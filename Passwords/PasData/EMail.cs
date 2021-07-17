@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Passwords.PasData
 {
-    class EMail
+    public class EMail
     {
         private char SplitChar = '@';
 

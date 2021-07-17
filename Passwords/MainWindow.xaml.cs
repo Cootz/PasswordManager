@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Passwords.PasData;
 
 namespace Passwords
 {
@@ -22,7 +23,26 @@ namespace Passwords
     {
         public MainWindow()
         {
+            Task t = new Task(() => PasswordController.Initialize());//Async initializetion
+            t.Start();
+
             InitializeComponent();
+
+            t.Wait();
+            PasswordController.SavePasswords(new Profile[] {
+                new Profile()
+                {
+                    Service = "steam",
+                    Email = new EMail()
+                    {
+                        Adress = "test@fda.td"
+                    },
+                    Password = "psw",
+                    Username = null
+                } 
+            });
+
+
         }
     }
 }
