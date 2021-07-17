@@ -16,6 +16,7 @@ namespace Passwords.PasData
         private SqlCeEngine eng;
         private SqlCeConnection connection;
         private SqlCeCommand cmd;
+        private int _id;
 
         private async Task opencon()
         {
@@ -35,7 +36,7 @@ namespace Passwords.PasData
 
         public async void Initialize()
         {
-            if (!File.Exists(Directory.GetCurrentDirectory() + @"\" + dbname))
+            if (File.Exists(Directory.GetCurrentDirectory() + dbname))
             {
                 eng = new SqlCeEngine(com);
                 eng.CreateDatabase();
@@ -58,8 +59,10 @@ namespace Passwords.PasData
 
         public async Task Add(Profile profile)
         {
-            await createcommand("INSERT INTO Profiles (Service, Email, Password, Username)" +
-                $"VALUES (\'{profile.Service}\',\'{profile.Email.Adress}\',\'{profile.Password}\',\'{profile.Username}\')");
+            await createcommand("INSERT INTO Profiles (ProfileID, Service, Email, Password, Username)" +
+                $"VALUES (\'{_id}\', \'{profile.Service}\',\'{profile.Email.Adress}\',\'{profile.Password}\',\'{profile.Username}\')");
+
+            _id++;
         }
 
         public async Task<List<Profile>> Select(string condition)
