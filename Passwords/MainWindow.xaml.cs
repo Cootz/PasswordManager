@@ -23,12 +23,11 @@ namespace Passwords
     {
         public MainWindow()
         {
-            Task t = new Task(() => PasswordController.Initialize());//Async initializetion
-            t.Start();
+            Task t = PasswordController.Initialize();//Async initializetion
 
             InitializeComponent();
 
-            t.Wait();
+            Task.WhenAll(t);
             PasswordController.SavePasswords(new Profile[] {
                 new Profile()
                 {
@@ -39,10 +38,10 @@ namespace Passwords
                     },
                     Password = "psw",
                     Username = null
-                } 
+                }
             });
 
-
+            PasswordController.SearhProfiles("Service=\'steam\'").Wait();
         }
     }
 }

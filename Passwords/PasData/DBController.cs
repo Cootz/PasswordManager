@@ -34,21 +34,29 @@ namespace Passwords.PasData
             return dataSet;
         }
 
-        public async void Initialize()
+        public async Task Initialize()
         {
-            if (File.Exists(Directory.GetCurrentDirectory() + dbname))
+            if (!File.Exists(Directory.GetCurrentDirectory() + dbname))
             {
-                eng = new SqlCeEngine(com);
-                eng.CreateDatabase();
-
+                try
+                {
+                    eng = new SqlCeEngine(com);
+                    eng.CreateDatabase();
+                }
+                catch { }
+                
                 await opencon();
 
-                await createcommand("CREATE TABLE Profiles " +
-                       "(ProfileID int NOT NULL," +
-                       "Service Ntext NOT NULL," +
-                       "Email Ntext NOT NULL," +
-                       "Password Ntext NOT NULL," +
-                       "Username Ntext);");
+                try
+                {
+                    await createcommand("CREATE TABLE Profiles " +
+                           "(ProfileID int NOT NULL," +
+                           "Service nvarchar(4000) NOT NULL," +
+                           "Email nvarchar(4000) NOT NULL," +
+                           "Password nvarchar(4000) NOT NULL," +
+                           "Username nvarchar(4000));");
+                }
+                catch(Exception e) { }
             }
             else
             {
@@ -65,16 +73,14 @@ namespace Passwords.PasData
             _id++;
         }
 
-        public async Task<List<Profile>> Select(string condition)
+        public async Task<DataSet> Select(string condition)
         {
             List<Profile> profiles = new List<Profile>();
 
-            DataSet dataset = await createcommand("SELECT * IN Profiles " +
-                "WHERE " + condition);
+            DataSet dataset = await createcommand("SELECT * FROM Profiles " +
+                "WHERE " + condition + ";");
 
-            if (true) { }
-
-            return new List<Profile>();
+            return dataset;
         }
 
 

@@ -2,6 +2,8 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
+using System.Threading.Tasks;
 
 namespace Passwords.PasData
 {
@@ -11,7 +13,7 @@ namespace Passwords.PasData
         public static string path = @"\Passwords";
         private static readonly string PaswFile = "Password.psw";
 
-        public static void Initialize()
+        public static async Task Initialize()
         {
             path = Directory.GetCurrentDirectory() + path;
 
@@ -20,7 +22,7 @@ namespace Passwords.PasData
                 Directory.CreateDirectory(path);
             }
 
-            DB.Initialize();
+            await DB.Initialize();
         }
 
         public static async void SavePasswords(Profile[] Data)
@@ -31,9 +33,9 @@ namespace Passwords.PasData
             }          
         }     
 
-        public static List<Profile> SearhProfiles(string keyWord)
+        public static async Task<List<Profile>> SearhProfiles(string keyWord)
         {
-            DB.Select(keyWord);
+            DataSet data = await DB.Select(keyWord);
 
             return null;
         }
