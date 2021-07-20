@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Passwords.PasData;
+using Passwords;
 
 namespace Passwords
 {
@@ -28,20 +29,25 @@ namespace Passwords
             InitializeComponent();
 
             Task.WhenAll(t);
-            PasswordController.SavePasswords(new Profile[] {
-                new Profile()
-                {
-                    Service = "steam",
-                    Email = new EMail()
-                    {
-                        Adress = "test@fda.td"
-                    },
-                    Password = "psw",
-                    Username = null
-                }
-            });
+            //PasswordController.SavePasswords(new Profile[] {
+            //    new Profile()
+            //    {
+            //        Service = "steam",
+            //        Email = new EMail()
+            //        {
+            //            Adress = "test@fda.td"
+            //        },
+            //        Password = "psw",
+            //        Username = null
+            //    }
+            //});
 
-            PasswordController.SearhProfiles("Service=\'steam\'").Wait();
+            List<Profile> profiles = PasswordController.SearhProfiles("Service=\'steam\'").Result;
+
+            foreach (var prof in profiles)
+            { 
+            
+            }
         }
     }
 }

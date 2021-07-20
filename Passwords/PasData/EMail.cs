@@ -6,12 +6,12 @@ namespace Passwords.PasData
 {
     public class EMail
     {
-        private char SplitChar = '@';
+        private const char SplitChar = '@';
 
         public string Adress { 
             get 
             {
-                return adr + SplitChar + postfix; 
+                return _adr + SplitChar + _postfix; 
             } 
             set 
             { 
@@ -19,8 +19,8 @@ namespace Passwords.PasData
             } 
         }
         
-        private string adr;
-        private string postfix;
+        private string _adr;
+        private string _postfix;
 
         public EMail()
         { 
@@ -29,17 +29,44 @@ namespace Passwords.PasData
 
         public EMail(string adress, string postfix)
         {
-            adr = adress;
-            this.postfix = postfix;
+            _adr = adress;
+            this._postfix = postfix;
         }
 
         private void ParseEmail(string email)
         {
             string[] parsed = email.Split(SplitChar);
 
-            adr = parsed[0];
-            postfix = parsed[1];
+            _adr = parsed[0];
+            _postfix = parsed[1];
 
+        }
+
+        public static bool operator !=(EMail left, EMail right)
+        {
+            return left.Adress != right.Adress;
+        }
+
+        public static bool operator ==(EMail left, EMail right)
+        {
+            return left.Adress == right.Adress;
+        }
+
+        public override bool Equals(object obj)
+        {
+            try
+            {
+                return this == (EMail)obj;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
     }

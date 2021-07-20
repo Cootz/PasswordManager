@@ -11,24 +11,24 @@ namespace Passwords.PasData
 {
     public class DBController
     {
-        private static readonly string dbname = PasswordController.path + @"\PswDB.sdf";
-        private static readonly string com = $"DataSource=\"{dbname}\"; Password=\"scpassw1\"";
-        private SqlCeEngine eng;
-        private SqlCeConnection connection;
-        private SqlCeCommand cmd;
+        private static readonly string DBName = PasswordController.Path + @"\PswDB.sdf";
+        private static readonly string Com = $"DataSource=\"{DBName}\"; Password=\"scpassw1\"";
+        private SqlCeEngine _engine;
+        private SqlCeConnection _connection;
+        private SqlCeCommand _cmd;
         private int _id;
 
-        private async Task opencon()
+        private async Task OpenCon()
         {
-            connection = new SqlCeConnection(com);
-            await connection.OpenAsync();
+            _connection = new SqlCeConnection(Com);
+            await _connection.OpenAsync();
         }
 
-        private async Task<DataSet> createcommand(string command)
+        private async Task<DataSet> CreateCommand(string command)
         {
-            cmd = new SqlCeCommand(command, connection);
-            await cmd.ExecuteNonQueryAsync();
-            SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(cmd);
+            _cmd = new SqlCeCommand(command, _connection);
+            await _cmd.ExecuteNonQueryAsync();
+            SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(_cmd);
             DataSet dataSet = new DataSet();
             dataAdapter.Fill(dataSet);
             return dataSet;
@@ -36,38 +36,38 @@ namespace Passwords.PasData
 
         public async Task Initialize()
         {
-            if (!File.Exists(Directory.GetCurrentDirectory() + dbname))
+            if (!File.Exists(Directory.GetCurrentDirectory() + DBName))
             {
                 try
                 {
-                    eng = new SqlCeEngine(com);
-                    eng.CreateDatabase();
+                    _engine = new SqlCeEngine(Com);
+                    _engine.CreateDatabase();
                 }
                 catch { }
                 
-                await opencon();
+                await OpenCon();
 
                 try
                 {
-                    await createcommand("CREATE TABLE Profiles " +
-                           "(ProfileID int NOT NULL," +
+                    await CreateCommand("CREATE TABLE Profiles " +
+                           "(ProfileID int NOT NULL UNIQIE," +
                            "Service nvarchar(4000) NOT NULL," +
                            "Email nvarchar(4000) NOT NULL," +
                            "Password nvarchar(4000) NOT NULL," +
                            "Username nvarchar(4000));");
                 }
-                catch(Exception e) { }
+                catch { }
             }
             else
             {
-                await opencon();
+                await OpenCon();
             }
             
         }
 
         public async Task Add(Profile profile)
         {
-            await createcommand("INSERT INTO Profiles (ProfileID, Service, Email, Password, Username)" +
+            await CreateCommand("INSERT INTO Profiles (ProfileID, Service, Email, Password, Username)" +
                 $"VALUES (\'{_id}\', \'{profile.Service}\',\'{profile.Email.Adress}\',\'{profile.Password}\',\'{profile.Username}\')");
 
             _id++;
@@ -75,12 +75,10 @@ namespace Passwords.PasData
 
         public async Task<DataSet> Select(string condition)
         {
-            List<Profile> profiles = new List<Profile>();
-
-            DataSet dataset = await createcommand("SELECT * FROM Profiles " +
+            DataSet dataSet = await CreateCommand("SELECT * FROM Profiles " +
                 "WHERE " + condition + ";");
-
-            return dataset;
+           
+            return dataSet;
         }
 
 

@@ -10,24 +10,23 @@ namespace Passwords.PasData
     public static class PasswordController
     {
         private static DBController DB = new DBController();
-        public static string path = @"\Passwords";
-        private static readonly string PaswFile = "Password.psw";
+        public static string Path = @"\Passwords";
 
         public static async Task Initialize()
         {
-            path = Directory.GetCurrentDirectory() + path;
+            Path = Directory.GetCurrentDirectory() + Path;
 
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(Path))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(Path);
             }
 
             await DB.Initialize();
         }
 
-        public static async void SavePasswords(Profile[] Data)
+        public static async void SavePasswords(Profile[] data)
         {            
-            foreach (Profile prof in Data)
+            foreach (Profile prof in data)
             {
                 await DB.Add(prof);
             }          
@@ -35,9 +34,27 @@ namespace Passwords.PasData
 
         public static async Task<List<Profile>> SearhProfiles(string keyWord)
         {
+            List<Profile> profiles = new List<Profile>();
+
             DataSet data = await DB.Select(keyWord);
 
-            return null;
+            DataRowCollection dataRows = data.Tables[0].Rows;
+
+            foreach (DataRow row in dataRows)
+            {
+                object[] items = row.ItemArray;
+
+                Profile profile = new Profile();
+
+                profile.Service = (string)items[1];
+                profile.Email = new EMail() { Adress = (string)items[2] };
+                profile.Password = (string)items[3];
+                profile.Username = (string)items[4];
+
+                profiles.Add(profile);
+            }
+
+            return profiles;
         }
     }
 }
