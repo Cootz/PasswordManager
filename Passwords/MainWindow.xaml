@@ -6,37 +6,9 @@
         xmlns:local="clr-namespace:Passwords"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <DockPanel>
-        <Grid DockPanel.Dock="Top" Margin="140,5,140,0" Background="#dddddd">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="15*"/>
-                <ColumnDefinition Width="1.5*"/>
-            </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Search" TextAlignment="Center" FontSize="24" FontFamily="Times New Roman" Grid.Column="0" />
-            <Button Grid.Column="1" BorderThickness="0">
-                <Button.Background>
-                    <SolidColorBrush Opacity="0"/>
-                </Button.Background>
-            </Button>
-        </Grid>
+    <Frame x:Name ="MainFrame" Content="{Binding Model.CurrentPage}">
 
-        <Grid DockPanel.Dock="Bottom">
-            <Button Content="Add" FontSize="24" Margin="500,0,50,15" BorderThickness="0">
-                <Button.Background>
-                    <SolidColorBrush Opacity="0"/>
-                </Button.Background>
-            </Button>
-        </Grid>
-     
-        <DockPanel Margin="10,0,10,0">
-            <TextBlock DockPanel.Dock="Top" Text="Recent" FontSize="20" FontFamily="Areal"/>
-
-            <Grid DockPanel.Dock="Right">
-                <ListBox BorderThickness="0"/>
-            </Grid>
-        </DockPanel>
-        
-
-    </DockPanel>
+    </Frame>
+    
 </Window>

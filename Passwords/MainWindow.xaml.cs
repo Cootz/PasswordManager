@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Passwords.PasData;
-using Passwords;
+using Passwords.ViewModer;
 
 namespace Passwords
 {
@@ -24,30 +12,15 @@ namespace Passwords
     {
         public MainWindow()
         {
-            Task t = PasswordController.Initialize();//Async initializetion
+            Task initializeTask = PasswordController.Initialize();//Async initializetion
 
             InitializeComponent();
 
-            Task.WhenAll(t);
-            //PasswordController.SavePasswords(new Profile[] {
-            //    new Profile()
-            //    {
-            //        Service = "steam",
-            //        Email = new EMail()
-            //        {
-            //            Adress = "test@fda.td"
-            //        },
-            //        Password = "psw",
-            //        Username = null
-            //    }
-            //});
+            DataContext = new MainWindowViewModel();
 
-            List<Profile> profiles = PasswordController.SearhProfiles("Service=\'steam\'").Result;
+            Task.WhenAll(initializeTask);
 
-            foreach (var prof in profiles)
-            { 
-            
-            }
+            Shell.GoTo(nameof(Recent));
         }
     }
 }
