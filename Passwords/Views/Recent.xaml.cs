@@ -1,4 +1,5 @@
 ﻿using Passwords.PasData;
+using Passwords.ViewModel;
 using System.Collections.Generic;
 using System.Windows.Controls;
 
@@ -9,29 +10,14 @@ namespace Passwords
     /// </summary>
     public partial class Recent : Page
     {
+        private RecentViewModel viewModel;
+
         public Recent()
         {
+            viewModel = new();
+            DataContext = viewModel;
+
             InitializeComponent();
-
-            //PasswordController.SavePasswords(new Profile[] {
-            //    new Profile()
-            //    {
-            //        Service = "steam",
-            //        Email = new EMail()
-            //        {
-            //            Adress = "test@fda.td"
-            //        },
-            //        Password = "psw",
-            //        Username = null
-            //    }
-            //});
-
-            List<Profile> profiles = PasswordController.SearhProfiles("Service LIKE 'steam'").Result;
-
-            foreach (var prof in profiles)
-            {
-
-            }
         }
     }
 }

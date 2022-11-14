@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace Passwords.Model
 {
-    public class MainWindowModel : INotifyPropertyChanged
+    public class MainWindowModel : AbstractModel
     {
         private Shell _shell;
 
@@ -25,8 +25,6 @@ namespace Passwords.Model
         }
         private Page _currentPage = new Page();
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public MainWindowModel()
         {
             _shell = new Shell();
@@ -38,15 +36,5 @@ namespace Passwords.Model
         {
             _currentPage = Shell.CurrentPage;
         }
-
-        private void OnPorpertyChanged([CallerMemberName] string property = "")
-        {
-            if (property != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
-
-
     }
 }

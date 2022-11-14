@@ -40,7 +40,7 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="37*"/>
                 </Grid.ColumnDefinitions>
-                <ListBox BorderThickness="0" Grid.ColumnSpan="2"/>
+                <ListBox BorderThickness="0" Grid.ColumnSpan="2" ItemsSource="{Binding Model.Profiles}"/>
             </Grid>
         </DockPanel>
 

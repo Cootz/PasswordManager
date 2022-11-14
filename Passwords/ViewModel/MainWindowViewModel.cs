@@ -1,4 +1,5 @@
 ﻿using Passwords.Model;
+using Passwords.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Passwords.ViewModer
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : AbstractViewModel
     {
         public MainWindowModel Model
         {
@@ -21,23 +22,13 @@ namespace Passwords.ViewModer
                 OnPorpertyChanged();
             }
         }
-        private MainWindowModel _model;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private MainWindowModel _model;
 
         public MainWindowViewModel()
         {
             _model = new MainWindowModel();
         }
-
-        private void OnPorpertyChanged([CallerMemberName] string property = "")
-        {
-            if (property != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
-
 
     }
 }
