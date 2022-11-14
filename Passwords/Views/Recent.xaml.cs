@@ -26,7 +26,7 @@ namespace Passwords
             //    }
             //});
 
-            List<Profile> profiles = PasswordController.SearhProfiles("Service=\'steam\'").Result;
+            List<Profile> profiles = PasswordController.SearhProfiles("Service LIKE 'steam'").Result;
 
             foreach (var prof in profiles)
             {
