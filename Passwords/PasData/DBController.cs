@@ -50,7 +50,7 @@ namespace Passwords.PasData
                 try
                 {
                     await CreateCommand("CREATE TABLE Profiles " +
-                           "(ProfileID int NOT NULL UNIQIE," +
+                           "(ProfileID int PRIMARY KEY," +
                            "Service nvarchar(4000) NOT NULL," +
                            "Email nvarchar(4000) NOT NULL," +
                            "Password nvarchar(4000) NOT NULL," +
