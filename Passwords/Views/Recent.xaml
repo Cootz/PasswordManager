@@ -36,12 +36,16 @@
             <TextBlock DockPanel.Dock="Top" Text="Recent" FontSize="20" FontFamily="Areal"/>
 
             <Grid DockPanel.Dock="Right">
-                <ListBox BorderThickness="0"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="37*"/>
+                </Grid.ColumnDefinitions>
+                <ListBox BorderThickness="0" Grid.ColumnSpan="2"/>
             </Grid>
         </DockPanel>
 
 
     </DockPanel>
 
-    
+
 </Page>
