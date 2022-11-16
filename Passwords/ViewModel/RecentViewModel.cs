@@ -14,14 +14,6 @@ namespace Passwords.ViewModel
         public RecentModel Model { get { return _model; } set { _model = value; OnPorpertyChanged(); } }
         private RecentModel _model;
 
-        public RecentViewModel()
-        {
-            _model = new();
-        }
-
-        
-
-
-
+        public RecentViewModel() => _model = new();
     }
 }

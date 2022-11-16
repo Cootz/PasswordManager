@@ -10,14 +10,25 @@ namespace Passwords
     /// </summary>
     public partial class Recent : Page
     {
-        private RecentViewModel viewModel;
-
         public Recent()
         {
-            viewModel = new();
-            DataContext = viewModel;
+            DataContext = new RecentViewModel();
 
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            (DataContext as RecentViewModel).Model.Profiles.Add(new Profile()
+            {
+                Service = "origin",
+                Email = new EMail()
+                {
+                    Adress = "test2@fda.td"
+                },
+                Password = "psw",
+                Username = "Crio"
+            });
         }
     }
 }

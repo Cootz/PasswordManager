@@ -17,7 +17,7 @@ namespace Passwords.ViewModel
 
         protected void OnPorpertyChanged([CallerMemberName] string property = "")
         {
-            if (property != null)
+            if (property is not null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }

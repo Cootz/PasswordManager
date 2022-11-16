@@ -8,15 +8,19 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Recent" Background="White">
 
+    <Page.Resources>
+        <ResourceDictionary Source="AppStyle.xaml"/>
+    </Page.Resources>
+
     <DockPanel>
-        <Grid DockPanel.Dock="Top" Margin="140,5,140,0" Background="#dddddd">
+        <Grid DockPanel.Dock="Top" Margin="140,5,140,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15*"/>
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Search" TextAlignment="Center" FontSize="24" FontFamily="Times New Roman" Grid.Column="0" />
-            <Button Grid.Column="1" BorderThickness="0">
+            <TextBox Text="Search" TextAlignment="Center" FontSize="24" FontFamily="Times New Roman" Grid.Column="0"/>
+            <Button Grid.Column="1">
                 <Button.Background>
                     <SolidColorBrush Opacity="0"/>
                 </Button.Background>
@@ -24,13 +28,8 @@
         </Grid>
 
         <Grid DockPanel.Dock="Bottom">
-            <Button Content="Add" FontSize="24" Margin="500,0,50,15" BorderThickness="0">
-                <Button.Background>
-                    <SolidColorBrush Opacity="0"/>
-                </Button.Background>
-            </Button>
+            <Button Content="Add" Margin="0,0,10,10" HorizontalAlignment="Right" Width="200 pt" Click="Button_Click"/>
         </Grid>
-
 
         <DockPanel Margin="10,0,10,0">
             <TextBlock DockPanel.Dock="Top" Text="Recent" FontSize="20" FontFamily="Areal"/>
@@ -40,11 +39,9 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="37*"/>
                 </Grid.ColumnDefinitions>
-                <ListBox BorderThickness="0" Grid.ColumnSpan="2" ItemsSource="{Binding Model.Profiles}"/>
+                <DataGrid x:Name="recent_passwords" BorderThickness="0" Grid.ColumnSpan="2" ItemsSource="{Binding Model.Profiles}" IsReadOnly="True" ColumnWidth="*"/>
             </Grid>
         </DockPanel>
-
-
     </DockPanel>
 
 

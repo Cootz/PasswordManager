@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows;
 
 namespace Passwords.ViewModer
 {
@@ -21,7 +22,7 @@ namespace Passwords.ViewModer
                 _model = value;
                 OnPorpertyChanged();
             }
-        }
+        }       
 
         private MainWindowModel _model;
 
@@ -29,6 +30,5 @@ namespace Passwords.ViewModer
         {
             _model = new MainWindowModel();
         }
-
     }
 }

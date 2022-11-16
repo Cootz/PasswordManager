@@ -1,0 +1,57 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Themes/Light.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="Control" x:Key="baseStyle">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontFamily" Value="Arial"/>
+    </Style>
+
+    <Style TargetType="Label" BasedOn="{StaticResource baseStyle}">
+        <Setter Property="Background" Value="{StaticResource Background}"/>
+        <Setter Property="Foreground" Value="{StaticResource OnBackground}"/>
+    </Style>
+
+    <Style TargetType="Button" BasedOn="{StaticResource baseStyle}">
+        <Setter Property="Background" Value="{StaticResource Background}"/>
+        <Setter Property="Foreground" Value="{StaticResource OnBackground}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style TargetType="DataGrid" BasedOn="{StaticResource baseStyle}">
+        <Setter Property="Background" Value="{StaticResource Primary}"/>
+        <Setter Property="Foreground" Value="{StaticResource Secondary}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="ColumnHeaderStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource baseStyle}">
+                    <Setter Property="Background" Value="{StaticResource Primary}"/>
+                    <Setter Property="Foreground" Value="{StaticResource Secondary}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RowHeaderStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridRowHeader" BasedOn="{StaticResource baseStyle}">
+                    <Setter Property="Background" Value="{StaticResource Primary}"/>
+                    <Setter Property="Foreground" Value="{StaticResource Secondary}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CellStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridCell" BasedOn="{StaticResource baseStyle}">
+                    <Setter Property="Background" Value="{StaticResource Primary}"/>
+                    <Setter Property="Foreground" Value="{StaticResource Secondary}"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+
+</ResourceDictionary>

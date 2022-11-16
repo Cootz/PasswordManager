@@ -15,25 +15,22 @@ namespace Passwords.PasData
             } 
             set 
             { 
-                ParseEmail(value); 
+                Parse(value); 
             } 
         }
         
         private string _adr;
         private string _postfix;
 
-        public EMail()
-        { 
-        
-        }
+        public EMail() { }
 
         public EMail(string adress, string postfix)
         {
             _adr = adress;
-            this._postfix = postfix;
+            _postfix = postfix;
         }
 
-        private void ParseEmail(string email)
+        private void Parse(string email)
         {
             string[] parsed = email.Split(SplitChar);
 
@@ -42,15 +39,8 @@ namespace Passwords.PasData
 
         }
 
-        public static bool operator !=(EMail left, EMail right)
-        {
-            return left.Adress != right.Adress;
-        }
-
-        public static bool operator ==(EMail left, EMail right)
-        {
-            return left.Adress == right.Adress;
-        }
+        public static bool operator !=(EMail left, EMail right) => left.Adress != right.Adress;        
+        public static bool operator ==(EMail left, EMail right) => left.Adress == right.Adress;        
 
         public override bool Equals(object obj)
         {
@@ -64,10 +54,8 @@ namespace Passwords.PasData
             }
         }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        public override int GetHashCode() => base.GetHashCode();
 
+        public override string ToString() => Adress;
     }
 }

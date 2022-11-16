@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "md0TAc9T+r8aHb6BUZghSxHJJNRg2mKXzmPgf8rmWzgv2BHX7svLTjJ3aOwQ4OY1mYzQkZwtnKYwKTUFSUx5yA==",
+  "dgSpecHash": "RjMjDBh9Vb9HH/lHYRfvcKVhO46J0w/EJd3ONvE49oM4vgxoCA/8f/NWE+slt2th+JggRPY6KG6AuU3a4Qy+TA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\Source\\Repos\\PasswordManager\\Passwords\\Passwords.csproj",
+  "projectFilePath": "C:\\Users\\PC\\source\\repos\\PasswordManager\\Passwords\\Passwords.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\entityframework.sqlservercompact\\6.4.4\\entityframework.sqlservercompact.6.4.4.nupkg.sha512",
