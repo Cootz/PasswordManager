@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="Background" Color="White"/>
     <SolidColorBrush x:Key="OnBackground" Color="Black"/>
-    <SolidColorBrush x:Key="Primary" Color="#DEF5E5"/>
-    <SolidColorBrush x:Key="OnPrimary" Color="#BCEAD5"/>
-    <SolidColorBrush x:Key="Secondary" Color="#8EC3B0"/>
-    <SolidColorBrush x:Key="OnSecondary" Color="#9ED5C5"/>
+    <SolidColorBrush x:Key="Primary" Color="#FFDEF5E5"/>
+    <SolidColorBrush x:Key="OnPrimary" Color="#FFBCEAD5"/>
+    <SolidColorBrush x:Key="Secondary" Color="#FF8EC3B0"/>
+    <SolidColorBrush x:Key="OnSecondary" Color="#FF9ED5C5"/>
 
 
 
