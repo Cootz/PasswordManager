@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Passwords"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="Style/AppStyle.xaml"/>
     </Application.Resources>
 </Application>

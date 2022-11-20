@@ -37,7 +37,7 @@ namespace Passwords.PasData
             return equals[0] & equals[1] & equals[2] & equals[3];
         }
 
-        public static bool operator !=(Profile left, Profile right)
+        public static bool operator != (Profile left, Profile right)
         {
             return !left.Equals(right);
         }

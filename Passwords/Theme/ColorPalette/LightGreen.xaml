@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="NeitralColor">#FFFFFFFF</Color>
+    <Color x:Key="OnNeitralColor">#FF000000</Color>
+    <Color x:Key="PrimaryColor">#FFDEF5E5</Color>
+    <Color x:Key="OnPrimaryColor">#FFBCEAD5</Color>
+    <Color x:Key="SecondaryColor">#FF8EC3B0</Color>
+    <Color x:Key="OnSecondaryColor">#FF9ED5C5</Color>
+</ResourceDictionary>
