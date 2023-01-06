@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordManager.View.RecentPage"
+             xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
+             x:DataType="viewmodel:RecentViewModel"
+             Title="RecentPage">
+    <VerticalStackLayout>
+        <Entry FontSize="24" Grid.Column="0"/>
+        <Button Text="Add" Margin="0,0,10,10"/>
+
+        <CollectionView ItemsSource="{Binding Model.Profiles}"/>
+    </VerticalStackLayout>
+</ContentPage>
