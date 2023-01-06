@@ -11,9 +11,9 @@ namespace Passwords.Model
 
         public RecentModel()
         {
-            ObservableCollection<Profile> serviceResutl = new(PasswordController.SearhProfiles("Service LIKE 'steam'").Result ?? new());
+            ObservableCollection<Profile> serviceResult = new(PasswordController.SearhProfiles("Service LIKE 'steam'").Result ?? new());
 
-            serviceResutl.Add(new Profile()
+            serviceResult.Add(new Profile()
             {
                 Service = "steam",
                 Email = new EMail()
@@ -23,7 +23,7 @@ namespace Passwords.Model
                 Password = "psw",
                 Username = null
             });
-            _profiles = serviceResutl;
+            _profiles = serviceResult;
         }
     }
 }

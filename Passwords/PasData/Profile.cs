@@ -47,5 +47,22 @@ namespace Passwords.PasData
             return left.Equals(right);
         }
 
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            return Equals(obj as Profile);
+        }
+
+        public override int GetHashCode() => base.GetHashCode();
+        
     }
 }

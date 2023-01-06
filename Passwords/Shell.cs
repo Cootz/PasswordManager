@@ -8,6 +8,7 @@ namespace Passwords
     public class Shell
     {
         private static Dictionary<string, Page> _pages = new Dictionary<string, Page>();
+        private static Stack<string> _pagesStack = new Stack<string>();
 
         public static Page CurrentPage
         {
@@ -41,12 +42,14 @@ namespace Passwords
         {
             if (pageName == "..")
             {
-                //Go to previos page in stack. Make using stack 
+                pageName = _pagesStack.Pop();
             }
             else
             {
-                ChangePage(_pages[pageName]);
-            }            
+                _pagesStack.Push(pageName);
+            }
+
+            ChangePage(_pages[pageName]);
         }
 
         private static void ChangePage(Page destinantionPage)
