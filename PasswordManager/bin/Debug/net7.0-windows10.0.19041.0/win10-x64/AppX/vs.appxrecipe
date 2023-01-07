@@ -19,7 +19,7 @@
     <WindowsSdkPath>
     </WindowsSdkPath>
     <LayoutDir>C:\Users\PC\source\repos\PasswordManager\PasswordManager\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppX</LayoutDir>
-    <RegisteredManifestChecksum>6005B587C903899E1E0F3C299073EE8EF208A5201928E606FD38563F54A10341</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>AC9E4965A64B50D84483F22986E07255FA65421C737EF94AD86856E7279402C2</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>320e7896-9bd6-4507-93a0-c73902f78538_1.0.0.1_x64__9zz4h110yvjzm</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>320e7896-9bd6-4507-93a0-c73902f78538_9zz4h110yvjzm!App</RegisteredUserModeAppID>
     <RegisteredPackageID>320e7896-9bd6-4507-93a0-c73902f78538</RegisteredPackageID>
@@ -30,25 +30,25 @@
     <AppXManifest Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-01-06T15:53:50.512</Modified>
+      <Modified>2023-01-07T06:49:28.660</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-01-06T15:53:50.071</Modified>
+      <Modified>2023-01-07T06:49:28.339</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\PasswordManager.runtimeconfig.json">
       <PackagePath>PasswordManager.runtimeconfig.json</PackagePath>
-      <Modified>2023-01-06T15:49:53.907</Modified>
+      <Modified>2023-01-07T06:49:28.273</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\PasswordManager.dll">
       <PackagePath>PasswordManager.dll</PackagePath>
-      <Modified>2023-01-06T15:53:48.065</Modified>
+      <Modified>2023-01-07T06:49:27.308</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>PasswordManager.exe</PackagePath>
-      <Modified>2023-01-06T15:53:48.095</Modified>
+      <Modified>2023-01-07T06:49:27.315</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\fluentmigrator.runner.sqlserverce\3.3.2\runtimes\win-x64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest">
       <PackagePath>amd64/Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest</PackagePath>
@@ -122,761 +122,761 @@
       <PackagePath>x86/sqlcese40.dll</PackagePath>
       <Modified>2021-10-18T17:39:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\Microsoft.CSharp.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
-      <Modified>2022-10-18T17:01:34.000</Modified>
+      <Modified>2022-11-18T17:08:12.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\Microsoft.VisualBasic.Core.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\Microsoft.VisualBasic.Core.dll">
       <PackagePath>Microsoft.VisualBasic.Core.dll</PackagePath>
-      <Modified>2022-10-18T17:01:40.000</Modified>
+      <Modified>2022-11-18T17:08:16.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\Microsoft.VisualBasic.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\Microsoft.VisualBasic.dll">
       <PackagePath>Microsoft.VisualBasic.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\Microsoft.Win32.Primitives.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\Microsoft.Win32.Primitives.dll">
       <PackagePath>Microsoft.Win32.Primitives.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\Microsoft.Win32.Registry.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\Microsoft.Win32.Registry.dll">
       <PackagePath>Microsoft.Win32.Registry.dll</PackagePath>
-      <Modified>2022-10-18T17:01:44.000</Modified>
+      <Modified>2022-11-18T17:08:18.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.AppContext.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.AppContext.dll">
       <PackagePath>System.AppContext.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Buffers.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Buffers.dll">
       <PackagePath>System.Buffers.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Collections.Concurrent.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Collections.Concurrent.dll">
       <PackagePath>System.Collections.Concurrent.dll</PackagePath>
-      <Modified>2022-10-18T17:01:48.000</Modified>
+      <Modified>2022-11-18T17:08:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Collections.Immutable.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Collections.Immutable.dll">
       <PackagePath>System.Collections.Immutable.dll</PackagePath>
-      <Modified>2022-10-18T17:01:58.000</Modified>
+      <Modified>2022-11-18T17:08:30.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Collections.NonGeneric.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Collections.NonGeneric.dll">
       <PackagePath>System.Collections.NonGeneric.dll</PackagePath>
-      <Modified>2022-10-18T17:02:02.000</Modified>
+      <Modified>2022-11-18T17:08:34.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Collections.Specialized.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Collections.Specialized.dll">
       <PackagePath>System.Collections.Specialized.dll</PackagePath>
-      <Modified>2022-10-18T17:02:06.000</Modified>
+      <Modified>2022-11-18T17:08:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Collections.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Collections.dll">
       <PackagePath>System.Collections.dll</PackagePath>
-      <Modified>2022-10-18T17:01:52.000</Modified>
+      <Modified>2022-11-18T17:08:26.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.ComponentModel.Annotations.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.ComponentModel.Annotations.dll">
       <PackagePath>System.ComponentModel.Annotations.dll</PackagePath>
-      <Modified>2022-10-18T17:02:10.000</Modified>
+      <Modified>2022-11-18T17:08:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.ComponentModel.DataAnnotations.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.ComponentModel.DataAnnotations.dll">
       <PackagePath>System.ComponentModel.DataAnnotations.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.ComponentModel.EventBasedAsync.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.ComponentModel.EventBasedAsync.dll">
       <PackagePath>System.ComponentModel.EventBasedAsync.dll</PackagePath>
-      <Modified>2022-10-18T17:02:20.000</Modified>
+      <Modified>2022-11-18T17:08:48.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.ComponentModel.Primitives.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.ComponentModel.Primitives.dll">
       <PackagePath>System.ComponentModel.Primitives.dll</PackagePath>
-      <Modified>2022-10-18T17:02:24.000</Modified>
+      <Modified>2022-11-18T17:08:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.ComponentModel.TypeConverter.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.ComponentModel.TypeConverter.dll">
       <PackagePath>System.ComponentModel.TypeConverter.dll</PackagePath>
-      <Modified>2022-10-18T17:02:28.000</Modified>
+      <Modified>2022-11-18T17:08:56.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.ComponentModel.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.ComponentModel.dll">
       <PackagePath>System.ComponentModel.dll</PackagePath>
-      <Modified>2022-10-18T17:02:14.000</Modified>
+      <Modified>2022-11-18T17:08:44.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Configuration.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Configuration.dll">
       <PackagePath>System.Configuration.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Console.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Console.dll">
       <PackagePath>System.Console.dll</PackagePath>
-      <Modified>2022-10-18T17:02:32.000</Modified>
+      <Modified>2022-11-18T17:08:58.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Core.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Core.dll">
       <PackagePath>System.Core.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Data.Common.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Data.Common.dll">
       <PackagePath>System.Data.Common.dll</PackagePath>
-      <Modified>2022-10-18T17:02:40.000</Modified>
+      <Modified>2022-11-18T17:09:06.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Data.DataSetExtensions.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Data.DataSetExtensions.dll">
       <PackagePath>System.Data.DataSetExtensions.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Data.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Data.dll">
       <PackagePath>System.Data.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Diagnostics.Contracts.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Diagnostics.Contracts.dll">
       <PackagePath>System.Diagnostics.Contracts.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Diagnostics.Debug.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Diagnostics.Debug.dll">
       <PackagePath>System.Diagnostics.Debug.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Diagnostics.DiagnosticSource.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Diagnostics.DiagnosticSource.dll">
       <PackagePath>System.Diagnostics.DiagnosticSource.dll</PackagePath>
-      <Modified>2022-10-18T17:02:44.000</Modified>
+      <Modified>2022-11-18T17:09:10.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Diagnostics.FileVersionInfo.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Diagnostics.FileVersionInfo.dll">
       <PackagePath>System.Diagnostics.FileVersionInfo.dll</PackagePath>
-      <Modified>2022-10-18T17:02:48.000</Modified>
+      <Modified>2022-11-18T17:09:12.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Diagnostics.Process.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Diagnostics.Process.dll">
       <PackagePath>System.Diagnostics.Process.dll</PackagePath>
-      <Modified>2022-10-18T17:02:52.000</Modified>
+      <Modified>2022-11-18T17:09:16.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Diagnostics.StackTrace.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Diagnostics.StackTrace.dll">
       <PackagePath>System.Diagnostics.StackTrace.dll</PackagePath>
-      <Modified>2022-10-18T17:02:56.000</Modified>
+      <Modified>2022-11-18T17:09:20.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Diagnostics.TextWriterTraceListener.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Diagnostics.TextWriterTraceListener.dll">
       <PackagePath>System.Diagnostics.TextWriterTraceListener.dll</PackagePath>
-      <Modified>2022-10-18T17:03:00.000</Modified>
+      <Modified>2022-11-18T17:09:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Diagnostics.Tools.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Diagnostics.Tools.dll">
       <PackagePath>System.Diagnostics.Tools.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Diagnostics.TraceSource.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Diagnostics.TraceSource.dll">
       <PackagePath>System.Diagnostics.TraceSource.dll</PackagePath>
-      <Modified>2022-10-18T17:03:04.000</Modified>
+      <Modified>2022-11-18T17:09:28.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Diagnostics.Tracing.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Diagnostics.Tracing.dll">
       <PackagePath>System.Diagnostics.Tracing.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Drawing.Primitives.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Drawing.Primitives.dll">
       <PackagePath>System.Drawing.Primitives.dll</PackagePath>
-      <Modified>2022-10-18T17:03:08.000</Modified>
+      <Modified>2022-11-18T17:09:30.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Drawing.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Drawing.dll">
       <PackagePath>System.Drawing.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Dynamic.Runtime.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Dynamic.Runtime.dll">
       <PackagePath>System.Dynamic.Runtime.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Formats.Asn1.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Formats.Asn1.dll">
       <PackagePath>System.Formats.Asn1.dll</PackagePath>
-      <Modified>2022-10-18T17:03:12.000</Modified>
+      <Modified>2022-11-18T17:09:34.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Formats.Tar.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Formats.Tar.dll">
       <PackagePath>System.Formats.Tar.dll</PackagePath>
-      <Modified>2022-10-18T17:03:18.000</Modified>
+      <Modified>2022-11-18T17:09:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Globalization.Calendars.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Globalization.Calendars.dll">
       <PackagePath>System.Globalization.Calendars.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Globalization.Extensions.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Globalization.Extensions.dll">
       <PackagePath>System.Globalization.Extensions.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Globalization.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Globalization.dll">
       <PackagePath>System.Globalization.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.Compression.Brotli.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.Compression.Brotli.dll">
       <PackagePath>System.IO.Compression.Brotli.dll</PackagePath>
-      <Modified>2022-10-18T17:03:22.000</Modified>
+      <Modified>2022-11-18T17:09:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.Compression.FileSystem.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.Compression.FileSystem.dll">
       <PackagePath>System.IO.Compression.FileSystem.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.Compression.ZipFile.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.Compression.ZipFile.dll">
       <PackagePath>System.IO.Compression.ZipFile.dll</PackagePath>
-      <Modified>2022-10-18T17:03:30.000</Modified>
+      <Modified>2022-11-18T17:09:48.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.Compression.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.Compression.dll">
       <PackagePath>System.IO.Compression.dll</PackagePath>
-      <Modified>2022-10-18T17:03:26.000</Modified>
+      <Modified>2022-11-18T17:09:44.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.FileSystem.AccessControl.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.FileSystem.AccessControl.dll">
       <PackagePath>System.IO.FileSystem.AccessControl.dll</PackagePath>
-      <Modified>2022-10-18T17:03:34.000</Modified>
+      <Modified>2022-11-18T17:09:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.FileSystem.DriveInfo.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.FileSystem.DriveInfo.dll">
       <PackagePath>System.IO.FileSystem.DriveInfo.dll</PackagePath>
-      <Modified>2022-10-18T17:03:38.000</Modified>
+      <Modified>2022-11-18T17:09:56.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.FileSystem.Primitives.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.FileSystem.Primitives.dll">
       <PackagePath>System.IO.FileSystem.Primitives.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.FileSystem.Watcher.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.FileSystem.Watcher.dll">
       <PackagePath>System.IO.FileSystem.Watcher.dll</PackagePath>
-      <Modified>2022-10-18T17:03:42.000</Modified>
+      <Modified>2022-11-18T17:09:58.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.FileSystem.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.FileSystem.dll">
       <PackagePath>System.IO.FileSystem.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.IsolatedStorage.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.IsolatedStorage.dll">
       <PackagePath>System.IO.IsolatedStorage.dll</PackagePath>
-      <Modified>2022-10-18T17:03:48.000</Modified>
+      <Modified>2022-11-18T17:10:02.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.MemoryMappedFiles.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.MemoryMappedFiles.dll">
       <PackagePath>System.IO.MemoryMappedFiles.dll</PackagePath>
-      <Modified>2022-10-18T17:03:52.000</Modified>
+      <Modified>2022-11-18T17:10:06.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.Pipes.AccessControl.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.Pipes.AccessControl.dll">
       <PackagePath>System.IO.Pipes.AccessControl.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.Pipes.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.Pipes.dll">
       <PackagePath>System.IO.Pipes.dll</PackagePath>
-      <Modified>2022-10-18T17:03:56.000</Modified>
+      <Modified>2022-11-18T17:10:10.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.UnmanagedMemoryStream.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.UnmanagedMemoryStream.dll">
       <PackagePath>System.IO.UnmanagedMemoryStream.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.IO.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.IO.dll">
       <PackagePath>System.IO.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Linq.Expressions.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Linq.Expressions.dll">
       <PackagePath>System.Linq.Expressions.dll</PackagePath>
-      <Modified>2022-10-18T17:04:12.000</Modified>
+      <Modified>2022-11-18T17:10:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Linq.Parallel.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Linq.Parallel.dll">
       <PackagePath>System.Linq.Parallel.dll</PackagePath>
-      <Modified>2022-10-18T17:04:18.000</Modified>
+      <Modified>2022-11-18T17:10:26.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Linq.Queryable.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Linq.Queryable.dll">
       <PackagePath>System.Linq.Queryable.dll</PackagePath>
-      <Modified>2022-10-18T17:04:22.000</Modified>
+      <Modified>2022-11-18T17:10:30.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Linq.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Linq.dll">
       <PackagePath>System.Linq.dll</PackagePath>
-      <Modified>2022-10-18T17:04:00.000</Modified>
+      <Modified>2022-11-18T17:10:14.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Memory.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Memory.dll">
       <PackagePath>System.Memory.dll</PackagePath>
-      <Modified>2022-10-18T17:04:26.000</Modified>
+      <Modified>2022-11-18T17:10:32.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.Http.Json.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.Http.Json.dll">
       <PackagePath>System.Net.Http.Json.dll</PackagePath>
-      <Modified>2022-10-18T17:04:36.000</Modified>
+      <Modified>2022-11-18T17:10:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.Http.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.Http.dll">
       <PackagePath>System.Net.Http.dll</PackagePath>
-      <Modified>2022-10-18T17:04:32.000</Modified>
+      <Modified>2022-11-18T17:10:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.HttpListener.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.HttpListener.dll">
       <PackagePath>System.Net.HttpListener.dll</PackagePath>
-      <Modified>2022-10-18T17:04:40.000</Modified>
+      <Modified>2022-11-18T17:10:46.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.Mail.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.Mail.dll">
       <PackagePath>System.Net.Mail.dll</PackagePath>
-      <Modified>2022-10-18T17:04:46.000</Modified>
+      <Modified>2022-11-18T17:10:50.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.NameResolution.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.NameResolution.dll">
       <PackagePath>System.Net.NameResolution.dll</PackagePath>
-      <Modified>2022-10-18T17:04:50.000</Modified>
+      <Modified>2022-11-18T17:10:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.NetworkInformation.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.NetworkInformation.dll">
       <PackagePath>System.Net.NetworkInformation.dll</PackagePath>
-      <Modified>2022-10-18T17:04:54.000</Modified>
+      <Modified>2022-11-18T17:10:56.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.Ping.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.Ping.dll">
       <PackagePath>System.Net.Ping.dll</PackagePath>
-      <Modified>2022-10-18T17:04:58.000</Modified>
+      <Modified>2022-11-18T17:11:00.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.Primitives.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.Primitives.dll">
       <PackagePath>System.Net.Primitives.dll</PackagePath>
-      <Modified>2022-10-18T17:05:02.000</Modified>
+      <Modified>2022-11-18T17:11:02.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.Quic.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.Quic.dll">
       <PackagePath>System.Net.Quic.dll</PackagePath>
-      <Modified>2022-10-18T17:05:06.000</Modified>
+      <Modified>2022-11-18T17:11:06.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.Requests.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.Requests.dll">
       <PackagePath>System.Net.Requests.dll</PackagePath>
-      <Modified>2022-10-18T17:05:12.000</Modified>
+      <Modified>2022-11-18T17:11:10.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.Security.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.Security.dll">
       <PackagePath>System.Net.Security.dll</PackagePath>
-      <Modified>2022-10-18T17:05:16.000</Modified>
+      <Modified>2022-11-18T17:11:14.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.ServicePoint.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.ServicePoint.dll">
       <PackagePath>System.Net.ServicePoint.dll</PackagePath>
-      <Modified>2022-10-18T17:05:20.000</Modified>
+      <Modified>2022-11-18T17:11:18.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.Sockets.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.Sockets.dll">
       <PackagePath>System.Net.Sockets.dll</PackagePath>
-      <Modified>2022-10-18T17:05:26.000</Modified>
+      <Modified>2022-11-18T17:11:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.WebClient.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.WebClient.dll">
       <PackagePath>System.Net.WebClient.dll</PackagePath>
-      <Modified>2022-10-18T17:05:30.000</Modified>
+      <Modified>2022-11-18T17:11:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.WebHeaderCollection.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.WebHeaderCollection.dll">
       <PackagePath>System.Net.WebHeaderCollection.dll</PackagePath>
-      <Modified>2022-10-18T17:05:34.000</Modified>
+      <Modified>2022-11-18T17:11:28.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.WebProxy.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.WebProxy.dll">
       <PackagePath>System.Net.WebProxy.dll</PackagePath>
-      <Modified>2022-10-18T17:05:38.000</Modified>
+      <Modified>2022-11-18T17:11:32.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.WebSockets.Client.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.WebSockets.Client.dll">
       <PackagePath>System.Net.WebSockets.Client.dll</PackagePath>
-      <Modified>2022-10-18T17:05:42.000</Modified>
+      <Modified>2022-11-18T17:11:36.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.WebSockets.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.WebSockets.dll">
       <PackagePath>System.Net.WebSockets.dll</PackagePath>
-      <Modified>2022-10-18T17:05:46.000</Modified>
+      <Modified>2022-11-18T17:11:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Net.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Net.dll">
       <PackagePath>System.Net.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Numerics.Vectors.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Numerics.Vectors.dll">
       <PackagePath>System.Numerics.Vectors.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Numerics.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Numerics.dll">
       <PackagePath>System.Numerics.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.ObjectModel.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.ObjectModel.dll">
       <PackagePath>System.ObjectModel.dll</PackagePath>
-      <Modified>2022-10-18T17:05:50.000</Modified>
+      <Modified>2022-11-18T17:11:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Private.CoreLib.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Private.CoreLib.dll">
       <PackagePath>System.Private.CoreLib.dll</PackagePath>
-      <Modified>2022-10-18T16:19:28.000</Modified>
+      <Modified>2022-11-18T16:26:00.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Private.DataContractSerialization.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Private.DataContractSerialization.dll">
       <PackagePath>System.Private.DataContractSerialization.dll</PackagePath>
-      <Modified>2022-10-18T17:05:56.000</Modified>
+      <Modified>2022-11-18T17:11:48.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Private.Uri.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Private.Uri.dll">
       <PackagePath>System.Private.Uri.dll</PackagePath>
-      <Modified>2022-10-18T17:06:02.000</Modified>
+      <Modified>2022-11-18T17:11:52.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Private.Xml.Linq.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Private.Xml.Linq.dll">
       <PackagePath>System.Private.Xml.Linq.dll</PackagePath>
-      <Modified>2022-10-18T17:06:18.000</Modified>
+      <Modified>2022-11-18T17:12:06.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Private.Xml.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Private.Xml.dll">
       <PackagePath>System.Private.Xml.dll</PackagePath>
-      <Modified>2022-10-18T17:06:12.000</Modified>
+      <Modified>2022-11-18T17:12:02.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Reflection.DispatchProxy.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Reflection.DispatchProxy.dll">
       <PackagePath>System.Reflection.DispatchProxy.dll</PackagePath>
-      <Modified>2022-10-18T17:06:22.000</Modified>
+      <Modified>2022-11-18T17:12:10.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Reflection.Emit.ILGeneration.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Reflection.Emit.ILGeneration.dll">
       <PackagePath>System.Reflection.Emit.ILGeneration.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Reflection.Emit.Lightweight.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Reflection.Emit.Lightweight.dll">
       <PackagePath>System.Reflection.Emit.Lightweight.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Reflection.Emit.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Reflection.Emit.dll">
       <PackagePath>System.Reflection.Emit.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Reflection.Extensions.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Reflection.Extensions.dll">
       <PackagePath>System.Reflection.Extensions.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Reflection.Metadata.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Reflection.Metadata.dll">
       <PackagePath>System.Reflection.Metadata.dll</PackagePath>
-      <Modified>2022-10-18T17:06:28.000</Modified>
+      <Modified>2022-11-18T17:12:14.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Reflection.Primitives.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Reflection.Primitives.dll">
       <PackagePath>System.Reflection.Primitives.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Reflection.TypeExtensions.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Reflection.TypeExtensions.dll">
       <PackagePath>System.Reflection.TypeExtensions.dll</PackagePath>
-      <Modified>2022-10-18T17:06:32.000</Modified>
+      <Modified>2022-11-18T17:12:18.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Reflection.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Reflection.dll">
       <PackagePath>System.Reflection.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Resources.Reader.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Resources.Reader.dll">
       <PackagePath>System.Resources.Reader.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Resources.ResourceManager.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Resources.ResourceManager.dll">
       <PackagePath>System.Resources.ResourceManager.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Resources.Writer.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Resources.Writer.dll">
       <PackagePath>System.Resources.Writer.dll</PackagePath>
-      <Modified>2022-10-18T17:06:36.000</Modified>
+      <Modified>2022-11-18T17:12:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.CompilerServices.Unsafe.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.CompilerServices.Unsafe.dll">
       <PackagePath>System.Runtime.CompilerServices.Unsafe.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.CompilerServices.VisualC.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.CompilerServices.VisualC.dll">
       <PackagePath>System.Runtime.CompilerServices.VisualC.dll</PackagePath>
-      <Modified>2022-10-18T17:06:40.000</Modified>
+      <Modified>2022-11-18T17:12:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.Extensions.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.Extensions.dll">
       <PackagePath>System.Runtime.Extensions.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.Handles.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.Handles.dll">
       <PackagePath>System.Runtime.Handles.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.InteropServices.JavaScript.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.InteropServices.JavaScript.dll">
       <PackagePath>System.Runtime.InteropServices.JavaScript.dll</PackagePath>
-      <Modified>2022-10-18T17:06:48.000</Modified>
+      <Modified>2022-11-18T17:12:32.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.InteropServices.RuntimeInformation.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.InteropServices.RuntimeInformation.dll">
       <PackagePath>System.Runtime.InteropServices.RuntimeInformation.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.InteropServices.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.InteropServices.dll">
       <PackagePath>System.Runtime.InteropServices.dll</PackagePath>
-      <Modified>2022-10-18T17:06:44.000</Modified>
+      <Modified>2022-11-18T17:12:28.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.Intrinsics.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.Intrinsics.dll">
       <PackagePath>System.Runtime.Intrinsics.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.Loader.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.Loader.dll">
       <PackagePath>System.Runtime.Loader.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.Numerics.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.Numerics.dll">
       <PackagePath>System.Runtime.Numerics.dll</PackagePath>
-      <Modified>2022-10-18T17:06:52.000</Modified>
+      <Modified>2022-11-18T17:12:36.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.Serialization.Formatters.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.Serialization.Formatters.dll">
       <PackagePath>System.Runtime.Serialization.Formatters.dll</PackagePath>
-      <Modified>2022-10-18T17:06:56.000</Modified>
+      <Modified>2022-11-18T17:12:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.Serialization.Json.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.Serialization.Json.dll">
       <PackagePath>System.Runtime.Serialization.Json.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.Serialization.Primitives.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.Serialization.Primitives.dll">
       <PackagePath>System.Runtime.Serialization.Primitives.dll</PackagePath>
-      <Modified>2022-10-18T17:07:00.000</Modified>
+      <Modified>2022-11-18T17:12:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.Serialization.Xml.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.Serialization.Xml.dll">
       <PackagePath>System.Runtime.Serialization.Xml.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.Serialization.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.Serialization.dll">
       <PackagePath>System.Runtime.Serialization.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Runtime.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.AccessControl.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.AccessControl.dll">
       <PackagePath>System.Security.AccessControl.dll</PackagePath>
-      <Modified>2022-10-18T17:07:04.000</Modified>
+      <Modified>2022-11-18T17:12:46.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.Claims.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.Claims.dll">
       <PackagePath>System.Security.Claims.dll</PackagePath>
-      <Modified>2022-10-18T17:07:08.000</Modified>
+      <Modified>2022-11-18T17:12:50.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.Algorithms.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.Algorithms.dll">
       <PackagePath>System.Security.Cryptography.Algorithms.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.Cng.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.Cng.dll">
       <PackagePath>System.Security.Cryptography.Cng.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.Csp.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.Csp.dll">
       <PackagePath>System.Security.Cryptography.Csp.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.Encoding.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.Encoding.dll">
       <PackagePath>System.Security.Cryptography.Encoding.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.OpenSsl.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.OpenSsl.dll">
       <PackagePath>System.Security.Cryptography.OpenSsl.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.Primitives.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.Primitives.dll">
       <PackagePath>System.Security.Cryptography.Primitives.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.X509Certificates.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.X509Certificates.dll">
       <PackagePath>System.Security.Cryptography.X509Certificates.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.Cryptography.dll">
       <PackagePath>System.Security.Cryptography.dll</PackagePath>
-      <Modified>2022-10-18T17:07:14.000</Modified>
+      <Modified>2022-11-18T17:12:54.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.Principal.Windows.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.Principal.Windows.dll">
       <PackagePath>System.Security.Principal.Windows.dll</PackagePath>
-      <Modified>2022-10-18T17:07:20.000</Modified>
+      <Modified>2022-11-18T17:12:58.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.Principal.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.Principal.dll">
       <PackagePath>System.Security.Principal.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.SecureString.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.SecureString.dll">
       <PackagePath>System.Security.SecureString.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Security.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Security.dll">
       <PackagePath>System.Security.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.ServiceModel.Web.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.ServiceModel.Web.dll">
       <PackagePath>System.ServiceModel.Web.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.ServiceProcess.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.ServiceProcess.dll">
       <PackagePath>System.ServiceProcess.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Text.Encoding.CodePages.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Text.Encoding.CodePages.dll">
       <PackagePath>System.Text.Encoding.CodePages.dll</PackagePath>
-      <Modified>2022-10-18T17:07:24.000</Modified>
+      <Modified>2022-11-18T17:13:02.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Text.Encoding.Extensions.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Text.Encoding.Extensions.dll">
       <PackagePath>System.Text.Encoding.Extensions.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Text.Encoding.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Text.Encoding.dll">
       <PackagePath>System.Text.Encoding.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Text.Encodings.Web.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Text.Encodings.Web.dll">
       <PackagePath>System.Text.Encodings.Web.dll</PackagePath>
-      <Modified>2022-10-18T17:07:28.000</Modified>
+      <Modified>2022-11-18T17:13:06.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Text.Json.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Text.Json.dll">
       <PackagePath>System.Text.Json.dll</PackagePath>
-      <Modified>2022-10-18T17:07:34.000</Modified>
+      <Modified>2022-11-18T17:13:10.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Text.RegularExpressions.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Text.RegularExpressions.dll">
       <PackagePath>System.Text.RegularExpressions.dll</PackagePath>
-      <Modified>2022-10-18T17:07:40.000</Modified>
+      <Modified>2022-11-18T17:13:14.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Threading.Channels.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Threading.Channels.dll">
       <PackagePath>System.Threading.Channels.dll</PackagePath>
-      <Modified>2022-10-18T17:07:44.000</Modified>
+      <Modified>2022-11-18T17:13:18.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Threading.Overlapped.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Threading.Overlapped.dll">
       <PackagePath>System.Threading.Overlapped.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Threading.Tasks.Dataflow.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Threading.Tasks.Dataflow.dll">
       <PackagePath>System.Threading.Tasks.Dataflow.dll</PackagePath>
-      <Modified>2022-10-18T17:07:52.000</Modified>
+      <Modified>2022-11-18T17:13:26.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Threading.Tasks.Extensions.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Threading.Tasks.Extensions.dll">
       <PackagePath>System.Threading.Tasks.Extensions.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Threading.Tasks.Parallel.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Threading.Tasks.Parallel.dll">
       <PackagePath>System.Threading.Tasks.Parallel.dll</PackagePath>
-      <Modified>2022-10-18T17:07:56.000</Modified>
+      <Modified>2022-11-18T17:13:30.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Threading.Tasks.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Threading.Tasks.dll">
       <PackagePath>System.Threading.Tasks.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Threading.Thread.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Threading.Thread.dll">
       <PackagePath>System.Threading.Thread.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Threading.ThreadPool.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Threading.ThreadPool.dll">
       <PackagePath>System.Threading.ThreadPool.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Threading.Timer.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Threading.Timer.dll">
       <PackagePath>System.Threading.Timer.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Threading.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Threading.dll">
       <PackagePath>System.Threading.dll</PackagePath>
-      <Modified>2022-10-18T17:07:48.000</Modified>
+      <Modified>2022-11-18T17:13:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Transactions.Local.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Transactions.Local.dll">
       <PackagePath>System.Transactions.Local.dll</PackagePath>
-      <Modified>2022-10-18T17:08:02.000</Modified>
+      <Modified>2022-11-18T17:13:32.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Transactions.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Transactions.dll">
       <PackagePath>System.Transactions.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.ValueTuple.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.ValueTuple.dll">
       <PackagePath>System.ValueTuple.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Web.HttpUtility.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Web.HttpUtility.dll">
       <PackagePath>System.Web.HttpUtility.dll</PackagePath>
-      <Modified>2022-10-18T17:08:06.000</Modified>
+      <Modified>2022-11-18T17:13:36.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Web.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Web.dll">
       <PackagePath>System.Web.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Windows.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Windows.dll">
       <PackagePath>System.Windows.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Xml.Linq.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Xml.Linq.dll">
       <PackagePath>System.Xml.Linq.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Xml.ReaderWriter.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Xml.ReaderWriter.dll">
       <PackagePath>System.Xml.ReaderWriter.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Xml.Serialization.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Xml.Serialization.dll">
       <PackagePath>System.Xml.Serialization.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Xml.XDocument.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Xml.XDocument.dll">
       <PackagePath>System.Xml.XDocument.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Xml.XPath.XDocument.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Xml.XPath.XDocument.dll">
       <PackagePath>System.Xml.XPath.XDocument.dll</PackagePath>
-      <Modified>2022-10-18T17:08:10.000</Modified>
+      <Modified>2022-11-18T17:13:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Xml.XPath.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Xml.XPath.dll">
       <PackagePath>System.Xml.XPath.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Xml.XmlDocument.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Xml.XmlDocument.dll">
       <PackagePath>System.Xml.XmlDocument.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Xml.XmlSerializer.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Xml.XmlSerializer.dll">
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.Xml.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.Xml.dll">
       <PackagePath>System.Xml.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\System.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\System.dll">
       <PackagePath>System.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\WindowsBase.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\WindowsBase.dll">
       <PackagePath>WindowsBase.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\mscorlib.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\mscorlib.dll">
       <PackagePath>mscorlib.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\lib\net7.0\netstandard.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\lib\net7.0\netstandard.dll">
       <PackagePath>netstandard.dll</PackagePath>
-      <Modified>2022-10-18T16:21:40.000</Modified>
+      <Modified>2022-11-18T16:27:38.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Core.Runtime.win\7.0.49\lib\net7.0-windows10.0.19041\Microsoft.Maui.dll">
+    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Core.Runtime.win\7.0.52\lib\net7.0-windows10.0.19041\Microsoft.Maui.dll">
       <PackagePath>Microsoft.Maui.dll</PackagePath>
-      <Modified>2022-10-27T21:34:14.000</Modified>
+      <Modified>2022-11-25T20:35:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Runtime.win\7.0.49\lib\net7.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.dll">
+    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Runtime.win\7.0.52\lib\net7.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.dll">
       <PackagePath>Microsoft.Maui.Controls.Compatibility.dll</PackagePath>
-      <Modified>2022-10-27T21:34:06.000</Modified>
+      <Modified>2022-11-25T20:35:46.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Runtime.win\7.0.49\lib\net7.0-windows10.0.19041\Microsoft.Maui.Controls.Xaml.dll">
+    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Runtime.win\7.0.52\lib\net7.0-windows10.0.19041\Microsoft.Maui.Controls.Xaml.dll">
       <PackagePath>Microsoft.Maui.Controls.Xaml.dll</PackagePath>
-      <Modified>2022-10-27T21:34:08.000</Modified>
+      <Modified>2022-11-25T20:35:44.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Runtime.win\7.0.49\lib\net7.0-windows10.0.19041\Microsoft.Maui.Controls.dll">
+    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Runtime.win\7.0.52\lib\net7.0-windows10.0.19041\Microsoft.Maui.Controls.dll">
       <PackagePath>Microsoft.Maui.Controls.dll</PackagePath>
-      <Modified>2022-10-27T21:33:46.000</Modified>
+      <Modified>2022-11-25T20:36:30.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Essentials.Runtime.win\7.0.49\lib\net7.0-windows10.0.19041\Microsoft.Maui.Essentials.dll">
+    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Essentials.Runtime.win\7.0.52\lib\net7.0-windows10.0.19041\Microsoft.Maui.Essentials.dll">
       <PackagePath>Microsoft.Maui.Essentials.dll</PackagePath>
-      <Modified>2022-10-27T21:34:34.000</Modified>
+      <Modified>2022-11-25T20:36:06.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\Microsoft.DiaSymReader.Native.amd64.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\Microsoft.DiaSymReader.Native.amd64.dll">
       <PackagePath>Microsoft.DiaSymReader.Native.amd64.dll</PackagePath>
       <Modified>2020-12-16T23:57:00.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\System.IO.Compression.Native.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\System.IO.Compression.Native.dll">
       <PackagePath>System.IO.Compression.Native.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\clretwrc.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\clretwrc.dll">
       <PackagePath>clretwrc.dll</PackagePath>
-      <Modified>2022-10-18T16:08:32.000</Modified>
+      <Modified>2022-11-18T16:15:30.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\clrgc.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\clrgc.dll">
       <PackagePath>clrgc.dll</PackagePath>
-      <Modified>2022-10-18T16:01:46.000</Modified>
+      <Modified>2022-11-18T16:08:46.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\clrjit.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\clrjit.dll">
       <PackagePath>clrjit.dll</PackagePath>
-      <Modified>2022-10-18T16:03:44.000</Modified>
+      <Modified>2022-11-18T16:10:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\coreclr.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\coreclr.dll">
       <PackagePath>coreclr.dll</PackagePath>
-      <Modified>2022-10-18T16:11:58.000</Modified>
+      <Modified>2022-11-18T16:18:54.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\createdump.exe">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\createdump.exe">
       <PackagePath>createdump.exe</PackagePath>
-      <Modified>2022-10-18T16:08:00.000</Modified>
+      <Modified>2022-11-18T16:15:00.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\hostfxr.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\hostfxr.dll">
       <PackagePath>hostfxr.dll</PackagePath>
-      <Modified>2022-10-18T16:53:54.000</Modified>
+      <Modified>2022-11-18T17:00:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\hostpolicy.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\hostpolicy.dll">
       <PackagePath>hostpolicy.dll</PackagePath>
-      <Modified>2022-10-18T16:54:28.000</Modified>
+      <Modified>2022-11-18T17:01:12.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\mscordaccore.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\mscordaccore.dll">
       <PackagePath>mscordaccore.dll</PackagePath>
-      <Modified>2022-10-18T16:23:06.000</Modified>
+      <Modified>2022-11-18T16:29:12.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\mscordaccore_amd64_amd64_7.0.22.51805.dll">
-      <PackagePath>mscordaccore_amd64_amd64_7.0.22.51805.dll</PackagePath>
-      <Modified>2022-10-18T16:23:06.000</Modified>
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\mscordaccore_amd64_amd64_7.0.122.56804.dll">
+      <PackagePath>mscordaccore_amd64_amd64_7.0.122.56804.dll</PackagePath>
+      <Modified>2022-11-18T16:29:10.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\mscordbi.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\mscordbi.dll">
       <PackagePath>mscordbi.dll</PackagePath>
-      <Modified>2022-10-18T16:22:34.000</Modified>
+      <Modified>2022-11-18T16:29:32.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\mscorrc.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\mscorrc.dll">
       <PackagePath>mscorrc.dll</PackagePath>
-      <Modified>2022-10-18T16:08:34.000</Modified>
+      <Modified>2022-11-18T16:15:34.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.0\runtimes\win-x64\native\msquic.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.netcore.app.runtime.win-x64\7.0.1\runtimes\win-x64\native\msquic.dll">
       <PackagePath>msquic.dll</PackagePath>
-      <Modified>2022-10-18T16:21:42.000</Modified>
+      <Modified>2022-11-18T16:27:40.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.27\lib\net6.0\Microsoft.Windows.SDK.NET.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.28\lib\net6.0\Microsoft.Windows.SDK.NET.dll">
       <PackagePath>Microsoft.Windows.SDK.NET.dll</PackagePath>
-      <Modified>2022-08-17T03:26:28.000</Modified>
+      <Modified>2022-11-16T01:34:44.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.27\lib\net6.0\WinRT.Runtime.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.28\lib\net6.0\WinRT.Runtime.dll">
       <PackagePath>WinRT.Runtime.dll</PackagePath>
-      <Modified>2022-08-17T03:26:26.000</Modified>
+      <Modified>2022-11-16T01:34:42.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\communitytoolkit.mvvm\8.0.0\lib\net6.0\CommunityToolkit.Mvvm.dll">
       <PackagePath>CommunityToolkit.Mvvm.dll</PackagePath>
@@ -974,61 +974,73 @@
       <PackagePath>Microsoft.IdentityModel.Tokens.dll</PackagePath>
       <Modified>2020-10-13T00:27:48.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.maui.graphics\7.0.49\lib\net7.0-windows10.0.19041\Microsoft.Maui.Graphics.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.maui.graphics\7.0.52\lib\net7.0-windows10.0.19041\Microsoft.Maui.Graphics.dll">
       <PackagePath>Microsoft.Maui.Graphics.dll</PackagePath>
-      <Modified>2022-10-28T00:33:44.000</Modified>
+      <Modified>2022-11-25T23:36:10.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.maui.graphics.win2d.winui.desktop\7.0.49\lib\net7.0-windows10.0.19041\Microsoft.Maui.Graphics.Win2D.WinUI.Desktop.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.maui.graphics.win2d.winui.desktop\7.0.52\lib\net7.0-windows10.0.19041\Microsoft.Maui.Graphics.Win2D.WinUI.Desktop.dll">
       <PackagePath>Microsoft.Maui.Graphics.Win2D.WinUI.Desktop.dll</PackagePath>
-      <Modified>2022-10-28T00:33:50.000</Modified>
+      <Modified>2022-11-25T23:36:36.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.win32.systemevents\4.7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll">
       <PackagePath>Microsoft.Win32.SystemEvents.dll</PackagePath>
       <Modified>2019-11-15T08:54:18.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.InteractiveExperiences.Projection.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.InteractiveExperiences.Projection.dll">
       <PackagePath>Microsoft.InteractiveExperiences.Projection.dll</PackagePath>
-      <Modified>2022-08-04T00:41:32.000</Modified>
+      <Modified>2022-10-28T10:21:44.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.WinUI.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.WinUI.dll">
       <PackagePath>Microsoft.WinUI.dll</PackagePath>
-      <Modified>2022-09-09T05:50:34.000</Modified>
+      <Modified>2022-11-08T23:39:24.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.Windows.AppLifecycle.Projection.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.AppLifecycle.Projection.dll">
       <PackagePath>Microsoft.Windows.AppLifecycle.Projection.dll</PackagePath>
-      <Modified>2022-09-07T21:54:34.000</Modified>
+      <Modified>2022-11-08T19:31:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.Windows.AppNotifications.Projection.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.AppNotifications.Builder.Projection.dll">
+      <PackagePath>Microsoft.Windows.AppNotifications.Builder.Projection.dll</PackagePath>
+      <Modified>2022-11-08T19:31:22.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.AppNotifications.Projection.dll">
       <PackagePath>Microsoft.Windows.AppNotifications.Projection.dll</PackagePath>
-      <Modified>2022-09-07T21:54:34.000</Modified>
+      <Modified>2022-11-08T19:31:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll">
       <PackagePath>Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll</PackagePath>
-      <Modified>2022-09-07T21:54:34.000</Modified>
+      <Modified>2022-11-08T19:31:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.Windows.ApplicationModel.Resources.Projection.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.ApplicationModel.Resources.Projection.dll">
       <PackagePath>Microsoft.Windows.ApplicationModel.Resources.Projection.dll</PackagePath>
-      <Modified>2022-09-07T21:54:34.000</Modified>
+      <Modified>2022-11-08T19:31:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll">
       <PackagePath>Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll</PackagePath>
-      <Modified>2022-09-07T21:54:34.000</Modified>
+      <Modified>2022-11-08T19:31:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.Windows.PushNotifications.Projection.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.PushNotifications.Projection.dll">
       <PackagePath>Microsoft.Windows.PushNotifications.Projection.dll</PackagePath>
-      <Modified>2022-09-07T21:54:34.000</Modified>
+      <Modified>2022-11-08T19:31:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.Windows.System.Power.Projection.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.Security.AccessControl.Projection.dll">
+      <PackagePath>Microsoft.Windows.Security.AccessControl.Projection.dll</PackagePath>
+      <Modified>2022-11-08T19:31:22.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.System.Power.Projection.dll">
       <PackagePath>Microsoft.Windows.System.Power.Projection.dll</PackagePath>
-      <Modified>2022-09-07T21:54:34.000</Modified>
+      <Modified>2022-11-08T19:31:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.Windows.System.Projection.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.System.Projection.dll">
       <PackagePath>Microsoft.Windows.System.Projection.dll</PackagePath>
-      <Modified>2022-09-07T21:54:34.000</Modified>
+      <Modified>2022-11-08T19:31:22.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\lib\net5.0-windows10.0.18362.0\Microsoft.WindowsAppRuntime.Bootstrap.Net.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.Widgets.Projection.dll">
+      <PackagePath>Microsoft.Windows.Widgets.Projection.dll</PackagePath>
+      <Modified>2022-11-03T19:53:12.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\lib\net6.0-windows10.0.18362.0\Microsoft.WindowsAppRuntime.Bootstrap.Net.dll">
       <PackagePath>Microsoft.WindowsAppRuntime.Bootstrap.Net.dll</PackagePath>
-      <Modified>2022-09-07T21:54:34.000</Modified>
+      <Modified>2022-11-08T19:31:22.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\system.configuration.configurationmanager\4.7.0\lib\netstandard2.0\System.Configuration.ConfigurationManager.dll">
       <PackagePath>System.Configuration.ConfigurationManager.dll</PackagePath>
@@ -1070,25 +1082,25 @@
       <PackagePath>Microsoft.Graphics.Canvas.dll</PackagePath>
       <Modified>2022-10-04T20:41:34.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\runtimes\win10-x64\native\Microsoft.WindowsAppRuntime.Bootstrap.dll">
+    <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\runtimes\win10-x64\native\Microsoft.WindowsAppRuntime.Bootstrap.dll">
       <PackagePath>Microsoft.WindowsAppRuntime.Bootstrap.dll</PackagePath>
-      <Modified>2022-09-07T21:54:36.000</Modified>
+      <Modified>2022-11-08T19:31:24.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\PasswordManager.deps.json">
       <PackagePath>PasswordManager.deps.json</PackagePath>
-      <Modified>2023-01-06T15:53:50.337</Modified>
+      <Modified>2023-01-07T06:49:28.524</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Ref.win\7.0.49\ref\net7.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.pri">
+    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Ref.win\7.0.52\ref\net7.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.pri">
       <PackagePath>Microsoft.Maui.Controls.Compatibility.pri</PackagePath>
-      <Modified>2022-10-27T21:28:12.000</Modified>
+      <Modified>2022-11-25T20:28:56.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Ref.win\7.0.49\ref\net7.0-windows10.0.19041\Microsoft.Maui.Controls.pri">
+    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Ref.win\7.0.52\ref\net7.0-windows10.0.19041\Microsoft.Maui.Controls.pri">
       <PackagePath>Microsoft.Maui.Controls.pri</PackagePath>
-      <Modified>2022-10-27T21:27:50.000</Modified>
+      <Modified>2022-11-25T20:28:34.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Core.Ref.win\7.0.49\ref\net7.0-windows10.0.19041\Microsoft.Maui.pri">
+    <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Core.Ref.win\7.0.52\ref\net7.0-windows10.0.19041\Microsoft.Maui.pri">
       <PackagePath>Microsoft.Maui.pri</PackagePath>
-      <Modified>2022-10-27T21:27:24.000</Modified>
+      <Modified>2022-11-25T20:28:08.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -1328,39 +1340,39 @@
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
-    <ResolvedSDKReference Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.1.msix">
-      <Name>Microsoft.WindowsAppRuntime.1.1</Name>
-      <Version>1005.616.1651.0</Version>
+    <ResolvedSDKReference Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.2.msix">
+      <Name>Microsoft.WindowsAppRuntime.1.2</Name>
+      <Version>2000.677.1750.0</Version>
       <Architecture>x86</Architecture>
-      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.1, MinVersion = 1005.616.1651.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.1.msix</AppxLocation>
+      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.2, MinVersion = 2000.677.1750.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.2.msix</AppxLocation>
       <MoreInfo>
       </MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.1.msix">
-      <Name>Microsoft.WindowsAppRuntime.1.1</Name>
-      <Version>1005.616.1651.0</Version>
+    <ResolvedSDKReference Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.2.msix">
+      <Name>Microsoft.WindowsAppRuntime.1.2</Name>
+      <Version>2000.677.1750.0</Version>
       <Architecture>win32</Architecture>
-      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.1, MinVersion = 1005.616.1651.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.1.msix</AppxLocation>
+      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.2, MinVersion = 2000.677.1750.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.2.msix</AppxLocation>
       <MoreInfo>
       </MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\buildTransitive\..\tools\MSIX\win10-x64\Microsoft.WindowsAppRuntime.1.1.msix">
-      <Name>Microsoft.WindowsAppRuntime.1.1</Name>
-      <Version>1005.616.1651.0</Version>
+    <ResolvedSDKReference Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\buildTransitive\..\tools\MSIX\win10-x64\Microsoft.WindowsAppRuntime.1.2.msix">
+      <Name>Microsoft.WindowsAppRuntime.1.2</Name>
+      <Version>2000.677.1750.0</Version>
       <Architecture>x64</Architecture>
-      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.1, MinVersion = 1005.616.1651.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\buildTransitive\..\tools\MSIX\win10-x64\Microsoft.WindowsAppRuntime.1.1.msix</AppxLocation>
+      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.2, MinVersion = 2000.677.1750.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\buildTransitive\..\tools\MSIX\win10-x64\Microsoft.WindowsAppRuntime.1.2.msix</AppxLocation>
       <MoreInfo>
       </MoreInfo>
     </ResolvedSDKReference>
-    <ResolvedSDKReference Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\buildTransitive\..\tools\MSIX\win10-arm64\Microsoft.WindowsAppRuntime.1.1.msix">
-      <Name>Microsoft.WindowsAppRuntime.1.1</Name>
-      <Version>1005.616.1651.0</Version>
+    <ResolvedSDKReference Include="C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\buildTransitive\..\tools\MSIX\win10-arm64\Microsoft.WindowsAppRuntime.1.2.msix">
+      <Name>Microsoft.WindowsAppRuntime.1.2</Name>
+      <Version>2000.677.1750.0</Version>
       <Architecture>arm64</Architecture>
-      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.1, MinVersion = 1005.616.1651.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
-      <AppxLocation>C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.1.5\buildTransitive\..\tools\MSIX\win10-arm64\Microsoft.WindowsAppRuntime.1.1.msix</AppxLocation>
+      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.2, MinVersion = 2000.677.1750.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\PC\.nuget\packages\microsoft.windowsappsdk\1.2.221109.1\buildTransitive\..\tools\MSIX\win10-arm64\Microsoft.WindowsAppRuntime.1.2.msix</AppxLocation>
       <MoreInfo>
       </MoreInfo>
     </ResolvedSDKReference>

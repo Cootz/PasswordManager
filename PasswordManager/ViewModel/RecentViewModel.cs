@@ -1,13 +1,21 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PasswordManager.Model;
+using PasswordManager.Model.DB.Schema;
+using System.Collections.ObjectModel;
 
 namespace PasswordManager.ViewModel
 {
-    internal partial class RecentViewModel : ObservableObject
+    public partial class RecentViewModel : ObservableObject
     {
         [ObservableProperty]
         private RecentModel model;
+        [ObservableProperty]
+        ObservableCollection<Profile> profiles;
 
-        public RecentViewModel() => Model = new();
+        public RecentViewModel()
+        {
+            Model = new();
+            Profiles = new(Model.getProfiles().Result);            
+        }
     }
 }

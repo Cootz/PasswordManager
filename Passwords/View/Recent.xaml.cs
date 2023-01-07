@@ -13,8 +13,7 @@ namespace Passwords
         public Recent()
         {
             DataContext = new RecentViewModel();
-
-            InitializeComponent();
+            
         }
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)

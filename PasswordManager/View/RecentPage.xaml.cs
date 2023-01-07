@@ -4,9 +4,9 @@ namespace PasswordManager.View;
 
 public partial class RecentPage : ContentPage
 {
-	public RecentPage()
+	public RecentPage(RecentViewModel vm)
 	{
-        BindingContext = new RecentViewModel();
         InitializeComponent();
+		BindingContext = vm;
 	}
 }

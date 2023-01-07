@@ -1,29 +1,29 @@
-﻿using PasswordManager.PasData;
+﻿using PasswordManager.Model.DB;
+using PasswordManager.Model.DB.Schema;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace PasswordManager.Model
 {
-    internal class RecentModel
+    public class RecentModel
     {
-        public ObservableCollection<Profile> Profiles { get { return _profiles; } set { _profiles = value; } }
-        private ObservableCollection<Profile> _profiles;
-
-        public RecentModel()
+        public async Task<IEnumerable<Profile>> getProfiles()
         {
-            ObservableCollection<Profile> serviceResult = new(PasswordController.SearhProfiles("Service LIKE 'steam'").Result ?? new());
-
-            serviceResult.Add(new Profile()
+            List<Profile> profiles =  /*await PasswordController.SearhProfiles("Service LIKE 'steam'") ??*/ new();
+            for (int i = 0; i < 20; i++)
             {
-                Service = "steam",
-                Email = new EMail()
+                profiles.Add(new Profile()
                 {
-                    Adress = "test@fda.td"
-                },
-                Password = "psw",
-                Username = null
-            });
-            _profiles = serviceResult;
+                    Service = "steam",
+                    Email = new EMail()
+                    {
+                        Adress = $"test{i}@fda.td"
+                    },
+                    Password = $"psw{i}{Random.Shared.Next(0, i + 32)}",
+                    Username = null
+                });
+            }
+            return profiles;
         }
     }
 }
