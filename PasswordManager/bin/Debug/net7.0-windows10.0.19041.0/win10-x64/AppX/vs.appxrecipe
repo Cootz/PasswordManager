@@ -30,13 +30,13 @@
     <AppXManifest Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-01-07T06:49:28.660</Modified>
+      <Modified>2023-01-08T04:25:06.906</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-01-07T06:49:28.339</Modified>
+      <Modified>2023-01-08T04:25:06.498</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\PasswordManager.runtimeconfig.json">
       <PackagePath>PasswordManager.runtimeconfig.json</PackagePath>
@@ -44,11 +44,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\bin\Debug\net7.0-windows10.0.19041.0\win10-x64\PasswordManager.dll">
       <PackagePath>PasswordManager.dll</PackagePath>
-      <Modified>2023-01-07T06:49:27.308</Modified>
+      <Modified>2023-01-08T04:25:04.644</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>PasswordManager.exe</PackagePath>
-      <Modified>2023-01-07T06:49:27.315</Modified>
+      <Modified>2023-01-08T04:25:04.675</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\.nuget\packages\fluentmigrator.runner.sqlserverce\3.3.2\runtimes\win-x64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest">
       <PackagePath>amd64/Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest</PackagePath>
@@ -1088,7 +1088,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\PC\source\repos\PasswordManager\PasswordManager\obj\Debug\net7.0-windows10.0.19041.0\win10-x64\PasswordManager.deps.json">
       <PackagePath>PasswordManager.deps.json</PackagePath>
-      <Modified>2023-01-07T06:49:28.524</Modified>
+      <Modified>2023-01-08T04:25:06.726</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files\dotnet\packs\Microsoft.Maui.Controls.Ref.win\7.0.52\ref\net7.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.pri">
       <PackagePath>Microsoft.Maui.Controls.Compatibility.pri</PackagePath>
