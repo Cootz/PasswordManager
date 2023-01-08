@@ -11,7 +11,6 @@ namespace PasswordManager.Model.DB
         private SqlCeEngine _engine;
         private SqlCeConnection _connection;
         private SqlCeCommand _cmd;
-        private int _id;
 
         private async Task OpenCon()
         {
@@ -31,7 +30,9 @@ namespace PasswordManager.Model.DB
 
         public async Task Initialize()
         {
-            if (!File.Exists(Directory.GetCurrentDirectory() + DBName))
+            File.Delete(DBName);
+
+            if (!File.Exists(DBName))
             {
                 try
                 {
@@ -45,11 +46,12 @@ namespace PasswordManager.Model.DB
                 try
                 {
                     await CreateCommand("CREATE TABLE Profiles " +
-                           "(ProfileID int PRIMARY KEY," +
+                           "(ProfileID int IDENTITY(1,1) PRIMARY KEY," +
                            "Service nvarchar(4000) NOT NULL," +
                            "Email nvarchar(4000) NOT NULL," +
                            "Password nvarchar(4000) NOT NULL," +
                            "Username nvarchar(4000));");
+                    _engine.Upgrade();
                 }
                 catch { }
             }
@@ -62,10 +64,8 @@ namespace PasswordManager.Model.DB
 
         public async Task Add(Profile profile)
         {
-            await CreateCommand("INSERT INTO Profiles (ProfileID, Service, Email, Password, Username)" +
-                $"VALUES (\'{_id}\', \'{profile.Service}\',\'{profile.Email.Adress}\',\'{profile.Password}\',\'{profile.Username}\')");
-
-            _id++;
+            await CreateCommand("INSERT INTO Profiles (Service, Email, Password, Username)" +
+                $"VALUES (\'{profile.Service}\',\'{profile.Email.Adress}\',\'{profile.Password}\',\'{profile.Username}\')");
         }
 
         public async Task<DataSet> Select(string condition)

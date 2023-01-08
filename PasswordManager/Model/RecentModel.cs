@@ -9,7 +9,18 @@ namespace PasswordManager.Model
     {
         public async Task<IEnumerable<Profile>> getProfiles()
         {
-            List<Profile> profiles =  /*await PasswordController.SearhProfiles("Service LIKE 'steam'") ??*/ new();
+            PasswordController.SavePasswords(new List<Profile>(){ new Profile()
+            {
+                Service = "steam",
+                Email = new EMail()
+                {
+                    Adress = $"dataFormDb@fda.td"
+                },
+                Password = $"pswDb",
+                Username = "RelM"
+            } }.ToArray());
+
+            List<Profile> profiles =  await PasswordController.SearhProfiles("Service LIKE 'steam'") ?? new();
             for (int i = 0; i < 20; i++)
             {
                 profiles.Add(new Profile()

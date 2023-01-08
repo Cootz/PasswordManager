@@ -15,7 +15,7 @@ namespace PasswordManager.ViewModel
         public RecentViewModel()
         {
             Model = new();
-            Profiles = new(Model.getProfiles().Result);            
+            Task.Run(async () => Profiles = new(await Model.getProfiles()));           
         }
     }
 }

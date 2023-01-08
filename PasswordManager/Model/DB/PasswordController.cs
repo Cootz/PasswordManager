@@ -15,7 +15,7 @@ namespace PasswordManager.Model.DB
 
         public static async Task Initialize()
         {
-            Path = Directory.GetCurrentDirectory() + Path;
+            Path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path;
 
             if (!Directory.Exists(Path))
             {
