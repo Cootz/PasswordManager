@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordManager.View.RecentPage"
+             xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
+             xmlns:schema="clr-namespace:PasswordManager.Model.DB.Schema"
+             x:DataType="viewmodel:RecentViewModel"
+             Title="RecentPage">
+    <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, *">
+        <Entry FontSize="24" Text="Hi!"/>
+        <Button Text="Add" Margin="10, 5" Padding="10" FontSize="Medium" Grid.Row="1"/>
+
+        <CollectionView ItemsSource="{Binding Profiles}" Grid.Row="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type schema:Profile}">
+                    <Frame Margin="10, 5" Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+                        <HorizontalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="25">
+                            <Label Text="{Binding Service}" FontSize="Medium"/>
+                            <Label Text="{Binding Email}" FontSize="Medium"/>
+                            <Label Text="{Binding Password}" FontSize="Medium"/>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
