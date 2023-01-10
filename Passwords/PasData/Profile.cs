@@ -13,8 +13,8 @@ namespace Passwords.PasData
 
         public string Service { get { return service; } set { service = value; } }
         public EMail Email { get { return eMail; } set { eMail = value; } }
-        public string Password { get { return password; } set { password = value; } }
         public string Username { get { return username; } set { username = value; } }
+        public string Password { get { return password; } set { password = value; } }
 
         public Profile() { }
 
@@ -24,8 +24,8 @@ namespace Passwords.PasData
 
             ret.Append(Service ?? NullMessage).Append(FieldSplit);
             ret.Append(Email).Append(FieldSplit);
-            ret.Append(Password ?? NullMessage).Append(FieldSplit);
-            ret.Append(Username ?? NullMessage).Append(ProfileSplit);
+            ret.Append(Username ?? NullMessage).Append(FieldSplit);
+            ret.Append(Password ?? NullMessage).Append(ProfileSplit);
 
             return ret.ToString();
         }

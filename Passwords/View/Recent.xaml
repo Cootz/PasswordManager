@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Passwords"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Recent" Background="{DynamicResource Primary}">
+      Title="Recent" Background="{DynamicResource Primary}" Cursor="Hand">
 
     <Page.Resources>
         <ResourceDictionary Source="../Style/AppStyle.xaml"/>

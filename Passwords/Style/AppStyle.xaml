@@ -9,14 +9,4 @@
         <ResourceDictionary Source="Control/Button.xaml"/>
         <ResourceDictionary Source="Control/TextBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-
-    
-    
-
-    
-
-    
-
-
-
 </ResourceDictionary>
