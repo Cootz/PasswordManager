@@ -1,2 +1,2 @@
 # PasswordManager
-Manage your accounts password
+Manage your accounts passwords
