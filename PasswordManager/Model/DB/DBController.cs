@@ -1,79 +1,35 @@
-﻿using System.Data;
-using System.Data.SqlServerCe;
+﻿using Microsoft.EntityFrameworkCore;
 using PasswordManager.Model.DB.Schema;
+using PasswordManager.Model.IO;
+using System.Data;
 
-namespace PasswordManager.Model.DB
+namespace PasswordManager.Model.DB;
+
+public class DBController : DbContext, IController
 {
-    public class DBController : IController
+    private static readonly string DBPath = Path.Combine(AppDirectoryManager.AppData, "Psw.db");
+    private static readonly string Connection = $"Filename=\"{DBPath}\"";
+    
+    public DbSet<Profile> Profiles { get; set; }
+
+    public async Task Initialize()
     {
-        private static readonly string DBName = PasswordController.Path + @"\PswDB.sdf";
-        private static readonly string Com = $"DataSource=\"{DBName}\"; Password=\"scpassw1\"";
-        private SqlCeEngine _engine;
-        private SqlCeConnection _connection;
-        private SqlCeCommand _cmd;
+        await Database.EnsureCreatedAsync();
+    }
 
-        private async Task OpenCon()
-        {
-            _connection = new SqlCeConnection(Com);
-            await _connection.OpenAsync();
-        }
+    public async Task Add(Profile profile)
+    {
+        Profiles.Add(profile);
+        SaveChanges();
+    }
 
-        private async Task<DataSet> CreateCommand(string command)
-        {
-            _cmd = new SqlCeCommand(command, _connection);
-            await _cmd.ExecuteNonQueryAsync();
-            SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(_cmd);
-            DataSet dataSet = new DataSet();
-            dataAdapter.Fill(dataSet);
-            return dataSet;
-        }
+    public async Task<IEnumerable<Profile>> Select(Func<Profile, bool> predicate) 
+    {
+        return Profiles.Where(predicate);
+    }
 
-        public async Task Initialize()
-        {
-            File.Delete(DBName);
-
-            if (!File.Exists(DBName))
-            {
-                try
-                {
-                    _engine = new SqlCeEngine(Com);
-                    _engine.CreateDatabase();
-                }
-                catch { }
-
-                await OpenCon();
-
-                try
-                {
-                    await CreateCommand("CREATE TABLE Profiles " +
-                           "(ProfileID int IDENTITY(1,1) PRIMARY KEY," +
-                           "Service nvarchar(4000) NOT NULL," +
-                           "Email nvarchar(4000) NOT NULL," +
-                           "Password nvarchar(4000) NOT NULL," +
-                           "Username nvarchar(4000));");
-                    _engine.Upgrade();
-                }
-                catch { }
-            }
-            else
-            {
-                await OpenCon();
-            }
-
-        }
-
-        public async Task Add(Profile profile)
-        {
-            await CreateCommand("INSERT INTO Profiles (Service, Email, Password, Username)" +
-                $"VALUES (\'{profile.Service}\',\'{profile.Email.Adress}\',\'{profile.Password}\',\'{profile.Username}\')");
-        }
-
-        public async Task<DataSet> Select(string condition)
-        {
-            DataSet dataSet = await CreateCommand("SELECT * FROM Profiles " +
-                "WHERE " + condition + ";");
-
-            return dataSet;
-        }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlite(Connection);
     }
 }
