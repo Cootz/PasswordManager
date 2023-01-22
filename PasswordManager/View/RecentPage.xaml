@@ -8,7 +8,7 @@
              Title="RecentPage">
     <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, *">
         <Entry FontSize="24" Text="Hi!"/>
-        <Button Text="Add" Margin="10, 5" Padding="10" FontSize="Medium" Grid.Row="1"/>
+        <Button Text="Add" Margin="10, 5" Padding="10" FontSize="Medium" Grid.Row="1" Command="{Binding AddNoteCommand}"/>
 
         <CollectionView ItemsSource="{Binding Profiles}" Grid.Row="2">
             <CollectionView.ItemTemplate>
@@ -23,6 +23,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
     </Grid>
 </ContentPage>

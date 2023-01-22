@@ -11,7 +11,6 @@ public class Profile : AProfile
 
     public int ID { get; set; }
     public string Service { get { return service; } set { service = value; } }
-    public string Email { get { return eMail; } set { eMail = value; } }
     public string Username { get { return username; } set { username = value; } }
     public string Password { get { return password; } set { password = value; } }
 
@@ -22,7 +21,6 @@ public class Profile : AProfile
         StringBuilder ret = new StringBuilder();
 
         ret.Append(Service ?? NullMessage).Append(FieldSplit);
-        ret.Append(Email).Append(FieldSplit);
         ret.Append(Username ?? NullMessage).Append(FieldSplit);
         ret.Append(Password ?? NullMessage).Append(ProfileSplit);
 
@@ -31,7 +29,7 @@ public class Profile : AProfile
 
     public override bool Equals([AllowNull] Profile other)
     {
-        bool[] equals = { Service == other.Service, Email == other.Email, Password == other.Password, Username == other.username };
+        bool[] equals = { Service == other.Service, Password == other.Password, Username == other.username };
 
         return equals[0] & equals[1] & equals[2] & equals[3];
     }
