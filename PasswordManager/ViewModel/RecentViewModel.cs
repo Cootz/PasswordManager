@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Model;
 using PasswordManager.Model.DB.Schema;
+using PasswordManager.View;
 using System.Collections.ObjectModel;
 
 namespace PasswordManager.ViewModel
@@ -20,9 +21,9 @@ namespace PasswordManager.ViewModel
         }
 
         [RelayCommand]
-        void AddNote()
-        { 
-            
+        async Task AddNote()
+        {
+            await Shell.Current.GoToAsync(nameof(AddPage));
         }
     }
 }

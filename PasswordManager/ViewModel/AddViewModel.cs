@@ -18,12 +18,17 @@ namespace PasswordManager.ViewModel
         private string service;
 
         [RelayCommand]
-        void AddProfile()
+        async Task AddProfile()
         { 
-           
+
+
+           await GoBack();
         }
 
-
+        async Task GoBack()
+        {
+            await Shell.Current.GoToAsync("..");
+        }
 
     }
 }

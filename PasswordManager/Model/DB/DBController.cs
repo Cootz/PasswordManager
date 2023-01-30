@@ -10,7 +10,7 @@ public class DBController : DbContext, IController
     private static readonly string DBPath = Path.Combine(AppDirectoryManager.AppData, "Psw.db");
     private static readonly string Connection = $"Filename=\"{DBPath}\"";
     
-    public DbSet<Profile> Profiles { get; set; }
+    private DbSet<Profile> Profiles { get; set; }
 
     public async Task Initialize()
     {
@@ -19,11 +19,11 @@ public class DBController : DbContext, IController
 
     public async Task Add(Profile profile)
     {
-        Profiles.Add(profile);
-        SaveChanges();
+        await Profiles.AddAsync(profile);
+        await SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<Profile>> Select(Func<Profile, bool> predicate) 
+    public IEnumerable<Profile> Select(Func<Profile, bool> predicate) 
     {
         return Profiles.Where(predicate);
     }

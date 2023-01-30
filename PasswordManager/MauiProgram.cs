@@ -17,8 +17,12 @@ namespace PasswordManager
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            //Pass viewmodel into page using Singleton/Transient
             builder.Services.AddSingleton<RecentPage>();
             builder.Services.AddSingleton<RecentViewModel>();
+
+            builder.Services.AddTransient<AddPage>();
+            builder.Services.AddTransient<AddViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

@@ -19,5 +19,5 @@ public static class PasswordController
         }
     }
 
-    public static async Task<List<Profile>> SearhProfiles(Func<Profile, bool> predicate) => new List<Profile>(await DB.Select(predicate));
+    public static List<Profile> SearhProfiles(Func<Profile, bool> predicate) => DB.Select(predicate).ToList();
 }

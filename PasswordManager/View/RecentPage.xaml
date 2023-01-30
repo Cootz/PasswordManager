@@ -16,7 +16,7 @@
                     <Frame Margin="10, 5" Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
                         <HorizontalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="25">
                             <Label Text="{Binding Service}" FontSize="Medium"/>
-                            <Label Text="{Binding Email}" FontSize="Medium"/>
+                            <Label Text="{Binding Username}" FontSize="Medium"/>
                             <Label Text="{Binding Password}" FontSize="Medium"/>
                         </HorizontalStackLayout>
                     </Frame>
