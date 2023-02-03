@@ -1,4 +1,5 @@
 ﻿using PasswordManager.Model.DB;
+using PasswordManager.Model.IO;
 
 namespace PasswordManager
 {
@@ -6,11 +7,14 @@ namespace PasswordManager
     {
         public App()
         {
-            Task dbInit = PasswordController.Initialize();
+            Task[] Inits = {
+                PasswordController.Initialize(),
+                AppDirectoryManager.Initialize()
+            };
 
             InitializeComponent();
 
-            Task.WhenAll(dbInit);
+            Task.WhenAll(Inits);
             MainPage = new AppShell();
         }
     }

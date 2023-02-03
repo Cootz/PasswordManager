@@ -8,7 +8,8 @@ namespace PasswordManager
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(RecentPage), typeof(RecentPage));
+            //Register routes
+            Routing.RegisterRoute(nameof(AddPage), typeof(AddPage));
         }
     }
 }
