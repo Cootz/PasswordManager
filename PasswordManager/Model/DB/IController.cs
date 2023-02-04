@@ -2,7 +2,7 @@
 
 namespace PasswordManager.Model.DB;
 
-internal interface IController
+internal interface IController: IDisposable
 {
     public Task Initialize();
     public IEnumerable<Profile> Select(Func<Profile, bool> predicate);

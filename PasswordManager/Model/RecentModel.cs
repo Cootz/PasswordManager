@@ -7,7 +7,7 @@ public class RecentModel
 {
     public async Task<IEnumerable<Profile>> getProfiles()
     {
-        List<Profile> profiles =  PasswordController.SearhProfiles(x => x.Service == "steam") ?? new();
+        List<Profile> profiles = PasswordController.SearhProfiles(x => x.Service == "steam") ?? new();
         return profiles;
     }
 }

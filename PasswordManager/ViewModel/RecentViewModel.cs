@@ -17,7 +17,7 @@ namespace PasswordManager.ViewModel
         public RecentViewModel()
         {
             Model = new();
-            Task.Run(async () => Profiles = new(await Model.getProfiles()));
+            Task.Run(async () => Profiles = (ObservableCollection<Profile>)await Model.getProfiles());
         }
 
         [RelayCommand]

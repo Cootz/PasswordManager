@@ -1,20 +1,26 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using MongoDB.Bson;
+using Realms;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace PasswordManager.Model.DB.Schema;
 
-public class Profile : AProfile
+public partial class Profile : RealmObject
 {
     private const char FieldSplit = ':';
     private const char ProfileSplit = ';';
     private const string NullMessage = "null";
 
-    public int ID { get; set; }
-    public string Service { get { return service; } set { service = value; } }
-    public string Username { get { return username; } set { username = value; } }
-    public string Password { get { return password; } set { password = value; } }
+    [PrimaryKey]
+    public ObjectId ID { get; set; }
+    public string Service { get; set; }
+    public string Username { get; set; }
+    public string Password { get; set; }
 
-    public Profile() { }
+    public Profile() 
+    {
+        ID = new ObjectId();
+    }
 
     public override string ToString()
     {
@@ -27,12 +33,12 @@ public class Profile : AProfile
         return ret.ToString();
     }
 
-    public override bool Equals([AllowNull] Profile other)
-    {
-        bool[] equals = { Service == other.Service, Password == other.Password, Username == other.username };
+    //public override bool Equals([AllowNull] Profile other)
+    //{
+    //    bool[] equals = { Service == other?.Service, Password == other?.Password, Username == other?.Username };
 
-        return equals[0] & equals[1] & equals[2] & equals[3];
-    }
+    //    return equals[0] & equals[1] & equals[2];
+    //}
 
     public static bool operator !=(Profile left, Profile right)
     {
@@ -44,7 +50,7 @@ public class Profile : AProfile
         return left.Equals(right);
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals([AllowNull]object obj)
     {
         if (ReferenceEquals(this, obj))
         {
