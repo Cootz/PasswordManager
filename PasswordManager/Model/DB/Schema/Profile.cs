@@ -12,14 +12,14 @@ public partial class Profile : RealmObject
     private const string NullMessage = "null";
 
     [PrimaryKey]
-    public ObjectId ID { get; set; }
+    public Guid ID { get; set; }
     public string Service { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
 
     public Profile() 
     {
-        ID = new ObjectId();
+        ID = Guid.NewGuid();
     }
 
     public override string ToString()

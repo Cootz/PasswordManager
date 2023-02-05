@@ -20,7 +20,7 @@ public static class PasswordController
     }
 
     public static async void Add(Profile profile) => await DB.Add(profile);
-    
-    public static List<Profile> SearhProfiles(Func<Profile, bool> predicate) => DB.Select(predicate).ToList();
+
+    public static IQueryable<Profile> GetProfiles() => DB.Select<Profile>();
 
 }
