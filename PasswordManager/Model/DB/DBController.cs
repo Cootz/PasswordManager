@@ -5,7 +5,8 @@ using System.Data;
 
 namespace PasswordManager.Model.DB;
 
-public class DBController : DbContext, IController
+[Obsolete]
+public class DBController : DbContext
 {
     private static readonly string DBPath = Path.Combine(AppDirectoryManager.AppData, "Psw.db");
     private static readonly string Connection = $"Filename=\"{DBPath}\"";

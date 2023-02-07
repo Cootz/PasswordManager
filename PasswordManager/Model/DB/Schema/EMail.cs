@@ -1,5 +1,6 @@
 ﻿namespace PasswordManager.Model.DB.Schema;
 
+[Obsolete]
 public class EMail
 {
     private char SplitChar = '@';

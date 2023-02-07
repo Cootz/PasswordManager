@@ -4,7 +4,7 @@ namespace PasswordManager.Model.DB;
 
 public static class PasswordController
 {
-    private static IController DB = new DBController();
+    private static IController DB = new RealmController();
 
     public static async Task Initialize()
     {
@@ -19,5 +19,8 @@ public static class PasswordController
         }
     }
 
-    public static List<Profile> SearhProfiles(Func<Profile, bool> predicate) => DB.Select(predicate).ToList();
+    public static async void Add(Profile profile) => await DB.Add(profile);
+
+    public static IQueryable<Profile> GetProfiles() => DB.Select<Profile>();
+
 }

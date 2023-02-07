@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PasswordManager.Model.DB;
+using PasswordManager.Model.DB.Schema;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +21,13 @@ namespace PasswordManager.ViewModel
 
         [RelayCommand]
         async Task AddProfile()
-        { 
-
+        {
+            PasswordController.Add(new Profile()
+            { 
+                Username = username,
+                Password = password,
+                Service= service
+            });
 
            await GoBack();
         }

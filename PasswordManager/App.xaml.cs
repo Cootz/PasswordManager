@@ -7,9 +7,10 @@ namespace PasswordManager
     {
         public App()
         {
+            AppDirectoryManager.Initialize().Wait();
+
             Task[] Inits = {
                 PasswordController.Initialize(),
-                AppDirectoryManager.Initialize()
             };
 
             InitializeComponent();
