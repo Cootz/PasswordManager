@@ -11,13 +11,10 @@ namespace PasswordManager.ViewModel
     public partial class RecentViewModel : ObservableObject
     {
         [ObservableProperty]
-        private RecentModel model;
-        [ObservableProperty]
         IQueryable<Profile> profiles;
 
         public RecentViewModel()
         {
-            Model = new();
             Profiles = PasswordController.GetProfiles();
         }
 
