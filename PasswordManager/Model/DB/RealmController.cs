@@ -37,6 +37,7 @@ namespace PasswordManager.Model.DB
                 SchemaVersion = schema_version,
                 MigrationCallback = OnMigration
             };
+
             realm = Realm.GetInstance(config);
 
             return Task.CompletedTask;
@@ -72,5 +73,7 @@ namespace PasswordManager.Model.DB
                 _ => null
             };
         }
+
+        public Task Remove(Profile profile) => realm?.WriteAsync(() => realm.Remove(profile));
     }
 }

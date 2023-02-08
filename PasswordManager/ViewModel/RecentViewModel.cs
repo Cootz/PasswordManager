@@ -21,7 +21,6 @@ namespace PasswordManager.ViewModel
         {
             var IOInit = AppDirectoryManager.Initialize();
             db = new PasswordController(new RealmController());
-            Debug.Write(nameof(db));
 
             Task.WhenAll(IOInit).Wait();
 
@@ -43,6 +42,12 @@ namespace PasswordManager.ViewModel
                     { nameof(db), db }
                 }
             );
+        }
+
+        [RelayCommand]
+        async Task DeleteNote(object sender)
+        {
+            await db.Remove((Profile)sender);
         }
     }
 }
