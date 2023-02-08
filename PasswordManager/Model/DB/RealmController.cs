@@ -30,7 +30,7 @@ namespace PasswordManager.Model.DB
             realm.Dispose();
         }
 
-        public async Task Initialize()
+        public Task Initialize()
         {
             var config = new RealmConfiguration(Path.Combine(AppDirectoryManager.Data, "Psw.realm"))
             { 
@@ -38,6 +38,8 @@ namespace PasswordManager.Model.DB
                 MigrationCallback = OnMigration
             };
             realm = Realm.GetInstance(config);
+
+            return Task.CompletedTask;
         }
 
         private void OnMigration(Migration migration, ulong lastSchemaVersion)
@@ -55,6 +57,7 @@ namespace PasswordManager.Model.DB
 
                     for (int i = 0; i < newProfiles.Count(); i++)
                         newProfiles.ElementAt(i).ID = Guid.NewGuid();
+
                     break;
             }
         }
