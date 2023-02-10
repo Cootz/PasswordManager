@@ -24,6 +24,8 @@ public class PasswordController
         }
     }
 
+    public async Task Remove(Profile profile) => await DB.Remove(profile); 
+
     public async void Add(Profile profile) => await DB.Add(profile);
 
     public IQueryable<Profile> GetProfiles() => DB.Select<Profile>();

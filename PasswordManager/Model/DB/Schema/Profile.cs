@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson;
-using Realms;
+﻿using Realms;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
@@ -8,13 +7,18 @@ namespace PasswordManager.Model.DB.Schema;
 public partial class Profile : RealmObject, IEquatable<Profile>
 {
     private const char FieldSplit = ':';
+    
     private const char ProfileSplit = ';';
+    
     private const string NullMessage = "null";
 
     [PrimaryKey]
     public Guid ID { get; set; }
+
     public string Service { get; set; }
+    
     public string Username { get; set; }
+    
     public string Password { get; set; }
 
     public Profile() 

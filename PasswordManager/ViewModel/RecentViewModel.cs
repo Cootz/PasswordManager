@@ -1,12 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using PasswordManager.Model;
 using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
 using PasswordManager.View;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace PasswordManager.ViewModel
 {
@@ -21,7 +19,6 @@ namespace PasswordManager.ViewModel
         {
             var IOInit = AppDirectoryManager.Initialize();
             db = new PasswordController(new RealmController());
-            Debug.Write(nameof(db));
 
             Task.WhenAll(IOInit).Wait();
 
@@ -43,6 +40,12 @@ namespace PasswordManager.ViewModel
                     { nameof(db), db }
                 }
             );
+        }
+
+        [RelayCommand]
+        async Task DeleteNote(object sender)
+        {
+            await db.Remove((Profile)sender);
         }
     }
 }

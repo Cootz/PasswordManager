@@ -31,6 +31,8 @@ namespace PasswordManager.Tests.DB
 
         public Task Initialize() => Task.CompletedTask;
 
+        public Task Remove(Profile profile) => realm.WriteAsync(() => realm.Remove(profile));
+
         public IQueryable<T> Select<T>() where T : class => typeof(T) switch
         {
             var value when value == typeof(Profile) => (IQueryable<T>)realm?.All<Profile>(),

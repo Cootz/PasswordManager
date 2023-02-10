@@ -13,13 +13,19 @@
         <CollectionView ItemsSource="{Binding Profiles}" Grid.Row="2">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type schema:Profile}">
-                    <Frame Margin="10, 5" Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
-                        <HorizontalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="25">
-                            <Label Text="{Binding Service}" FontSize="Medium"/>
-                            <Label Text="{Binding Username}" FontSize="Medium"/>
-                            <Label Text="{Binding Password}" FontSize="Medium"/>
-                        </HorizontalStackLayout>
-                    </Frame>
+                    <SwipeView>
+                        <SwipeView.GestureRecognizers>
+                            <SwipeGestureRecognizer Direction="Left" Command="{Binding Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=DeleteNote}"/>
+                        </SwipeView.GestureRecognizers>
+                        <Frame Margin="10, 5" Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+                            <Grid ColumnDefinitions="*,*,*" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                                <Label Grid.Column="0" Text="{Binding Service}" HorizontalTextAlignment="Center" FontSize="Medium"/>
+                                <Label Grid.Column="1" Text="{Binding Username}" HorizontalTextAlignment="Center" FontSize="Medium"/>
+                                <Label Grid.Column="2" Text="{Binding Password}" HorizontalTextAlignment="Center" FontSize="Medium"/>
+                            </Grid>
+                        </Frame>
+                    </SwipeView>
+
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
