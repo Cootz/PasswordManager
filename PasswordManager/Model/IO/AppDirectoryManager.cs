@@ -3,9 +3,11 @@
 public static class AppDirectoryManager
 {
     private const string appName = "PasswordManager";
+
     private const string data = "data";
 
     public static string AppData { get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), appName); } }
+
     public static string Data { get { return Path.Combine(AppData, data); } }
 
     public static Task Initialize()

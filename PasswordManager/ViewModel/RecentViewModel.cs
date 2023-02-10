@@ -1,12 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using PasswordManager.Model;
 using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
 using PasswordManager.View;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace PasswordManager.ViewModel
 {
