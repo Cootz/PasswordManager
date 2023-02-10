@@ -2,16 +2,21 @@
 
 namespace PasswordManager.Model.DB;
 
-public static class PasswordController
+public class PasswordController
 {
-    private static IController DB = new RealmController();
+    private IController DB;
 
-    public static async Task Initialize()
+    public PasswordController(IController DB)
+    {
+        this.DB = DB;
+    }
+
+    public async Task Initialize()
     {
         await DB.Initialize();
     }
 
-    public static async void SavePasswords(Profile[] data)
+    public async void SavePasswords(Profile[] data)
     {
         foreach (Profile prof in data)
         {
@@ -19,8 +24,10 @@ public static class PasswordController
         }
     }
 
-    public static async void Add(Profile profile) => await DB.Add(profile);
+    public async Task Remove(Profile profile) => await DB.Remove(profile); 
 
-    public static IQueryable<Profile> GetProfiles() => DB.Select<Profile>();
+    public async void Add(Profile profile) => await DB.Add(profile);
+
+    public IQueryable<Profile> GetProfiles() => DB.Select<Profile>();
 
 }

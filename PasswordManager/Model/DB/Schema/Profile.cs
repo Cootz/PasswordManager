@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PasswordManager.Model.DB.Schema;
 
-public partial class Profile : RealmObject
+public partial class Profile : RealmObject, IEquatable<Profile>
 {
     private const char FieldSplit = ':';
     private const char ProfileSplit = ';';
@@ -33,12 +33,12 @@ public partial class Profile : RealmObject
         return ret.ToString();
     }
 
-    //public override bool Equals([AllowNull] Profile other)
-    //{
-    //    bool[] equals = { Service == other?.Service, Password == other?.Password, Username == other?.Username };
+    public bool Equals([AllowNull] Profile other)
+    {
+        bool[] equals = { Service == other?.Service, Password == other?.Password, Username == other?.Username };
 
-    //    return equals[0] & equals[1] & equals[2];
-    //}
+        return equals[0] & equals[1] & equals[2];
+    }
 
     public static bool operator !=(Profile left, Profile right)
     {
