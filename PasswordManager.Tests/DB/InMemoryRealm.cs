@@ -1,6 +1,7 @@
 ﻿using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using Realms;
+using Remotion.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,12 @@ namespace PasswordManager.Tests.DB
 {
     public class InMemoryRealm : IController
     {
-        private Realm realm = null;
+        private Realm realm = null!;
 
         public InMemoryRealm()
         {
             var config = new InMemoryConfiguration("test-db");
-            var realm = Realm.GetInstance(config);
+            realm = Realm.GetInstance(config);
         }
 
         public async Task Add(Profile profile)
@@ -35,8 +36,8 @@ namespace PasswordManager.Tests.DB
 
         public IQueryable<T> Select<T>() where T : class => typeof(T) switch
         {
-            var value when value == typeof(Profile) => (IQueryable<T>)realm?.All<Profile>(),
-            _ => null
+            var value when value == typeof(Profile) => (IQueryable<T>)realm.All<Profile>(),
+            _ => null!
         };
     }
 }

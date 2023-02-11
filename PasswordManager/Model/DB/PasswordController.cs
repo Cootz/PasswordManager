@@ -2,7 +2,7 @@
 
 namespace PasswordManager.Model.DB;
 
-public class PasswordController
+public class PasswordController: IDisposable
 {
     private IController DB;
 
@@ -30,4 +30,5 @@ public class PasswordController
 
     public IQueryable<Profile> GetProfiles() => DB.Select<Profile>();
 
+    public void Dispose() => DB.Dispose();
 }
