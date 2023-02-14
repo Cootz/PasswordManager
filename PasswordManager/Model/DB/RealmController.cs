@@ -16,7 +16,10 @@ namespace PasswordManager.Model.DB
 
         public bool IsInitialized() => isInitialized;
 
-        public RealmController() { }
+        public RealmController() 
+        {
+            Initialize().RunSynchronously();
+        }
 
         public async Task Add(Profile profile)
         {
@@ -33,6 +36,10 @@ namespace PasswordManager.Model.DB
 
         public async Task Initialize()
         {
+            //Prevent double initialization
+            if (IsInitialized())
+                return;
+
             var config = new RealmConfiguration(Path.Combine(AppDirectoryManager.Data, "Psw.realm"))
             { 
                 SchemaVersion = schema_version,
@@ -43,7 +50,7 @@ namespace PasswordManager.Model.DB
             {
                 realm = Realm.GetInstance(config);
             } 
-            catch (Exception ex) 
+            catch 
             {
                 string databasePath = config.DatabasePath;
 
@@ -89,16 +96,7 @@ namespace PasswordManager.Model.DB
             }
         }
 
-        public IQueryable<T> Select<T>()
-            where T : class
-        {
-            var type = typeof(T);
-            return type switch
-            {
-                var value when value == typeof(Profile) => (IQueryable<T>)realm?.All<Profile>(),
-                _ => null
-            };
-        }
+        public IQueryable<T> Select<T>() where T : IRealmObject => realm?.All<T>();
 
         public Task Remove(Profile profile) => realm?.WriteAsync(() => realm.Remove(profile));
     }

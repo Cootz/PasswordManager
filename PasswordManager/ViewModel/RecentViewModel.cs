@@ -21,7 +21,7 @@ namespace PasswordManager.ViewModel
         {
             db = databaseService;
 
-            Profiles = db.GetProfiles();
+            Profiles = db.Select<Profile>();
         }
 
         [RelayCommand]

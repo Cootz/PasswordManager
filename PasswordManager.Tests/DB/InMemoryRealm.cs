@@ -13,6 +13,7 @@ namespace PasswordManager.Tests.DB
     public class InMemoryRealm : IController
     {
         private Realm realm = null!;
+        private bool isInitialized = false;
 
         public InMemoryRealm()
         {
@@ -30,14 +31,16 @@ namespace PasswordManager.Tests.DB
 
         public void Dispose() => realm.Dispose();
 
-        public Task Initialize() => Task.CompletedTask;
+        public Task Initialize()
+        {
+            isInitialized = true;
+            return Task.CompletedTask;
+        }
+
+        public bool IsInitialized() => isInitialized; 
 
         public Task Remove(Profile profile) => realm.WriteAsync(() => realm.Remove(profile));
 
-        public IQueryable<T> Select<T>() where T : class => typeof(T) switch
-        {
-            var value when value == typeof(Profile) => (IQueryable<T>)realm.All<Profile>(),
-            _ => null!
-        };
+        public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
     }
 }

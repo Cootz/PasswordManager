@@ -1,9 +1,11 @@
-﻿using PasswordManager.Model.DB;
+﻿using PasswordManager.Model;
+using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
+using Realms;
 
 namespace PasswordManager.Services;
 
-public sealed class DatabaseService: IDatabaseService
+public sealed class DatabaseService: IInitializable, IDisposable
 {
     private IController DB;
 
@@ -37,7 +39,7 @@ public sealed class DatabaseService: IDatabaseService
 
     public async void Add(Profile profile) => await DB.Add(profile);
 
-    public IQueryable<Profile> GetProfiles() => DB.Select<Profile>();
+    public IQueryable<T> Select<T>() where T : IRealmObject => DB.Select<T>();
 
     public void Dispose() => DB.Dispose();
 }

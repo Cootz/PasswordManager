@@ -9,7 +9,7 @@
     <VerticalStackLayout>
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Service:" VerticalOptions="Center" FontSize="Medium"/>
-            <Picker ItemsSource="{Binding Service}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium"/>
+            <Picker ItemsSource="{Binding Services}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium"/>
         </HorizontalStackLayout>
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Login:" VerticalOptions="Center" FontSize="Medium"/>

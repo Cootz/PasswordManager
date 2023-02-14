@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using PasswordManager.Model.DB;
+using PasswordManager.Model.IO;
 using PasswordManager.Services;
 using PasswordManager.View;
 using PasswordManager.ViewModel;
@@ -11,6 +12,9 @@ namespace PasswordManager
     {
         public static MauiApp CreateMauiApp()
         {
+            //TODO: replace with dependency injection
+            AppDirectoryManager.Initialize().RunSynchronously();
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -20,7 +24,7 @@ namespace PasswordManager
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            //Pass viewmodel into page using Singleton/Transient
+            //Setting dependencies for injection
             builder.Services.AddSingleton<IController, RealmController>();
             builder.Services.AddSingleton<DatabaseService>();
 

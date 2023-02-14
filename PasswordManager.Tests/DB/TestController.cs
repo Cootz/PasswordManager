@@ -1,5 +1,6 @@
 ﻿using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
+using PasswordManager.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace PasswordManager.Tests.DB
 
             controller.Add(profile);
 
-            Assert.That(controller.GetProfiles().First().Equals(profile), Is.True);
+            Assert.That(controller.Select<Profile>().First().Equals(profile), Is.True);
         }
 
         [Test]
@@ -42,7 +43,7 @@ namespace PasswordManager.Tests.DB
          
             controller.Add(profile);
 
-            Assert.That(controller.GetProfiles().Count(), Is.EqualTo(1));
+            Assert.That(controller.Select<Profile>().Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -52,51 +53,55 @@ namespace PasswordManager.Tests.DB
 
             controller.Add(profile);
 
-            Assert.That(controller.GetProfiles().Count(), Is.EqualTo(1));
+            Assert.That(controller.Select<Profile>().Count(), Is.EqualTo(1));
 
             await controller.Remove(profile);
 
-            Assert.That(controller.GetProfiles().Count(), Is.EqualTo(0));
+            Assert.That(controller.Select<Profile>().Count(), Is.EqualTo(0));
         }
 
         private Profile GetTestProfile() => new()
         {
-            Service = "test service",
+            Service = new Service("test service"),
             Username = "test username",
             Password = "test password",
         };
 
         private Profile[] GetTestProfiles()
         {
+            var steam = Service.defaultServices.Single(s => s.Name == "steam");
+            var origin = Service.defaultServices.Single(s => s.Name == "origin");
+            var gog = Service.defaultServices.Single(s => s.Name == "gog");
+
             return new Profile[]
             {
                 new ()
                 {
-                    Service = "steam",
+                    Service = steam,
                     Username = "coo",
                     Password = "P@ssw0rd"
                 },
                 new ()
                 {
-                    Service = "steam",
+                    Service = steam,
                     Username = "Rimo",
                     Password = "Passw0rd"
                 },
                 new ()
                 {
-                    Service = "steam",
+                    Service = steam,
                     Username = "Iro",
                     Password = "Password"
                 },
                 new ()
                 {
-                    Service = "origin",
+                    Service = origin,
                     Username = "Ica",
                     Password = "P@ssword"
                 },
                 new ()
                 {
-                    Service = "gog",
+                    Service = gog,
                     Username = "Tenno",
                     Password = "p@ssword"
                 }
