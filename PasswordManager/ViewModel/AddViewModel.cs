@@ -2,14 +2,18 @@
 using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
+using PasswordManager.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PasswordManager.ViewModel
 {
-    [QueryProperty("PasswordController", "db")]
     public partial class AddViewModel : ObservableObject
     {
-        [ObservableProperty]
-        public PasswordController passwordController;
+        private DatabaseService _databaseService;
 
         [ObservableProperty]
         private string username;
@@ -18,19 +22,21 @@ namespace PasswordManager.ViewModel
         private string password;
         
         [ObservableProperty]
-        private IQueryable<Service> service;
+        private Service service;
 
-        [ObservableProperty]
-        private int selectedIndex;
+        public AddViewModel(DatabaseService databaseService)
+        {
+            _databaseService = databaseService;
+        }
 
         [RelayCommand]
         async Task AddProfile()
         {
-            PasswordController?.Add(new Profile()
-            {
+            _databaseService.Add(new Profile()
+            { 
                 Username = Username,
                 Password = Password,
-                Service = Service.ElementAt(SelectedIndex)
+                Service= Service
             });
 
            await GoBack();

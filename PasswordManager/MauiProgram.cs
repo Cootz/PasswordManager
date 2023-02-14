@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using PasswordManager.Model.DB;
+using PasswordManager.Services;
 using PasswordManager.View;
 using PasswordManager.ViewModel;
 
@@ -18,12 +21,15 @@ namespace PasswordManager
                 });
 
             //Pass viewmodel into page using Singleton/Transient
+            builder.Services.AddSingleton<IController, RealmController>();
+            builder.Services.AddSingleton<DatabaseService>();
+
             builder.Services.AddSingleton<RecentPage>();
             builder.Services.AddSingleton<RecentViewModel>();
 
             builder.Services.AddTransient<AddPage>();
             builder.Services.AddTransient<AddViewModel>();
-
+            
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif

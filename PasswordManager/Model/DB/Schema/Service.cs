@@ -4,7 +4,7 @@ namespace PasswordManager.Model.DB.Schema
 {
     public partial class Service : RealmObject
     {
-        public readonly Service[] defaultServices =
+        public static readonly Service[] defaultServices =
         {
             new Service { ID = Guid.Parse("00000000-0000-0000-0000-000000000001"), Name = "steam" },
             new Service { ID = Guid.Parse("00000000-0000-0000-0000-000000000002"), Name = "discord" },

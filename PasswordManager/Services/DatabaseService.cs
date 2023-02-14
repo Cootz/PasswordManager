@@ -1,19 +1,28 @@
-﻿using PasswordManager.Model.DB.Schema;
+﻿using PasswordManager.Model.DB;
+using PasswordManager.Model.DB.Schema;
 
-namespace PasswordManager.Model.DB;
+namespace PasswordManager.Services;
 
-public class PasswordController: IDisposable
+public sealed class DatabaseService: IDatabaseService
 {
     private IController DB;
 
-    public PasswordController(IController DB)
+    private bool isInitialized = false;
+
+    public bool IsInitialized() => isInitialized;
+
+    public DatabaseService(IController DB)
     {
         this.DB = DB;
+
+        Task.Run(Initialize);
     }
 
     public async Task Initialize()
     {
         await DB.Initialize();
+
+        isInitialized = true;
     }
 
     public async void SavePasswords(Profile[] data)

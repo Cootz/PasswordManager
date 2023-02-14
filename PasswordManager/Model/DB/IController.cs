@@ -5,9 +5,8 @@ namespace PasswordManager.Model.DB;
 /// <summary>
 /// Provides database logic. Makes database migration easier
 /// </summary>
-public interface IController: IDisposable
+public interface IController: IInitializable, IDisposable
 {
-    public Task Initialize();
     public IQueryable<T> Select<T>() where T : class;
     public Task Add(Profile profile);
     public Task Remove(Profile profile);
