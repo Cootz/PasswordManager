@@ -15,7 +15,7 @@ public partial class Profile : RealmObject, IEquatable<Profile>
     [PrimaryKey]
     public Guid ID { get; set; }
 
-    public string Service { get; set; }
+    public Service Service { get; set; }
     
     public string Username { get; set; }
     
@@ -30,7 +30,7 @@ public partial class Profile : RealmObject, IEquatable<Profile>
     {
         StringBuilder ret = new StringBuilder();
 
-        ret.Append(Service ?? NullMessage).Append(FieldSplit);
+        ret.Append(Service.Name).Append(FieldSplit);
         ret.Append(Username ?? NullMessage).Append(FieldSplit);
         ret.Append(Password ?? NullMessage).Append(ProfileSplit);
 
@@ -70,5 +70,4 @@ public partial class Profile : RealmObject, IEquatable<Profile>
     }
 
     public override int GetHashCode() => base.GetHashCode();
-
 }

@@ -13,17 +13,19 @@ namespace PasswordManager.Tests.DB.Schema
         [Test]
         public void CompareTwoEqualProfilesTest()
         {
+            var providedService = new Service("steam");
+
             var Profile = new Profile { 
                 Username= "testUser",
                 Password = "testPassword",
-                Service = "steam"
+                Service = providedService
             };
 
             var otherProfile = new Profile
             {
                 Username = "testUser",
                 Password = "testPassword",
-                Service = "steam"
+                Service = providedService
             };
 
             Assert.That(Profile.Equals(otherProfile), Is.True);
@@ -32,18 +34,20 @@ namespace PasswordManager.Tests.DB.Schema
         [Test]
         public void CompareTwoDifferentProfilesTest()
         {
+            var steamService = new Service("steam");
+
             var Profile = new Profile
             {
                 Username = "testUser",
                 Password = "testPassword",
-                Service = "steam"
+                Service = steamService
             };
 
             var otherProfile = new Profile
             {
                 Username = "diffTestUser",
                 Password = "diffTestPassword",
-                Service = "steam"
+                Service = steamService
             };
 
             Assert.That(Profile.Equals(otherProfile), Is.False);

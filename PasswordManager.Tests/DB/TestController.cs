@@ -1,4 +1,5 @@
-﻿using PasswordManager.Model.DB;
+﻿using NUnit.Framework.Constraints;
+using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using System;
 using System.Collections.Generic;
@@ -61,42 +62,46 @@ namespace PasswordManager.Tests.DB
 
         private Profile GetTestProfile() => new()
         {
-            Service = "test service",
+            Service = new Service("test service"),
             Username = "test username",
             Password = "test password",
         };
 
         private Profile[] GetTestProfiles()
         {
+            var steamService = new Service("steam");
+            var originService = new Service("origin");
+            var gogService = new Service("gog");
+
             return new Profile[]
             {
                 new ()
                 {
-                    Service = "steam",
+                    Service = steamService,
                     Username = "coo",
                     Password = "P@ssw0rd"
                 },
                 new ()
                 {
-                    Service = "steam",
+                    Service = steamService,
                     Username = "Rimo",
                     Password = "Passw0rd"
                 },
                 new ()
                 {
-                    Service = "steam",
+                    Service = steamService,
                     Username = "Iro",
                     Password = "Password"
                 },
                 new ()
                 {
-                    Service = "origin",
+                    Service = originService,
                     Username = "Ica",
                     Password = "P@ssword"
                 },
                 new ()
                 {
-                    Service = "gog",
+                    Service = gogService,
                     Username = "Tenno",
                     Password = "p@ssword"
                 }

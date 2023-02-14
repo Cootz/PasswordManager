@@ -18,16 +18,19 @@ namespace PasswordManager.ViewModel
         private string password;
         
         [ObservableProperty]
-        private string service;
+        private IQueryable<Service> service;
+
+        [ObservableProperty]
+        private int selectedIndex;
 
         [RelayCommand]
         async Task AddProfile()
         {
             PasswordController?.Add(new Profile()
-            { 
-                Username = username,
-                Password = password,
-                Service= service
+            {
+                Username = Username,
+                Password = Password,
+                Service = Service.ElementAt(SelectedIndex)
             });
 
            await GoBack();
