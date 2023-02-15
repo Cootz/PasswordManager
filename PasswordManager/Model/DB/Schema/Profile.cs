@@ -26,6 +26,14 @@ public partial class Profile : RealmObject, IEquatable<Profile>
         ID = Guid.NewGuid();
     }
 
+    public Profile(Guid iD, Service service, string username, string password)
+    {
+        ID = iD;
+        Service = service;
+        Username = username;
+        Password = password;
+    }
+
     public override string ToString()
     {
         StringBuilder ret = new StringBuilder();
@@ -61,7 +69,7 @@ public partial class Profile : RealmObject, IEquatable<Profile>
             return true;
         }
 
-        if (ReferenceEquals(obj, null))
+        if (obj is null)
         {
             return false;
         }

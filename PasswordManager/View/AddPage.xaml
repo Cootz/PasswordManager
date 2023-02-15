@@ -5,11 +5,11 @@
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
              xmlns:schema="clr-namespace:PasswordManager.Model.DB.Schema"
              x:DataType="viewmodel:AddViewModel"
-             Title="AddPage">
+             Title="Add new password">
     <VerticalStackLayout>
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Service:" VerticalOptions="Center" FontSize="Medium"/>
-            <Picker ItemsSource="{Binding Services}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium"/>
+            <Picker ItemsSource="{Binding Services}" Title="Select service" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium" ItemDisplayBinding="{Binding Name}"/>
         </HorizontalStackLayout>
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Login:" VerticalOptions="Center" FontSize="Medium"/>

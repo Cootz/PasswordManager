@@ -35,17 +35,41 @@ namespace PasswordManager.ViewModel
             this.Services = databaseService.Select<Service>();
         }
 
+        //TODO: This look weird, should be done somehow else
+        private Profile Validate(Profile profile)
+        {
+            if (profile == null) throw new ArgumentNullException(nameof(profile));
+
+            if (profile.Service == null) throw new ArgumentNullException(nameof(profile));
+            if (String.IsNullOrEmpty(profile.Username)) throw new ArgumentException($"Incorrect {nameof(profile.Service)} format.");
+            if (String.IsNullOrEmpty(profile.Password)) throw new ArgumentException($"Incorrect {nameof(profile.Service)} format.");
+
+            return profile;
+        }
+
         [RelayCommand]
         async Task AddProfile()
         {
-            _databaseService.Add(new Profile()
+            Profile profile = new Profile()
             {
                 Username = Username,
                 Password = Password,
                 Service = Services.ElementAt(ServiceIndex)
-            });
+            };
 
-           await GoBack();
+            try
+            {
+                Validate(profile);
+
+                _databaseService.Add(profile);
+            }
+            catch (Exception ex)
+            {
+                
+                return;
+            }
+
+            await GoBack();
         }
 
         async Task GoBack()

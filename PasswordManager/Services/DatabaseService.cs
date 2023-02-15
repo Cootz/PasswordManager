@@ -5,7 +5,7 @@ using Realms;
 
 namespace PasswordManager.Services;
 
-public sealed class DatabaseService: IInitializable, IDisposable
+public sealed class DatabaseService : IInitializable, IDisposable
 {
     private IController DB;
 
@@ -17,7 +17,7 @@ public sealed class DatabaseService: IInitializable, IDisposable
     {
         this.DB = DB;
 
-        Task.Run(Initialize);
+        //Initialize().RunSynchronously();
     }
 
     public async Task Initialize()

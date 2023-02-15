@@ -12,9 +12,6 @@ namespace PasswordManager
     {
         public static MauiApp CreateMauiApp()
         {
-            //TODO: replace with dependency injection
-            AppDirectoryManager.Initialize().RunSynchronously();
-
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()

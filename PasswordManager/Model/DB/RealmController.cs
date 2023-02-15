@@ -8,7 +8,7 @@ namespace PasswordManager.Model.DB
 {
     public sealed class RealmController : IController
     {
-        private const ulong schema_version = 2;
+        private const ulong schema_version = 3;
 
         private Realm realm;
 
@@ -18,7 +18,7 @@ namespace PasswordManager.Model.DB
 
         public RealmController() 
         {
-            Initialize().RunSynchronously();
+            Initialize().Wait();
         }
 
         public async Task Add(Profile profile)
@@ -41,16 +41,16 @@ namespace PasswordManager.Model.DB
                 return;
 
             var config = new RealmConfiguration(Path.Combine(AppDirectoryManager.Data, "Psw.realm"))
-            { 
+            {
                 SchemaVersion = schema_version,
                 MigrationCallback = OnMigration
             };
 
-            try 
+            try
             {
                 realm = Realm.GetInstance(config);
-            } 
-            catch 
+            }
+            catch
             {
                 string databasePath = config.DatabasePath;
 
@@ -72,7 +72,7 @@ namespace PasswordManager.Model.DB
                 await realm.WriteAsync(() => servicesToAdd.ForEach(s => realm.Add(s)));
 
             Debug.WriteLine(realm.All<Service>().FirstOrDefault().Name);
-            
+
             isInitialized = true;
         }
 

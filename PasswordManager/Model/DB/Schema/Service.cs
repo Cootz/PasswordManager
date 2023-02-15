@@ -31,6 +31,16 @@ namespace PasswordManager.Model.DB.Schema
 
         public bool Equals([AllowNull] Service other)
         {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other is null)
+            {
+                return false;
+            }
+
             bool[] equals = {ID == other.ID, Name == other.Name};
 
             return equals[0] & equals[1];
@@ -46,19 +56,6 @@ namespace PasswordManager.Model.DB.Schema
             return left.Equals(right);
         }
 
-        public override bool Equals([AllowNull] object obj)
-        {
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (ReferenceEquals(obj, null))
-            {
-                return false;
-            }
-
-            return Equals(obj as Service);
-        }
+        public override int GetHashCode() => ID.GetHashCode();
     }
 }
