@@ -26,13 +26,14 @@ namespace PasswordManager.ViewModel
         private string password;
         
         [ObservableProperty]
-        private int serviceIndex;
+        private Service selectedService;
 
         public AddViewModel(DatabaseService databaseService)
         {
             _databaseService = databaseService;
 
-            this.Services = databaseService.Select<Service>();
+            Services = databaseService.Select<Service>();
+            SelectedService = Services.First() ?? Service.defaultServices.FirstOrDefault();
         }
 
         //TODO: This look weird, should be done somehow else
@@ -54,7 +55,7 @@ namespace PasswordManager.ViewModel
             {
                 Username = Username,
                 Password = Password,
-                Service = Services.ElementAt(ServiceIndex)
+                Service = SelectedService
             };
 
             try
