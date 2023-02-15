@@ -5,7 +5,7 @@
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
              xmlns:schema="clr-namespace:PasswordManager.Model.DB.Schema"
              x:DataType="viewmodel:RecentViewModel"
-             Title="RecentPage">
+             Title="Your profiles">
     <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, *">
         <Entry FontSize="24" Text="Hi!"/>
         <Button Text="Add" Margin="10, 5" Padding="10" FontSize="Medium" Grid.Row="1" Command="{Binding AddNoteCommand}"/>
