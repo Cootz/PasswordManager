@@ -33,7 +33,7 @@ namespace PasswordManager.ViewModel
             _databaseService = databaseService;
 
             Services = databaseService.Select<Service>();
-            SelectedService = Services.First() ?? Service.defaultServices.FirstOrDefault();
+            SelectedService = Services.First() ?? Service.DefaultServices.FirstOrDefault();
         }
 
         //TODO: This look weird, should be done somehow else

@@ -31,10 +31,20 @@ namespace PasswordManager.Tests.DB
 
         public void Dispose() => realm.Dispose();
 
-        public Task Initialize()
+        public async Task Initialize()
         {
+            //Preparing default values
+            var services = realm.All<Service>();
+            var servicesToAdd = new List<Service>();
+
+            foreach (var service in Service.DefaultServices)
+                if (realm.Find<Service>(service.ID) is null)
+                    servicesToAdd.Add(service);
+
+            if (servicesToAdd.Count > 0)
+                await realm.WriteAsync(() => servicesToAdd.ForEach(s => realm.Add(s)));
+
             isInitialized = true;
-            return Task.CompletedTask;
         }
 
         public bool IsInitialized() => isInitialized; 

@@ -53,5 +53,20 @@ namespace PasswordManager.Tests.DB.Schema
             Assert.That(Profile.Equals(otherProfile), Is.False);
         }
 
+        [Test]
+        public void CompareProfileWithNullTest()
+        {
+            var steamService = new Service("steam");
+
+            var Profile = new Profile
+            {
+                Username = "testUser",
+                Password = "testPassword",
+                Service = steamService
+            };
+
+            Assert.That(Profile.Equals(null), Is.False);
+        }
+
     }
 }
