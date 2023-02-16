@@ -1,15 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using NSubstitute;
-using NUnit.Framework;
-using PasswordManager.Model.DB;
 using PasswordManager.Services;
 using PasswordManager.Tests.DB;
 using PasswordManager.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Tests.ViewModel
 {

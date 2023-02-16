@@ -1,9 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-using PasswordManager.Model.DB.Schema;
+﻿using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
 using Realms;
 using System.Diagnostics;
-using System.Linq;
 
 namespace PasswordManager.Model.DB
 {

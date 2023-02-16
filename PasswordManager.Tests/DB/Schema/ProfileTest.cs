@@ -1,10 +1,4 @@
-﻿using NUnit.Framework;
-using PasswordManager.Model.DB.Schema;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PasswordManager.Model.DB.Schema;
 
 namespace PasswordManager.Tests.DB.Schema
 {

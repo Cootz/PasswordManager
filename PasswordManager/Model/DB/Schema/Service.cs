@@ -57,5 +57,10 @@ namespace PasswordManager.Model.DB.Schema
         }
 
         public override int GetHashCode() => ID.GetHashCode();
+
+        public override bool Equals(object obj)
+        {
+            return obj is Service ? Equals(obj as Service) : false;
+        }
     }
 }

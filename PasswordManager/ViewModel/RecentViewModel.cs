@@ -1,10 +1,7 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Platform;
-using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
-using PasswordManager.Model.IO;
 using PasswordManager.Services;
 using PasswordManager.View;
 
