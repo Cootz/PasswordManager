@@ -5,7 +5,7 @@
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
              xmlns:schema="clr-namespace:PasswordManager.Model.DB.Schema"
              x:DataType="viewmodel:RecentViewModel"
-             Title="RecentPage">
+             Title="Your profiles">
     <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, *">
         <Entry FontSize="24" Text="Hi!"/>
         <Button Text="Add" Margin="10, 5" Padding="10" FontSize="Medium" Grid.Row="1" Command="{Binding AddNoteCommand}"/>
@@ -19,7 +19,7 @@
                         </SwipeView.GestureRecognizers>
                         <Frame Margin="10, 5" Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
                             <Grid ColumnDefinitions="*,*,*" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                                <Label Grid.Column="0" Text="{Binding Service}" HorizontalTextAlignment="Center" FontSize="Medium"/>
+                                <Label Grid.Column="0" Text="{Binding Service.Name}" HorizontalTextAlignment="Center" FontSize="Medium"/>
                                 <Label Grid.Column="1" Text="{Binding Username}" HorizontalTextAlignment="Center" FontSize="Medium"/>
                                 <Label Grid.Column="2" Text="{Binding Password}" HorizontalTextAlignment="Center" FontSize="Medium"/>
                             </Grid>

@@ -10,12 +10,10 @@ public static class AppDirectoryManager
 
     public static string Data { get { return Path.Combine(AppData, data); } }
 
-    public static Task Initialize()
+    public static void Initialize()
     {
         ensureDirectoryCreated(AppData);
         ensureDirectoryCreated(Data);
-
-        return Task.CompletedTask;
     }
 
     private static void ensureDirectoryCreated(string path)

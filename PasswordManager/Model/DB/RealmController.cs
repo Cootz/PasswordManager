@@ -1,16 +1,25 @@
-﻿using PasswordManager.Model.DB.Schema;
+﻿using Microsoft.Extensions.Logging;
+using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
 using Realms;
+using System.Diagnostics;
 
 namespace PasswordManager.Model.DB
 {
-    public class RealmController : IController
+    public sealed class RealmController : IController
     {
-        private const ulong schema_version = 2;
+        private const ulong schema_version = 3;
 
         private Realm realm;
 
-        public RealmController() { }
+        private bool isInitialized = false;
+
+        public bool IsInitialized() => isInitialized;
+
+        public RealmController() 
+        {
+            Initialize().Wait();
+        }
 
         public async Task Add(Profile profile)
         {
@@ -25,17 +34,46 @@ namespace PasswordManager.Model.DB
             realm.Dispose();
         }
 
-        public Task Initialize()
+        public async Task Initialize()
         {
+            //Prevent double initialization
+            if (IsInitialized())
+                return;
+
             var config = new RealmConfiguration(Path.Combine(AppDirectoryManager.Data, "Psw.realm"))
-            { 
+            {
                 SchemaVersion = schema_version,
                 MigrationCallback = OnMigration
             };
 
-            realm = Realm.GetInstance(config);
+            try
+            {
+                realm = Realm.GetInstance(config);
+            }
+            catch
+            {
+                string databasePath = config.DatabasePath;
 
-            return Task.CompletedTask;
+                BackupManager.Backup(new FileInfo(databasePath));
+                File.Delete(databasePath);
+
+                realm = Realm.GetInstance(config);
+            }
+
+            //Preparing default values
+            var services = realm.All<Service>();
+            var servicesToAdd = new List<Service>();
+
+            foreach (var service in Service.defaultServices)
+                if (realm.Find<Service>(service.ID) is null)
+                    servicesToAdd.Add(service);
+
+            if (servicesToAdd.Count > 0)
+                await realm.WriteAsync(() => servicesToAdd.ForEach(s => realm.Add(s)));
+
+            Debug.WriteLine(realm.All<Service>().FirstOrDefault().Name);
+
+            isInitialized = true;
         }
 
         private void OnMigration(Migration migration, ulong lastSchemaVersion)
@@ -58,16 +96,7 @@ namespace PasswordManager.Model.DB
             }
         }
 
-        public IQueryable<T> Select<T>()
-            where T : class
-        {
-            var type = typeof(T);
-            return type switch
-            {
-                var value when value == typeof(Profile) => (IQueryable<T>)realm?.All<Profile>(),
-                _ => null
-            };
-        }
+        public IQueryable<T> Select<T>() where T : IRealmObject => realm?.All<T>();
 
         public Task Remove(Profile profile) => realm?.WriteAsync(() => realm.Remove(profile));
     }

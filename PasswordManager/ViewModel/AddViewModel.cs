@@ -2,14 +2,22 @@
 using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
+using PasswordManager.Services;
+using Realms;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PasswordManager.ViewModel
 {
-    [QueryProperty("PasswordController", "db")]
     public partial class AddViewModel : ObservableObject
     {
+        private DatabaseService _databaseService;
+
         [ObservableProperty]
-        public PasswordController passwordController;
+        private IQueryable<Service> services;
 
         [ObservableProperty]
         private string username;
@@ -18,19 +26,51 @@ namespace PasswordManager.ViewModel
         private string password;
         
         [ObservableProperty]
-        private string service;
+        private Service selectedService;
+
+        public AddViewModel(DatabaseService databaseService)
+        {
+            _databaseService = databaseService;
+
+            Services = databaseService.Select<Service>();
+            SelectedService = Services.First() ?? Service.defaultServices.FirstOrDefault();
+        }
+
+        //TODO: This look weird, should be done somehow else
+        private Profile Validate(Profile profile)
+        {
+            if (profile == null) throw new ArgumentNullException(nameof(profile));
+
+            if (profile.Service == null) throw new ArgumentNullException(nameof(profile));
+            if (String.IsNullOrEmpty(profile.Username)) throw new ArgumentException($"Incorrect {nameof(profile.Service)} format.");
+            if (String.IsNullOrEmpty(profile.Password)) throw new ArgumentException($"Incorrect {nameof(profile.Service)} format.");
+
+            return profile;
+        }
 
         [RelayCommand]
         async Task AddProfile()
         {
-            PasswordController?.Add(new Profile()
-            { 
-                Username = username,
-                Password = password,
-                Service= service
-            });
+            Profile profile = new Profile()
+            {
+                Username = Username,
+                Password = Password,
+                Service = SelectedService
+            };
 
-           await GoBack();
+            try
+            {
+                Validate(profile);
+
+                _databaseService.Add(profile);
+            }
+            catch (Exception ex)
+            {
+                
+                return;
+            }
+
+            await GoBack();
         }
 
         async Task GoBack()
