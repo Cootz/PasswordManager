@@ -20,6 +20,8 @@ namespace PasswordManager
                 });
 
             //Setting dependencies for injection
+            builder.Services.AddSingleton<INavigationService, NavigationService>();
+
             builder.Services.AddSingleton<IController, RealmController>();
             builder.Services.AddSingleton<DatabaseService>();
 

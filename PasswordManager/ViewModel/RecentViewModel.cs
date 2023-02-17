@@ -13,10 +13,12 @@ namespace PasswordManager.ViewModel
         IQueryable<Profile> profiles;
 
         private DatabaseService db;
+        private readonly INavigationService _navigationService;
 
-        public RecentViewModel(DatabaseService databaseService)
+        public RecentViewModel(DatabaseService databaseService, INavigationService navigationService)
         {
             db = databaseService;
+            _navigationService = navigationService;
 
             Profiles = db.Select<Profile>();
         }
@@ -24,7 +26,7 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         async Task AddNote()
         {
-            await Shell.Current.GoToAsync(nameof(AddPage));
+            await _navigationService.NavigateToAsync(nameof(AddPage));
         }
 
         [RelayCommand]

@@ -11,7 +11,7 @@ namespace PasswordManager.Tests.DB
 
         public InMemoryRealm()
         {
-            var config = new InMemoryConfiguration("test-db");
+            var config = new InMemoryConfiguration($"test-db-{Guid.NewGuid()}");
             realm = Realm.GetInstance(config);
         }
 

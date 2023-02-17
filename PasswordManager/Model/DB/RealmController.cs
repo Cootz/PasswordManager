@@ -70,7 +70,7 @@ namespace PasswordManager.Model.DB
             if (servicesToAdd.Count > 0)
                 await realm.WriteAsync(() => servicesToAdd.ForEach(s => realm.Add(s)));
 
-            Debug.Assert(realm.All<Service>().Intersect(Service.DefaultServices).Count() == Service.DefaultServices.Length);
+            Debug.Assert(realm.All<Service>().ToArray().Intersect(Service.DefaultServices).Count() == Service.DefaultServices.Length);
 
             isInitialized = true;
         }
