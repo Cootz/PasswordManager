@@ -16,7 +16,7 @@ namespace PasswordManager.Utils
         {
             if (profile == null) throw new ArgumentNullException(nameof(profile));
             
-            if (profile.Service == null) throw new ArgumentNullException(nameof(profile));
+            if (profile.Service is null) throw new ArgumentNullException(nameof(profile));
             if (String.IsNullOrEmpty(profile.Username)) throw new ArgumentException($"Incorrect {nameof(profile.Service)} format.");
             if (String.IsNullOrEmpty(profile.Password)) throw new ArgumentException($"Incorrect {nameof(profile.Service)} format.");
             

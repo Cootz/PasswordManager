@@ -6,14 +6,12 @@ namespace PasswordManager.Tests.DB
 {
     public class InMemoryRealm : IController
     {
+        private readonly InMemoryConfiguration config = new($"test-db-{Guid.NewGuid()}");
+
         private Realm realm = null!;
         private bool isInitialized = false;
 
-        public InMemoryRealm()
-        {
-            var config = new InMemoryConfiguration($"test-db-{Guid.NewGuid()}");
-            realm = Realm.GetInstance(config);
-        }
+        public InMemoryRealm() => realm = Realm.GetInstance(config);
 
         public async Task Add(Profile profile)
         {
@@ -23,7 +21,12 @@ namespace PasswordManager.Tests.DB
             });
         }
 
-        public void Dispose() => realm.Dispose();
+        public void Dispose()
+        {
+            realm.Dispose();
+
+            Realm.DeleteRealm(config);
+        }
 
         public async Task Initialize()
         {

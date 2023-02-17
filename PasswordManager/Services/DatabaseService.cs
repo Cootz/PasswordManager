@@ -30,9 +30,8 @@ public sealed class DatabaseService : IInitializable, IDisposable
 
 
     /// <summary>
-    /// Save a range of <see cref="Profile">
+    /// Save a range of <see cref="Profile"/>
     /// </summary>
-    /// <param name="data"></param>
     public async void SavePasswords(IEnumerable<Profile> data)
     {
         foreach (Profile prof in data)

@@ -41,8 +41,12 @@ namespace PasswordManager.ViewModel
                 Password = Password,
                 Service = SelectedService
             };
-            
-            _databaseService.Add(profile.Verify());
+
+            try
+            {
+                _databaseService.Add(profile.Verify());
+            }
+            catch { }
 
             await GoBack();
         }

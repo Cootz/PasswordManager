@@ -54,12 +54,12 @@ public partial class Profile : RealmObject, IEquatable<Profile>
 
     public static bool operator !=(Profile left, Profile right)
     {
-        return !left.Equals(right);
+        return !left?.Equals(right) ?? false;
     }
 
     public static bool operator ==(Profile left, Profile right)
     {
-        return left.Equals(right);
+        return left?.Equals(right) ?? false;
     }
 
     public override bool Equals([AllowNull]object obj)

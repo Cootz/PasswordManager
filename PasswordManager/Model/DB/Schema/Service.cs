@@ -48,12 +48,12 @@ namespace PasswordManager.Model.DB.Schema
 
         public static bool operator !=(Service left, Service right)
         {
-            return !left.Equals(right);
+            return !left?.Equals(right) ?? false;
         }
 
         public static bool operator ==(Service left, Service right)
         {
-            return left.Equals(right);
+            return left?.Equals(right) ?? false;
         }
 
         public override int GetHashCode() => ID.GetHashCode();
