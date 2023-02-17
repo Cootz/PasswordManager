@@ -5,6 +5,9 @@ using Realms;
 
 namespace PasswordManager.Services;
 
+/// <summary>
+/// Provides interactions with database
+/// </summary>
 public sealed class DatabaseService : IInitializable, IDisposable
 {
     private IController DB;
