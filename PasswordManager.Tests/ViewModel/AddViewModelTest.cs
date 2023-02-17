@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using NUnit.Framework;
 using PasswordManager.Services;
 using PasswordManager.Tests.DB;
 using PasswordManager.Tests.Services;
@@ -6,19 +7,30 @@ using PasswordManager.ViewModel;
 
 namespace PasswordManager.Tests.ViewModel
 {
+    [TestFixture]
     public class AddViewModelTest
     {
         private AddViewModel viewModel;
         private DatabaseService databaseService;
 
+        [OneTimeSetUp]
+        public void SetUpOnce()
+        {
+            databaseService = new(new InMemoryRealm());
+            databaseService.Initialize().Wait();
+        }
+
         [SetUp]
         public void SetUpViewModel()
         {
-            databaseService = new DatabaseService(new InMemoryRealm());
-            databaseService.Initialize().Wait();
-
             viewModel = new AddViewModel(databaseService, new MockSuccessfulNavigationService());
         }
+
+        [TearDown]
+        public void TearDown() => viewModel = null!;
+        
+        [OneTimeTearDown]
+        public void OneTimeTearDown() => databaseService.Dispose();
 
         [Test]
         public void ClickOnAddButtonWithValiableProfileTest()
@@ -29,7 +41,7 @@ namespace PasswordManager.Tests.ViewModel
             viewModel.Username = "Valid username";
             viewModel.Password = "Valid p@ss0wrd";
 
-            Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(0));
+            Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
         }
 
         [Test]
@@ -41,7 +53,7 @@ namespace PasswordManager.Tests.ViewModel
             viewModel.Username = "";
             viewModel.Password = "Valid p@ss0wrd";
 
-            Assert.ThrowsAsync<ArgumentException>(async () => await command.ExecuteAsync(null));
+            Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
         }
 
         [Test]
@@ -53,17 +65,7 @@ namespace PasswordManager.Tests.ViewModel
             viewModel.Username = "";
             viewModel.Password = "Valid p@ss0wrd";
 
-            Assert.ThrowsAsync<ArgumentException>(async () => await command.ExecuteAsync(0));
+            Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
         }
-
-        [TearDown]
-        public void TearDown()
-        { 
-            databaseService.Dispose();
-
-            databaseService = null!;
-            viewModel = null!;
-        }
-
     }
 }

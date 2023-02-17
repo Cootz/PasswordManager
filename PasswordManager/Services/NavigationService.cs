@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PasswordManager.Services
 {
+    /// <summary>
+    /// Handeles navigation
+    /// </summary>
     public sealed class NavigationService : INavigationService
     {
         public Task NavigateToAsync(string route, IDictionary<string, object> routeParameters = null)

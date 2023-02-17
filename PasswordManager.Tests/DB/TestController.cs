@@ -1,8 +1,10 @@
 ﻿using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
+using PasswordManager.Tests.TestData;
 
 namespace PasswordManager.Tests.DB
 {
+    [TestFixture]
     public class TestController
     {
         DatabaseService controller;
@@ -23,7 +25,7 @@ namespace PasswordManager.Tests.DB
         [Test]
         public void AddItemTest()
         {
-            Profile profile = GetTestProfile();
+            Profile profile = ProfileData.GetTestProfile();
 
             controller.Add(profile);
 
@@ -33,7 +35,7 @@ namespace PasswordManager.Tests.DB
         [Test]
         public void AddMultipleItemsTest()
         {
-            Profile[] profiles = GetTestProfiles();
+            Profile[] profiles = ProfileData.GetTestProfiles();
 
             controller.SavePasswords(profiles);
 
@@ -43,7 +45,7 @@ namespace PasswordManager.Tests.DB
         [Test]
         public void SelectItemTest()
         {
-            Profile profile = GetTestProfile();
+            Profile profile = ProfileData.GetTestProfile();
          
             controller.Add(profile);
 
@@ -53,7 +55,7 @@ namespace PasswordManager.Tests.DB
         [Test]
         public async Task RemoveItemTest() 
         {
-            Profile profile = GetTestProfile();
+            Profile profile = ProfileData.GetTestProfile();
 
             controller.Add(profile);
 
@@ -64,53 +66,7 @@ namespace PasswordManager.Tests.DB
             Assert.That(controller.Select<Profile>().Count(), Is.EqualTo(0));
         }
 
-        private Profile GetTestProfile() => new()
-        {
-            Service = new Service("test service"),
-            Username = "test username",
-            Password = "test password",
-        };
-
-        private Profile[] GetTestProfiles()
-        {
-            var steam = Service.DefaultServices.Single(s => s.Name == "steam");
-            var origin = Service.DefaultServices.Single(s => s.Name == "origin");
-            var gog = Service.DefaultServices.Single(s => s.Name == "gog");
-
-            return new Profile[]
-            {
-                new ()
-                {
-                    Service = steam,
-                    Username = "coo",
-                    Password = "P@ssw0rd"
-                },
-                new ()
-                {
-                    Service = steam,
-                    Username = "Rimo",
-                    Password = "Passw0rd"
-                },
-                new ()
-                {
-                    Service = steam,
-                    Username = "Iro",
-                    Password = "Password"
-                },
-                new ()
-                {
-                    Service = origin,
-                    Username = "Ica",
-                    Password = "P@ssword"
-                },
-                new ()
-                {
-                    Service = gog,
-                    Username = "Tenno",
-                    Password = "p@ssword"
-                }
-            };
-        }
+       
 
     }
 }

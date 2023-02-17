@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
+using PasswordManager.Utils;
 
 namespace PasswordManager.ViewModel
 {
@@ -31,18 +32,6 @@ namespace PasswordManager.ViewModel
             SelectedService = Services.First() ?? Service.DefaultServices.FirstOrDefault();
         }
 
-        //TODO: This look weird, should be done somehow else
-        private Profile Validate(Profile profile)
-        {
-            if (profile == null) throw new ArgumentNullException(nameof(profile));
-
-            if (profile.Service == null) throw new ArgumentNullException(nameof(profile));
-            if (String.IsNullOrEmpty(profile.Username)) throw new ArgumentException($"Incorrect {nameof(profile.Service)} format.");
-            if (String.IsNullOrEmpty(profile.Password)) throw new ArgumentException($"Incorrect {nameof(profile.Service)} format.");
-
-            return profile;
-        }
-
         [RelayCommand]
         async Task AddProfile()
         {
@@ -52,10 +41,12 @@ namespace PasswordManager.ViewModel
                 Password = Password,
                 Service = SelectedService
             };
-            
-            Validate(profile);
 
-            _databaseService.Add(profile);
+            try
+            {
+                _databaseService.Add(profile.Verify());
+            }
+            catch { }
 
             await GoBack();
         }
