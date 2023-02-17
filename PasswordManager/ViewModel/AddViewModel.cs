@@ -1,20 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
-using Realms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.ViewModel
 {
     public partial class AddViewModel : ObservableObject
     {
-        private DatabaseService _databaseService;
+        private readonly DatabaseService _databaseService;
+        private readonly INavigationService _navigationService;
 
         [ObservableProperty]
         private IQueryable<Service> services;
@@ -28,12 +22,13 @@ namespace PasswordManager.ViewModel
         [ObservableProperty]
         private Service selectedService;
 
-        public AddViewModel(DatabaseService databaseService)
+        public AddViewModel(DatabaseService databaseService, INavigationService navigationService)
         {
             _databaseService = databaseService;
+            _navigationService = navigationService;
 
             Services = databaseService.Select<Service>();
-            SelectedService = Services.First() ?? Service.defaultServices.FirstOrDefault();
+            SelectedService = Services.First() ?? Service.DefaultServices.FirstOrDefault();
         }
 
         //TODO: This look weird, should be done somehow else
@@ -57,25 +52,17 @@ namespace PasswordManager.ViewModel
                 Password = Password,
                 Service = SelectedService
             };
+            
+            Validate(profile);
 
-            try
-            {
-                Validate(profile);
-
-                _databaseService.Add(profile);
-            }
-            catch (Exception ex)
-            {
-                
-                return;
-            }
+            _databaseService.Add(profile);
 
             await GoBack();
         }
 
         async Task GoBack()
         {
-            await Shell.Current.GoToAsync("..");
+            await _navigationService.PopAsync();
         }
 
     }

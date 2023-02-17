@@ -1,11 +1,5 @@
-﻿using PasswordManager.Model.DB;
-using PasswordManager.Model.DB.Schema;
+﻿using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Tests.DB
 {
@@ -27,13 +21,23 @@ namespace PasswordManager.Tests.DB
         }
 
         [Test]
-        public void AddItemTest() 
+        public void AddItemTest()
         {
             Profile profile = GetTestProfile();
 
             controller.Add(profile);
 
             Assert.That(controller.Select<Profile>().First().Equals(profile), Is.True);
+        }
+
+        [Test]
+        public void AddMultipleItemsTest()
+        {
+            Profile[] profiles = GetTestProfiles();
+
+            controller.SavePasswords(profiles);
+
+            Assert.That(controller.Select<Profile>().Count(), Is.EqualTo(5));
         }
 
         [Test]
@@ -69,9 +73,9 @@ namespace PasswordManager.Tests.DB
 
         private Profile[] GetTestProfiles()
         {
-            var steam = Service.defaultServices.Single(s => s.Name == "steam");
-            var origin = Service.defaultServices.Single(s => s.Name == "origin");
-            var gog = Service.defaultServices.Single(s => s.Name == "gog");
+            var steam = Service.DefaultServices.Single(s => s.Name == "steam");
+            var origin = Service.DefaultServices.Single(s => s.Name == "origin");
+            var gog = Service.DefaultServices.Single(s => s.Name == "gog");
 
             return new Profile[]
             {

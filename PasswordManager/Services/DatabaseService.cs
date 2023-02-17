@@ -16,8 +16,6 @@ public sealed class DatabaseService : IInitializable, IDisposable
     public DatabaseService(IController DB)
     {
         this.DB = DB;
-
-        //Initialize().RunSynchronously();
     }
 
     public async Task Initialize()

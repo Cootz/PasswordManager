@@ -1,10 +1,4 @@
-﻿using NUnit.Framework;
-using PasswordManager.Model.DB.Schema;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PasswordManager.Model.DB.Schema;
 
 namespace PasswordManager.Tests.DB.Schema
 {
@@ -51,6 +45,21 @@ namespace PasswordManager.Tests.DB.Schema
             };
 
             Assert.That(Profile.Equals(otherProfile), Is.False);
+        }
+
+        [Test]
+        public void CompareProfileWithNullTest()
+        {
+            var steamService = new Service("steam");
+
+            var Profile = new Profile
+            {
+                Username = "testUser",
+                Password = "testPassword",
+                Service = steamService
+            };
+
+            Assert.That(Profile.Equals(null), Is.False);
         }
 
     }

@@ -5,7 +5,7 @@ namespace PasswordManager.Model.DB.Schema
 {
     public partial class Service : RealmObject, IEquatable<Service>
     {
-        public static readonly Service[] defaultServices =
+        public static readonly Service[] DefaultServices =
         {
             new Service { ID = Guid.Parse("00000000-0000-0000-0000-000000000001"), Name = "steam" },
             new Service { ID = Guid.Parse("00000000-0000-0000-0000-000000000002"), Name = "discord" },
@@ -57,5 +57,10 @@ namespace PasswordManager.Model.DB.Schema
         }
 
         public override int GetHashCode() => ID.GetHashCode();
+
+        public override bool Equals(object obj)
+        {
+            return obj is Service ? Equals(obj as Service) : false;
+        }
     }
 }

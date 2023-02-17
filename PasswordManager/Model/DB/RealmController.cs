@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using PasswordManager.Model.DB.Schema;
+﻿using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
 using Realms;
 using System.Diagnostics;
@@ -64,14 +63,14 @@ namespace PasswordManager.Model.DB
             var services = realm.All<Service>();
             var servicesToAdd = new List<Service>();
 
-            foreach (var service in Service.defaultServices)
+            foreach (var service in Service.DefaultServices)
                 if (realm.Find<Service>(service.ID) is null)
                     servicesToAdd.Add(service);
 
             if (servicesToAdd.Count > 0)
                 await realm.WriteAsync(() => servicesToAdd.ForEach(s => realm.Add(s)));
 
-            Debug.WriteLine(realm.All<Service>().FirstOrDefault().Name);
+            Debug.Assert(realm.All<Service>().ToArray().Intersect(Service.DefaultServices).Count() == Service.DefaultServices.Length);
 
             isInitialized = true;
         }

@@ -1,12 +1,6 @@
 ﻿using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using Realms;
-using Remotion.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Tests.DB
 {
@@ -17,7 +11,7 @@ namespace PasswordManager.Tests.DB
 
         public InMemoryRealm()
         {
-            var config = new InMemoryConfiguration("test-db");
+            var config = new InMemoryConfiguration($"test-db-{Guid.NewGuid()}");
             realm = Realm.GetInstance(config);
         }
 
@@ -31,10 +25,20 @@ namespace PasswordManager.Tests.DB
 
         public void Dispose() => realm.Dispose();
 
-        public Task Initialize()
+        public async Task Initialize()
         {
+            //Preparing default values
+            var services = realm.All<Service>();
+            var servicesToAdd = new List<Service>();
+
+            foreach (var service in Service.DefaultServices)
+                if (realm.Find<Service>(service.ID) is null)
+                    servicesToAdd.Add(service);
+
+            if (servicesToAdd.Count > 0)
+                await realm.WriteAsync(() => servicesToAdd.ForEach(s => realm.Add(s)));
+
             isInitialized = true;
-            return Task.CompletedTask;
         }
 
         public bool IsInitialized() => isInitialized; 
