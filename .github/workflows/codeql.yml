@@ -13,12 +13,10 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "main" ]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
-  schedule:
-    - cron: '17 18 * * 0'
 
 jobs:
   analyze:
@@ -66,11 +64,15 @@ jobs:
     
     - name: Install .NET workloads
       run: dotnet workload restore
+      
+    - name: Install MAUI
+      run: dotnet workload install maui
 
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
-    # If this step fails, then you should remove it and run the build manually (see below)
     - name: Build
-      run: dotnet build -c Debug -f ${{ matrix.os.buildname }} Passwords.sln
+      run: dotnet build -c Release -f:${{ matrix.os.buildname }} Passwords.sln
+      
+    - name: Tests
+      run: dotnet test --no-build --verbosity normal Passwords.sln
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
