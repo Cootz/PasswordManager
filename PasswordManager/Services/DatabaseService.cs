@@ -28,7 +28,12 @@ public sealed class DatabaseService : IInitializable, IDisposable
         isInitialized = true;
     }
 
-    public async void SavePasswords(Profile[] data)
+
+    /// <summary>
+    /// Save a range of <see cref="Profile">
+    /// </summary>
+    /// <param name="data"></param>
+    public async void SavePasswords(IEnumerable<Profile> data)
     {
         foreach (Profile prof in data)
         {
@@ -36,10 +41,23 @@ public sealed class DatabaseService : IInitializable, IDisposable
         }
     }
 
+    /// <summary>
+    /// Deletes entry from database
+    /// </summary>
+    /// <param name="profile"></param>
+    /// <returns></returns>
     public async Task Remove(Profile profile) => await DB.Remove(profile); 
 
+    /// <summary>
+    /// Adds entry to database
+    /// </summary>
+    /// <param name="profile"></param>
     public async void Add(Profile profile) => await DB.Add(profile);
 
+    /// <summary>
+    /// Select every instance of given class from database
+    /// </summary>
+    /// <typeparam name="T">Type to search</typeparam>
     public IQueryable<T> Select<T>() where T : IRealmObject => DB.Select<T>();
 
     public void Dispose() => DB.Dispose();
