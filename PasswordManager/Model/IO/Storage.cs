@@ -16,8 +16,7 @@ namespace PasswordManager.Model.IO
 
         public Storage(string path)
         {
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+            var dir = Directory.CreateDirectory(path);
 
             WorkingDirectory = path;
         }
