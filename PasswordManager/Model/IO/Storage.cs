@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PasswordManager.Model.Storage
+namespace PasswordManager.Model.IO
 {
     /// <summary>
     /// Defines storage
     /// </summary>
     public abstract class Storage
     {
-        public string WorkingDirectory { get; set; }   
+        public string WorkingDirectory { get; set; }
 
-        public Storage(string path) 
+        public Storage(string path)
         {
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);

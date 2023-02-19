@@ -12,14 +12,18 @@ namespace PasswordManager.Model.DB
     {
         private const ulong schema_version = 3;
 
+        private IO.Storage dataStorage { get; set; }
+
         private Realm realm;
 
         private bool isInitialized = false;
 
         public bool IsInitialized() => isInitialized;
 
-        public RealmController() 
+        public RealmController(IO.Storage storage) 
         {
+            dataStorage = storage.GetStorageForDirectory("data");
+
             Initialize().Wait();
         }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PasswordManager.Model.Storage
+namespace PasswordManager.Model.IO
 {
     public class AppStorage : Storage
     {
