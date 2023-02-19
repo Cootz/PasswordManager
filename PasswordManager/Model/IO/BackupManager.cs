@@ -11,7 +11,7 @@ namespace PasswordManager.Model.IO
         /// Creates copy with .bak extension form given file 
         /// </summary>
         /// <param name="file">File to backup</param>
-        /// <param name="externalDirectory">Directory to save backup in. If null file copies to the directory of given file</param>
+        /// <param name="externalStorage">Storage with directory to save backup in. If null file copies to the directory of given file</param>
         public static void Backup(FileInfo file, Storage externalStorage = null)
         {
             if (file.Exists)
