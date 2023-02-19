@@ -26,9 +26,9 @@ public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
         ID = Guid.NewGuid();
     }
 
-    public ProfileInfo(Guid iD, ServiceInfo service, string username, string password)
+    public ProfileInfo(Guid id, ServiceInfo service, string username, string password)
     {
-        ID = iD;
+        ID = id;
         Service = service;
         Username = username;
         Password = password;
