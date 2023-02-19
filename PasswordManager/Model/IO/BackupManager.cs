@@ -12,12 +12,12 @@ namespace PasswordManager.Model.IO
         /// </summary>
         /// <param name="file">File to backup</param>
         /// <param name="externalDirectory">Directory to save backup in. If null file copies to the directory of given file</param>
-        public static void Backup(FileInfo file, DirectoryInfo externalDirectory = null)
+        public static void Backup(FileInfo file, Storage externalStorage = null)
         {
             if (file.Exists)
             {
-                if (externalDirectory is not null && externalDirectory.Exists)
-                    file.CopyTo(Path.Combine(externalDirectory.FullName, $"{file.Name}.bak"));
+                if (externalStorage is not null)
+                    file.CopyTo(Path.Combine(externalStorage.WorkingDirectory, $"{file.Name}.bak"));
                 else
                     file.CopyTo($"{file.FullName}.bak");
             }
