@@ -1,6 +1,6 @@
 ﻿namespace PasswordManager.Model.DB.Schema;
 
-[Obsolete]
+[Obsolete("Not used anymore", true)]
 public class EMail
 {
     private char SplitChar = '@';

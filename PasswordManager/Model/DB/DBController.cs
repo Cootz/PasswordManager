@@ -5,12 +5,9 @@ using System.Data;
 
 namespace PasswordManager.Model.DB;
 
-[Obsolete]
+[Obsolete("Migrated to realm", true)]
 public class DBController : DbContext
 {
-    private static readonly string DBPath = Path.Combine(AppDirectoryManager.AppData, "Psw.db");
-    private static readonly string Connection = $"Filename=\"{DBPath}\"";
-    
     private DbSet<ProfileInfo> Profiles { get; set; }
 
     public async Task Initialize()
@@ -31,6 +28,5 @@ public class DBController : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite(Connection);
     }
 }
