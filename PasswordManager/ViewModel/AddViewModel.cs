@@ -12,7 +12,7 @@ namespace PasswordManager.ViewModel
         private readonly INavigationService _navigationService;
 
         [ObservableProperty]
-        private IQueryable<Service> services;
+        private IQueryable<ServiceInfo> services;
 
         [ObservableProperty]
         private string username;
@@ -21,21 +21,21 @@ namespace PasswordManager.ViewModel
         private string password;
         
         [ObservableProperty]
-        private Service selectedService;
+        private ServiceInfo selectedService;
 
         public AddViewModel(DatabaseService databaseService, INavigationService navigationService)
         {
             _databaseService = databaseService;
             _navigationService = navigationService;
 
-            Services = databaseService.Select<Service>();
-            SelectedService = Services.First() ?? Service.DefaultServices.FirstOrDefault();
+            Services = databaseService.Select<ServiceInfo>();
+            SelectedService = Services.First() ?? ServiceInfo.DefaultServices.FirstOrDefault();
         }
 
         [RelayCommand]
         async Task AddProfile()
         {
-            Profile profile = new Profile()
+            ProfileInfo profile = new ProfileInfo()
             {
                 Username = Username,
                 Password = Password,

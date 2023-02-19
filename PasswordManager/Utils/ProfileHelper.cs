@@ -10,9 +10,9 @@ namespace PasswordManager.Utils
         /// </summary>
         /// <param name="profile">Profile to verify</param>
         /// <returns>Verified profile</returns>
-        /// <exception cref="ArgumentNullException">Throw if <see cref="Profile.Service"/> is null</exception>
-        /// <exception cref="ArgumentException">Throw if <see cref="Profile.Username"/> or <see cref="Profile.Password"/> have incorrect format</exception>
-        public static Profile Verify(this Profile profile)
+        /// <exception cref="ArgumentNullException">Throw if <see cref="ProfileInfo.Service"/> is null</exception>
+        /// <exception cref="ArgumentException">Throw if <see cref="ProfileInfo.Username"/> or <see cref="ProfileInfo.Password"/> have incorrect format</exception>
+        public static ProfileInfo Verify(this ProfileInfo profile)
         {
             if (profile == null) throw new ArgumentNullException(nameof(profile));
             

@@ -2,11 +2,12 @@
 
 namespace PasswordManager.Model.DB.Schema;
 
-public abstract class AProfile : IEquatable<Profile>
+[Obsolete]
+public abstract class AProfile : IEquatable<ProfileInfo>
 {
     protected string username;
     protected string password;
     protected string service;
 
-    public abstract bool Equals([AllowNull] Profile other);
+    public abstract bool Equals([AllowNull] ProfileInfo other);
 }
