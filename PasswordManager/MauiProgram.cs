@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PasswordManager.Model.DB;
+using PasswordManager.Model.IO;
 using PasswordManager.Services;
 using PasswordManager.View;
 using PasswordManager.ViewModel;
@@ -8,6 +9,13 @@ namespace PasswordManager
 {
     public static class MauiProgram
     {
+        public const string AppName = 
+#if DEBUG
+            "PasswordManager-debug";
+#else
+            "PasswordManager";
+#endif
+
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -19,7 +27,12 @@ namespace PasswordManager
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            Storage storage = new AppStorage(Path.Combine(appData, AppName));
+
             //Setting dependencies for injection
+            builder.Services.AddSingleton(storage);
+
             builder.Services.AddSingleton<INavigationService, NavigationService>();
 
             builder.Services.AddSingleton<IController, RealmController>();

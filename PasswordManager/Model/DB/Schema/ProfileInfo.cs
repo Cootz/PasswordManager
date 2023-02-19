@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PasswordManager.Model.DB.Schema;
 
-public partial class Profile : RealmObject, IEquatable<Profile>
+public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
 {
     private const char FieldSplit = ':';
     
@@ -15,20 +15,20 @@ public partial class Profile : RealmObject, IEquatable<Profile>
     [PrimaryKey]
     public Guid ID { get; set; }
 
-    public Service Service { get; set; }
+    public ServiceInfo Service { get; set; }
     
     public string Username { get; set; }
     
     public string Password { get; set; }
 
-    public Profile() 
+    public ProfileInfo() 
     {
         ID = Guid.NewGuid();
     }
 
-    public Profile(Guid iD, Service service, string username, string password)
+    public ProfileInfo(Guid id, ServiceInfo service, string username, string password)
     {
-        ID = iD;
+        ID = id;
         Service = service;
         Username = username;
         Password = password;
@@ -45,19 +45,19 @@ public partial class Profile : RealmObject, IEquatable<Profile>
         return ret.ToString();
     }
 
-    public bool Equals([AllowNull] Profile other)
+    public bool Equals([AllowNull] ProfileInfo other)
     {
         bool[] equals = { Service == other?.Service, Password == other?.Password, Username == other?.Username };
 
         return equals[0] & equals[1] & equals[2];
     }
 
-    public static bool operator !=(Profile left, Profile right)
+    public static bool operator !=(ProfileInfo left, ProfileInfo right)
     {
         return !left?.Equals(right) ?? false;
     }
 
-    public static bool operator ==(Profile left, Profile right)
+    public static bool operator ==(ProfileInfo left, ProfileInfo right)
     {
         return left?.Equals(right) ?? false;
     }
@@ -74,7 +74,7 @@ public partial class Profile : RealmObject, IEquatable<Profile>
             return false;
         }
 
-        return Equals(obj as Profile);
+        return Equals(obj as ProfileInfo);
     }
 
     public override int GetHashCode() => base.GetHashCode();

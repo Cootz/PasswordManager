@@ -10,7 +10,7 @@ namespace PasswordManager.ViewModel
     public partial class RecentViewModel : ObservableObject
     {
         [ObservableProperty]
-        IQueryable<Profile> profiles;
+        IQueryable<ProfileInfo> profiles;
 
         private DatabaseService db;
         private readonly INavigationService _navigationService;
@@ -20,7 +20,7 @@ namespace PasswordManager.ViewModel
             db = databaseService;
             _navigationService = navigationService;
 
-            Profiles = db.Select<Profile>();
+            Profiles = db.Select<ProfileInfo>();
         }
 
         [RelayCommand]
@@ -32,7 +32,7 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         async Task DeleteNote(object sender)
         {
-            await db.Remove((Profile)sender);
+            await db.Remove((ProfileInfo)sender);
         }
     }
 }

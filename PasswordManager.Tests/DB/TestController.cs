@@ -25,45 +25,45 @@ namespace PasswordManager.Tests.DB
         [Test]
         public void AddItemTest()
         {
-            Profile profile = ProfileData.GetTestProfile();
+            ProfileInfo profile = ProfileData.GetTestProfile();
 
             controller.Add(profile);
 
-            Assert.That(controller.Select<Profile>().First().Equals(profile), Is.True);
+            Assert.That(controller.Select<ProfileInfo>().First().Equals(profile), Is.True);
         }
 
         [Test]
         public void AddMultipleItemsTest()
         {
-            Profile[] profiles = ProfileData.GetTestProfiles();
+            ProfileInfo[] profiles = ProfileData.GetTestProfiles();
 
             controller.SavePasswords(profiles);
 
-            Assert.That(controller.Select<Profile>().Count(), Is.EqualTo(5));
+            Assert.That(controller.Select<ProfileInfo>().Count(), Is.EqualTo(5));
         }
 
         [Test]
         public void SelectItemTest()
         {
-            Profile profile = ProfileData.GetTestProfile();
+            ProfileInfo profile = ProfileData.GetTestProfile();
          
             controller.Add(profile);
 
-            Assert.That(controller.Select<Profile>().Count(), Is.EqualTo(1));
+            Assert.That(controller.Select<ProfileInfo>().Count(), Is.EqualTo(1));
         }
 
         [Test]
         public async Task RemoveItemTest() 
         {
-            Profile profile = ProfileData.GetTestProfile();
+            ProfileInfo profile = ProfileData.GetTestProfile();
 
             controller.Add(profile);
 
-            Assert.That(controller.Select<Profile>().Count(), Is.EqualTo(1));
+            Assert.That(controller.Select<ProfileInfo>().Count(), Is.EqualTo(1));
 
             await controller.Remove(profile);
 
-            Assert.That(controller.Select<Profile>().Count(), Is.EqualTo(0));
+            Assert.That(controller.Select<ProfileInfo>().Count(), Is.EqualTo(0));
         }
 
        

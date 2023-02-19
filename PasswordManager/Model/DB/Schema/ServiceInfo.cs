@@ -3,14 +3,14 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace PasswordManager.Model.DB.Schema
 {
-    public partial class Service : RealmObject, IEquatable<Service>
+    public partial class ServiceInfo : RealmObject, IEquatable<ServiceInfo>
     {
-        public static readonly Service[] DefaultServices =
+        public static readonly ServiceInfo[] DefaultServices =
         {
-            new Service { ID = Guid.Parse("00000000-0000-0000-0000-000000000001"), Name = "steam" },
-            new Service { ID = Guid.Parse("00000000-0000-0000-0000-000000000002"), Name = "discord" },
-            new Service { ID = Guid.Parse("00000000-0000-0000-0000-000000000003"), Name = "gog" },
-            new Service { ID = Guid.Parse("00000000-0000-0000-0000-000000000004"), Name = "origin" }
+            new ServiceInfo { ID = Guid.Parse("00000000-0000-0000-0000-000000000001"), Name = "steam" },
+            new ServiceInfo { ID = Guid.Parse("00000000-0000-0000-0000-000000000002"), Name = "discord" },
+            new ServiceInfo { ID = Guid.Parse("00000000-0000-0000-0000-000000000003"), Name = "gog" },
+            new ServiceInfo { ID = Guid.Parse("00000000-0000-0000-0000-000000000004"), Name = "origin" }
         };
 
         [PrimaryKey]
@@ -19,17 +19,17 @@ namespace PasswordManager.Model.DB.Schema
         [Indexed]
         public string Name { get; set; } = string.Empty;
 
-        public Service(string name) : base()
+        public ServiceInfo(string name) : base()
         {
             Name = name ?? string.Empty;
         }
 
-        public Service()
+        public ServiceInfo()
         {         
             ID = Guid.NewGuid();
         }
 
-        public bool Equals([AllowNull] Service other)
+        public bool Equals([AllowNull] ServiceInfo other)
         {
             if (ReferenceEquals(this, other))
             {
@@ -46,12 +46,12 @@ namespace PasswordManager.Model.DB.Schema
             return equals[0] & equals[1];
         }
 
-        public static bool operator !=(Service left, Service right)
+        public static bool operator !=(ServiceInfo left, ServiceInfo right)
         {
             return !left?.Equals(right) ?? false;
         }
 
-        public static bool operator ==(Service left, Service right)
+        public static bool operator ==(ServiceInfo left, ServiceInfo right)
         {
             return left?.Equals(right) ?? false;
         }
@@ -60,7 +60,7 @@ namespace PasswordManager.Model.DB.Schema
 
         public override bool Equals(object obj)
         {
-            return obj is Service ? Equals(obj as Service) : false;
+            return obj is ServiceInfo ? Equals(obj as ServiceInfo) : false;
         }
     }
 }

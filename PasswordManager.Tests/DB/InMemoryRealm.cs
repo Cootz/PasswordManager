@@ -13,7 +13,7 @@ namespace PasswordManager.Tests.DB
 
         public InMemoryRealm() => realm = Realm.GetInstance(config);
 
-        public async Task Add(Profile profile)
+        public async Task Add(ProfileInfo profile)
         {
             await realm.WriteAsync(() =>
             {
@@ -31,11 +31,11 @@ namespace PasswordManager.Tests.DB
         public async Task Initialize()
         {
             //Preparing default values
-            var services = realm.All<Service>();
-            var servicesToAdd = new List<Service>();
+            var services = realm.All<ServiceInfo>();
+            var servicesToAdd = new List<ServiceInfo>();
 
-            foreach (var service in Service.DefaultServices)
-                if (realm.Find<Service>(service.ID) is null)
+            foreach (var service in ServiceInfo.DefaultServices)
+                if (realm.Find<ServiceInfo>(service.ID) is null)
                     servicesToAdd.Add(service);
 
             if (servicesToAdd.Count > 0)
@@ -46,7 +46,7 @@ namespace PasswordManager.Tests.DB
 
         public bool IsInitialized() => isInitialized; 
 
-        public Task Remove(Profile profile) => realm.WriteAsync(() => realm.Remove(profile));
+        public Task Remove(ProfileInfo profile) => realm.WriteAsync(() => realm.Remove(profile));
 
         public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
     }

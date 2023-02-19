@@ -14,7 +14,7 @@ namespace PasswordManager.Tests.Utils
         [Test]
         public void TestPositiveVerification()
         {
-            Profile profile = ProfileData.GetTestProfile(); 
+            ProfileInfo profile = ProfileData.GetTestProfile(); 
 
             Assert.DoesNotThrow(() => profile.Verify());
         }
@@ -22,7 +22,7 @@ namespace PasswordManager.Tests.Utils
         [Test]
         public void TestNegativeServiceVerification()
         {
-            Profile profile = ProfileData.GetTestProfile();
+            ProfileInfo profile = ProfileData.GetTestProfile();
 
             profile.Service = null;
 
@@ -32,7 +32,7 @@ namespace PasswordManager.Tests.Utils
         [Test]
         public void TestNegativeLoginVerification()
         {
-            Profile profile = ProfileData.GetTestProfile();
+            ProfileInfo profile = ProfileData.GetTestProfile();
 
             profile.Username = String.Empty;
 
@@ -42,7 +42,7 @@ namespace PasswordManager.Tests.Utils
         [Test]
         public void TestNegativePasswordVerification()
         {
-            Profile profile = ProfileData.GetTestProfile();
+            ProfileInfo profile = ProfileData.GetTestProfile();
 
             profile.Password = String.Empty;
 

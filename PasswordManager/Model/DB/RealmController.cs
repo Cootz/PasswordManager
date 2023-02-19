@@ -5,9 +5,14 @@ using System.Diagnostics;
 
 namespace PasswordManager.Model.DB
 {
+    /// <summary>
+    /// Handles data transferring to/from realm
+    /// </summary>
     public sealed class RealmController : IController
     {
         private const ulong schema_version = 3;
+
+        private Storage dataStorage { get; set; }
 
         private Realm realm;
 
@@ -15,12 +20,14 @@ namespace PasswordManager.Model.DB
 
         public bool IsInitialized() => isInitialized;
 
-        public RealmController() 
+        public RealmController(Storage storage) 
         {
+            dataStorage = storage.GetStorageForDirectory("data");
+
             Initialize().Wait();
         }
 
-        public async Task Add(Profile profile)
+        public async Task Add(ProfileInfo profile)
         {
             await realm.WriteAsync(() =>
             {
@@ -39,7 +46,7 @@ namespace PasswordManager.Model.DB
             if (IsInitialized())
                 return;
 
-            var config = new RealmConfiguration(Path.Combine(AppDirectoryManager.Data, "Psw.realm"))
+            var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "Psw.realm"))
             {
                 SchemaVersion = schema_version,
                 MigrationCallback = OnMigration
@@ -60,17 +67,17 @@ namespace PasswordManager.Model.DB
             }
 
             //Preparing default values
-            var services = realm.All<Service>();
-            var servicesToAdd = new List<Service>();
+            var services = realm.All<ServiceInfo>();
+            var servicesToAdd = new List<ServiceInfo>();
 
-            foreach (var service in Service.DefaultServices)
-                if (realm.Find<Service>(service.ID) is null)
+            foreach (var service in ServiceInfo.DefaultServices)
+                if (realm.Find<ServiceInfo>(service.ID) is null)
                     servicesToAdd.Add(service);
 
             if (servicesToAdd.Count > 0)
                 await realm.WriteAsync(() => servicesToAdd.ForEach(s => realm.Add(s)));
 
-            Debug.Assert(realm.All<Service>().ToArray().Intersect(Service.DefaultServices).Count() == Service.DefaultServices.Length);
+            Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count() == ServiceInfo.DefaultServices.Length);
 
             isInitialized = true;
         }
@@ -86,7 +93,7 @@ namespace PasswordManager.Model.DB
             switch (targetVersion)
             {
                 case 2:
-                    var newProfiles = migration.NewRealm.All<Profile>();
+                    var newProfiles = migration.NewRealm.All<ProfileInfo>();
 
                     for (int i = 0; i < newProfiles.Count(); i++)
                         newProfiles.ElementAt(i).ID = Guid.NewGuid();
@@ -97,6 +104,6 @@ namespace PasswordManager.Model.DB
 
         public IQueryable<T> Select<T>() where T : IRealmObject => realm?.All<T>();
 
-        public Task Remove(Profile profile) => realm?.WriteAsync(() => realm.Remove(profile));
+        public Task Remove(ProfileInfo profile) => realm?.WriteAsync(() => realm.Remove(profile));
     }
 }
