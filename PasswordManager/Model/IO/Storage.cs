@@ -12,7 +12,7 @@ namespace PasswordManager.Model.IO
     /// </summary>
     public abstract class Storage
     {
-        public string WorkingDirectory { get; set; }
+        public string WorkingDirectory { get; private set; }
 
         public Storage(string path)
         {

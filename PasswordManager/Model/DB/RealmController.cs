@@ -12,7 +12,7 @@ namespace PasswordManager.Model.DB
     {
         private const ulong schema_version = 3;
 
-        private IO.Storage dataStorage { get; set; }
+        private Storage dataStorage { get; set; }
 
         private Realm realm;
 
@@ -20,7 +20,7 @@ namespace PasswordManager.Model.DB
 
         public bool IsInitialized() => isInitialized;
 
-        public RealmController(IO.Storage storage) 
+        public RealmController(Storage storage) 
         {
             dataStorage = storage.GetStorageForDirectory("data");
 
@@ -46,7 +46,7 @@ namespace PasswordManager.Model.DB
             if (IsInitialized())
                 return;
 
-            var config = new RealmConfiguration(Path.Combine(AppDirectoryManager.Data, "Psw.realm"))
+            var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "Psw.realm"))
             {
                 SchemaVersion = schema_version,
                 MigrationCallback = OnMigration
