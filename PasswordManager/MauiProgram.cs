@@ -28,10 +28,9 @@ namespace PasswordManager
                 });
 
             string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            Storage storage = new AppStorage(Path.Combine(appData, AppName));
 
             //Setting dependencies for injection
-            builder.Services.AddSingleton(storage);
+            builder.Services.AddSingleton<Storage>(x => new AppStorage(Path.Combine(appData, AppName)));
 
             builder.Services.AddSingleton<INavigationService, NavigationService>();
 

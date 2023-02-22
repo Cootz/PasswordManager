@@ -8,8 +8,7 @@
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:RecentPage}"
-        
+        ContentTemplate="{DataTemplate local:RecentPage}"        
         Route="RecentPage"/>
 
 </Shell>
