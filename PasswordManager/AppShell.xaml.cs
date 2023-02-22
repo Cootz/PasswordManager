@@ -10,6 +10,7 @@ namespace PasswordManager
 
             //Register routes
             Routing.RegisterRoute(nameof(AddPage), typeof(AddPage));
+            Routing.RegisterRoute(nameof(RecentPage), typeof(RecentPage));
         }
     }
 }
