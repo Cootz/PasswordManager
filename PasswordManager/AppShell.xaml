@@ -10,7 +10,7 @@
         <ShellContent ContentTemplate="{DataTemplate local:RecentPage}"/>
     </FlyoutItem>
 
-    <FlyoutItem Title="Home" Route="RecentPage">
-        <ShellContent ContentTemplate="{DataTemplate local:RecentPage}"/>
+    <FlyoutItem Title="Settings" Route="SettingsPage">
+        <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"/>
     </FlyoutItem>
 </Shell>
