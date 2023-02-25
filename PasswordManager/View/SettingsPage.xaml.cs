@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PasswordManager.ViewModel;
 
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+namespace PasswordManager.View;
 
-namespace PasswordManager.View
+public partial class SettingsPage : ContentPage
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsPage : ContentPage
-    {
-        public SettingsPage()
-        {
-            InitializeComponent();
-        }
-    }
+	public SettingsPage(SettingsViewModel vm)
+	{
+		InitializeComponent();
+
+		BindingContext = vm;
+	}
 }

@@ -43,6 +43,9 @@ namespace PasswordManager
             builder.Services.AddTransient<AddPage>();
             builder.Services.AddTransient<AddViewModel>();
             
+            builder.Services.AddSingleton<SettingsPage>();
+            builder.Services.AddSingleton<SettingsViewModel>();
+
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
