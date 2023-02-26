@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordManager.View.SettingsPage"
+             Title="SettingsPage">
+    <VerticalStackLayout>
+        <Grid RowDefinitions="*,*,*,*,*,*,*,*,*" ColumnDefinitions="*,*">
+            <Label HorizontalOptions="End" Grid.Column="0" Text="Services" Margin="0,0,10,0" VerticalOptions="Center"/>
+            <Button Text="Add" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
