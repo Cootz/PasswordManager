@@ -19,9 +19,6 @@ public partial class SettingsRow : ContentView
         set => SetValue(TitleProperty, value);
     }
 
-    //[Bindable(true)]
-    //public string Title { get; set; } = string.Empty;
-
     public SettingsRow()
 	{
 		InitializeComponent();
