@@ -3,19 +3,29 @@ using System.ComponentModel;
 
 namespace PasswordManager.View.Controls;
 
+#nullable enable
+
 /// <summary>
-/// Represents row of settings screen in format Title Content
+/// Represents row of settings screen in format | Title|Content |
 /// </summary>
 public partial class SettingsRow : ContentView
 {
-	[Bindable(BindableSupport.Yes, BindingDirection.TwoWay)]
-	public string Title { get; set; }
+    public static readonly BindableProperty TitleProperty =
+        BindableProperty.Create(nameof(Title), typeof(string), typeof(SettingsRow), defaultValue: string.Empty);
 
-    [Bindable(BindableSupport.Yes, BindingDirection.TwoWay)]
-    public ContentView Content { get; set; }
+    public string Title
+    {
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
+    }
 
-	public SettingsRow()
+    //[Bindable(true)]
+    //public string Title { get; set; } = string.Empty;
+
+    public SettingsRow()
 	{
 		InitializeComponent();
 	}
+
+
 }
