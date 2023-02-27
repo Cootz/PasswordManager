@@ -23,6 +23,4 @@ public partial class SettingsRow : ContentView
 	{
 		InitializeComponent();
 	}
-
-
 }
