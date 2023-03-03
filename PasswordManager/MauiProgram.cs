@@ -34,8 +34,7 @@ namespace PasswordManager
 
             builder.Services.AddSingleton<INavigationService, NavigationService>();
 
-            builder.Services.AddSingleton<IController, RealmController>();
-            builder.Services.AddSingleton<DatabaseService>();
+            builder.Services.AddSingleton(s => new DatabaseService(new RealmController(s.GetService<Storage>())));
 
             builder.Services.AddSingleton<RecentPage>();
             builder.Services.AddSingleton<RecentViewModel>();
@@ -46,6 +45,9 @@ namespace PasswordManager
             builder.Services.AddTransient<AddPage>();
             builder.Services.AddTransient<AddViewModel>();
             
+            builder.Services.AddSingleton<SettingsPage>();
+            builder.Services.AddSingleton<SettingsViewModel>();
+
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
