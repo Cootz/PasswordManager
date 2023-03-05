@@ -1,5 +1,6 @@
 using Microsoft.Maui.Controls;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace PasswordManager.View.Controls;
 
@@ -14,7 +15,7 @@ public partial class SettingLayout : ContentView
         BindableProperty.Create(nameof(Title), typeof(string), typeof(SettingLayout), defaultValue: string.Empty);
 
     public static readonly BindableProperty OrientationProperty =
-        BindableProperty.Create(nameof(Orientation), typeof(OrientationEnum), typeof(SettingLayout), defaultValue: OrientationEnum.Horizontal);
+        BindableProperty.Create(nameof(Orientation), typeof(OrientationEnum), typeof(SettingLayout), defaultValue: OrientationEnum.Horizontal, propertyChanged: OrientationChanged);
 
     public string Title
     {
@@ -30,15 +31,28 @@ public partial class SettingLayout : ContentView
 
     public SettingLayout()
 	{
-		InitializeComponent();
+        InitializeComponent();
 
-        switch (Orientation)
+        SetOrientation(this, Orientation);
+    }
+
+    static void OrientationChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var layout = (SettingLayout)bindable;
+
+        SetOrientation(layout, (OrientationEnum)newValue);
+        layout.InvalidateMeasure();
+    }
+
+    static void SetOrientation(SettingLayout layout, OrientationEnum orientation)
+    {
+        switch (orientation)
         {
             case OrientationEnum.Horizontal:
-                this.ControlTemplate = this.Resources["OrientationHorizontal"] as ControlTemplate;
+                layout.ControlTemplate = layout.Resources["OrientationHorizontal"] as ControlTemplate;
                 break;
             case OrientationEnum.Vertical:
-                this.ControlTemplate = this.Resources["OrientationVertical"] as ControlTemplate;
+                layout.ControlTemplate = layout.Resources["OrientationVertical"] as ControlTemplate;
                 break;
         }
     }

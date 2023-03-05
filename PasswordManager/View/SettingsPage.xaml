@@ -5,7 +5,7 @@
              xmlns:controls="clr-namespace:PasswordManager.View.Controls"
              Title="SettingsPage">
     <VerticalStackLayout Margin="10" Spacing="6">
-        <controls:SettingLayout Title="Services" Orientation="Vertical">
+        <controls:SettingLayout Title="Services" Orientation="Horizontal">
             <Button Text="Manage services"/>
         </controls:SettingLayout>
     </VerticalStackLayout>
