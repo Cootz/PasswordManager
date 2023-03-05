@@ -7,7 +7,7 @@ namespace PasswordManager.View.Controls;
 #nullable enable
 
 /// <summary>
-/// Represents row of settings screen in format | Title|Content |
+/// Represents row or column of a setting
 /// </summary>
 public partial class SettingLayout : ContentView
 {
