@@ -49,7 +49,7 @@ public partial class SettingLayout : ContentView
         switch (orientation)
         {
             case OrientationEnum.Horizontal:
-                layout.ControlTemplate = layout.Resources["OrientationHorizontal"] as ControlTemplate;
+              layout.ControlTemplate = layout.Resources["OrientationHorizontal"] as ControlTemplate;
                 break;
             case OrientationEnum.Vertical:
                 layout.ControlTemplate = layout.Resources["OrientationVertical"] as ControlTemplate;
