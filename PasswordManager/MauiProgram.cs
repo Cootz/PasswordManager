@@ -39,6 +39,9 @@ namespace PasswordManager
             builder.Services.AddSingleton<RecentPage>();
             builder.Services.AddSingleton<RecentViewModel>();
 
+            builder.Services.AddSingleton<ManageServicesPage>();
+            builder.Services.AddSingleton<ManageServicesViewModel>();
+
             builder.Services.AddTransient<AddPage>();
             builder.Services.AddTransient<AddViewModel>();
             
