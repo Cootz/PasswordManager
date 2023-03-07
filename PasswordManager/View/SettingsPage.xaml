@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:schema="clr-namespace:PasswordManager.Model.DB.Schema"
              x:Class="PasswordManager.View.SettingsPage"
              xmlns:controls="clr-namespace:PasswordManager.View.Controls"
+             xmlns:viewmodels="clr-namespace:PasswordManager.ViewModel"
+             x:DataType="viewmodels:SettingsViewModel"
              Title="SettingsPage">
     <VerticalStackLayout Margin="10" Spacing="6">
         <controls:SettingLayout Title="Services" Orientation="Vertical">
-            <Button Text="Manage services"/>
+            <StackLayout Orientation="Vertical">
+                <CollectionView MaximumHeightRequest="100" HorizontalOptions="CenterAndExpand" ItemsSource="{Binding ServiceInfos}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type schema:ServiceInfo}">
+                            <Border>
+                                <Label Text="{Binding Name}" HorizontalOptions="CenterAndExpand"/>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button Text="Add" HorizontalOptions="End" Margin="0,0,0,10"/>
+            </StackLayout>
         </controls:SettingLayout>
     </VerticalStackLayout>
 </ContentPage>
