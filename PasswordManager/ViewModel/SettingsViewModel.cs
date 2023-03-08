@@ -24,7 +24,7 @@ namespace PasswordManager.ViewModel
         {
             string response = await App.AlertService.ShowPromptAsync("Service", "Enter service name");
 
-            if (String.IsNullOrEmpty(response))
+            if (!String.IsNullOrEmpty(response))
             {
                 ServiceInfo newService = new ServiceInfo();
 
