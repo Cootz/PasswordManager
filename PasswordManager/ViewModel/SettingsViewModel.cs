@@ -10,15 +10,28 @@ namespace PasswordManager.ViewModel
         [ObservableProperty]
         private IQueryable<ServiceInfo> serviceInfos;
 
+        private DatabaseService databaseService;
+
         public SettingsViewModel(DatabaseService db) 
         {
+            databaseService = db;
+
             ServiceInfos = db.Select<ServiceInfo>();
         }
 
         [RelayCommand]
         private async void AddService()
         {
-            await Shell.Current.CurrentPage.DisplayPromptAsync("Service", "Enter service name");
+            string response = await App.AlertService.ShowPromptAsync("Service", "Enter service name");
+
+            if (String.IsNullOrEmpty(response))
+            {
+                ServiceInfo newService = new ServiceInfo();
+
+                newService.Name = response;
+
+                databaseService.Add(newService);
+            }
         }
     }
 }

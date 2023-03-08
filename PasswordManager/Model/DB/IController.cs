@@ -9,6 +9,6 @@ namespace PasswordManager.Model.DB;
 public interface IController: IInitializable, IDisposable
 {
     public IQueryable<T> Select<T>() where T : IRealmObject;
-    public Task Add(ProfileInfo profile);
-    public Task Remove(ProfileInfo profile);
+    public Task Add<T>(T info) where T : IRealmObject;
+    public Task Remove<T>(T info) where T : IRealmObject;
 }

@@ -13,11 +13,11 @@ namespace PasswordManager.Tests.DB
 
         public InMemoryRealm() => realm = Realm.GetInstance(config);
 
-        public async Task Add(ProfileInfo profile)
+        public async Task Add<T>(T info) where T : IRealmObject
         {
             await realm.WriteAsync(() =>
             {
-                realm.Add(profile);
+                realm.Add(info);
             });
         }
 
@@ -46,7 +46,7 @@ namespace PasswordManager.Tests.DB
 
         public bool IsInitialized() => isInitialized; 
 
-        public Task Remove(ProfileInfo profile) => realm.WriteAsync(() => realm.Remove(profile));
+        public Task Remove<T>(T info) where T : IRealmObject => realm.WriteAsync(() => realm.Remove(info));
 
         public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
     }

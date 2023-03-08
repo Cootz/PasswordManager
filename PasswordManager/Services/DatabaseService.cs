@@ -51,7 +51,7 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// Adds entry to database
     /// </summary>
     /// <param name="profile"></param>
-    public async void Add(ProfileInfo profile) => await DB.Add(profile);
+    public async void Add(IRealmObject info) => await DB.Add(info);
 
     /// <summary>
     /// Select every instance of given class from database
