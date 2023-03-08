@@ -11,8 +11,5 @@ namespace PasswordManager.ViewModel
         { 
             databaseService = db;
         }
-
-
-
     }
 }
