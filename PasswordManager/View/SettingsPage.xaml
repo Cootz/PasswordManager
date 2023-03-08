@@ -7,19 +7,19 @@
              xmlns:viewmodels="clr-namespace:PasswordManager.ViewModel"
              x:DataType="viewmodels:SettingsViewModel"
              Title="SettingsPage">
-    <VerticalStackLayout Margin="10" Spacing="6">
-        <controls:SettingLayout Title="Services" Orientation="Vertical">
+    <VerticalStackLayout Margin="10" Spacing="6" HorizontalOptions="FillAndExpand">
+        <controls:SettingLayout Title="Services" Orientation="Vertical" HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical">
-                <CollectionView MaximumHeightRequest="100" HorizontalOptions="CenterAndExpand" ItemsSource="{Binding ServiceInfos}">
+                <CollectionView MaximumHeightRequest="100" ItemsSource="{Binding ServiceInfos}" HorizontalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="{x:Type schema:ServiceInfo}">
-                            <Border>
-                                <Label Text="{Binding Name}" HorizontalOptions="CenterAndExpand"/>
+                        <DataTemplate x:DataType="{x:Type schema:ServiceInfo}" >
+                            <Border HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding Name}" FontSize="Medium"/>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <Button Text="Add" HorizontalOptions="End" Margin="0,0,0,10"/>
+                <Button Text="Add" HorizontalOptions="FillAndExpand" Margin="0,0,0,10" Command="{Binding AddServiceCommand}"/>
             </StackLayout>
         </controls:SettingLayout>
     </VerticalStackLayout>
