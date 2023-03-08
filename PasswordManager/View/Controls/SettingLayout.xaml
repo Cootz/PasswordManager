@@ -6,15 +6,15 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <ControlTemplate x:Key="OrientationHorizontal">
-                <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}" ColumnDefinitions="*, *">
-                    <Label Text="{Binding Title, FallbackValue=''}" HorizontalOptions="End" VerticalOptions="Center" Grid.Column="0" Margin="0,0,10,0"/>
-                    <ContentView Content="{Binding Content}" HorizontalOptions="Start" VerticalOptions="Center" Grid.Column="1"/>
+                <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}" ColumnDefinitions="*, *" HorizontalOptions="{Binding HorizontalOptions}" VerticalOptions="{Binding VerticalOptions}">
+                    <Label Text="{Binding Title, FallbackValue=''}" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="0" Margin="0,0,10,0"/>
+                    <ContentView Content="{Binding Content}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="1"/>
                 </Grid>
             </ControlTemplate>
             <ControlTemplate x:Key="OrientationVertical">
-                <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}" RowDefinitions="*, *">
-                    <Label Text="{Binding Title, FallbackValue=''}" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Margin="0,0,0,10"/>
-                    <ContentView Content="{Binding Content}" HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1"/>
+                <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}" RowDefinitions="*, auto" HorizontalOptions="{Binding HorizontalOptions}" VerticalOptions="{Binding VerticalOptions}">
+                    <Label Text="{Binding Title, FallbackValue=''}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="0" Margin="5"/>
+                    <ContentView Content="{Binding Content}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Grid.Row="1"/>
                 </Grid>
             </ControlTemplate>
         </ResourceDictionary>

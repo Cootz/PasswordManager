@@ -1,6 +1,7 @@
 ﻿using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
 using Realms;
+using System;
 using System.Diagnostics;
 
 namespace PasswordManager.Model.DB
@@ -27,13 +28,10 @@ namespace PasswordManager.Model.DB
             Initialize().Wait();
         }
 
-        public async Task Add(ProfileInfo profile)
+        public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(() =>
         {
-            await realm.WriteAsync(() =>
-            {
-                realm.Add(profile);
-            });
-        }
+            realm.Add(info);
+        });
 
         public void Dispose()
         {
@@ -89,7 +87,7 @@ namespace PasswordManager.Model.DB
         private void OnMigration(Migration migration, ulong lastSchemaVersion)
         {
             for (ulong i = 1; i <= schema_version; i++)
-                applyMigrationsForVestions(migration, (ulong)i);
+                applyMigrationsForVestions(migration, i);
         }
 
         private void applyMigrationsForVestions(Migration migration, ulong targetVersion)
@@ -106,8 +104,8 @@ namespace PasswordManager.Model.DB
             }
         }
 
-        public IQueryable<T> Select<T>() where T : IRealmObject => realm?.All<T>();
+        public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
 
-        public Task Remove(ProfileInfo profile) => realm?.WriteAsync(() => realm.Remove(profile));
+        public Task Remove<T>(T info) where T : IRealmObject => realm?.WriteAsync(() => realm.Remove(info));
     }
 }
