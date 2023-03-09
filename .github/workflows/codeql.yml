@@ -13,7 +13,7 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "github-actions-rework" ]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
@@ -41,6 +41,8 @@ jobs:
         # Use only 'javascript' to analyze code written in JavaScript, TypeScript or both
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
+    timeout-minutes: 60
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -61,18 +63,26 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '7.0.x'
-    
-    - name: Install .NET workloads
-      run: dotnet workload restore
       
     - name: Install MAUI
       run: dotnet workload install maui
 
-    - name: Build
-      run: dotnet build -c Release -f:${{ matrix.os.buildname }} Passwords.sln
+    - name: Build app
+      run: dotnet build -c Debug -warnaserror -f:${{ matrix.os.buildname }} .\PasswordManager\PasswordManager.csproj
+
+    - name: Build tests
+      run: dotnet build -c Debug -warnaserror -f:net7.0 .\PasswordManager.Tests\PasswordManager.Tests.csproj
       
-    - name: Tests
-      run: dotnet test --no-build --verbosity normal Passwords.sln
+    - name: Test
+      run: dotnet test $pwd/**/*.Tests/bin/Debug/*/*.Tests.dll --logger "trx;LogFileName=TestResults-${{matrix.os.prettyname}}.trx" -- NUnit.ConsoleOut=0
+      shell: pwsh
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      if: ${{ always() }}
+      with:
+        name: test-results-${{matrix.os.prettyname}}
+        path: ${{github.workspace}}/TestResults/TestResults-${{matrix.os.prettyname}}.trx
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
