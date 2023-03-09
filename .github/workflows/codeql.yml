@@ -74,15 +74,7 @@ jobs:
       run: dotnet build -c Debug -warnaserror -f:net7.0 ${{github.workspace}}/PasswordManager.Tests/PasswordManager.Tests.csproj
       
     - name: Test
-      run: dotnet test $pwd/**/*.Tests/bin/Debug/*/*.Tests.dll --logger "trx;LogFileName=TestResults-${{matrix.os.prettyname}}.trx" -- NUnit.ConsoleOut=0
-      shell: pwsh
-
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v2
-      if: ${{ always() }}
-      with:
-        name: test-results-${{matrix.os.prettyname}}
-        path: ${{github.workspace}}/TestResults/TestResults-${{matrix.os.prettyname}}.trx
+      run: dotnet test --no-build --verbosity normal Passwords.sln
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
