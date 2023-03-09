@@ -68,10 +68,10 @@ jobs:
       run: dotnet workload install maui
 
     - name: Build app
-      run: dotnet build -c Debug -warnaserror -f:${{ matrix.os.buildname }} .\PasswordManager\PasswordManager.csproj
+      run: dotnet build -c Debug -warnaserror -f:${{ matrix.os.buildname }} ${{github.workspace}}/PasswordManager/PasswordManager.csproj
 
     - name: Build tests
-      run: dotnet build -c Debug -warnaserror -f:net7.0 .\PasswordManager.Tests\PasswordManager.Tests.csproj
+      run: dotnet build -c Debug -warnaserror -f:net7.0 ${{github.workspace}}/PasswordManager.Tests/PasswordManager.Tests.csproj
       
     - name: Test
       run: dotnet test $pwd/**/*.Tests/bin/Debug/*/*.Tests.dll --logger "trx;LogFileName=TestResults-${{matrix.os.prettyname}}.trx" -- NUnit.ConsoleOut=0
