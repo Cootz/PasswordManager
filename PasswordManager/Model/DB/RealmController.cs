@@ -38,11 +38,11 @@ namespace PasswordManager.Model.DB
             realm.Dispose();
         }
 
-        public async Task Initialize()
+        public Task Initialize()
         {
             //Prevent double initialization
             if (IsInitialized())
-                return;
+                return Task.CompletedTask;
 
             var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "Psw.realm"))
             {
@@ -82,6 +82,7 @@ namespace PasswordManager.Model.DB
             Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count() == ServiceInfo.DefaultServices.Length);
 
             isInitialized = true;
+            return Task.CompletedTask;
         }
 
         private void OnMigration(Migration migration, ulong lastSchemaVersion)
