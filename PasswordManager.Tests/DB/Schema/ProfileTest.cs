@@ -2,6 +2,7 @@
 
 namespace PasswordManager.Tests.DB.Schema
 {
+    [TestFixture]
     public class ProfileTest
     {
         [Test]

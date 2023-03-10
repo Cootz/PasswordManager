@@ -4,14 +4,24 @@ using Realms;
 
 namespace PasswordManager.Tests.DB
 {
-    public class InMemoryRealm : IController
+    public class RealmTest : IController
     {
-        private readonly InMemoryConfiguration config = new($"test-db-{Guid.NewGuid()}");
+        private static ulong realm_verson = 1;
+
+        private readonly InMemoryConfiguration config = new($"test-db-{Guid.NewGuid()}")
+        {
+            SchemaVersion = realm_verson
+        };
 
         private Realm realm = null!;
         private bool isInitialized = false;
 
-        public InMemoryRealm() => realm = Realm.GetInstance(config);
+        public RealmTest()
+        {
+            realm = Realm.GetInstance(config);
+
+            realm_verson++;
+        }
 
         public async Task Add<T>(T info) where T : IRealmObject
         {
@@ -23,9 +33,7 @@ namespace PasswordManager.Tests.DB
 
         public void Dispose()
         {
-            realm.Dispose();
-
-            Realm.DeleteRealm(config);
+            realm = null!;
         }
 
         public async Task Initialize()

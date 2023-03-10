@@ -16,7 +16,7 @@ namespace PasswordManager.Tests.ViewModel
         [OneTimeSetUp]
         public void SetUpOnce()
         {
-            databaseService = new(new InMemoryRealm());
+            databaseService = new(new RealmTest());
             databaseService.Initialize().Wait();
         }
 
