@@ -37,7 +37,11 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         private async void RemoveService(ServiceInfo info)
         {
-            
+            if (info.Profiles.Any())
+            { 
+                foreach (ProfileInfo profile in info.Profiles)
+                    await databaseService.Remove(profile);
+            }
 
             await databaseService.Remove(info);
         }
