@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using NUnit.Framework;
+using PasswordManager.Model.DB;
 using PasswordManager.Services;
 using PasswordManager.Tests.DB;
+using PasswordManager.Tests.IO;
 using PasswordManager.Tests.Services;
 using PasswordManager.ViewModel;
 
@@ -16,7 +18,7 @@ namespace PasswordManager.Tests.ViewModel
         [OneTimeSetUp]
         public void SetUpOnce()
         {
-            databaseService = new(new RealmTest());
+            databaseService = new(new RealmController(new TempStorage()));
             databaseService.Initialize().Wait();
         }
 

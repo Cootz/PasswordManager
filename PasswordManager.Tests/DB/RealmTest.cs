@@ -1,5 +1,6 @@
 ﻿using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
+using PasswordManager.Model.IO;
 using Realms;
 
 namespace PasswordManager.Tests.DB
@@ -8,16 +9,19 @@ namespace PasswordManager.Tests.DB
     {
         private static ulong realm_verson = 1;
 
-        private readonly InMemoryConfiguration config = new($"test-db-{Guid.NewGuid()}")
+        private readonly RealmConfiguration config = new($"test-db-{Guid.NewGuid()}")
         {
             SchemaVersion = realm_verson
         };
 
+        private Storage dataStorage { get; set; }
+
         private Realm realm = null!;
         private bool isInitialized = false;
 
-        public RealmTest()
+        public RealmTest(Storage storage)
         {
+            dataStorage = storage;
             realm = Realm.GetInstance(config);
 
             realm_verson++;

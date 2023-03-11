@@ -1,6 +1,7 @@
 ﻿using PasswordManager.Model.DB;
 using PasswordManager.Model.IO;
 using PasswordManager.Services;
+using PasswordManager.Tests.IO;
 using Realms;
 using System;
 using System.Collections.Generic;
@@ -15,15 +16,19 @@ namespace PasswordManager.Tests.DB
     {
         protected void RunTestWithDatabase(Action<DatabaseService> testRun)
         {
-            using IController controller = new RealmTest();
-            using DatabaseService database = new(controller);
+            TempStorage tempStorage = new TempStorage();
+            IController controller = new RealmController(tempStorage);
+            
+            DatabaseService database = new(controller);
+           
             database.Initialize().Wait();
             testRun(database);
         }
 
         protected async void RunTestWithDatabaseAsync(Func<DatabaseService, Task> testRun)
         {
-            using IController controller = new RealmTest();
+            TempStorage tempStorage = new TempStorage();
+            using IController controller = new RealmController(tempStorage);
             using DatabaseService database = new(controller);
             database.Initialize().Wait();
             await testRun(database);
