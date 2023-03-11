@@ -15,10 +15,19 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type schema:ProfileInfo}">
                     <SwipeView>
-                        <SwipeView.GestureRecognizers>
-                            <SwipeGestureRecognizer Direction="Left" Command="{Binding Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=DeleteNote}"/>
-                        </SwipeView.GestureRecognizers>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" BackgroundColor="{StaticResource Primary}" Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=DeleteNoteCommand}" CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
                         <Frame Margin="10, 5" Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+                            <FlyoutBase.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="Delete" Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=DeleteNoteCommand}" CommandParameter="{Binding .}"/>
+                                </MenuFlyout>
+                            </FlyoutBase.ContextFlyout>
+
                             <Grid ColumnDefinitions="*,*,*" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                                 <Label Grid.Column="0" Text="{Binding Service.Name}" HorizontalTextAlignment="Center" FontSize="Medium"/>
                                 <Label Grid.Column="1" Text="{Binding Username}" HorizontalTextAlignment="Center" FontSize="Medium"/>
@@ -26,7 +35,6 @@
                             </Grid>
                         </Frame>
                     </SwipeView>
-
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

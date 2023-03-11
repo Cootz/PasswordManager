@@ -28,7 +28,6 @@ public sealed class DatabaseService : IInitializable, IDisposable
         isInitialized = true;
     }
 
-
     /// <summary>
     /// Save a range of <see cref="ProfileInfo"/>
     /// </summary>
@@ -50,7 +49,7 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// <summary>
     /// Adds entry to database
     /// </summary>
-    /// <param name="profile"></param>
+    /// <param name="info"></param>
     public async void Add(IRealmObject info) => await DB.Add(info);
 
     /// <summary>

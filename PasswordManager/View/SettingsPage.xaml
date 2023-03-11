@@ -10,12 +10,24 @@
     <VerticalStackLayout Margin="10" Spacing="6" HorizontalOptions="FillAndExpand">
         <controls:SettingLayout Title="Services" Orientation="Vertical" HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical">
-                <CollectionView MaximumHeightRequest="100" ItemsSource="{Binding ServiceInfos}" HorizontalOptions="FillAndExpand">
+                <CollectionView MaximumHeightRequest="200" ItemsSource="{Binding ServiceInfos}" HorizontalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="{x:Type schema:ServiceInfo}" >
-                            <Border HorizontalOptions="FillAndExpand">
-                                <Label Text="{Binding Name}" FontSize="Medium"/>
-                            </Border>
+                        <DataTemplate x:DataType="{x:Type schema:ServiceInfo}">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete" BackgroundColor="{StaticResource Primary}"/>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <FlyoutBase.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="Delete"/>
+                                    </MenuFlyout>
+                                </FlyoutBase.ContextFlyout>
+                                <Frame HorizontalOptions="FillAndExpand" BackgroundColor="Gray">
+                                    <Label Text="{Binding Name}" FontSize="Medium"/>
+                                </Frame>
+                            </SwipeView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

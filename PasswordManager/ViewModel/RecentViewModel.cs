@@ -30,9 +30,9 @@ namespace PasswordManager.ViewModel
         }
 
         [RelayCommand]
-        async Task DeleteNote(object sender)
+        async Task DeleteNote(ProfileInfo sender)
         {
-            await db.Remove((ProfileInfo)sender);
+            await db.Remove(sender);
         }
     }
 }
