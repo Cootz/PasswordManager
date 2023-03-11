@@ -5,6 +5,7 @@
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
              xmlns:schema="clr-namespace:PasswordManager.Model.DB.Schema"
              x:DataType="viewmodel:RecentViewModel"
+             x:Name="RecentProfiles"
              Title="Your profiles">
     
     <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, *">
@@ -21,13 +22,14 @@
                             </SwipeItems>
                         </SwipeView.RightItems>
 
-                        <Frame Margin="10, 5" Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
-                            <FlyoutBase.ContextFlyout>
-                                <MenuFlyout>
-                                    <MenuFlyoutItem Text="Delete" Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=DeleteNoteCommand}" CommandParameter="{Binding .}"/>
-                                </MenuFlyout>
-                            </FlyoutBase.ContextFlyout>
+                        <FlyoutBase.ContextFlyout>
+                            <MenuFlyout>
+                                <!--RelativeSource not working due to the bag. See: https://github.com/dotnet/maui/issues/5382-->
+                                <MenuFlyoutItem Text="Delete" Command="{Binding Source={x:Reference Name=RecentProfiles}, Path=BindingContext.DeleteNoteCommand}" CommandParameter="{Binding .}"/>
+                            </MenuFlyout>
+                        </FlyoutBase.ContextFlyout>
 
+                        <Frame Margin="10, 5" Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
                             <Grid ColumnDefinitions="*,*,*" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                                 <Label Grid.Column="0" Text="{Binding Service.Name}" HorizontalTextAlignment="Center" FontSize="Medium"/>
                                 <Label Grid.Column="1" Text="{Binding Username}" HorizontalTextAlignment="Center" FontSize="Medium"/>

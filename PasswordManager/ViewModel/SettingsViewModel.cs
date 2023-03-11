@@ -33,5 +33,13 @@ namespace PasswordManager.ViewModel
                 databaseService.Add(newService);
             }
         }
+
+        [RelayCommand]
+        private async void RemoveService(ServiceInfo info)
+        {
+            
+
+            await databaseService.Remove(info);
+        }
     }
 }

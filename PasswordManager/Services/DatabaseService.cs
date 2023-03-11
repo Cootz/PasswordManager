@@ -42,9 +42,8 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// <summary>
     /// Deletes entry from database
     /// </summary>
-    /// <param name="profile"></param>
     /// <returns></returns>
-    public async Task Remove(ProfileInfo profile) => await DB.Remove(profile); 
+    public async Task Remove<T>(T info) where T : IRealmObject => await DB.Remove(info); 
 
     /// <summary>
     /// Adds entry to database
