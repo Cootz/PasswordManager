@@ -1,11 +1,6 @@
 ﻿using PasswordManager.Model.DB.Schema;
 using PasswordManager.Tests.TestData;
 using PasswordManager.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Tests.Utils
 {
