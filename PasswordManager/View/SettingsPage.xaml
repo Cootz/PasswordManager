@@ -6,16 +6,29 @@
              xmlns:controls="clr-namespace:PasswordManager.View.Controls"
              xmlns:viewmodels="clr-namespace:PasswordManager.ViewModel"
              x:DataType="viewmodels:SettingsViewModel"
+             x:Name="Settings"
              Title="SettingsPage">
     <VerticalStackLayout Margin="10" Spacing="6" HorizontalOptions="FillAndExpand">
         <controls:SettingLayout Title="Services" Orientation="Vertical" HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical">
-                <CollectionView MaximumHeightRequest="100" ItemsSource="{Binding ServiceInfos}" HorizontalOptions="FillAndExpand">
+                <CollectionView MaximumHeightRequest="200" ItemsSource="{Binding ServiceInfos}" HorizontalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="{x:Type schema:ServiceInfo}" >
-                            <Border HorizontalOptions="FillAndExpand">
-                                <Label Text="{Binding Name}" FontSize="Medium"/>
-                            </Border>
+                        <DataTemplate x:DataType="{x:Type schema:ServiceInfo}">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete" BackgroundColor="{StaticResource Primary}" Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=RemoveServiceCommand}" CommandParameter="{Binding .}"/>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <FlyoutBase.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="Delete" Command="{Binding Source={x:Reference Name=Settings}, Path=BindingContext.RemoveServiceCommand}" CommandParameter="{Binding .}"/>
+                                    </MenuFlyout>
+                                </FlyoutBase.ContextFlyout>
+                                <Frame HorizontalOptions="FillAndExpand" BackgroundColor="Gray">
+                                    <Label Text="{Binding Name}" FontSize="Medium"/>
+                                </Frame>
+                            </SwipeView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

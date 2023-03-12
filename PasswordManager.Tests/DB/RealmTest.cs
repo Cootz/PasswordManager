@@ -56,7 +56,9 @@ namespace PasswordManager.Tests.DB
             isInitialized = true;
         }
 
-        public bool IsInitialized() => isInitialized; 
+        public bool IsInitialized() => isInitialized;
+
+        public Task Refresh() => realm.RefreshAsync();
 
         public Task Remove<T>(T info) where T : IRealmObject => realm.WriteAsync(() => realm.Remove(info));
 

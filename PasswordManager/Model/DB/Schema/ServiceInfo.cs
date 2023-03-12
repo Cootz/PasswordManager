@@ -19,6 +19,9 @@ namespace PasswordManager.Model.DB.Schema
         [Indexed]
         public string Name { get; set; } = string.Empty;
 
+        [Backlink(nameof(ProfileInfo.Service))]
+        public IQueryable<ProfileInfo> Profiles { get; }
+
         public ServiceInfo(string name) : base()
         {
             Name = name ?? string.Empty;

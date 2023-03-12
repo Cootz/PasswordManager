@@ -24,7 +24,7 @@ namespace PasswordManager.ViewModel
         {
             string response = await App.AlertService.ShowPromptAsync("Service", "Enter service name");
 
-            if (!String.IsNullOrEmpty(response))
+            if (!string.IsNullOrEmpty(response))
             {
                 ServiceInfo newService = new ServiceInfo();
 
@@ -32,6 +32,20 @@ namespace PasswordManager.ViewModel
 
                 databaseService.Add(newService);
             }
+        }
+
+        [RelayCommand]
+        private async void RemoveService(ServiceInfo info)
+        {
+            List<ProfileInfo> profilesPendingDeleting = new List<ProfileInfo>(info.Profiles);
+
+            await databaseService.RealmQuerry(async (realm) => {
+                await realm.WriteAsync(() =>
+                {
+                    realm.RemoveRange(info.Profiles);
+                    realm.Remove(info);
+                });
+            });
         }
     }
 }

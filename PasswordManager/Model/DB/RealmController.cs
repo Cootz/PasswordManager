@@ -1,7 +1,6 @@
 ﻿using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
 using Realms;
-using System;
 using System.Diagnostics;
 
 namespace PasswordManager.Model.DB
@@ -106,6 +105,10 @@ namespace PasswordManager.Model.DB
         }
 
         public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
+
+        public Task Refresh() => realm.RefreshAsync();
+
+        public async Task RealmQuerry(Func<Realm, Task> action) => await action(realm);
 
         public Task Remove<T>(T info) where T : IRealmObject => realm?.WriteAsync(() => realm.Remove(info));
     }
