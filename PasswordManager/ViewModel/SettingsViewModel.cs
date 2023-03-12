@@ -24,7 +24,7 @@ namespace PasswordManager.ViewModel
         {
             string response = await App.AlertService.ShowPromptAsync("Service", "Enter service name");
 
-            if (!String.IsNullOrEmpty(response))
+            if (!string.IsNullOrEmpty(response))
             {
                 ServiceInfo newService = new ServiceInfo();
 
@@ -39,20 +39,13 @@ namespace PasswordManager.ViewModel
         {
             List<ProfileInfo> profilesPendingDeleting = new List<ProfileInfo>(info.Profiles);
 
-            if (info.Profiles.Any())
-                foreach (ProfileInfo profile in info.Profiles)
-                    await databaseService.Remove(profile);
-
-            while (profilesPendingDeleting.Count > 0)
-            {
-                IQueryable<ProfileInfo> profiles = databaseService.Select<ProfileInfo>();
-
-                foreach (var profile in profilesPendingDeleting)
-                    if (!profiles.Any(p => p.ID == profile.ID))
-                        profilesPendingDeleting.Remove(profile);
-            }
-
-            await databaseService.Remove(info);
+            await databaseService.RealmQuerry(async (realm) => {
+                await realm.WriteAsync(() =>
+                {
+                    realm.RemoveRange(info.Profiles);
+                    realm.Remove(info);
+                });
+            });
         }
     }
 }

@@ -58,6 +58,13 @@ public sealed class DatabaseService : IInitializable, IDisposable
     public async void Add(IRealmObject info) => await DB.Add(info);
 
     /// <summary>
+    /// Asynchronously provide direct access to realm instance
+    /// </summary>
+    /// <param name="action"></param>
+    /// <returns></returns>
+    public async Task RealmQuerry(Func<Realm, Task> action) => await (DB as RealmController).RealmQuerry(action);
+
+    /// <summary>
     /// Select every instance of given class from database
     /// </summary>
     /// <typeparam name="T">Type to search</typeparam>
