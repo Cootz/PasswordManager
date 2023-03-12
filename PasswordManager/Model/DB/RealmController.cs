@@ -107,6 +107,8 @@ namespace PasswordManager.Model.DB
 
         public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
 
+        public Task Refresh() => realm.RefreshAsync();
+
         public Task Remove<T>(T info) where T : IRealmObject => realm?.WriteAsync(() => realm.Remove(info));
     }
 }

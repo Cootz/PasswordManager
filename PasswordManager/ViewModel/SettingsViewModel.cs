@@ -37,10 +37,19 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         private async void RemoveService(ServiceInfo info)
         {
+            List<ProfileInfo> profilesPendingDeleting = new List<ProfileInfo>(info.Profiles);
+
             if (info.Profiles.Any())
-            { 
                 foreach (ProfileInfo profile in info.Profiles)
                     await databaseService.Remove(profile);
+
+            while (profilesPendingDeleting.Count > 0)
+            {
+                IQueryable<ProfileInfo> profiles = databaseService.Select<ProfileInfo>();
+
+                foreach (var profile in profilesPendingDeleting)
+                    if (!profiles.Any(p => p.ID == profile.ID))
+                        profilesPendingDeleting.Remove(profile);
             }
 
             await databaseService.Remove(info);

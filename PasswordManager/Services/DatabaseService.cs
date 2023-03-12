@@ -43,7 +43,13 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// Deletes entry from database
     /// </summary>
     /// <returns></returns>
-    public async Task Remove<T>(T info) where T : IRealmObject => await DB.Remove(info); 
+    public async Task Remove<T>(T info) where T : IRealmObject => await DB.Remove(info);
+
+    /// <summary>
+    /// Asynchronously wait for the database instance and outstanding objects to get updated to point to the most recent persisted version
+    /// </summary>
+    /// <returns></returns>
+    public async Task Refresh() => await DB.Refresh();
 
     /// <summary>
     /// Adds entry to database
