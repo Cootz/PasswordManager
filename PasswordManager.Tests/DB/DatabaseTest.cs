@@ -14,23 +14,29 @@ namespace PasswordManager.Tests.DB
     [TestFixture]
     public class DatabaseTest
     {
+        static TempStorage tempStorage;
+        static RealmController controller;
+        static DatabaseService database;
+
+        [OneTimeSetUp]
+        public static void Setup()
+        {
+            tempStorage = new TempStorage();
+            controller = new RealmController(tempStorage);
+            database = new(controller);
+
+            database.Initialize().Wait();
+        }
+
         protected void RunTestWithDatabase(Action<DatabaseService> testRun)
         {
-            TempStorage tempStorage = new TempStorage();
-            IController controller = new RealmController(tempStorage);
-            
-            DatabaseService database = new(controller);
-           
-            database.Initialize().Wait();
             testRun(database);
+            
+            
         }
 
         protected async void RunTestWithDatabaseAsync(Func<DatabaseService, Task> testRun)
         {
-            TempStorage tempStorage = new TempStorage();
-            using IController controller = new RealmController(tempStorage);
-            using DatabaseService database = new(controller);
-            database.Initialize().Wait();
             await testRun(database);
         }
     }
