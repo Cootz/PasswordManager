@@ -28,7 +28,6 @@ public sealed class DatabaseService : IInitializable, IDisposable
         isInitialized = true;
     }
 
-
     /// <summary>
     /// Save a range of <see cref="ProfileInfo"/>
     /// </summary>
@@ -43,15 +42,27 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// <summary>
     /// Deletes entry from database
     /// </summary>
-    /// <param name="profile"></param>
     /// <returns></returns>
-    public async Task Remove(ProfileInfo profile) => await DB.Remove(profile); 
+    public async Task Remove<T>(T info) where T : IRealmObject => await DB.Remove(info);
+
+    /// <summary>
+    /// Asynchronously wait for the database instance and outstanding objects to get updated to point to the most recent persisted version
+    /// </summary>
+    /// <returns></returns>
+    public async Task Refresh() => await DB.Refresh();
 
     /// <summary>
     /// Adds entry to database
     /// </summary>
-    /// <param name="profile"></param>
+    /// <param name="info"></param>
     public async void Add(IRealmObject info) => await DB.Add(info);
+
+    /// <summary>
+    /// Asynchronously provide direct access to realm instance
+    /// </summary>
+    /// <param name="action"></param>
+    /// <returns></returns>
+    public async Task RealmQuerry(Func<Realm, Task> action) => await (DB as RealmController).RealmQuerry(action);
 
     /// <summary>
     /// Select every instance of given class from database

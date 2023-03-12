@@ -5,6 +5,7 @@
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
              xmlns:schema="clr-namespace:PasswordManager.Model.DB.Schema"
              x:DataType="viewmodel:RecentViewModel"
+             x:Name="RecentProfiles"
              Title="Your profiles">
     
     <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, *">
@@ -15,9 +16,19 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="{x:Type schema:ProfileInfo}">
                     <SwipeView>
-                        <SwipeView.GestureRecognizers>
-                            <SwipeGestureRecognizer Direction="Left" Command="{Binding Source={RelativeSource Mode=FindAncestor, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=DeleteNote}"/>
-                        </SwipeView.GestureRecognizers>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete" BackgroundColor="{StaticResource Primary}" Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=DeleteNoteCommand}" CommandParameter="{Binding .}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <FlyoutBase.ContextFlyout>
+                            <MenuFlyout>
+                                <!--RelativeSource not working due to the bag. See: https://github.com/dotnet/maui/issues/5382-->
+                                <MenuFlyoutItem Text="Delete" Command="{Binding Source={x:Reference Name=RecentProfiles}, Path=BindingContext.DeleteNoteCommand}" CommandParameter="{Binding .}"/>
+                            </MenuFlyout>
+                        </FlyoutBase.ContextFlyout>
+
                         <Frame Margin="10, 5" Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
                             <Grid ColumnDefinitions="*,*,*" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                                 <Label Grid.Column="0" Text="{Binding Service.Name}" HorizontalTextAlignment="Center" FontSize="Medium"/>
@@ -26,7 +37,6 @@
                             </Grid>
                         </Frame>
                     </SwipeView>
-
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

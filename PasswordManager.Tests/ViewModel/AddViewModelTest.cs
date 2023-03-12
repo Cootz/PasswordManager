@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using NUnit.Framework;
 using PasswordManager.Services;
 using PasswordManager.Tests.DB;
 using PasswordManager.Tests.Services;

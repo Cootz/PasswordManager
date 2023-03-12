@@ -1,5 +1,4 @@
-﻿
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
@@ -30,9 +29,9 @@ namespace PasswordManager.ViewModel
         }
 
         [RelayCommand]
-        async Task DeleteNote(object sender)
+        async Task DeleteNote(ProfileInfo sender)
         {
-            await db.Remove((ProfileInfo)sender);
+            await db.Remove(sender);
         }
     }
 }

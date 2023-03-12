@@ -1,6 +1,4 @@
-﻿using PasswordManager.Model.DB;
-using PasswordManager.Model.IO;
-using PasswordManager.Services;
+﻿using PasswordManager.Services;
 
 namespace PasswordManager
 {
