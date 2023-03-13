@@ -1,5 +1,4 @@
 ﻿using PasswordManager.Model.DB.Schema;
-using PasswordManager.Services;
 using PasswordManager.Tests.TestData;
 
 namespace PasswordManager.Tests.DB

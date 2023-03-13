@@ -1,24 +1,19 @@
 ﻿using PasswordManager.Model.DB;
-using PasswordManager.Model.IO;
+using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
 using PasswordManager.Tests.IO;
 using Realms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Tests.DB
 {
-    [TestFixture]
+
     public class DatabaseTest
     {
-        static TempStorage tempStorage;
-        static RealmController controller;
-        static DatabaseService database;
+        static TempStorage? tempStorage;
+        static RealmController? controller;
+        static DatabaseService? database;
 
-        [OneTimeSetUp]
+        [SetUp]
         public static void Setup()
         {
             tempStorage = new TempStorage();
@@ -30,14 +25,39 @@ namespace PasswordManager.Tests.DB
 
         protected void RunTestWithDatabase(Action<DatabaseService> testRun)
         {
-            testRun(database);
-            
-            
+            testRun(database!);
         }
 
         protected async void RunTestWithDatabaseAsync(Func<DatabaseService, Task> testRun)
         {
-            await testRun(database);
+            await testRun(database!);
+        }
+
+        [TearDown]
+        public async Task TearDown()
+        {
+            await controller!.RealmQuerry(async (realm) =>
+            {
+                DeleteRealmWithRetries(realm);
+            });
+        }
+
+        protected static bool DeleteRealmWithRetries(Realm realm)
+        {
+            for (var i = 0; i < 100; i++)
+            {
+                try
+                {
+                    Realm.DeleteRealm(realm.Config);
+                    return true;
+                }
+                catch
+                {
+                    Task.Delay(50).Wait();
+                }
+            }
+
+            return false;
         }
     }
 }
