@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace PasswordManager.Model.IO
+﻿namespace PasswordManager.Model.IO
 {
     /// <summary>
     /// Handles backup things
