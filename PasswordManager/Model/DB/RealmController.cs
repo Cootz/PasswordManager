@@ -27,7 +27,7 @@ namespace PasswordManager.Model.DB
             Initialize().Wait();
         }
 
-        public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(async () =>
+        public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(() =>
         {
             realm.Add(info);
         });

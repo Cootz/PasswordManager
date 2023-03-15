@@ -1,9 +1,7 @@
-﻿using NUnit.Framework;
-using PasswordManager.Model.DB;
+﻿using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
 using PasswordManager.Tests.IO;
-using Realms;
 
 namespace PasswordManager.Tests.DB
 {
@@ -59,34 +57,6 @@ namespace PasswordManager.Tests.DB
 
                 realm.Refresh();
             });
-        }
-
-        public async Task OneTimeTearDown()
-        {
-            await controller!.RealmQuerry(async (realm) =>
-            {
-                await realm.RefreshAsync();
-
-                DeleteRealmWithRetries(realm);
-            });
-        }
-
-        protected static bool DeleteRealmWithRetries(Realm realm)
-        {
-            for (var i = 0; i < 100; i++)
-            {
-                try
-                {
-                    Realm.DeleteRealm(realm.Config);
-                    return true;
-                }
-                catch
-                {
-                    Task.Delay(50).Wait();
-                }
-            }
-
-            return false;
         }
     }
 }

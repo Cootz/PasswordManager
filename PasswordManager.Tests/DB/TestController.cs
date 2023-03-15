@@ -3,7 +3,6 @@ using PasswordManager.Tests.TestData;
 
 namespace PasswordManager.Tests.DB
 {
-    [TestFixture]
     public class TestController : DatabaseTest
     {
         [Test]
