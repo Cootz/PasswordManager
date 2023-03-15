@@ -20,7 +20,7 @@ namespace PasswordManager.Model.DB
 
         public bool IsInitialized() => isInitialized;
 
-        public RealmController(Storage storage) 
+        public RealmController(Storage storage)
         {
             dataStorage = storage.GetStorageForDirectory("data");
 
@@ -74,7 +74,7 @@ namespace PasswordManager.Model.DB
             if (servicesToAdd.Count > 0)
                 realm.Write(() =>
                 {
-                    foreach(ServiceInfo service in servicesToAdd)
+                    foreach (ServiceInfo service in servicesToAdd)
                         realm.Add(service);
                 });
 
