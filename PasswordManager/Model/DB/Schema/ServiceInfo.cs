@@ -5,6 +5,9 @@ namespace PasswordManager.Model.DB.Schema
 {
     public partial class ServiceInfo : RealmObject, IEquatable<ServiceInfo>
     {
+        /// <summary>
+        /// Array of services that must be in the database by default
+        /// </summary>
         public static readonly ServiceInfo[] DefaultServices =
         {
             new ServiceInfo { ID = Guid.Parse("00000000-0000-0000-0000-000000000001"), Name = "steam" },
@@ -16,9 +19,15 @@ namespace PasswordManager.Model.DB.Schema
         [PrimaryKey]
         public Guid ID { get; set; }
 
+        /// <summary>
+        /// Service name
+        /// </summary>
         [Indexed]
         public string Name { get; set; } = string.Empty;
 
+        /// <summary>
+        /// List of <see cref="ProfileInfo"/>s linked to this <see cref="ServiceInfo"/>
+        /// </summary>
         [Backlink(nameof(ProfileInfo.Service))]
         public IQueryable<ProfileInfo> Profiles { get; }
 
