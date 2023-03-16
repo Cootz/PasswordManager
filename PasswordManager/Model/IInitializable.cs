@@ -11,7 +11,7 @@
         public bool IsInitialized();
 
         /// <summary>
-        /// Load and setup necessary things for this instance to function
+        /// Load and setup necessary things for this instance to function properly
         /// </summary>
         public Task Initialize();
     }

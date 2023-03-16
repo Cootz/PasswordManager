@@ -4,7 +4,6 @@ namespace PasswordManager.Utils
 {
     public static class ProfileHelper
     {
-
         /// <summary>
         /// Verify profile data
         /// </summary>
