@@ -20,31 +20,28 @@ namespace PasswordManager.Model.DB
 
         public bool IsInitialized() => isInitialized;
 
-        public RealmController(Storage storage) 
+        public RealmController(Storage storage)
         {
             dataStorage = storage.GetStorageForDirectory("data");
 
             Initialize().Wait();
         }
 
-        public async Task Add(ProfileInfo profile)
+        public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(() =>
         {
-            await realm.WriteAsync(() =>
-            {
-                realm.Add(profile);
-            });
-        }
+            realm.Add(info);
+        });
 
         public void Dispose()
         {
             realm.Dispose();
         }
 
-        public async Task Initialize()
+        public Task Initialize()
         {
             //Prevent double initialization
             if (IsInitialized())
-                return;
+                return Task.CompletedTask;
 
             var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "Psw.realm"))
             {
@@ -77,19 +74,20 @@ namespace PasswordManager.Model.DB
             if (servicesToAdd.Count > 0)
                 realm.Write(() =>
                 {
-                    foreach(ServiceInfo service in servicesToAdd)
+                    foreach (ServiceInfo service in servicesToAdd)
                         realm.Add(service);
                 });
 
             Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count() == ServiceInfo.DefaultServices.Length);
 
             isInitialized = true;
+            return Task.CompletedTask;
         }
 
         private void OnMigration(Migration migration, ulong lastSchemaVersion)
         {
             for (ulong i = 1; i <= schema_version; i++)
-                applyMigrationsForVestions(migration, (ulong)i);
+                applyMigrationsForVestions(migration, i);
         }
 
         private void applyMigrationsForVestions(Migration migration, ulong targetVersion)
@@ -106,8 +104,12 @@ namespace PasswordManager.Model.DB
             }
         }
 
-        public IQueryable<T> Select<T>() where T : IRealmObject => realm?.All<T>();
+        public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
 
-        public Task Remove(ProfileInfo profile) => realm?.WriteAsync(() => realm.Remove(profile));
+        public Task Refresh() => realm.RefreshAsync();
+
+        public async Task RealmQuerry(Func<Realm, Task> action) => await action(realm);
+
+        public Task Remove<T>(T info) where T : IRealmObject => realm?.WriteAsync(() => realm.Remove(info));
     }
 }

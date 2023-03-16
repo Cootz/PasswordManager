@@ -1,31 +1,43 @@
 ﻿using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
+using PasswordManager.Model.IO;
 using Realms;
 
 namespace PasswordManager.Tests.DB
 {
-    public class InMemoryRealm : IController
+    public class RealmTest : IController
     {
-        private readonly InMemoryConfiguration config = new($"test-db-{Guid.NewGuid()}");
+        private static ulong realm_verson = 1;
+
+        private readonly RealmConfiguration config = new($"test-db-{Guid.NewGuid()}")
+        {
+            SchemaVersion = realm_verson
+        };
+
+        private Storage dataStorage { get; set; }
 
         private Realm realm = null!;
         private bool isInitialized = false;
 
-        public InMemoryRealm() => realm = Realm.GetInstance(config);
+        public RealmTest(Storage storage)
+        {
+            dataStorage = storage;
+            realm = Realm.GetInstance(config);
 
-        public async Task Add(ProfileInfo profile)
+            realm_verson++;
+        }
+
+        public async Task Add<T>(T info) where T : IRealmObject
         {
             await realm.WriteAsync(() =>
             {
-                realm.Add(profile);
+                realm.Add(info);
             });
         }
 
         public void Dispose()
         {
-            realm.Dispose();
-
-            Realm.DeleteRealm(config);
+            realm = null!;
         }
 
         public async Task Initialize()
@@ -44,9 +56,11 @@ namespace PasswordManager.Tests.DB
             isInitialized = true;
         }
 
-        public bool IsInitialized() => isInitialized; 
+        public bool IsInitialized() => isInitialized;
 
-        public Task Remove(ProfileInfo profile) => realm.WriteAsync(() => realm.Remove(profile));
+        public Task Refresh() => realm.RefreshAsync();
+
+        public Task Remove<T>(T info) where T : IRealmObject => realm.WriteAsync(() => realm.Remove(info));
 
         public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
     }

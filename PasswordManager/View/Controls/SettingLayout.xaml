@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:this="clr-namespace:PasswordManager.View.Controls"
+             x:Class="PasswordManager.View.Controls.SettingLayout">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="OrientationHorizontal">
+                <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}" ColumnDefinitions="*, *" HorizontalOptions="{Binding HorizontalOptions}" VerticalOptions="{Binding VerticalOptions}">
+                    <Label Text="{Binding Title, FallbackValue=''}" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="0" Margin="0,0,10,0"/>
+                    <ContentView Content="{Binding Content}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="1"/>
+                </Grid>
+            </ControlTemplate>
+            <ControlTemplate x:Key="OrientationVertical">
+                <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}" RowDefinitions="*, auto" HorizontalOptions="{Binding HorizontalOptions}" VerticalOptions="{Binding VerticalOptions}">
+                    <Label Text="{Binding Title, FallbackValue=''}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="0" Margin="5"/>
+                    <ContentView Content="{Binding Content}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Grid.Row="1"/>
+                </Grid>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </ContentView.Resources>
+</ContentView>

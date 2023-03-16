@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:schema="clr-namespace:PasswordManager.Model.DB.Schema"
              x:Class="PasswordManager.View.SettingsPage"
              xmlns:controls="clr-namespace:PasswordManager.View.Controls"
+             xmlns:viewmodels="clr-namespace:PasswordManager.ViewModel"
+             x:DataType="viewmodels:SettingsViewModel"
+             x:Name="Settings"
              Title="SettingsPage">
-    <VerticalStackLayout Margin="10" Spacing="6">
-        <controls:SettingsRow Title="Services">
-            <Button Text="Manage services"/>
-        </controls:SettingsRow>
+    <VerticalStackLayout Margin="10" Spacing="6" HorizontalOptions="FillAndExpand">
+        <controls:SettingLayout Title="Services" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical">
+                <CollectionView MaximumHeightRequest="200" ItemsSource="{Binding ServiceInfos}" HorizontalOptions="FillAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type schema:ServiceInfo}">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete" BackgroundColor="{StaticResource Primary}" Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=RemoveServiceCommand}" CommandParameter="{Binding .}"/>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <FlyoutBase.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Text="Delete" Command="{Binding Source={x:Reference Name=Settings}, Path=BindingContext.RemoveServiceCommand}" CommandParameter="{Binding .}"/>
+                                    </MenuFlyout>
+                                </FlyoutBase.ContextFlyout>
+                                <Frame HorizontalOptions="FillAndExpand" BackgroundColor="Gray">
+                                    <Label Text="{Binding Name}" FontSize="Medium"/>
+                                </Frame>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button Text="Add" HorizontalOptions="FillAndExpand" Margin="0,0,0,10" Command="{Binding AddServiceCommand}"/>
+            </StackLayout>
+        </controls:SettingLayout>
     </VerticalStackLayout>
 </ContentPage>
