@@ -5,7 +5,14 @@
     /// </summary>
     public interface IInitializable
     {
+        /// <summary>
+        /// Show if current instance initialized
+        /// </summary>
         public bool IsInitialized();
+
+        /// <summary>
+        /// Load and setup necessary things for this instance to function
+        /// </summary>
         public Task Initialize();
     }
 }
