@@ -19,7 +19,7 @@ namespace PasswordManager.ViewModel
 
         [ObservableProperty]
         private string password;
-        
+
         [ObservableProperty]
         private ServiceInfo selectedService;
 

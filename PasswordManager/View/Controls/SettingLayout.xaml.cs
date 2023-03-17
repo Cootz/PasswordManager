@@ -1,7 +1,3 @@
-using Microsoft.Maui.Controls;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 namespace PasswordManager.View.Controls;
 
 #nullable enable
@@ -30,7 +26,7 @@ public partial class SettingLayout : ContentView
     }
 
     public SettingLayout()
-	{
+    {
         InitializeComponent();
 
         SetOrientation(this, Orientation);
@@ -49,7 +45,7 @@ public partial class SettingLayout : ContentView
         switch (orientation)
         {
             case OrientationEnum.Horizontal:
-              layout.ControlTemplate = layout.Resources["OrientationHorizontal"] as ControlTemplate;
+                layout.ControlTemplate = layout.Resources["OrientationHorizontal"] as ControlTemplate;
                 break;
             case OrientationEnum.Vertical:
                 layout.ControlTemplate = layout.Resources["OrientationVertical"] as ControlTemplate;
@@ -58,7 +54,7 @@ public partial class SettingLayout : ContentView
     }
 
     public enum OrientationEnum
-    { 
+    {
         Vertical,
         Horizontal
     }
