@@ -11,7 +11,7 @@
                 routeParameters is not null
                     ? Shell.Current.GoToAsync(route, routeParameters)
                     : Shell.Current.GoToAsync(route);
-                
+
         }
         public Task PopAsync() => Shell.Current.GoToAsync("..");
     }

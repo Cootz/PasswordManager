@@ -12,7 +12,7 @@ namespace PasswordManager.ViewModel
 
         private DatabaseService databaseService;
 
-        public SettingsViewModel(DatabaseService db) 
+        public SettingsViewModel(DatabaseService db)
         {
             databaseService = db;
 
@@ -39,7 +39,8 @@ namespace PasswordManager.ViewModel
         {
             List<ProfileInfo> profilesPendingDeleting = new List<ProfileInfo>(info.Profiles);
 
-            await databaseService.RealmQuerry(async (realm) => {
+            await databaseService.RealmQuerry(async (realm) =>
+            {
                 await realm.WriteAsync(() =>
                 {
                     realm.RemoveRange(info.Profiles);

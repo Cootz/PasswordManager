@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Utils
 {
@@ -15,7 +11,7 @@ namespace PasswordManager.Utils
 
             using Aes aes_encryption = Aes.Create();
             using Aes aes_HMAC = Aes.Create();
-            
+
             aes_encryption.KeySize = 256;
             aes_HMAC.KeySize = 256;
 
@@ -34,7 +30,7 @@ namespace PasswordManager.Utils
         }
 
         public static byte[] ToKey(this string key_string)
-        { 
+        {
             return Encoding.UTF8.GetBytes(key_string);
         }
     }

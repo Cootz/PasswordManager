@@ -9,7 +9,7 @@ namespace PasswordManager
 {
     public static class MauiProgram
     {
-        public const string AppName = 
+        public const string AppName =
 #if DEBUG
             "PasswordManager-debug";
 #else
@@ -46,12 +46,12 @@ namespace PasswordManager
 
             builder.Services.AddTransient<AddPage>();
             builder.Services.AddTransient<AddViewModel>();
-            
+
             builder.Services.AddSingleton<SettingsPage>();
             builder.Services.AddSingleton<SettingsViewModel>();
 
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

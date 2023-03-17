@@ -8,7 +8,7 @@ namespace PasswordManager.ViewModel
         private DatabaseService databaseService;
 
         public ManageServicesViewModel(DatabaseService db)
-        { 
+        {
             databaseService = db;
         }
     }
