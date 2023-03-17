@@ -1,4 +1,5 @@
-﻿using PasswordManager.Model.DB.Schema;
+﻿using Microsoft.Maui.Storage;
+using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
 using PasswordManager.Utils;
 using Realms;
@@ -12,11 +13,14 @@ namespace PasswordManager.Model.DB
     public sealed class RealmController : IController
     {
         /// <summary>
-        /// 3 - Update <see cref="ServiceInfo"/> and <see cref="ProfileInfo"/> after migration from Sqlite
+        /// Version     Changes
+        /// 3       -   Update <see cref="ServiceInfo"/> and <see cref="ProfileInfo"/> after migration from Sqlite
         /// </summary>
         private const ulong schema_version = 3;
 
         private Storage dataStorage { get; set; }
+
+        private ISecureStorage secureStorage { get; set; }
 
         private Realm realm;
 
@@ -24,8 +28,9 @@ namespace PasswordManager.Model.DB
 
         public bool IsInitialized() => isInitialized;
 
-        public RealmController(Storage storage)
+        public RealmController(Storage storage, ISecureStorage secureStorage)
         {
+            this.secureStorage = secureStorage;
             dataStorage = storage.GetStorageForDirectory("data");
 
             Initialize().Wait();
@@ -48,12 +53,13 @@ namespace PasswordManager.Model.DB
                 return;
 
             byte[] key = new byte[64];
-            string enc_key_string = await SecureStorage.Default.GetAsync("realm_key");
+
+            string enc_key_string = await secureStorage.GetAsync("realm_key");
 
             if (enc_key_string == null)
             {
                 key = EncryptionHelper.GenerateKey();
-                await SecureStorage.Default.SetAsync("realm_key", key.ToKeyString());
+                await secureStorage.SetAsync("realm_key", key.ToKeyString());
             }
             else
                 key = enc_key_string.ToKey();

@@ -36,7 +36,7 @@ namespace PasswordManager
 
             builder.Services.AddSingleton<IAlertService, AlertService>();
 
-            builder.Services.AddSingleton(s => new DatabaseService(new RealmController(s.GetService<Storage>())));
+            builder.Services.AddSingleton(s => new DatabaseService(new RealmController(s.GetService<Storage>(), SecureStorage.Default)));
 
             builder.Services.AddSingleton<RecentPage>();
             builder.Services.AddSingleton<RecentViewModel>();
