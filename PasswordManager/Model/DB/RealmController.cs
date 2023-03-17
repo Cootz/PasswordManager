@@ -53,10 +53,10 @@ namespace PasswordManager.Model.DB
             if (enc_key_string == null)
             {
                 key = EncryptionHelper.GenerateKey();
-                await SecureStorage.Default.SetAsync("", key.ToKeyString());
+                await SecureStorage.Default.SetAsync("realm_key", key.ToKeyString());
             }
-
-
+            else
+                key = enc_key_string.ToKey();
 
             var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "Psw.realm"))
             {
