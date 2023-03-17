@@ -11,7 +11,7 @@ namespace PasswordManager.Tests.Utils
         [Test]
         public void GenerateKeyTest()
         {
-            byte[] key = null;
+            byte[] key = null!;
 
             Assert.DoesNotThrow(() => { key = EncryptionHelper.GenerateKey(); });
 
@@ -34,7 +34,7 @@ namespace PasswordManager.Tests.Utils
         public void StringKeyToByteTest()
         {
             string key_string = expected_string;
-            byte[] key = null;
+            byte[] key = null!;
 
             Assert.DoesNotThrow(() => { key = key_string.ToKey(); });
 
