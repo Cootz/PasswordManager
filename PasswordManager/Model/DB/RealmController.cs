@@ -1,7 +1,11 @@
-﻿using PasswordManager.Model.DB.Schema;
+﻿using Android.Media;
+using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
+using PasswordManager.Utils;
 using Realms;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace PasswordManager.Model.DB
 {
@@ -37,16 +41,28 @@ namespace PasswordManager.Model.DB
             realm.Dispose();
         }
 
-        public Task Initialize()
+        public async Task Initialize()
         {
             //Prevent double initialization
             if (IsInitialized())
-                return Task.CompletedTask;
+                return;
+
+            byte[] key = new byte[64];
+            string enc_key_string = await SecureStorage.Default.GetAsync("realm_key");
+
+            if (enc_key_string == null)
+            {
+                key = EncryptionHelper.GenerateKey();
+                await SecureStorage.Default.SetAsync("", key.ToKeyString());
+            }
+
+
 
             var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "Psw.realm"))
             {
                 SchemaVersion = schema_version,
-                MigrationCallback = OnMigration
+                MigrationCallback = OnMigration,
+                EncryptionKey = key
             };
 
             try
@@ -81,7 +97,6 @@ namespace PasswordManager.Model.DB
             Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count() == ServiceInfo.DefaultServices.Length);
 
             isInitialized = true;
-            return Task.CompletedTask;
         }
 
         private void OnMigration(Migration migration, ulong lastSchemaVersion)
