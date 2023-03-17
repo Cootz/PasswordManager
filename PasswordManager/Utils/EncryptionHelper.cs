@@ -11,11 +11,21 @@ namespace PasswordManager.Utils
     {
         public static byte[] GenerateKey()
         {
-            using Aes aes = Aes.Create();
-            aes.KeySize = 512;
-            aes.GenerateKey();
+            List<byte> key = new List<byte>();
 
-            return aes.Key;
+            using Aes aes_encryption = Aes.Create();
+            using Aes aes_HMAC = Aes.Create();
+            
+            aes_encryption.KeySize = 256;
+            aes_HMAC.KeySize = 256;
+
+            aes_encryption.GenerateKey();
+            aes_HMAC.GenerateKey();
+
+            key.AddRange(aes_encryption.Key);
+            key.AddRange(aes_HMAC.Key);
+
+            return key.ToArray();
         }
 
         public static string ToKeyString(this byte[] key)

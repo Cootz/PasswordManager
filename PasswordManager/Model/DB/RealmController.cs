@@ -1,11 +1,8 @@
-﻿using Android.Media;
-using PasswordManager.Model.DB.Schema;
+﻿using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
 using PasswordManager.Utils;
 using Realms;
 using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace PasswordManager.Model.DB
 {
@@ -14,6 +11,9 @@ namespace PasswordManager.Model.DB
     /// </summary>
     public sealed class RealmController : IController
     {
+        /// <summary>
+        /// 3 - Update <see cref="ServiceInfo"/> and <see cref="ProfileInfo"/> after migration from Sqlite
+        /// </summary>
         private const ulong schema_version = 3;
 
         private Storage dataStorage { get; set; }
@@ -58,7 +58,7 @@ namespace PasswordManager.Model.DB
             else
                 key = enc_key_string.ToKey();
 
-            var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "Psw.realm"))
+            var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "data.realm"))
             {
                 SchemaVersion = schema_version,
                 MigrationCallback = OnMigration,
