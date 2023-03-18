@@ -9,7 +9,7 @@ namespace PasswordManager.Tests.Utils
         [Test]
         public void TestPositiveVerification()
         {
-            ProfileInfo profile = ProfileData.GetTestProfile(); 
+            ProfileInfo profile = ProfileData.GetTestProfile();
 
             Assert.DoesNotThrow(() => profile.Verify());
         }

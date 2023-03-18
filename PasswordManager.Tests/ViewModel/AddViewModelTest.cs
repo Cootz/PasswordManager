@@ -12,7 +12,7 @@ namespace PasswordManager.Tests.ViewModel
         {
             RunTestWithDatabase((databaseService) =>
             {
-                AddViewModel viewModel = new (databaseService, new MockSuccessfulNavigationService());
+                AddViewModel viewModel = new(databaseService, new MockSuccessfulNavigationService());
 
                 AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 

@@ -1,5 +1,4 @@
 ﻿using Moq;
-using NSubstitute;
 using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
@@ -23,7 +22,7 @@ namespace PasswordManager.Tests.DB
                 var mock = new Mock<ISecureStorage>();
 
                 mock.Setup(secStoreage => secStoreage.GetAsync("realm_key")).Returns(Task.FromResult(@"PeShVmYq3t6w9z$C&F)J@McQfTjWnZr4u7x!A%D*G-KaPdRgUkXp2s5v8y/B?E(H"));
-                
+
                 secureStorage = mock.Object;
                 tempStorage = new TempStorage();
                 controller = new RealmController(tempStorage, secureStorage);
@@ -46,13 +45,14 @@ namespace PasswordManager.Tests.DB
         [TearDown]
         public async Task TearDown()
         {
-            await controller!.RealmQuerry(async (realm) => {
+            await controller!.RealmQuerry(async (realm) =>
+            {
                 await realm.WriteAsync(() =>
                 {
                     realm.RemoveAll<ProfileInfo>();
 
                     foreach (ServiceInfo service in realm.All<ServiceInfo>())
-                    { 
+                    {
                         if (!ServiceInfo.DefaultServices.Contains(service))
                             realm.Remove(service);
                     }
