@@ -55,7 +55,7 @@ namespace PasswordManager.Model.DB
 
             string enc_key_string = await secureStorage.GetAsync("realm_key");
 
-            if (enc_key_string == null)
+            if (enc_key_string == null || enc_key_string.Length != 64)
             {
                 key = EncryptionHelper.GenerateKey();
                 await secureStorage.SetAsync("realm_key", key.ToKeyString());

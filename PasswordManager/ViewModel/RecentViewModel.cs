@@ -3,13 +3,33 @@ using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
 using PasswordManager.View;
+using Realms;
 
 namespace PasswordManager.ViewModel
 {
     public partial class RecentViewModel : ObservableObject
     {
+        private IQueryable<ProfileInfo> profiles;
+
+        public IQueryable<ProfileInfo> Profiles
+        {
+            get
+            { 
+                if (!String.IsNullOrEmpty(SearchText))
+                    return profiles.Filter($"{nameof(ProfileInfo.Service.Name)} like $0" +
+                    $"|| {nameof(ProfileInfo.Username)} like $0", SearchText);
+                else
+                    return profiles;
+            }
+            set
+            {
+                profiles = value;
+                OnPropertyChanged(nameof(Profiles));
+            }
+        }
+
         [ObservableProperty]
-        IQueryable<ProfileInfo> profiles;
+        string searchText = string.Empty;
 
         private DatabaseService db;
         private readonly INavigationService _navigationService;
@@ -33,5 +53,7 @@ namespace PasswordManager.ViewModel
         {
             await db.Remove(sender);
         }
+
+
     }
 }
