@@ -38,6 +38,7 @@ namespace PasswordManager.Tests.Utils
 
             Assert.DoesNotThrow(() => { key = key_string.ToKey(); });
 
+            Assert.That(key.Length, Is.EqualTo(30));
             Assert.That(key, Is.EquivalentTo(expected_byte_key));
         }
     }
