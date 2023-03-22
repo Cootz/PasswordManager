@@ -26,12 +26,12 @@ namespace PasswordManager.Utils
 
         public static string ToKeyString(this byte[] key)
         {
-            return Encoding.UTF8.GetString(key);
+            return Encoding.Unicode.GetString(key);
         }
 
         public static byte[] ToKey(this string key_string)
         {
-            return Encoding.UTF8.GetBytes(key_string);
+            return Encoding.Unicode.GetBytes(key_string);
         }
     }
 }
