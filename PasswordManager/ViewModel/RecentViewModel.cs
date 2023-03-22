@@ -4,7 +4,6 @@ using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
 using PasswordManager.View;
 using Realms;
-using System.Xml.Linq;
 
 namespace PasswordManager.ViewModel
 {
@@ -15,7 +14,7 @@ namespace PasswordManager.ViewModel
         public IQueryable<ProfileInfo> Profiles
         {
             get
-            { 
+            {
                 if (!String.IsNullOrEmpty(SearchText) && SearchText.Length > 2)
                     return profiles.Filter($"{nameof(ProfileInfo.Service)}.{nameof(ServiceInfo.Name)} CONTAINS $0" +
                     $"|| {nameof(ProfileInfo.Username)} CONTAINS $0", SearchText);
@@ -32,9 +31,9 @@ namespace PasswordManager.ViewModel
         string searchText = string.Empty;
 
         public string SearchText
-        { 
+        {
             get => searchText;
-            set 
+            set
             {
                 searchText = value;
                 OnPropertyChanged(nameof(SearchText));
@@ -64,7 +63,5 @@ namespace PasswordManager.ViewModel
         {
             await db.Remove(sender);
         }
-
-
     }
 }
