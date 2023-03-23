@@ -5,6 +5,8 @@ using PasswordManager.Services;
 using PasswordManager.Tests.DB;
 using PasswordManager.Tests.TestData;
 using PasswordManager.ViewModel;
+using Realms;
+using System.Data;
 
 namespace PasswordManager.Tests.ViewModel
 {
@@ -26,9 +28,9 @@ namespace PasswordManager.Tests.ViewModel
             RunTestWithDatabase((databaseService) =>
             {
                 SettingsViewModel viewModel = new SettingsViewModel(databaseService, alertService);
-                AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddServiceCommand;
+                RelayCommand command = (RelayCommand)viewModel.AddServiceCommand;
 
-                Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
+                Assert.DoesNotThrow(() => command.Execute(null));
 
                 Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name));
             });
@@ -40,7 +42,7 @@ namespace PasswordManager.Tests.ViewModel
             RunTestWithDatabase((databaseService) =>
             {
                 SettingsViewModel viewModel = new SettingsViewModel(databaseService, alertService);
-                AsyncRelayCommand<ServiceInfo> command = (AsyncRelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
+                RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
 
                 ServiceInfo service = new ServiceInfo()
                 {
@@ -49,7 +51,7 @@ namespace PasswordManager.Tests.ViewModel
 
                 databaseService.Add(service);
 
-                Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(service));
+                Assert.DoesNotThrow(() => command.Execute(service));
 
                 Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
             });
@@ -58,10 +60,10 @@ namespace PasswordManager.Tests.ViewModel
         [Test]
         public void RemoveServiceWithProfilesTest()
         {
-            RunTestWithDatabase((databaseService) =>
+            RunTestWithDatabaseAsync(async (databaseService) =>
             {
                 SettingsViewModel viewModel = new SettingsViewModel(databaseService, alertService);
-                AsyncRelayCommand<ServiceInfo> command = (AsyncRelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
+                RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
 
                 ServiceInfo service = new ServiceInfo()
                 {
@@ -75,10 +77,21 @@ namespace PasswordManager.Tests.ViewModel
                 foreach (ProfileInfo profile in profileInfos)
                     databaseService.Add(profile);
 
-                Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(service));
+                Assert.DoesNotThrow(() => command.Execute(service));
+
+                databaseService.Refresh().Wait();
+
+                Realm frozenRealm = null!;
+
+                await databaseService.RealmQuerry(async realm =>
+                {
+                    frozenRealm = realm.Freeze();
+                });
 
                 Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
-                Assert.That(databaseService.Select<ProfileInfo>().Intersect(profileInfos).Any(), Is.False);
+
+                foreach (ProfileInfo profile in profileInfos)
+                    Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profile.ID), Is.False);
             });
         }
     }
