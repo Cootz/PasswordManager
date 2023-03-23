@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Moq;
+using NSubstitute;
 using PasswordManager.Services;
 using PasswordManager.Tests.DB;
 using PasswordManager.ViewModel;
@@ -32,6 +33,7 @@ namespace PasswordManager.Tests.ViewModel
         {
             RunTestWithDatabase((databaseService) =>
             {
+                var alertService = Substitute.For<IAlertService>();
                 AddViewModel viewModel = new(databaseService, navigationService.Object);
                 AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 
