@@ -11,10 +11,12 @@ namespace PasswordManager.ViewModel
         private IQueryable<ServiceInfo> serviceInfos;
 
         private DatabaseService databaseService;
+        private IAlertService alertService;
 
-        public SettingsViewModel(DatabaseService db)
+        public SettingsViewModel(DatabaseService db, IAlertService alertService)
         {
             databaseService = db;
+            this.alertService = alertService;
 
             ServiceInfos = db.Select<ServiceInfo>();
         }
@@ -22,7 +24,7 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         private async void AddService()
         {
-            string response = await App.AlertService.ShowPromptAsync("Service", "Enter service name");
+            string response = await alertService.ShowPromptAsync("Service", "Enter service name");
 
             if (!string.IsNullOrEmpty(response))
             {
@@ -37,8 +39,6 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         private async void RemoveService(ServiceInfo info)
         {
-            List<ProfileInfo> profilesPendingDeleting = new List<ProfileInfo>(info.Profiles);
-
             await databaseService.RealmQuerry(async (realm) =>
             {
                 await realm.WriteAsync(() =>
