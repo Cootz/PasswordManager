@@ -52,5 +52,41 @@ namespace PasswordManager.Tests.TestData
             };
         }
 
+        public static ProfileInfo[] GetTestProfiles(ServiceInfo service)
+        {
+            return new ProfileInfo[]
+            {
+                new ()
+                {
+                    Service = service,
+                    Username = "coo",
+                    Password = "P@ssw0rd"
+                },
+                new ()
+                {
+                    Service = service,
+                    Username = "Rimo",
+                    Password = "Passw0rd"
+                },
+                new ()
+                {
+                    Service = service,
+                    Username = "Iro",
+                    Password = "Password"
+                },
+                new ()
+                {
+                    Service = service,
+                    Username = "Ica",
+                    Password = "P@ssword"
+                },
+                new ()
+                {
+                    Service = service,
+                    Username = "Tenno",
+                    Password = "p@ssword"
+                }
+            };
+        }
     }
 }
