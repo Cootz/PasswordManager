@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using Moq;
 using NSubstitute;
 using PasswordManager.Services;
 using PasswordManager.Tests.DB;
@@ -9,14 +8,14 @@ namespace PasswordManager.Tests.ViewModel
 {
     public class AddViewModelTest : DatabaseTest
     {
-        private Mock<INavigationService> navigationService = new();
+        private INavigationService navigationService = Substitute.For<INavigationService>();
 
         [Test]
         public void ClickOnAddButtonWithValiableProfileTest()
         {
             RunTestWithDatabase((databaseService) =>
             {
-                AddViewModel viewModel = new(databaseService, navigationService.Object);
+                AddViewModel viewModel = new(databaseService, navigationService);
 
                 AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 
@@ -34,7 +33,7 @@ namespace PasswordManager.Tests.ViewModel
             RunTestWithDatabase((databaseService) =>
             {
                 var alertService = Substitute.For<IAlertService>();
-                AddViewModel viewModel = new(databaseService, navigationService.Object);
+                AddViewModel viewModel = new(databaseService, navigationService);
                 AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 
                 viewModel.SelectedService = viewModel.Services.First();
@@ -50,7 +49,7 @@ namespace PasswordManager.Tests.ViewModel
         {
             RunTestWithDatabase((databaseService) =>
             {
-                AddViewModel viewModel = new(databaseService, navigationService.Object);
+                AddViewModel viewModel = new(databaseService, navigationService);
                 AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 
                 viewModel.SelectedService = viewModel.Services.First();
