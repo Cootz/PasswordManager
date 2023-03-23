@@ -1,4 +1,4 @@
-﻿using Moq;
+﻿using NSubstitute;
 using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
@@ -19,11 +19,9 @@ namespace PasswordManager.Tests.DB
         {
             if (tempStorage is null)
             {
-                var mock = new Mock<ISecureStorage>();
+                secureStorage = Substitute.For<ISecureStorage>();
+                secureStorage.GetAsync("realm_key").Returns(Task.FromResult(@"PeShVmYq3t6w9z$C&F)J@McQfTjWnZr4"));
 
-                mock.Setup(secStoreage => secStoreage.GetAsync("realm_key")).Returns(Task.FromResult(@"PeShVmYq3t6w9z$C&F)J@McQfTjWnZr4u7x!A%D*G-KaPdRgUkXp2s5v8y/B?E(H"));
-
-                secureStorage = mock.Object;
                 tempStorage = new TempStorage();
                 controller = new RealmController(tempStorage, secureStorage);
                 database = new(controller);
