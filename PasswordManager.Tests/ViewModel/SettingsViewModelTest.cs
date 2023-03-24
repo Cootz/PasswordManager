@@ -86,6 +86,7 @@ namespace PasswordManager.Tests.ViewModel
                 await databaseService.RealmQuerry(async realm =>
                 {
                     frozenRealm = realm.Freeze();
+                    await Task.CompletedTask;
                 });
 
                 Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
