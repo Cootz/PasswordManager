@@ -6,7 +6,6 @@ using PasswordManager.Tests.DB;
 using PasswordManager.Tests.TestData;
 using PasswordManager.ViewModel;
 using Realms;
-using System.Data;
 
 namespace PasswordManager.Tests.ViewModel
 {
@@ -19,7 +18,7 @@ namespace PasswordManager.Tests.ViewModel
         [OneTimeSetUp]
         public void OniTimeSetup()
         {
-            alertService.ShowPromptAsync("","").ReturnsForAnyArgs(service_name);
+            alertService.ShowPromptAsync("", "").ReturnsForAnyArgs(service_name);
         }
 
         [Test]

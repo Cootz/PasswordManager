@@ -4,12 +4,6 @@ using PasswordManager.Services;
 using PasswordManager.Tests.DB;
 using PasswordManager.Tests.TestData;
 using PasswordManager.ViewModel;
-using Realms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Tests.ViewModel
 {
@@ -18,10 +12,10 @@ namespace PasswordManager.Tests.ViewModel
         INavigationService _navigationService = Substitute.For<INavigationService>();
 
         [Test]
-        public void TestListWithEmptySearch() => RunTestWithDatabase((databaseService) => 
+        public void TestListWithEmptySearch() => RunTestWithDatabase((databaseService) =>
         {
             RecentViewModel viewModel = setupViewModel(databaseService);
-            
+
             viewModel.SearchText = string.Empty;
 
             Assert.That(viewModel.Profiles, Is.EquivalentTo(databaseService.Select<ProfileInfo>()));
