@@ -48,10 +48,9 @@ namespace PasswordManager.Tests.ViewModel
 
             viewModel.SearchText = SearchRequest;
 
-            var profileInfos = databaseService.Select<ProfileInfo>();
-            var filteredInfos = profileInfos.Where(x => x.Service == ServiceInfo.DefaultServices[0]);
+            ServiceInfo service = databaseService.Select<ServiceInfo>().First(s => s.Name == "steam");
 
-            Assert.That(viewModel.Profiles, Is.EquivalentTo(filteredInfos));
+            Assert.That(viewModel.Profiles, Is.EquivalentTo(databaseService.Select<ProfileInfo>().Where(x => x.Service == service)));
         });
 
         private RecentViewModel setupViewModel(DatabaseService databaseService)
