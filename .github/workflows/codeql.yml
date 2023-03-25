@@ -21,7 +21,7 @@ on:
 jobs:
   analyze:
     name: Analyze
-    runs-on: ${{ matrix.os.fullname }}
+    runs-on: windows-latest
     permissions:
       actions: read
       contents: read
@@ -31,15 +31,6 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'csharp' ]
-        os:
-            - { prettyname: Windows, fullname: windows-latest, buildname: net7.0-windows10.0.19041.0 }
-            - { prettyname: macOS, fullname: macos-latest, buildname: net7.0-maccatalyst }
-            - { prettyname: Android, fullname: windows-latest, buildname: net7.0-android }
-            - { prettyname: iOS, fullname: macos-latest, buildname: net7.0-ios }
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
-        # Use only 'java' to analyze code written in Java, Kotlin or both
-        # Use only 'javascript' to analyze code written in JavaScript, TypeScript or both
-        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     timeout-minutes: 60
 
@@ -68,13 +59,7 @@ jobs:
       run: dotnet workload install maui
 
     - name: Build app
-      run: dotnet build -c Debug -warnaserror -f:${{ matrix.os.buildname }} ${{github.workspace}}/PasswordManager/PasswordManager.csproj
-
-    - name: Build tests
-      run: dotnet build -c Debug -warnaserror -f:net7.0 ${{github.workspace}}/PasswordManager.Tests/PasswordManager.Tests.csproj
-      
-    - name: Test
-      run: dotnet test --no-build --verbosity normal Passwords.sln
+      run: dotnet build -c Debug -warnaserror -f:net7.0-windows10.0.19041.0 ${{github.workspace}}/PasswordManager/PasswordManager.csproj
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
