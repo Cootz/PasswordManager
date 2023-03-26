@@ -1,9 +1,4 @@
 ﻿using PasswordManager.Model.IO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Tests.IO
 {
@@ -14,7 +9,7 @@ namespace PasswordManager.Tests.IO
 
         [Test]
         public void BackupFileOnseTest()
-        { 
+        {
             TempStorage storage = new TempStorage();
             string filePath = Path.Combine(storage.WorkingDirectory, filename);
 
@@ -39,9 +34,9 @@ namespace PasswordManager.Tests.IO
             var fileinfo = new FileInfo(filePath);
 
             List<FileInfo> backupFileInfos = new();
-            
+
             for (int i = 0; i < 100; i++)
-                 backupFileInfos.Add(BackupManager.Backup(fileinfo));
+                backupFileInfos.Add(BackupManager.Backup(fileinfo));
 
             foreach (var backupFileInfo in backupFileInfos)
             {
