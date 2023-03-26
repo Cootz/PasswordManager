@@ -15,9 +15,9 @@
             if (file.Exists)
             {
                 if (externalStorage is not null)
-                    file.CopyTo(Path.Combine(externalStorage.WorkingDirectory, $"{file.Name}.bak"));
+                    file.CopyTo(Path.Combine(externalStorage.WorkingDirectory, $"{file.Name}-{DateTime.Now.Date}.bak"));
                 else
-                    file.CopyTo($"{file.FullName}.bak");
+                    file.CopyTo($"{file.FullName}-{DateTime.Now.Date}.bak");
             }
             else
                 throw new FileNotFoundException($"File {file.Name} does not exist. Backup is failed!");
