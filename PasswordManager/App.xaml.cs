@@ -14,12 +14,7 @@ namespace PasswordManager
 
             AlertService = provider.GetService<IAlertService>();
 
-            ISecureStorage secureStorage = SecureStorage.Default;
-
-            if (!String.IsNullOrEmpty(secureStorage.GetAsync("app-password").Result))
-                MainPage = provider.GetService<LoginPage>();
-            else
-                MainPage = provider.GetService<RegisterPage>();
+            MainPage = new AppShell();
         }
     }
 }

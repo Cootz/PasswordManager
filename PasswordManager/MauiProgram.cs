@@ -39,10 +39,10 @@ namespace PasswordManager
             builder.Services.AddSingleton(s => new DatabaseService(new RealmController(s.GetService<Storage>(), SecureStorage.Default)));
 
             builder.Services.AddSingleton<LoginPage>();
-            builder.Services.AddSingleton(loginvm => new LoginViewModel(SecureStorage.Default));
+            builder.Services.AddSingleton(s => new LoginViewModel(SecureStorage.Default, s.GetService<INavigationService>()));
 
             builder.Services.AddSingleton<RegisterPage>();
-            builder.Services.AddSingleton(registervm => new RegisterViewModel(SecureStorage.Default));
+            builder.Services.AddSingleton(s => new RegisterViewModel(SecureStorage.Default));
 
             builder.Services.AddSingleton<RecentPage>();
             builder.Services.AddSingleton<RecentViewModel>();

@@ -31,7 +31,13 @@ namespace PasswordManager.ViewModel
             {
                 await secureStorage.SetAsync("app-password", Password);
 
-                Application.Current.MainPage = new AppShell();
+#if __MOBILE__
+                AppShell.SetFlyoutBehavior(AppShell.Current, FlyoutBehavior.Flyout);
+#else
+                AppShell.SetFlyoutBehavior(AppShell.Current, FlyoutBehavior.Locked);
+#endif
+
+                
             }
         }
     }
