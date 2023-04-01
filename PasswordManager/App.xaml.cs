@@ -1,4 +1,6 @@
-﻿using PasswordManager.Services;
+﻿using Microsoft.Maui.Storage;
+using PasswordManager.Services;
+using PasswordManager.View;
 
 namespace PasswordManager
 {
@@ -12,7 +14,12 @@ namespace PasswordManager
 
             AlertService = provider.GetService<IAlertService>();
 
-            MainPage = new AppShell();
+            ISecureStorage secureStorage = provider.GetService<ISecureStorage>();
+
+            if (!String.IsNullOrEmpty(secureStorage.GetAsync("app-password").Result))
+                MainPage = new LoginPage();
+            else
+                MainPage = new RegisterPage();
         }
     }
 }
