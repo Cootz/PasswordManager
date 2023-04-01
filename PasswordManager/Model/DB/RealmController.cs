@@ -1,5 +1,6 @@
 ﻿using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
+using PasswordManager.Utils;
 using Realms;
 using System.Diagnostics;
 
@@ -10,9 +11,15 @@ namespace PasswordManager.Model.DB
     /// </summary>
     public sealed class RealmController : IController
     {
+        /// <summary>
+        /// Version     Changes
+        /// 3       -   Update <see cref="ServiceInfo"/> and <see cref="ProfileInfo"/> after migration from Sqlite
+        /// </summary>
         private const ulong schema_version = 3;
 
         private Storage dataStorage { get; set; }
+
+        private ISecureStorage secureStorage { get; set; }
 
         private Realm realm;
 
@@ -20,8 +27,9 @@ namespace PasswordManager.Model.DB
 
         public bool IsInitialized() => isInitialized;
 
-        public RealmController(Storage storage)
+        public RealmController(Storage storage, ISecureStorage secureStorage)
         {
+            this.secureStorage = secureStorage;
             dataStorage = storage.GetStorageForDirectory("data");
 
             Initialize().Wait();
@@ -37,16 +45,39 @@ namespace PasswordManager.Model.DB
             realm.Dispose();
         }
 
-        public Task Initialize()
+        public async Task Initialize()
         {
             //Prevent double initialization
             if (IsInitialized())
-                return Task.CompletedTask;
+                return;
 
-            var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "Psw.realm"))
+            byte[] key = new byte[64];
+
+            string enc_key_string = await secureStorage.GetAsync("realm_key");
+
+            Debug.Assert(enc_key_string.ToKey().Length == 64);
+
+            if (enc_key_string == null || enc_key_string.ToKey().Length != 64)
+            {
+                string databasePath = Path.Combine(dataStorage.WorkingDirectory, "data.realm");
+
+                if (File.Exists(databasePath))
+                {
+                    BackupManager.Backup(new FileInfo(databasePath));
+                    File.Delete(databasePath);
+                }
+
+                key = EncryptionHelper.GenerateKey();
+                await secureStorage.SetAsync("realm_key", key.ToKeyString());
+            }
+            else
+                key = enc_key_string.ToKey();
+
+            var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "data.realm"))
             {
                 SchemaVersion = schema_version,
-                MigrationCallback = OnMigration
+                MigrationCallback = OnMigration,
+                EncryptionKey = key
             };
 
             try
@@ -81,7 +112,6 @@ namespace PasswordManager.Model.DB
             Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count() == ServiceInfo.DefaultServices.Length);
 
             isInitialized = true;
-            return Task.CompletedTask;
         }
 
         private void OnMigration(Migration migration, ulong lastSchemaVersion)

@@ -37,7 +37,7 @@ namespace PasswordManager.Model.DB.Schema
         }
 
         public ServiceInfo()
-        {         
+        {
             ID = Guid.NewGuid();
         }
 
@@ -53,7 +53,7 @@ namespace PasswordManager.Model.DB.Schema
                 return false;
             }
 
-            bool[] equals = {ID == other.ID, Name == other.Name};
+            bool[] equals = { ID == other.ID, Name == other.Name };
 
             return equals[0] & equals[1];
         }

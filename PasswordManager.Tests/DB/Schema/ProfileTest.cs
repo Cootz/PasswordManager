@@ -10,8 +10,9 @@ namespace PasswordManager.Tests.DB.Schema
         {
             var providedService = new ServiceInfo("steam");
 
-            var Profile = new ProfileInfo { 
-                Username= "testUser",
+            var Profile = new ProfileInfo
+            {
+                Username = "testUser",
                 Password = "testPassword",
                 Service = providedService
             };

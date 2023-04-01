@@ -1,4 +1,5 @@
-﻿using PasswordManager.Model.DB;
+﻿using NSubstitute;
+using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
 using PasswordManager.Tests.IO;
@@ -9,6 +10,7 @@ namespace PasswordManager.Tests.DB
     public class DatabaseTest
     {
         static TempStorage? tempStorage;
+        static ISecureStorage? secureStorage;
         static RealmController? controller;
         static DatabaseService? database;
 
@@ -17,8 +19,11 @@ namespace PasswordManager.Tests.DB
         {
             if (tempStorage is null)
             {
+                secureStorage = Substitute.For<ISecureStorage>();
+                secureStorage.GetAsync("realm_key").Returns(Task.FromResult(@"PeShVmYq3t6w9z$C&F)J@McQfTjWnZr4"));
+
                 tempStorage = new TempStorage();
-                controller = new RealmController(tempStorage);
+                controller = new RealmController(tempStorage, secureStorage);
                 database = new(controller);
 
                 database.Initialize().Wait();
@@ -38,13 +43,14 @@ namespace PasswordManager.Tests.DB
         [TearDown]
         public async Task TearDown()
         {
-            await controller!.RealmQuerry(async (realm) => {
+            await controller!.RealmQuerry(async (realm) =>
+            {
                 await realm.WriteAsync(() =>
                 {
                     realm.RemoveAll<ProfileInfo>();
 
                     foreach (ServiceInfo service in realm.All<ServiceInfo>())
-                    { 
+                    {
                         if (!ServiceInfo.DefaultServices.Contains(service))
                             realm.Remove(service);
                     }

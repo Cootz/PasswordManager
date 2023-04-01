@@ -7,21 +7,21 @@ namespace PasswordManager.Model.DB.Schema;
 public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
 {
     private const char FieldSplit = ':';
-    
+
     private const char ProfileSplit = ';';
-    
+
     private const string NullMessage = "null";
 
     [PrimaryKey]
     public Guid ID { get; set; }
 
     public ServiceInfo Service { get; set; }
-    
+
     public string Username { get; set; }
-    
+
     public string Password { get; set; }
 
-    public ProfileInfo() 
+    public ProfileInfo()
     {
         ID = Guid.NewGuid();
     }
@@ -62,7 +62,7 @@ public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
         return left?.Equals(right) ?? false;
     }
 
-    public override bool Equals([AllowNull]object obj)
+    public override bool Equals([AllowNull] object obj)
     {
         if (ReferenceEquals(this, obj))
         {
