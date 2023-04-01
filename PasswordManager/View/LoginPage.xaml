@@ -6,7 +6,7 @@
              x:DataType="viewmodel:LoginViewModel"
              Title="Login">
     <VerticalStackLayout>
-        <Entry  IsPassword="True"/>
-        <Button Text="Login"/>
+        <Entry Text="{Binding Password}" IsPassword="True"/>
+        <Button Text="Login" Command="{Binding LoginCommand}"/>
     </VerticalStackLayout>
 </ContentPage>
