@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Storage;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace PasswordManager.ViewModel
             this.secureStorage = secureStorage;
         }
 
+        [RelayCommand]
         async void Register()
         {
             if (Password == PasswordConfirmation && Password.Length >= 8)

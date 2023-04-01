@@ -14,12 +14,12 @@ namespace PasswordManager
 
             AlertService = provider.GetService<IAlertService>();
 
-            ISecureStorage secureStorage = provider.GetService<ISecureStorage>();
+            ISecureStorage secureStorage = SecureStorage.Default;
 
             if (!String.IsNullOrEmpty(secureStorage.GetAsync("app-password").Result))
-                MainPage = new LoginPage();
+                MainPage = provider.GetService<LoginPage>();
             else
-                MainPage = new RegisterPage();
+                MainPage = provider.GetService<RegisterPage>();
         }
     }
 }
