@@ -1,11 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Storage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.ViewModel
 {
@@ -20,7 +14,7 @@ namespace PasswordManager.ViewModel
         private string passwordConfirmation;
 
         public RegisterViewModel(ISecureStorage secureStorage)
-        { 
+        {
             this.secureStorage = secureStorage;
         }
 
@@ -36,8 +30,6 @@ namespace PasswordManager.ViewModel
 #else
                 AppShell.SetFlyoutBehavior(AppShell.Current, FlyoutBehavior.Locked);
 #endif
-
-                
             }
         }
     }

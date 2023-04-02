@@ -1,13 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Storage;
 using PasswordManager.Services;
 using PasswordManager.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.ViewModel
 {
@@ -20,7 +14,7 @@ namespace PasswordManager.ViewModel
         private string password;
 
         public LoginViewModel(ISecureStorage secureStorage, INavigationService navigation)
-        { 
+        {
             this.secureStorage = secureStorage;
             navigationService = navigation;
         }

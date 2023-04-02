@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Maui.Storage;
-using PasswordManager.Services;
+﻿using PasswordManager.Services;
 using PasswordManager.View;
 using PasswordManager.ViewModel;
 
