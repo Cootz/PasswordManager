@@ -88,10 +88,10 @@ namespace PasswordManager.Tests.ViewModel
                     await Task.CompletedTask;
                 });
 
-                Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
+                Assert.That(frozenRealm.All<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
 
                 foreach (ProfileInfo profile in profileInfos)
-                    Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profile.ID), Is.False);
+                    Assert.That(frozenRealm.All<ProfileInfo>().Any(p => p.ID == profile.ID), Is.False);
             });
         }
     }
