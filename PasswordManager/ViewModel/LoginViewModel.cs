@@ -24,7 +24,7 @@ namespace PasswordManager.ViewModel
         {
             if (Password == await secureStorage.GetAsync("app-password"))
             {
-                await Shell.Current.GoToAsync($"//{nameof(RecentPage)}");
+                await navigationService.NavigateToAsync($"//{nameof(RecentPage)}");
 
 #if __MOBILE__
                 AppShell.SetFlyoutBehavior(AppShell.Current, FlyoutBehavior.Flyout);
