@@ -9,12 +9,14 @@
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="LoginPage"/>
+        Route="LoginPage"
+        FlyoutItemIsVisible="False"/>
 
     <ShellContent
         Title="Register"
         ContentTemplate="{DataTemplate local:RegisterPage}"
-        Route="RegisterPage"/>
+        Route="RegisterPage"
+        FlyoutItemIsVisible="False"/>
 
     <FlyoutItem Title="Recent" Route="RecentPage">
         <ShellContent ContentTemplate="{DataTemplate local:RecentPage}"/>

@@ -1,6 +1,8 @@
-﻿using Microsoft.Maui.Storage;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Storage;
 using PasswordManager.Services;
 using PasswordManager.View;
+using PasswordManager.ViewModel;
 
 namespace PasswordManager
 {
@@ -13,6 +15,10 @@ namespace PasswordManager
             InitializeComponent();
 
             AlertService = provider.GetService<IAlertService>();
+
+            //Preinitialize page
+            provider.GetRequiredService<RecentPage>();
+            provider.GetRequiredService<RecentViewModel>();
 
             MainPage = new AppShell();
         }
