@@ -1,12 +1,6 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using NSubstitute;
+﻿using NSubstitute;
 using PasswordManager.Services;
 using PasswordManager.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Tests.ViewModel
 {
@@ -28,7 +22,7 @@ namespace PasswordManager.Tests.ViewModel
 
         [Test]
         public void TestLoginWithCorrectPassword()
-        { 
+        {
             string enteredPassword = password;
 
             LoginViewModel viewModel = new(secureStorage, navigationService);

@@ -1,11 +1,6 @@
 ﻿using NSubstitute;
 using PasswordManager.Services;
 using PasswordManager.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Tests.ViewModel
 {
@@ -45,7 +40,7 @@ namespace PasswordManager.Tests.ViewModel
         }
 
         [Test]
-        public void RegisterWithShortPassword() 
+        public void RegisterWithShortPassword()
         {
             string enteredPassword = "tinyPsw";
 
