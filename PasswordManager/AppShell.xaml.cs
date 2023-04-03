@@ -8,15 +8,18 @@ namespace PasswordManager
         {
             InitializeComponent();
 
-#if __MOBILE__
-            this.FlyoutBehavior = FlyoutBehavior.Flyout;
-#else
-            this.FlyoutBehavior = FlyoutBehavior.Locked;
-#endif
-
             //Register routes
             Routing.RegisterRoute(nameof(AddPage), typeof(AddPage));
             Routing.RegisterRoute(nameof(RecentPage), typeof(RecentPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+
+            ISecureStorage secureStorage = SecureStorage.Default;
+
+            if (!String.IsNullOrEmpty(secureStorage.GetAsync("app-password").Result))
+                GoToAsync($"//{nameof(LoginPage)}");
+            else
+                GoToAsync($"//{nameof(RegisterPage)}");
         }
     }
 }

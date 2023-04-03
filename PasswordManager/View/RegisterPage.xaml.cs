@@ -2,9 +2,9 @@ using PasswordManager.ViewModel;
 
 namespace PasswordManager.View;
 
-public partial class ManageServicesPage : ContentPage
+public partial class RegisterPage : ContentPage
 {
-    public ManageServicesPage(ManageServicesViewModel vm)
+    public RegisterPage(RegisterViewModel vm)
     {
         InitializeComponent();
         BindingContext = vm;
