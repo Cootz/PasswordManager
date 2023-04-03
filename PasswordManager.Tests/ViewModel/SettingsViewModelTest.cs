@@ -84,6 +84,7 @@ namespace PasswordManager.Tests.ViewModel
 
                 await databaseService.RealmQuerry(async realm =>
                 {
+                    realm.Refresh();
                     frozenRealm = realm.Freeze();
                     await Task.CompletedTask;
                 });
@@ -91,7 +92,7 @@ namespace PasswordManager.Tests.ViewModel
                 Assert.That(frozenRealm.All<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
 
                 foreach (ProfileInfo profile in profileInfos)
-                    Assert.That(frozenRealm.All<ProfileInfo>().Any(p => p.IsFrozen && p.ID == profile.ID), Is.False);
+                    Assert.That(frozenRealm.All<ProfileInfo>().Any(p => p.ID == profile.ID), Is.False);
             });
         }
     }
