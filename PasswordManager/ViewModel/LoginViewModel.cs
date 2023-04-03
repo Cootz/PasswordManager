@@ -27,9 +27,9 @@ namespace PasswordManager.ViewModel
                 await navigationService.NavigateToAsync($"//{nameof(RecentPage)}");
 
 #if __MOBILE__
-                AppShell.SetFlyoutBehavior(AppShell.Current, FlyoutBehavior.Flyout);
+                navigationService.SetFlyoutBehavior(FlyoutBehavior.Flyout);
 #else
-                AppShell.SetFlyoutBehavior(AppShell.Current, FlyoutBehavior.Locked);
+                navigationService.SetFlyoutBehavior(FlyoutBehavior.Locked);
 #endif
             }
 

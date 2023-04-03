@@ -13,5 +13,10 @@
         /// Removes the current page from the navigation stack
         /// </summary>
         public Task PopAsync();
+
+        /// <summary>
+        /// Set flyout behavior for current shell
+        /// </summary>
+        public void SetFlyoutBehavior(FlyoutBehavior flyoutBehavior);
     }
 }
