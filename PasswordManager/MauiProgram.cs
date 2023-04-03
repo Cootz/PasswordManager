@@ -42,7 +42,7 @@ namespace PasswordManager
             builder.Services.AddSingleton(s => new LoginViewModel(SecureStorage.Default, s.GetService<INavigationService>()));
 
             builder.Services.AddSingleton<RegisterPage>();
-            builder.Services.AddSingleton(s => new RegisterViewModel(SecureStorage.Default));
+            builder.Services.AddSingleton(s => new RegisterViewModel(SecureStorage.Default, s.GetService<INavigationService>()));
 
             builder.Services.AddSingleton<RecentPage>();
             builder.Services.AddSingleton<RecentViewModel>();
