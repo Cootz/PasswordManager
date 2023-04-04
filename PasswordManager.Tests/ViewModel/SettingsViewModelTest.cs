@@ -82,7 +82,8 @@ namespace PasswordManager.Tests.ViewModel
 
                 Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
 
-                Assert.That(databaseService.Select<ProfileInfo>().Concat(profileInfos).Any(), Is.False);
+                foreach (ProfileInfo profile in profileInfos)
+                    Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profile.ID), Is.False);
             });
         }
     }
