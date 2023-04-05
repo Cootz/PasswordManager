@@ -12,7 +12,7 @@ Currently, we support all major mobile and desktop operating systems, such as iO
 - **Cross platform:** Use on any device.
 
 # Getting Started
-Download the application from [Releases](https://github.com/Cootz/PasswordManager/releases) page. If you want to build an application from source code, see [Build & Run](https://github.com/Cootz/PasswordManager#build--run) section.
+Download the application from the [Releases](https://github.com/Cootz/PasswordManager/releases) page. If you want to build an application from source code, see the [Build & Run](https://github.com/Cootz/PasswordManager#build--run) section.
 
 # Build & Run
 
