@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using PasswordManager.Model.IO;
+﻿using PasswordManager.Model.IO;
 
 namespace PasswordManager.Tests.IO
 {
