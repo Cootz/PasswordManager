@@ -67,7 +67,12 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         async Task ShowNoteInfo(ProfileInfo sender)
         {
-            await _navigationService.NavigateToAsync(nameof(ProfilePage));
+            var routeParams = new Dictionary<string, object> 
+            {
+                { "profile" , sender }
+            };
+
+            await _navigationService.NavigateToAsync(nameof(ProfilePage), routeParams);
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PasswordManager.ViewModel
 {
-    
+    [QueryProperty(nameof(ProfileInfo), "profile")]
     public partial class ProfileViewModel : ObservableObject
     {
         [ObservableProperty]
