@@ -11,6 +11,7 @@ namespace PasswordManager
             //Register routes
             Routing.RegisterRoute(nameof(AddPage), typeof(AddPage));
             Routing.RegisterRoute(nameof(RecentPage), typeof(RecentPage));
+            Routing.RegisterRoute(nameof(ProfilePage), typeof(ProfilePage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
 

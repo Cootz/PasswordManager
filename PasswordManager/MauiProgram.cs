@@ -50,6 +50,9 @@ namespace PasswordManager
             builder.Services.AddTransient<AddPage>();
             builder.Services.AddTransient<AddViewModel>();
 
+            builder.Services.AddTransient<ProfilePage>();
+            builder.Services.AddTransient<ProfileViewModel>();
+
             builder.Services.AddSingleton<SettingsPage>();
             builder.Services.AddSingleton<SettingsViewModel>();
 
