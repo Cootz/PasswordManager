@@ -67,7 +67,7 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         async Task ShowNoteInfo(ProfileInfo sender)
         {
-            var routeParams = new Dictionary<string, object> 
+            var routeParams = new Dictionary<string, object>
             {
                 { "profile" , sender }
             };
