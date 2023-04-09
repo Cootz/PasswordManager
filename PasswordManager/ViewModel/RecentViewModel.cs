@@ -63,5 +63,16 @@ namespace PasswordManager.ViewModel
         {
             await db.Remove(sender);
         }
+
+        [RelayCommand]
+        async Task ShowNoteInfo(ProfileInfo sender)
+        {
+            var routeParams = new Dictionary<string, object>
+            {
+                { "profile" , sender }
+            };
+
+            await _navigationService.NavigateToAsync(nameof(ProfilePage), routeParams);
+        }
     }
 }
