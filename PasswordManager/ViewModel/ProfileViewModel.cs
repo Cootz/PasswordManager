@@ -15,8 +15,5 @@ namespace PasswordManager.ViewModel
         ProfileInfo profileInfo;
 
         public ProfileViewModel() { }
-
-
-
     }
 }
