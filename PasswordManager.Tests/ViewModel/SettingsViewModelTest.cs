@@ -80,6 +80,8 @@ namespace PasswordManager.Tests.ViewModel
 
                 await databaseService.Refresh();
 
+                await Task.Delay(100);
+
                 Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
 
                 foreach (ProfileInfo profile in profileInfos)
