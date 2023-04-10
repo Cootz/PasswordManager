@@ -4,7 +4,7 @@
              x:Class="PasswordManager.View.RegisterPage"
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
              x:DataType="viewmodel:RegisterViewModel"
-             Title="RegisterPage">
+             Title="Registeration">
     <VerticalStackLayout>
         <Label Text="Enter password"/>
         <Entry Text="{Binding Password}" IsPassword="True"/>
