@@ -5,7 +5,7 @@
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
              xmlns:controls="clr-namespace:PasswordManager.View.Controls"
              x:DataType="viewmodel:ProfileViewModel"
-             Title="ProfilePage">
+             Title="{Binding PageTitle}">
     <ContentPage.Resources>
         <Style x:Key="leftLabel" TargetType="Label">
             <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
