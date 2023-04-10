@@ -71,6 +71,8 @@ namespace PasswordManager.Tests.ViewModel
 
             await databaseService.Refresh();
 
+            await Task.Delay(50);
+
             Assert.That(deletedProfile, Is.Not.AnyOf(databaseService.Select<ProfileInfo>()));
         });
 
