@@ -30,11 +30,13 @@ namespace PasswordManager.Tests.DB
             }
         }
 
+        [NonParallelizable]
         protected void RunTestWithDatabase(Action<DatabaseService> testRun)
         {
             testRun(database!);
         }
 
+        [NonParallelizable]
         protected async void RunTestWithDatabaseAsync(Func<DatabaseService, Task> testRun)
         {
             await testRun(database!);
