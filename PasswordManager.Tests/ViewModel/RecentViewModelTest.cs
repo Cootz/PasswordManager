@@ -67,9 +67,11 @@ namespace PasswordManager.Tests.ViewModel
 
             ProfileInfo deletedProfile = databaseService.Select<ProfileInfo>().First();
 
-            Assert.DoesNotThrow(() => command.Execute(deletedProfile));
+            command.Execute(deletedProfile);
 
             await databaseService.Refresh();
+
+            await Task.Delay(50);
 
             Assert.That(deletedProfile, Is.Not.AnyOf(databaseService.Select<ProfileInfo>()));
         });

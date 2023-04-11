@@ -78,15 +78,9 @@ namespace PasswordManager.Tests.ViewModel
 
                 Assert.DoesNotThrow(() => command.Execute(service));
 
-                databaseService.Refresh().Wait();
+                await databaseService.Refresh();
 
-                Realm frozenRealm = null!;
-
-                await databaseService.RealmQuerry(async realm =>
-                {
-                    frozenRealm = realm.Freeze();
-                    await Task.CompletedTask;
-                });
+                await Task.Delay(100);
 
                 Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
 

@@ -55,8 +55,6 @@ namespace PasswordManager.Model.DB
 
             string enc_key_string = await secureStorage.GetAsync("realm_key");
 
-            Debug.Assert(enc_key_string.ToKey().Length == 64);
-
             if (enc_key_string == null || enc_key_string.ToKey().Length != 64)
             {
                 string databasePath = Path.Combine(dataStorage.WorkingDirectory, "data.realm");
@@ -72,6 +70,8 @@ namespace PasswordManager.Model.DB
             }
             else
                 key = enc_key_string.ToKey();
+
+            Debug.Assert(key.Length == 64);
 
             var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "data.realm"))
             {

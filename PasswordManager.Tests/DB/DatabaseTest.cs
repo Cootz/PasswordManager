@@ -7,6 +7,7 @@ using PasswordManager.Tests.IO;
 namespace PasswordManager.Tests.DB
 {
     [TestFixture]
+    [NonParallelizable]
     public class DatabaseTest
     {
         static TempStorage? tempStorage;
