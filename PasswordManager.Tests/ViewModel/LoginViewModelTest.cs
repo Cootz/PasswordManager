@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using PasswordManager.Services;
 using PasswordManager.ViewModel;
+using SharpHook;
 
 namespace PasswordManager.Tests.ViewModel
 {
@@ -9,6 +10,7 @@ namespace PasswordManager.Tests.ViewModel
     {
         private ISecureStorage secureStorage = Substitute.For<ISecureStorage>();
         private INavigationService navigationService = Substitute.For<INavigationService>();
+        private IGlobalHook hook = Substitute.For<IGlobalHook>();
         private const string password = "TestP@ssw0rd";
 
         private bool pageChanged = false;
@@ -25,7 +27,7 @@ namespace PasswordManager.Tests.ViewModel
         {
             string enteredPassword = password;
 
-            LoginViewModel viewModel = new(secureStorage, navigationService);
+            LoginViewModel viewModel = new(secureStorage, navigationService, hook);
             var command = viewModel.LoginCommand;
 
             viewModel.Password = enteredPassword;
@@ -40,7 +42,7 @@ namespace PasswordManager.Tests.ViewModel
         {
             string enteredPassword = "wrongPassword";
 
-            LoginViewModel viewModel = new(secureStorage, navigationService);
+            LoginViewModel viewModel = new(secureStorage, navigationService, hook);
             var command = viewModel.LoginCommand;
 
             viewModel.Password = enteredPassword;
