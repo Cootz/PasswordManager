@@ -18,5 +18,10 @@
         /// Set flyout behavior for current shell
         /// </summary>
         public void SetFlyoutBehavior(FlyoutBehavior flyoutBehavior);
+
+        /// <summary>
+        /// Return current page
+        /// </summary>
+        public Page GetCurrentPage();
     }
 }

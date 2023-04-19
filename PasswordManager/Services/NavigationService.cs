@@ -17,5 +17,7 @@
         public Task PopAsync() => Shell.Current.GoToAsync("..");
 
         public void SetFlyoutBehavior(FlyoutBehavior flyoutBehavior) => Shell.SetFlyoutBehavior(Shell.Current, flyoutBehavior);
+
+        public Page GetCurrentPage() => Shell.Current.CurrentPage;
     }
 }

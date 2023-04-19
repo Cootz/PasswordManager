@@ -9,7 +9,7 @@ namespace PasswordManager.ViewModel
         [ObservableProperty]
         ProfileInfo profileInfo;
 
-        public string PageTitle 
+        public string PageTitle
         {
             get => $"Profile {ProfileInfo?.Username ?? string.Empty}";
         }

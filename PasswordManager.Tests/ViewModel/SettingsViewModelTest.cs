@@ -5,7 +5,6 @@ using PasswordManager.Services;
 using PasswordManager.Tests.DB;
 using PasswordManager.Tests.TestData;
 using PasswordManager.ViewModel;
-using Realms;
 
 namespace PasswordManager.Tests.ViewModel
 {

@@ -4,6 +4,7 @@ using PasswordManager.Model.IO;
 using PasswordManager.Services;
 using PasswordManager.View;
 using PasswordManager.ViewModel;
+using SharpHook;
 
 namespace PasswordManager
 {
@@ -36,13 +37,24 @@ namespace PasswordManager
 
             builder.Services.AddSingleton<IAlertService, AlertService>();
 
+            builder.Services.AddSingleton<IGlobalHook, TaskPoolGlobalHook>(s =>
+            {
+                var globalHook = new TaskPoolGlobalHook();
+
+                globalHook.RunAsync();
+
+                return globalHook;
+            });
+
+            builder.Services.AddSingleton(s => SecureStorage.Default);
+
             builder.Services.AddSingleton(s => new DatabaseService(new RealmController(s.GetService<Storage>(), SecureStorage.Default)));
 
             builder.Services.AddSingleton<LoginPage>();
-            builder.Services.AddSingleton(s => new LoginViewModel(SecureStorage.Default, s.GetService<INavigationService>()));
+            builder.Services.AddSingleton<LoginViewModel>();
 
             builder.Services.AddSingleton<RegisterPage>();
-            builder.Services.AddSingleton(s => new RegisterViewModel(SecureStorage.Default, s.GetService<INavigationService>()));
+            builder.Services.AddSingleton<RegisterViewModel>();
 
             builder.Services.AddSingleton<RecentPage>();
             builder.Services.AddSingleton<RecentViewModel>();
