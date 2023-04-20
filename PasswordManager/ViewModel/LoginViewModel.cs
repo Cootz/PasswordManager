@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Services;
 using PasswordManager.View;
+using SharpHook;
 
 namespace PasswordManager.ViewModel
 {
@@ -9,14 +10,24 @@ namespace PasswordManager.ViewModel
     {
         private ISecureStorage secureStorage;
         private INavigationService navigationService;
+        private IGlobalHook hook;
 
         [ObservableProperty]
         private string password;
 
-        public LoginViewModel(ISecureStorage secureStorage, INavigationService navigation)
+        public LoginViewModel(ISecureStorage secureStorage, INavigationService navigation, IGlobalHook globalHook)
         {
             this.secureStorage = secureStorage;
             navigationService = navigation;
+            hook = globalHook;
+
+            hook.KeyPressed += OnKeyPressed;
+        }
+
+        private void OnKeyPressed(object sender, KeyboardHookEventArgs e)
+        {
+            if (e.Data.KeyCode == SharpHook.Native.KeyCode.VcEnter)
+                MainThread.BeginInvokeOnMainThread(Login);
         }
 
         [RelayCommand]
@@ -31,8 +42,9 @@ namespace PasswordManager.ViewModel
 #else
                 navigationService.SetFlyoutBehavior(FlyoutBehavior.Locked);
 #endif
-            }
 
+                hook.KeyPressed -= OnKeyPressed;
+            }
         }
     }
 }
