@@ -1,10 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using Microsoft.Maui.LifecycleEvents;
 using PasswordManager.Model.DB;
 using PasswordManager.Model.IO;
 using PasswordManager.Services;
 using PasswordManager.View;
 using PasswordManager.ViewModel;
 using SharpHook;
+using SharpHook.Native;
 
 namespace PasswordManager
 {
@@ -19,6 +22,8 @@ namespace PasswordManager
 
         public static MauiApp CreateMauiApp()
         {
+            var globalHook = new TaskPoolGlobalHook();
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -26,6 +31,28 @@ namespace PasswordManager
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                })
+                .ConfigureLifecycleEvents(events =>
+                {
+#if WINDOWS
+                    events.AddWindows(windows =>
+                    {
+                        windows.OnActivated((window, args) =>
+                        {
+                            if ((args.WindowActivationState == Microsoft.UI.Xaml.WindowActivationState.CodeActivated || args.WindowActivationState == Microsoft.UI.Xaml.WindowActivationState.PointerActivated) && !globalHook.IsRunning)
+                                globalHook.RunAsync();
+                            else
+                                UioHook.Stop();
+                        });
+                    });
+#elif MACCATALYST
+                    events.AddiOS(ios =>
+                    {
+                        ios
+                            .OnActivated((app) => { if (!globalHook.IsRunning) globalHook.RunAsync(); })
+                            .OnResignActivation((app) => UioHook.Stop());
+                    });
+#endif
                 });
 
             string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -39,10 +66,9 @@ namespace PasswordManager
 
             builder.Services.AddSingleton<IGlobalHook, TaskPoolGlobalHook>(s =>
             {
-                var globalHook = new TaskPoolGlobalHook();
-
+#if WINDOWS || MACCATALYST
                 globalHook.RunAsync();
-
+#endif
                 return globalHook;
             });
 
