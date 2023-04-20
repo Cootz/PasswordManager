@@ -8,6 +8,7 @@ using PasswordManager.View;
 using PasswordManager.ViewModel;
 using SharpHook;
 using SharpHook.Native;
+using System.Diagnostics;
 
 namespace PasswordManager
 {
@@ -41,7 +42,7 @@ namespace PasswordManager
                         {
                             if ((args.WindowActivationState == Microsoft.UI.Xaml.WindowActivationState.CodeActivated || args.WindowActivationState == Microsoft.UI.Xaml.WindowActivationState.PointerActivated) && !globalHook.IsRunning)
                                 globalHook.RunAsync();
-                            else
+                            else if (globalHook.IsRunning)
                                 UioHook.Stop();
                         });
                     });
@@ -50,7 +51,7 @@ namespace PasswordManager
                     {
                         ios
                             .OnActivated((app) => { if (!globalHook.IsRunning) globalHook.RunAsync(); })
-                            .OnResignActivation((app) => UioHook.Stop());
+                            .OnResignActivation((app) => UioHook.Stop())
                     });
 #endif
                 });
@@ -66,9 +67,9 @@ namespace PasswordManager
 
             builder.Services.AddSingleton<IGlobalHook, TaskPoolGlobalHook>(s =>
             {
-#if WINDOWS || MACCATALYST
-                globalHook.RunAsync();
-#endif
+//#if WINDOWS || MACCATALYST
+//                globalHook.RunAsync();
+//#endif
                 return globalHook;
             });
 
