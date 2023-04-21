@@ -4,7 +4,7 @@ using SharpHook.Native;
 
 namespace PasswordManager.Model
 {
-    public class OptimizedTaskPoolGlobalHook : GlobalHookBase
+    public sealed class OptimizedTaskPoolGlobalHook : GlobalHookBase
     {
         private readonly SemaphoreQueue taskQueue;
 

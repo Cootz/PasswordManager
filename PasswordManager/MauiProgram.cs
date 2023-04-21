@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
+using PasswordManager.Model;
 using PasswordManager.Model.DB;
 using PasswordManager.Model.IO;
 using PasswordManager.Services;
@@ -21,7 +22,7 @@ namespace PasswordManager
 
         public static MauiApp CreateMauiApp()
         {
-            var globalHook = new TaskPoolGlobalHook();
+            var globalHook = new OptimizedTaskPoolGlobalHook();
 
             var builder = MauiApp.CreateBuilder();
             builder
@@ -60,11 +61,11 @@ namespace PasswordManager
 
             builder.Services.AddSingleton<IAlertService, AlertService>();
 
-            builder.Services.AddSingleton<IGlobalHook, TaskPoolGlobalHook>(s =>
+            builder.Services.AddSingleton<IGlobalHook, OptimizedTaskPoolGlobalHook>(s =>
             {
-                //#if WINDOWS || MACCATALYST
-                //                globalHook.RunAsync();
-                //#endif
+#if WINDOWS || MACCATALYST
+                globalHook.RunAsync();
+#endif
                 return globalHook;
             });
 
