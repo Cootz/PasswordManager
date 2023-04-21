@@ -1,14 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.LifecycleEvents;
 using PasswordManager.Model.DB;
 using PasswordManager.Model.IO;
 using PasswordManager.Services;
+using PasswordManager.Utils;
 using PasswordManager.View;
 using PasswordManager.ViewModel;
 using SharpHook;
-using SharpHook.Native;
-using System.Diagnostics;
 
 namespace PasswordManager
 {
@@ -40,18 +38,15 @@ namespace PasswordManager
                     {
                         windows.OnActivated((window, args) =>
                         {
-                            if ((args.WindowActivationState == Microsoft.UI.Xaml.WindowActivationState.CodeActivated || args.WindowActivationState == Microsoft.UI.Xaml.WindowActivationState.PointerActivated) && !globalHook.IsRunning)
-                                globalHook.RunAsync();
-                            else if (globalHook.IsRunning)
-                                UioHook.Stop();
+                            OptimizationHelper.IsAppActive = args.WindowActivationState != Microsoft.UI.Xaml.WindowActivationState.Deactivated;
                         });
                     });
 #elif MACCATALYST
                     events.AddiOS(ios =>
                     {
                         ios
-                            .OnActivated((app) => { if (!globalHook.IsRunning) globalHook.RunAsync(); })
-                            .OnResignActivation((app) => UioHook.Stop())
+                            .OnActivated((app) => OptimizationHelper.IsAppActive = true)
+                            .OnResignActivation((app) => OptimizationHelper.IsAppActive = false);
                     });
 #endif
                 });
@@ -67,9 +62,9 @@ namespace PasswordManager
 
             builder.Services.AddSingleton<IGlobalHook, TaskPoolGlobalHook>(s =>
             {
-//#if WINDOWS || MACCATALYST
-//                globalHook.RunAsync();
-//#endif
+                //#if WINDOWS || MACCATALYST
+                //                globalHook.RunAsync();
+                //#endif
                 return globalHook;
             });
 
