@@ -22,7 +22,7 @@ namespace PasswordManager
 
         public static MauiApp CreateMauiApp()
         {
-            var globalHook = new OptimizedTaskPoolGlobalHook();
+            var globalHook = new OptimizedTaskPoolGlobalHook(new TaskPoolGlobalHookOptions(4, true));
 
             var builder = MauiApp.CreateBuilder();
             builder
@@ -54,7 +54,7 @@ namespace PasswordManager
 
             string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-            //Setting dependencies for injection
+            //Setup dependencies for injection
             builder.Services.AddSingleton<Storage>(x => new AppStorage(Path.Combine(appData, AppName)));
 
             builder.Services.AddSingleton<INavigationService, NavigationService>();
