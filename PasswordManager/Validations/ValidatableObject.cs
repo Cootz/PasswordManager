@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PasswordManager.Validations.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,33 +8,21 @@ using System.Threading.Tasks;
 
 namespace PasswordManager.Validations
 {
-    public class ValidatableObject<T> : ObservableObject, IValidity
+    /// <summary>
+    /// Validates <see cref="Value"/> based on <see cref="Validations"/> rules
+    /// </summary>
+    public partial class ValidatableObject<T> : ObservableObject, IValidity
     {
+        [ObservableProperty]
         private IEnumerable<string> _errors;
 
+        [ObservableProperty]
         private bool _isValid;
 
+        [ObservableProperty]
         private T _value;
 
         public List<IValidationRule<T>> Validations { get; } = new();
-
-        public IEnumerable<string> Errors
-        { 
-            get => _errors;
-            set => SetProperty(ref _errors, value);
-        }
-
-        public bool IsValid
-        {
-            get => _isValid;
-            set => SetProperty(ref _isValid, value);
-        }
-
-        public T Value
-        {
-            get => _value;
-            set => SetProperty(ref _value, value);
-        }
 
         public ValidatableObject()
         { 
