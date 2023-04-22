@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Services;
+using PasswordManager.Validations;
+using PasswordManager.Validations.Rules;
 using PasswordManager.View;
 using SharpHook;
 
@@ -8,15 +10,14 @@ namespace PasswordManager.ViewModel
 {
     public partial class RegisterViewModel : ObservableObject
     {
-        private ISecureStorage secureStorage;
-        private INavigationService navigationService;
-        private IGlobalHook hook;
+        private readonly ISecureStorage secureStorage;
+        private readonly INavigationService navigationService;
+        private readonly IGlobalHook hook;
 
-        [ObservableProperty]
-        private string password;
+        private ValidatableObject<(string, string)> matchValidation = new();
 
-        [ObservableProperty]
-        private string passwordConfirmation;
+        public ValidatableObject<string> Password { get; set; }
+        public ValidatableObject<string> PasswordConfirmation { get; set; }
 
         public RegisterViewModel(ISecureStorage secureStorage, INavigationService navigationService, IGlobalHook hook)
         {
@@ -25,6 +26,27 @@ namespace PasswordManager.ViewModel
             this.hook = hook;
 
             hook.KeyPressed += OnKeyPressed;
+
+            AddValidations();
+        }
+
+        private void AddValidations()
+        {
+            AddPasswordValidations(Password);
+            AddPasswordValidations(PasswordConfirmation);
+
+            matchValidation.Value = (Password.Value, PasswordConfirmation.Value);
+            matchValidation.Validations.Add(new PasswordsMatchRule());
+
+            void AddPasswordValidations(ValidatableObject<string> validatableObject)
+            {
+                validatableObject.Validations.Add(new IsNotNullOrEmptyRule()
+                {
+                    ValidationMessage = "A password is required"
+                });
+
+                validatableObject.Validations.Add(new PasswordLengthRule());
+            }
         }
 
         private void OnKeyPressed(object sender, KeyboardHookEventArgs e)
@@ -36,9 +58,9 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         async void Register()
         {
-            if (Password == PasswordConfirmation && Password.Length >= 8)
+            if (Password.IsValid && PasswordConfirmation.IsValid && matchValidation.IsValid)
             {
-                await secureStorage.SetAsync("app-password", Password);
+                await secureStorage.SetAsync("app-password", Password.Value);
 
                 await navigationService.NavigateToAsync($"//{nameof(RecentPage)}");
 
