@@ -7,9 +7,9 @@
              Title="Registeration">
     <VerticalStackLayout>
         <Label Text="Enter password"/>
-        <Entry Text="{Binding Password}" IsPassword="True"/>
+        <Entry Text="{Binding Password.Value}" IsPassword="True"/>
         <Label Text="Confirm password"/>
-        <Entry Text="{Binding PasswordConfirmation}" IsPassword="True"/>
+        <Entry Text="{Binding PasswordConfirmation.Value}" IsPassword="True"/>
         <Button Text="Register" Command="{Binding RegisterCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

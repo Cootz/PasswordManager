@@ -20,7 +20,7 @@ namespace PasswordManager.Validations
         private bool _isValid;
 
         [ObservableProperty]
-        private T _value;
+        private T _value = default;
 
         public List<IValidationRule<T>> Validations { get; } = new();
 

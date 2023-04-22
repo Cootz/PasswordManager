@@ -16,8 +16,8 @@ namespace PasswordManager.ViewModel
 
         private ValidatableObject<(string, string)> matchValidation = new();
 
-        public ValidatableObject<string> Password { get; set; }
-        public ValidatableObject<string> PasswordConfirmation { get; set; }
+        public ValidatableObject<string> Password { get; set; } = new();
+        public ValidatableObject<string> PasswordConfirmation { get; set; } = new();
 
         public RegisterViewModel(ISecureStorage secureStorage, INavigationService navigationService, IGlobalHook hook)
         {
@@ -58,7 +58,7 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         async void Register()
         {
-            if (Password.IsValid && PasswordConfirmation.IsValid && matchValidation.IsValid)
+            if (Password.Validate() && PasswordConfirmation.Validate() && matchValidation.Validate())
             {
                 await secureStorage.SetAsync("app-password", Password.Value);
 
