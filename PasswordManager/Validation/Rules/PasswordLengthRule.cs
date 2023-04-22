@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PasswordManager.Validations.Rules
+namespace PasswordManager.Validation.Rules
 {
     public class PasswordLengthRule : IValidationRule<string>
     {

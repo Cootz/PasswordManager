@@ -1,12 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using PasswordManager.Validations.Rules;
+using PasswordManager.Validation.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PasswordManager.Validations
+namespace PasswordManager.Validation
 {
     /// <summary>
     /// Validates <see cref="Value"/> based on <see cref="Validations"/> rules

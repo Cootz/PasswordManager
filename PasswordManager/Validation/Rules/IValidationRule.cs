@@ -1,4 +1,4 @@
-﻿namespace PasswordManager.Validations.Rules
+﻿namespace PasswordManager.Validation.Rules
 {
     public interface IValidationRule<T>
     {

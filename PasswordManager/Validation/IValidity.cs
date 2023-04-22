@@ -1,4 +1,4 @@
-﻿namespace PasswordManager.Validations
+﻿namespace PasswordManager.Validation
 {
     public interface IValidity
     {
