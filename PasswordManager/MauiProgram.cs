@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Maui.LifecycleEvents;
+using PasswordManager.Model;
 using PasswordManager.Model.DB;
 using PasswordManager.Model.IO;
 using PasswordManager.Services;
+using PasswordManager.Utils;
 using PasswordManager.View;
 using PasswordManager.ViewModel;
 using SharpHook;
@@ -19,6 +22,8 @@ namespace PasswordManager
 
         public static MauiApp CreateMauiApp()
         {
+            var globalHook = new OptimizedTaskPoolGlobalHook(new TaskPoolGlobalHookOptions(4, true));
+
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
@@ -26,23 +31,41 @@ namespace PasswordManager
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                })
+                .ConfigureLifecycleEvents(events =>
+                {
+#if WINDOWS
+                    events.AddWindows(windows =>
+                    {
+                        windows.OnActivated((window, args) =>
+                        {
+                            OptimizationHelper.IsAppActive = args.WindowActivationState != Microsoft.UI.Xaml.WindowActivationState.Deactivated;
+                        });
+                    });
+#elif MACCATALYST
+                    events.AddiOS(ios =>
+                    {
+                        ios
+                            .OnActivated((app) => OptimizationHelper.IsAppActive = true)
+                            .OnResignActivation((app) => OptimizationHelper.IsAppActive = false);
+                    });
+#endif
                 });
 
             string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-            //Setting dependencies for injection
+            //Setup dependencies for injection
             builder.Services.AddSingleton<Storage>(x => new AppStorage(Path.Combine(appData, AppName)));
 
             builder.Services.AddSingleton<INavigationService, NavigationService>();
 
             builder.Services.AddSingleton<IAlertService, AlertService>();
 
-            builder.Services.AddSingleton<IGlobalHook, TaskPoolGlobalHook>(s =>
+            builder.Services.AddSingleton<IGlobalHook, OptimizedTaskPoolGlobalHook>(s =>
             {
-                var globalHook = new TaskPoolGlobalHook();
-
+#if WINDOWS || MACCATALYST
                 globalHook.RunAsync();
-
+#endif
                 return globalHook;
             });
 
