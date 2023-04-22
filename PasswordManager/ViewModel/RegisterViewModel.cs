@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Services;
-using PasswordManager.Validations;
-using PasswordManager.Validations.Rules;
+using PasswordManager.Validation;
+using PasswordManager.Validation.Rules;
 using PasswordManager.View;
 using SharpHook;
 

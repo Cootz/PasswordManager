@@ -1,11 +1,13 @@
-﻿using System.Windows.Input;
+﻿using PasswordManager.Validation;
+using PasswordManager.ViewModel;
+using System.Windows.Input;
 
 namespace PasswordManager.Model.Behavior
 {
     public class PasswordValidationBehavior : Behavior<Entry>
     {
-        public readonly BindableProperty CommandProperty =
-            BindableProperty.Create("Command", typeof(ICommand), typeof(PasswordValidationBehavior));
+        public static readonly BindableProperty ValidationProperty =
+            BindableProperty.Create("Validation", typeof(ValidatableObject<string>), typeof(PasswordValidationBehavior));
 
         protected override void OnAttachedTo(Entry bindable)
         {
@@ -23,10 +25,8 @@ namespace PasswordManager.Model.Behavior
 
         private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
-            ICommand command = GetValue(CommandProperty) as ICommand;
-
-            if (command is not null) 
-                MainThread.BeginInvokeOnMainThread(() => command.Execute(null));
+            ValidatableObject<string> validatableObject = GetValue(ValidationProperty) as ValidatableObject<string>;
+            validatableObject.Validate();
         }
     }
 }
