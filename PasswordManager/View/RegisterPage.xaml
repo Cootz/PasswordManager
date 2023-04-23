@@ -11,6 +11,11 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <convertors:FirstValidationConverter x:Key="firstValidation"/>
+
+            <Style x:Key="ErrorLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}"/>
+                <Setter Property="FontSize" Value="Small"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -30,9 +35,12 @@
                 </DataTrigger>
             </Entry.Triggers>
         </Entry>
-        <Label Text="{Binding Password.Errors, Converter={StaticResource firstValidation}}" TextColor="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}" FontSize="Small"/>
+        <Label Text="{Binding Password.Errors, Converter={StaticResource firstValidation}}" Style="{StaticResource ErrorLabel}"/>
+        
         <Label Text="Confirm password"/>
         <Entry Text="{Binding PasswordConfirmation.Value}" IsPassword="True"/>
+        <Label Text="{Binding PasswordConfirmation.Errors, Converter={StaticResource firstValidation}}" Style="{StaticResource ErrorLabel}"/>
+        
         <Button Text="Register" Command="{Binding RegisterCommand}"/>
     </VerticalStackLayout>
 </ContentPage>
