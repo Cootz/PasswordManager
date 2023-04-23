@@ -18,7 +18,9 @@
                 <DataTrigger
                     TargetType="Entry"
                     Binding="{Binding Password.IsValid}"
-                    Value="False"/>
+                    Value="False">
+                    <Setter Property="TextColor" Value="{StaticResource ErrorColor}"/>
+                </DataTrigger>
             </Entry.Triggers>
         </Entry>
         <Label Text="Confirm password"/>
