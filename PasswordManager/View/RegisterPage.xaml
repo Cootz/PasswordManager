@@ -19,7 +19,7 @@
                     TargetType="Entry"
                     Binding="{Binding Password.IsValid}"
                     Value="False">
-                    <Setter Property="TextColor" Value="{StaticResource ErrorColor}"/>
+                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}"/>
                 </DataTrigger>
             </Entry.Triggers>
         </Entry>
