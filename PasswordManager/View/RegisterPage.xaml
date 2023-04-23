@@ -4,9 +4,16 @@
              x:Class="PasswordManager.View.RegisterPage"
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
              xmlns:behaviors="clr-namespace:PasswordManager.Model.Behavior"
+             xmlns:convertors="clr-namespace:PasswordManager.Model.Converter"
              x:DataType="viewmodel:RegisterViewModel"
              x:Name="Registration"
              Title="Registration">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <convertors:FirstValidationConverter x:Key="firstValidation"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <VerticalStackLayout>
         <Label Text="Enter password"/>
         <Entry Text="{Binding Password.Value}" IsPassword="True">
@@ -23,6 +30,7 @@
                 </DataTrigger>
             </Entry.Triggers>
         </Entry>
+        <Label Text="{Binding Password.Errors, Converter={StaticResource firstValidation}}" TextColor="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}" FontSize="Small"/>
         <Label Text="Confirm password"/>
         <Entry Text="{Binding PasswordConfirmation.Value}" IsPassword="True"/>
         <Button Text="Register" Command="{Binding RegisterCommand}"/>

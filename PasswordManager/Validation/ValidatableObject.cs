@@ -26,8 +26,8 @@ namespace PasswordManager.Validation
 
         public ValidatableObject()
         { 
-            _isValid = true;
-            _errors = Enumerable.Empty<string>();
+            IsValid = true;
+            Errors = Enumerable.Empty<string>();
         }
 
         public bool Validate()
