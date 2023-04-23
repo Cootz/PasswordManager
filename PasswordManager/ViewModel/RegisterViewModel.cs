@@ -16,8 +16,8 @@ namespace PasswordManager.ViewModel
 
         private ValidatableObject<(string, string)> matchValidation = new();
 
-        public ValidatableObject<string> Password { get; set; } = new();
-        public ValidatableObject<string> PasswordConfirmation { get; set; } = new();
+        public ValidatableObject<string> Password { get; } = new();
+        public ValidatableObject<string> PasswordConfirmation { get; } = new();
 
         public RegisterViewModel(ISecureStorage secureStorage, INavigationService navigationService, IGlobalHook hook)
         {

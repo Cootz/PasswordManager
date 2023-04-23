@@ -9,6 +9,12 @@ namespace PasswordManager.Model.Behavior
         public static readonly BindableProperty ValidationProperty =
             BindableProperty.Create("Validation", typeof(ValidatableObject<string>), typeof(PasswordValidationBehavior));
 
+        public ValidatableObject<string> Validation
+        {
+            get => (ValidatableObject<string>)GetValue(ValidationProperty);
+            set => SetValue(ValidationProperty, value);
+        }
+
         protected override void OnAttachedTo(Entry bindable)
         {
             bindable.TextChanged += OnEntryTextChanged;
@@ -25,8 +31,7 @@ namespace PasswordManager.Model.Behavior
 
         private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
-            ValidatableObject<string> validatableObject = GetValue(ValidationProperty) as ValidatableObject<string>;
-            validatableObject.Validate();
+            Validation?.Validate();
         }
     }
 }

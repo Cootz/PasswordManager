@@ -5,13 +5,14 @@
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
              xmlns:behaviors="clr-namespace:PasswordManager.Model.Behavior"
              x:DataType="viewmodel:RegisterViewModel"
-             Title="Registeration">
+             x:Name="Registration"
+             Title="Registration">
     <VerticalStackLayout>
         <Label Text="Enter password"/>
         <Entry Text="{Binding Password.Value}" IsPassword="True">
             <Entry.Behaviors>
                 <behaviors:PasswordValidationBehavior
-                    Validation="{Binding Password}"/>
+                    Validation="{Binding Source={x:Reference Registration}, Path=BindingContext.Password}"/>
             </Entry.Behaviors>
             <Entry.Triggers>
                 <DataTrigger
