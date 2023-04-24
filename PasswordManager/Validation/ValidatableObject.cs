@@ -3,6 +3,7 @@ using PasswordManager.Utils;
 using PasswordManager.Validation.Rules;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,9 +57,14 @@ namespace PasswordManager.Validation
         public sbyte ToSByte(IFormatProvider provider) => ThrowHelper.ThrowNotSupportedException<sbyte>();
         public float ToSingle(IFormatProvider provider) => ThrowHelper.ThrowNotSupportedException<float>();
         public string ToString(IFormatProvider provider) => ThrowHelper.ThrowNotSupportedException<string>();
-        public object ToType(Type conversionType, IFormatProvider provider) => Convert.DefaultToType(this, conversionType, provider);
         public ushort ToUInt16(IFormatProvider provider) => ThrowHelper.ThrowNotSupportedException<ushort>();
         public uint ToUInt32(IFormatProvider provider) => ThrowHelper.ThrowNotSupportedException<uint>();
         public ulong ToUInt64(IFormatProvider provider) => ThrowHelper.ThrowNotSupportedException<ulong>();
+
+        public object ToType(Type conversionType, IFormatProvider provider) => conversionType switch
+        {
+            IValidity or INotifyPropertyChanged or INotifyPropertyChanging or IConvertible => this,
+            _ => ThrowHelper.ThrowNotSupportedException(conversionType)
+        };
     }
 }
