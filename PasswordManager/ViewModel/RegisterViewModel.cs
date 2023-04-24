@@ -5,6 +5,7 @@ using PasswordManager.Validation;
 using PasswordManager.Validation.Rules;
 using PasswordManager.View;
 using SharpHook;
+using System.ComponentModel;
 
 namespace PasswordManager.ViewModel
 {
@@ -14,7 +15,7 @@ namespace PasswordManager.ViewModel
         private readonly INavigationService navigationService;
         private readonly IGlobalHook hook;
 
-        private ValidatableObject<(string, string)> matchValidation = new();
+        public ValidatableObject<(string, string)> MatchValidation { get; } =  new();
 
         public ValidatableObject<string> Password { get; } = new();
         public ValidatableObject<string> PasswordConfirmation { get; } = new();
@@ -35,8 +36,11 @@ namespace PasswordManager.ViewModel
             AddPasswordValidations(Password);
             AddPasswordValidations(PasswordConfirmation);
 
-            matchValidation.Value = (Password.Value, PasswordConfirmation.Value);
-            matchValidation.Validations.Add(new PasswordsMatchRule());
+            MatchValidation.Value = (Password.Value, PasswordConfirmation.Value);
+            MatchValidation.Validations.Add(new PasswordsMatchRule());
+
+            Password.PropertyChanged += onPasswordPropertyChanged;
+            PasswordConfirmation.PropertyChanged += onPasswordPropertyChanged;
 
             void AddPasswordValidations(ValidatableObject<string> validatableObject)
             {
@@ -46,6 +50,12 @@ namespace PasswordManager.ViewModel
                 });
 
                 validatableObject.Validations.Add(new PasswordLengthRule());
+            }
+
+            void onPasswordPropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                if (e.PropertyName == nameof(Password.Value) || e.PropertyName == nameof(PasswordConfirmation.Value)) 
+                    MatchValidation.Value = (Password.Value, PasswordConfirmation.Value);
             }
         }
 
@@ -58,7 +68,7 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         async void Register()
         {
-            if (Password.Validate() && PasswordConfirmation.Validate() && matchValidation.Validate())
+            if (Password.Validate() && PasswordConfirmation.Validate() && MatchValidation.Validate())
             {
                 await secureStorage.SetAsync("app-password", Password.Value);
 

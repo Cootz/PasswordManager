@@ -9,9 +9,9 @@ namespace PasswordManager.Model.Behavior
         public static readonly BindableProperty ValidationProperty =
             BindableProperty.Create("Validation", typeof(ValidatableObject<string>), typeof(PasswordValidationBehavior));
 
-        public ValidatableObject<string> Validation
+        public IValidity Validation
         {
-            get => (ValidatableObject<string>)GetValue(ValidationProperty);
+            get => (IValidity)GetValue(ValidationProperty);
             set => SetValue(ValidationProperty, value);
         }
 

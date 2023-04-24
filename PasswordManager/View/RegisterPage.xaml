@@ -10,7 +10,7 @@
              Title="Registration">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <convertors:FirstValidationConverter x:Key="firstValidation"/>
+            <convertors:FirstValidationConverter x:Key="firstValidationConverter"/>
 
             <Style x:Key="ErrorLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}"/>
@@ -35,11 +35,24 @@
                 </DataTrigger>
             </Entry.Triggers>
         </Entry>
-        <Label Text="{Binding Password.Errors, Converter={StaticResource firstValidation}}" Style="{StaticResource ErrorLabel}"/>
+        <Label Text="{Binding Password.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}"/>
         
         <Label Text="Confirm password"/>
-        <Entry Text="{Binding PasswordConfirmation.Value}" IsPassword="True"/>
-        <Label Text="{Binding PasswordConfirmation.Errors, Converter={StaticResource firstValidation}}" Style="{StaticResource ErrorLabel}"/>
+        <Entry Text="{Binding PasswordConfirmation.Value}" IsPassword="True">
+            <Entry.Behaviors>
+                <behaviors:PasswordValidationBehavior
+                    Validation="{Binding Source={x:Reference Registration}, Path=BindingContext.MatchValidation}"/>
+            </Entry.Behaviors>
+            <Entry.Triggers>
+                <DataTrigger
+                    TargetType="Entry"
+                    Binding="{Binding MatchValidation.IsValid}"
+                    Value="False">
+                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}"/>
+                </DataTrigger>
+            </Entry.Triggers>
+        </Entry>
+        <Label Text="{Binding MatchValidation.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}"/>
         
         <Button Text="Register" Command="{Binding RegisterCommand}"/>
     </VerticalStackLayout>

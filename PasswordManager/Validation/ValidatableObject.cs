@@ -11,7 +11,7 @@ namespace PasswordManager.Validation
     /// <summary>
     /// Validates <see cref="Value"/> based on <see cref="Validations"/> rules
     /// </summary>
-    public partial class ValidatableObject<T> : ObservableObject, IValidity
+    public partial class ValidatableObject<T> : ObservableObject, IValidity, IConvertible
     {
         [ObservableProperty]
         private IEnumerable<string> _errors;
@@ -41,5 +41,23 @@ namespace PasswordManager.Validation
             IsValid = !Errors.Any();
             return IsValid;
         }
+
+        public TypeCode GetTypeCode() => throw new NotSupportedException();
+        public bool ToBoolean(IFormatProvider provider) => throw new NotImplementedException();
+        public byte ToByte(IFormatProvider provider) => throw new NotImplementedException();
+        public char ToChar(IFormatProvider provider) => throw new NotImplementedException();
+        public DateTime ToDateTime(IFormatProvider provider) => throw new NotImplementedException();
+        public decimal ToDecimal(IFormatProvider provider) => throw new NotImplementedException();
+        public double ToDouble(IFormatProvider provider) => throw new NotImplementedException();
+        public short ToInt16(IFormatProvider provider) => throw new NotImplementedException();
+        public int ToInt32(IFormatProvider provider) => throw new NotImplementedException();
+        public long ToInt64(IFormatProvider provider) => throw new NotImplementedException();
+        public sbyte ToSByte(IFormatProvider provider) => throw new NotImplementedException();
+        public float ToSingle(IFormatProvider provider) => throw new NotImplementedException();
+        public string ToString(IFormatProvider provider) => throw new NotImplementedException();
+        public object ToType(Type conversionType, IFormatProvider provider) => Convert.DefaultToType(this, conversionType, provider);
+        public ushort ToUInt16(IFormatProvider provider) => throw new NotImplementedException();
+        public uint ToUInt32(IFormatProvider provider) => throw new NotImplementedException();
+        public ulong ToUInt64(IFormatProvider provider) => throw new NotImplementedException();
     }
 }
