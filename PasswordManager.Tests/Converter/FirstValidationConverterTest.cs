@@ -1,10 +1,5 @@
 ﻿using PasswordManager.Model.Converter;
 using PasswordManager.Validation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Tests.Converter
 {
@@ -17,7 +12,7 @@ namespace PasswordManager.Tests.Converter
         {
             ValidatableObject<string> validatableObject = new();
 
-            validatableObject.Errors = new List<string>{"First error message", "Second error message"};
+            validatableObject.Errors = new List<string> { "First error message", "Second error message" };
 
             IValueConverter converter = new FirstValidationConverter();
 

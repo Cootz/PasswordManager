@@ -1,6 +1,4 @@
 ﻿using PasswordManager.Validation;
-using PasswordManager.ViewModel;
-using System.Windows.Input;
 
 namespace PasswordManager.Model.Behavior
 {

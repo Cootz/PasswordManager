@@ -15,7 +15,7 @@ namespace PasswordManager.ViewModel
         private readonly INavigationService navigationService;
         private readonly IGlobalHook hook;
 
-        public ValidatableObject<(string, string)> MatchValidation { get; } =  new();
+        public ValidatableObject<(string, string)> MatchValidation { get; } = new();
 
         public ValidatableObject<string> Password { get; } = new();
         public ValidatableObject<string> PasswordConfirmation { get; } = new();
@@ -54,7 +54,7 @@ namespace PasswordManager.ViewModel
 
             void onPasswordPropertyChanged(object sender, PropertyChangedEventArgs e)
             {
-                if (e.PropertyName == nameof(Password.Value) || e.PropertyName == nameof(PasswordConfirmation.Value)) 
+                if (e.PropertyName == nameof(Password.Value) || e.PropertyName == nameof(PasswordConfirmation.Value))
                     MatchValidation.Value = (Password.Value, PasswordConfirmation.Value);
             }
         }

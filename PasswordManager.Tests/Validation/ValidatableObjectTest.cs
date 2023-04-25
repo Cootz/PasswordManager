@@ -1,5 +1,4 @@
-﻿using NSubstitute;
-using PasswordManager.Tests.TestData;
+﻿using PasswordManager.Tests.TestData;
 using PasswordManager.Validation;
 using PasswordManager.Validation.Rules;
 

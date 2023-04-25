@@ -1,12 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using PasswordManager.Utils;
 using PasswordManager.Validation.Rules;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Validation
 {
@@ -27,7 +20,7 @@ namespace PasswordManager.Validation
         public List<IValidationRule<T>> Validations { get; } = new();
 
         public ValidatableObject()
-        { 
+        {
             IsValid = true;
             Errors = Enumerable.Empty<string>();
         }

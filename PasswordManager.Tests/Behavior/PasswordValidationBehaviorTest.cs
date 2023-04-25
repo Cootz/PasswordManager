@@ -1,11 +1,6 @@
 ﻿using NSubstitute;
 using PasswordManager.Model.Behavior;
 using PasswordManager.Validation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PasswordManager.Tests.Behavior
 {
@@ -36,7 +31,7 @@ namespace PasswordManager.Tests.Behavior
 
         [TearDown]
         public void ResetVars()
-        { 
+        {
             IsTriggered = false;
         }
     }
