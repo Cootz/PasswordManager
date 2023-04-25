@@ -21,7 +21,7 @@ namespace PasswordManager.Tests.TestData
                             }
                     })
                 .Returns(true)
-                .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithValidAllValid");
+                .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithAllValidChecks");
 
                 yield return new TestCaseData(
                     new object[] {
