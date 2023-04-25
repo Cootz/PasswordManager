@@ -32,13 +32,16 @@ namespace PasswordManager.Tests.ViewModel
             RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
             var command = viewModel.RegisterCommand;
 
-            viewModel.Password = enteredPassword;
-            viewModel.PasswordConfirmation = enteredPassword;
+            viewModel.Password.Value = enteredPassword;
+            viewModel.PasswordConfirmation.Value = enteredPassword;
 
             command.Execute(null);
 
-            Assert.That(savedPassword, Is.EqualTo(password));
-            Assert.That(pageChanged, Is.True);
+            Assert.Multiple(() =>
+            {
+                Assert.That(savedPassword, Is.EqualTo(password));
+                Assert.That(pageChanged, Is.True);
+            });
         }
 
         [Test]
@@ -49,8 +52,8 @@ namespace PasswordManager.Tests.ViewModel
             RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
             var command = viewModel.RegisterCommand;
 
-            viewModel.Password = enteredPassword;
-            viewModel.PasswordConfirmation = enteredPassword;
+            viewModel.Password.Value = enteredPassword;
+            viewModel.PasswordConfirmation.Value = enteredPassword;
 
             command.Execute(null);
 
@@ -65,8 +68,8 @@ namespace PasswordManager.Tests.ViewModel
             RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
             var command = viewModel.RegisterCommand;
 
-            viewModel.Password = enteredPassword;
-            viewModel.PasswordConfirmation = enteredPassword + "123";
+            viewModel.Password.Value = enteredPassword;
+            viewModel.PasswordConfirmation.Value = enteredPassword + "123";
 
             command.Execute(null);
 
