@@ -61,6 +61,8 @@ namespace PasswordManager.Tests.TestData
                     })
                 .Returns(false)
                 .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithOneInvalidCheckAtTheEnd");
+
+                yield return new TestCaseData(Enumerable.Empty<IValidationRule<object>>()).Returns(true).SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithNoRules");
             }
         }
 

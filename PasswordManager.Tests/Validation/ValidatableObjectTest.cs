@@ -7,9 +7,8 @@ namespace PasswordManager.Tests.Validation
     [TestFixture]
     public class ValidatableObjectTest
     {
-        [Test]
         [TestCaseSource(typeof(ValidationDataClass), nameof(ValidationDataClass.RulesTestCases))]
-        public bool ValidateWithRules(IValidationRule<object>[] rules)
+        public bool ValidateWithRules(IEnumerable<IValidationRule<object>> rules)
         {
             ValidatableObject<object> validatableObject = new();
 
