@@ -4,7 +4,7 @@ using PasswordManager.Validation.Rules;
 
 namespace PasswordManager.Tests.TestData
 {
-    internal class ValidationDataClass
+    internal class ValidationData
     {
         public static IEnumerable<TestCaseData> RulesTestCases
         {

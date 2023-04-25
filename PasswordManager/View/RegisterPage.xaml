@@ -4,19 +4,13 @@
              x:Class="PasswordManager.View.RegisterPage"
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
              xmlns:behaviors="clr-namespace:PasswordManager.Model.Behavior"
-             xmlns:convertors="clr-namespace:PasswordManager.Model.Converter"
+             xmlns:converters="clr-namespace:PasswordManager.Model.Converter"
              x:DataType="viewmodel:RegisterViewModel"
              x:Name="Registration"
              Title="Registration">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <convertors:FirstValidationConverter x:Key="firstValidationConverter"/>
-
-            <Style x:Key="ErrorLabel" TargetType="Label">
-                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}"/>
-                <Setter Property="FontSize" Value="Small"/>
-                <Setter Property="Margin" Value="0,0,0,10"/>
-            </Style>
+            <converters:FirstValidationConverter x:Key="firstValidationConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     

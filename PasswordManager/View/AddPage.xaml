@@ -4,21 +4,44 @@
              x:Class="PasswordManager.View.AddPage"
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
              xmlns:schema="clr-namespace:PasswordManager.Model.DB.Schema"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:converters="clr-namespace:PasswordManager.Model.Converter"
              x:DataType="viewmodel:AddViewModel"
              Title="Add new password">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FirstValidationConverter x:Key="firstValidationConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <VerticalStackLayout>
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Service:" VerticalOptions="Center" FontSize="Medium"/>
             <Picker ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService.Value}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium" ItemDisplayBinding="{Binding Name}"/>
         </HorizontalStackLayout>
+        <Label Text="{Binding SelectedService.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}"/>
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Login:" VerticalOptions="Center" FontSize="Medium"/>
-            <Entry Text="{Binding Username.Value}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium"/>
+            <Entry Text="{Binding Username.Value}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium">
+                <Entry.Behaviors>
+                    
+                </Entry.Behaviors>
+                <Entry.Triggers>
+                    <DataTrigger
+                    TargetType="Entry"
+                    Binding="{Binding Source={RelativeSource Self}, Path=BindingContext.IsValid}"
+                    Value="False">
+                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}"/>
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
         </HorizontalStackLayout>
+        <Label Text="{Binding Username.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}"/>
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Password:" VerticalOptions="Center" FontSize="Medium"/>
             <Entry Text="{Binding Password.Value}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium" IsPassword="True"/>
         </HorizontalStackLayout>
+        <Label Text="{Binding Password.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}"/>
         <Button Text="Add" VerticalOptions="CenterAndExpand" Command="{Binding AddProfileCommand}"/>
     </VerticalStackLayout>
 </ContentPage>
