@@ -15,6 +15,7 @@
             <Style x:Key="ErrorLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}"/>
                 <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="Margin" Value="0,0,0,10"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>

@@ -1,4 +1,5 @@
-﻿using PasswordManager.Validation;
+﻿using PasswordManager.Utils;
+using PasswordManager.Validation;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,6 +17,6 @@ namespace PasswordManager.Model.Converter
             return validation.Any() ? validation.First() : string.Empty;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => ThrowHelper.ThrowNotSupportedException();
     }
 }
