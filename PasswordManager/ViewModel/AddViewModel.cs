@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
 using PasswordManager.Utils;
+using PasswordManager.Validation;
+using PasswordManager.Validation.Rules;
 
 namespace PasswordManager.ViewModel
 {
@@ -14,14 +16,11 @@ namespace PasswordManager.ViewModel
         [ObservableProperty]
         private IQueryable<ServiceInfo> services;
 
-        [ObservableProperty]
-        private string username;
+        public ValidatableObject<string> Username { get; } = new();
 
-        [ObservableProperty]
-        private string password;
+        public ValidatableObject<string> Password { get; } = new();
 
-        [ObservableProperty]
-        private ServiceInfo selectedService;
+        public ValidatableObject<ServiceInfo> SelectedService { get; } = new();
 
         public AddViewModel(DatabaseService databaseService, INavigationService navigationService)
         {
@@ -29,32 +28,50 @@ namespace PasswordManager.ViewModel
             _navigationService = navigationService;
 
             Services = databaseService.Select<ServiceInfo>();
-            SelectedService = Services.First() ?? ServiceInfo.DefaultServices.FirstOrDefault();
+            SelectedService.Value = Services.First() ?? ServiceInfo.DefaultServices.FirstOrDefault();
+
+            AddValidation();
+        }
+
+        private void AddValidation()
+        {
+            Username.Validations.Add(new IsNotNullOrEmptyRule()
+            {
+                ValidationMessage = "A username is required"
+            });
+            
+            Password.Validations.Add(new IsNotNullOrEmptyRule()
+            {
+                ValidationMessage = "A password is required"
+            });
+
+            SelectedService.Validations.Add(new IsNotNullRule<ServiceInfo>()
+            { 
+                ValidationMessage = "A service is required"
+            });
         }
 
         [RelayCommand]
         async Task AddProfile()
         {
-            ProfileInfo profile = new ProfileInfo()
+            if (Username.Validate() && Password.Validate() && SelectedService.Validate())
             {
-                Username = Username,
-                Password = Password,
-                Service = SelectedService
-            };
+                ProfileInfo profile = new ProfileInfo()
+                {
+                    Username = Username.Value,
+                    Password = Password.Value,
+                    Service = SelectedService.Value
+                };
 
-            try
-            {
-                _databaseService.Add(profile.Verify());
+                _databaseService.Add(profile);
+
+                await GoBack();
             }
-            catch { }
-
-            await GoBack();
         }
 
         async Task GoBack()
         {
             await _navigationService.PopAsync();
         }
-
     }
 }

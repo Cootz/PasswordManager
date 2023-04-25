@@ -9,15 +9,15 @@
     <VerticalStackLayout>
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Service:" VerticalOptions="Center" FontSize="Medium"/>
-            <Picker ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium" ItemDisplayBinding="{Binding Name}"/>
+            <Picker ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService.Value}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium" ItemDisplayBinding="{Binding Name}"/>
         </HorizontalStackLayout>
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Login:" VerticalOptions="Center" FontSize="Medium"/>
-            <Entry Text="{Binding Username}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium"/>
+            <Entry Text="{Binding Username.Value}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium"/>
         </HorizontalStackLayout>
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Password:" VerticalOptions="Center" FontSize="Medium"/>
-            <Entry Text="{Binding Password}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium" IsPassword="True"/>
+            <Entry Text="{Binding Password.Value}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium" IsPassword="True"/>
         </HorizontalStackLayout>
         <Button Text="Add" VerticalOptions="CenterAndExpand" Command="{Binding AddProfileCommand}"/>
     </VerticalStackLayout>
