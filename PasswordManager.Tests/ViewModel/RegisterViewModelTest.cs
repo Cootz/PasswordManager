@@ -39,6 +39,9 @@ namespace PasswordManager.Tests.ViewModel
 
             Assert.Multiple(() =>
             {
+                Assert.That(viewModel.Password.IsValid);
+                Assert.That(viewModel.PasswordConfirmation.IsValid);
+                Assert.That(viewModel.MatchValidation.IsValid);
                 Assert.That(savedPassword, Is.EqualTo(password));
                 Assert.That(pageChanged, Is.True);
             });
@@ -57,7 +60,11 @@ namespace PasswordManager.Tests.ViewModel
 
             command.Execute(null);
 
-            Assert.That(pageChanged, Is.False);
+            Assert.Multiple(() =>
+            {
+                Assert.That(viewModel.Password.IsValid, Is.False);
+                Assert.That(pageChanged, Is.False);
+            });
         }
 
         [Test]
@@ -73,7 +80,12 @@ namespace PasswordManager.Tests.ViewModel
 
             command.Execute(null);
 
-            Assert.That(pageChanged, Is.False);
+            Assert.Multiple(() =>
+            {
+                Assert.That(viewModel.Password.IsValid, Is.True);
+                Assert.That(viewModel.MatchValidation.IsValid, Is.False);
+                Assert.That(pageChanged, Is.False);
+            });
         }
 
 
