@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PasswordManager.View.RegisterPage"
              xmlns:viewmodel="clr-namespace:PasswordManager.ViewModel"
-             xmlns:behaviors="clr-namespace:PasswordManager.Model.Behavior"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:converters="clr-namespace:PasswordManager.Model.Converter"
              x:DataType="viewmodel:RegisterViewModel"
              x:Name="Registration"
@@ -16,36 +16,22 @@
     
     <VerticalStackLayout>
         <Label Text="Enter password"/>
-        <Entry Text="{Binding Password.Value}" IsPassword="True">
+        <Entry BindingContext="{Binding Password}" Style="{StaticResource EntryWithValidation}" IsPassword="True">
             <Entry.Behaviors>
-                <behaviors:PasswordValidationBehavior
-                    Validation="{Binding Source={x:Reference Registration}, Path=BindingContext.Password}"/>
+                <toolkit:EventToCommandBehavior
+                    Command="{Binding Source={x:Reference Registration}, Path=BindingContext.Password.ValidateCommand}"
+                    EventName="TextChanged"/>
             </Entry.Behaviors>
-            <Entry.Triggers>
-                <DataTrigger
-                    TargetType="Entry"
-                    Binding="{Binding Password.IsValid}"
-                    Value="False">
-                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}"/>
-                </DataTrigger>
-            </Entry.Triggers>
         </Entry>
         <Label Text="{Binding Password.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}"/>
         
         <Label Text="Confirm password"/>
-        <Entry Text="{Binding PasswordConfirmation.Value}" IsPassword="True">
+        <Entry BindingContext="{Binding MatchValidation}" Text="{Binding Source={x:Reference Registration}, Path=BindingContext.PasswordConfirmation.Value}" IsPassword="True">
             <Entry.Behaviors>
-                <behaviors:PasswordValidationBehavior
-                    Validation="{Binding Source={x:Reference Registration}, Path=BindingContext.MatchValidation}"/>
+                <toolkit:EventToCommandBehavior
+                    Command="{Binding Source={x:Reference Registration}, Path=BindingContext.MatchValidation.ValidateCommand}"
+                    EventName="TextChanged"/>
             </Entry.Behaviors>
-            <Entry.Triggers>
-                <DataTrigger
-                    TargetType="Entry"
-                    Binding="{Binding MatchValidation.IsValid}"
-                    Value="False">
-                    <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}"/>
-                </DataTrigger>
-            </Entry.Triggers>
         </Entry>
         <Label Text="{Binding MatchValidation.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}"/>
         

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PasswordManager.Validation.Rules;
+using System.Windows.Input;
 
 namespace PasswordManager.Validation
 {
@@ -17,12 +18,15 @@ namespace PasswordManager.Validation
         [ObservableProperty]
         private T _value = default;
 
+        public ICommand ValidateCommand { get; }
+
         public List<IValidationRule<T>> Validations { get; } = new();
 
         public ValidatableObject()
         {
             IsValid = true;
             Errors = Enumerable.Empty<string>();
+            ValidateCommand = new Command(() => Validate());
         }
 
         public bool Validate()

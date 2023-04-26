@@ -408,4 +408,19 @@
         <Setter Property="Margin" Value="0,0,0,10"/>
     </Style>
 
+    <Style x:Key="EntryWithValidation" TargetType="Entry">
+        <Setter Property="Text" Value="{Binding Source={RelativeSource Self}, Path=BindingContext.Value}"/>
+        <Setter Property="HorizontalOptions" Value="Fill"/>
+        <Setter Property="MinimumWidthRequest" Value="150"/>
+        <Setter Property="Margin" Value="5,0,0,0"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Style.Triggers>
+            <DataTrigger
+                    TargetType="Entry"
+                    Binding="{Binding Source={RelativeSource Self}, Path=BindingContext.IsValid}"
+                    Value="False">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

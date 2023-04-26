@@ -56,7 +56,7 @@ namespace PasswordManager.ViewModel
         {
             if (Username.Validate() && Password.Validate() && SelectedService.Validate())
             {
-                ProfileInfo profile = new ProfileInfo()
+                ProfileInfo profile = new()
                 {
                     Username = Username.Value,
                     Password = Password.Value,
