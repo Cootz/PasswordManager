@@ -19,9 +19,9 @@ namespace PasswordManager.Tests.ViewModel
 
                 AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 
-                viewModel.SelectedService = viewModel.Services.First();
-                viewModel.Username = "Valid username";
-                viewModel.Password = "Valid p@ss0wrd";
+                viewModel.SelectedService.Value = viewModel.Services.First();
+                viewModel.Username.Value = "Valid username";
+                viewModel.Password.Value = "Valid p@ss0wrd";
 
                 Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
             });
@@ -36,9 +36,9 @@ namespace PasswordManager.Tests.ViewModel
                 AddViewModel viewModel = new(databaseService, navigationService);
                 AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 
-                viewModel.SelectedService = viewModel.Services.First();
-                viewModel.Username = "";
-                viewModel.Password = "Valid p@ss0wrd";
+                viewModel.SelectedService.Value = viewModel.Services.First();
+                viewModel.Username.Value = "";
+                viewModel.Password.Value = "Valid p@ss0wrd";
 
                 Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
             });
@@ -52,9 +52,9 @@ namespace PasswordManager.Tests.ViewModel
                 AddViewModel viewModel = new(databaseService, navigationService);
                 AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 
-                viewModel.SelectedService = viewModel.Services.First();
-                viewModel.Username = "";
-                viewModel.Password = "Valid p@ss0wrd";
+                viewModel.SelectedService.Value = viewModel.Services.First();
+                viewModel.Username.Value = "";
+                viewModel.Password.Value = "Valid p@ss0wrd";
 
                 Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
             });
