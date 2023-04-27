@@ -5,6 +5,18 @@
              x:Class="PasswordManager.View.Controls.SettingLayout">
     <ContentView.Resources>
         <ResourceDictionary>
+            <ControlTemplate x:Key="OrientationHorizontal">
+                <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}" ColumnDefinitions="*, *" HorizontalOptions="{Binding HorizontalOptions}" VerticalOptions="{Binding VerticalOptions}">
+                    <Label Text="{Binding Title, FallbackValue=''}" FontSize="Medium" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="0" Margin="0,0,10,0"/>
+                    <ContentView Content="{Binding Content}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="1"/>
+                </Grid>
+            </ControlTemplate>
+            <ControlTemplate x:Key="OrientationVertical">
+                <Grid BindingContext="{Binding Source={RelativeSource TemplatedParent}}" RowDefinitions="*, auto" HorizontalOptions="{Binding HorizontalOptions}" VerticalOptions="{Binding VerticalOptions}">
+                    <Label Text="{Binding Title, FallbackValue=''}" FontSize="Medium" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="0" Margin="5"/>
+                    <ContentView Content="{Binding Content}" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Grid.Row="1"/>
+                </Grid>
+            </ControlTemplate>
         </ResourceDictionary>
     </ContentView.Resources>
 </ContentView>

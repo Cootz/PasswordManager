@@ -17,7 +17,7 @@
         /// <summary>
         /// Show confirmation alert
         /// </summary>
-        /// <returns>User's respose</returns>
+        /// <returns>User's response</returns>
         Task<bool> ShowConfirmationAsync(string title, string message, string accept, string cancel);
     }
 }
