@@ -32,13 +32,19 @@ namespace PasswordManager.Tests.ViewModel
             RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
             var command = viewModel.RegisterCommand;
 
-            viewModel.Password = enteredPassword;
-            viewModel.PasswordConfirmation = enteredPassword;
+            viewModel.Password.Value = enteredPassword;
+            viewModel.PasswordConfirmation.Value = enteredPassword;
 
             command.Execute(null);
 
-            Assert.That(savedPassword, Is.EqualTo(password));
-            Assert.That(pageChanged, Is.True);
+            Assert.Multiple(() =>
+            {
+                Assert.That(viewModel.Password.IsValid);
+                Assert.That(viewModel.PasswordConfirmation.IsValid);
+                Assert.That(viewModel.MatchValidation.IsValid);
+                Assert.That(savedPassword, Is.EqualTo(password));
+                Assert.That(pageChanged, Is.True);
+            });
         }
 
         [Test]
@@ -49,12 +55,16 @@ namespace PasswordManager.Tests.ViewModel
             RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
             var command = viewModel.RegisterCommand;
 
-            viewModel.Password = enteredPassword;
-            viewModel.PasswordConfirmation = enteredPassword;
+            viewModel.Password.Value = enteredPassword;
+            viewModel.PasswordConfirmation.Value = enteredPassword;
 
             command.Execute(null);
 
-            Assert.That(pageChanged, Is.False);
+            Assert.Multiple(() =>
+            {
+                Assert.That(viewModel.Password.IsValid, Is.False);
+                Assert.That(pageChanged, Is.False);
+            });
         }
 
         [Test]
@@ -65,12 +75,17 @@ namespace PasswordManager.Tests.ViewModel
             RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
             var command = viewModel.RegisterCommand;
 
-            viewModel.Password = enteredPassword;
-            viewModel.PasswordConfirmation = enteredPassword + "123";
+            viewModel.Password.Value = enteredPassword;
+            viewModel.PasswordConfirmation.Value = enteredPassword + "123";
 
             command.Execute(null);
 
-            Assert.That(pageChanged, Is.False);
+            Assert.Multiple(() =>
+            {
+                Assert.That(viewModel.Password.IsValid, Is.True);
+                Assert.That(viewModel.MatchValidation.IsValid, Is.False);
+                Assert.That(pageChanged, Is.False);
+            });
         }
 
 
