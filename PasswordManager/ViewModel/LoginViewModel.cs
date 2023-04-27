@@ -31,11 +31,11 @@ namespace PasswordManager.ViewModel
         private void OnKeyPressed(object sender, KeyboardHookEventArgs e)
         {
             if (e.Data.KeyCode == SharpHook.Native.KeyCode.VcEnter)
-                MainThread.BeginInvokeOnMainThread(Login);
+                MainThread.InvokeOnMainThreadAsync(Login);
         }
 
         [RelayCommand]
-        async void Login()
+        async Task Login()
         {
             await Task.Run(Password.Validate);
 

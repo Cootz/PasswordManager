@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using CommunityToolkit.Mvvm.Input;
+using NSubstitute;
 using PasswordManager.Services;
 using PasswordManager.ViewModel;
 using SharpHook;
@@ -8,9 +9,9 @@ namespace PasswordManager.Tests.ViewModel
     [TestFixture]
     public class LoginViewModelTest
     {
-        private ISecureStorage secureStorage = Substitute.For<ISecureStorage>();
-        private INavigationService navigationService = Substitute.For<INavigationService>();
-        private IGlobalHook hook = Substitute.For<IGlobalHook>();
+        private readonly ISecureStorage secureStorage = Substitute.For<ISecureStorage>();
+        private readonly INavigationService navigationService = Substitute.For<INavigationService>();
+        private readonly IGlobalHook hook = Substitute.For<IGlobalHook>();
         private const string password = "TestP@ssw0rd";
 
         private bool pageChanged = false;
@@ -23,16 +24,16 @@ namespace PasswordManager.Tests.ViewModel
         }
 
         [Test]
-        public void TestLoginWithCorrectPassword()
+        public async Task TestLoginWithCorrectPassword()
         {
             string enteredPassword = password;
 
             LoginViewModel viewModel = new(secureStorage, navigationService, hook);
-            var command = viewModel.LoginCommand;
+            AsyncRelayCommand command = (AsyncRelayCommand)viewModel.LoginCommand;
 
-            viewModel.Password = enteredPassword;
+            viewModel.Password.Value = enteredPassword;
 
-            command.Execute(null);
+            await command.ExecuteAsync(null);
 
             Assert.That(pageChanged, Is.True);
         }
@@ -45,7 +46,7 @@ namespace PasswordManager.Tests.ViewModel
             LoginViewModel viewModel = new(secureStorage, navigationService, hook);
             var command = viewModel.LoginCommand;
 
-            viewModel.Password = enteredPassword;
+            viewModel.Password.Value = enteredPassword;
 
             command.Execute(null);
 
