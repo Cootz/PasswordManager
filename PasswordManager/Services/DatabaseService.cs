@@ -62,7 +62,7 @@ namespace PasswordManager.Services
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
-        public async Task RealmQuerry(Func<Realm, Task> action) => await (DB as RealmController).RealmQuerry(action);
+        public async Task RealmQuerry(Func<Realm, Task> action) => await (DB as RealmController).RealmQuery(action);
 
         /// <summary>
         /// Select every instance of given class from database

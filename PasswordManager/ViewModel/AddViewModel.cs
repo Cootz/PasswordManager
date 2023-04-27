@@ -36,50 +36,6 @@ namespace PasswordManager.ViewModel
             Username.Validations.Add(new IsNotNullOrEmptyRule()
             {
                 ValidationMessage = "A username is required"
-
-                /* Unmerged change from project 'PasswordManager (net7.0-maccatalyst)'
-                Before:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                After:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                */
-
-                /* Unmerged change from project 'PasswordManager (net7.0-ios)'
-                Before:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                After:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                */
-
-                /* Unmerged change from project 'PasswordManager (net7.0)'
-                Before:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                After:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                */
-
-                /* Unmerged change from project 'PasswordManager (net7.0-android)'
-                Before:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                After:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                */
             });
 
             Password.Validations.Add(new IsNotNullOrEmptyRule()

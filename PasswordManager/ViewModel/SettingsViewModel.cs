@@ -25,14 +25,17 @@ namespace PasswordManager.ViewModel
         {
             string response = await alertService.ShowPromptAsync("Service", "Enter service name");
 
-            if (!string.IsNullOrEmpty(response))
+            if (string.IsNullOrEmpty(response))
             {
-                ServiceInfo newService = new();
-
-                newService.Name = response;
-
-                databaseService.Add(newService);
+                return;
             }
+
+            ServiceInfo newService = new()
+            {
+                Name = response
+            };
+
+            databaseService.Add(newService);
         }
 
         [RelayCommand]

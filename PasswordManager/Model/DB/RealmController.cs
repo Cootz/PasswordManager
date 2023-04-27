@@ -71,7 +71,7 @@ namespace PasswordManager.Model.DB
 
             Debug.Assert(key.Length == 64);
 
-            RealmConfiguration config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "data.realm"))
+            RealmConfiguration config = new(Path.Combine(dataStorage.WorkingDirectory, "data.realm"))
             {
                 SchemaVersion = schema_version,
                 MigrationCallback = OnMigration,
@@ -80,7 +80,7 @@ namespace PasswordManager.Model.DB
 
             try
             {
-                realm = Realm.GetInstance(config);
+                realm = await Realm.GetInstanceAsync(config);
             }
             catch
             {
@@ -89,7 +89,7 @@ namespace PasswordManager.Model.DB
                 BackupManager.Backup(new FileInfo(databasePath));
                 File.Delete(databasePath);
 
-                realm = Realm.GetInstance(config);
+                realm = await Realm.GetInstanceAsync(config);
             }
 
             //Preparing default values
@@ -106,7 +106,7 @@ namespace PasswordManager.Model.DB
 
             if (servicesToAdd.Count > 0)
             {
-                realm.Write(() =>
+                await realm.WriteAsync(() =>
                 {
                     foreach (ServiceInfo service in servicesToAdd)
                     {
@@ -125,11 +125,11 @@ namespace PasswordManager.Model.DB
         {
             for (ulong i = 1; i <= schema_version; i++)
             {
-                applyMigrationsForVestions(migration, i);
+                applyMigrationsForVersions(migration, i);
             }
         }
 
-        private void applyMigrationsForVestions(Migration migration, ulong targetVersion)
+        private void applyMigrationsForVersions(Migration migration, ulong targetVersion)
         {
             switch (targetVersion)
             {
@@ -149,7 +149,7 @@ namespace PasswordManager.Model.DB
 
         public Task Refresh() => realm.RefreshAsync();
 
-        public async Task RealmQuerry(Func<Realm, Task> action) => await action(realm);
+        public async Task RealmQuery(Func<Realm, Task> action) => await action(realm);
 
         public Task Remove<T>(T info) where T : IRealmObject => realm?.WriteAsync(() => realm.Remove(info));
     }

@@ -37,11 +37,11 @@ namespace PasswordManager.Tests.ViewModel
         [Test]
         [TestCase("steam")]
         [TestCase("Steam")]
-        public void TestListWithNormalSearchRequest(string SearchRequest) => RunTestWithDatabase((databaseService) =>
+        public void TestListWithNormalSearchRequest(string searchRequest) => RunTestWithDatabase((databaseService) =>
         {
             RecentViewModel viewModel = setupViewModel(databaseService);
 
-            viewModel.SearchText = SearchRequest;
+            viewModel.SearchText = searchRequest;
 
             ServiceInfo service = databaseService.Select<ServiceInfo>().First(s => s.Name == "steam");
 

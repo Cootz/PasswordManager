@@ -37,7 +37,7 @@ namespace PasswordManager.Tests.DB
 
         [TearDown]
         public async Task TearDown() =>
-            await controller!.RealmQuerry(async (realm) =>
+            await controller!.RealmQuery(async (realm) =>
             {
                 await realm.WriteAsync(() =>
                 {

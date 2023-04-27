@@ -28,7 +28,7 @@ namespace PasswordManager.ViewModel
             set
             {
                 profiles = value;
-                OnPropertyChanged(nameof(Profiles));
+                OnPropertyChanged();
             }
         }
 
@@ -40,7 +40,7 @@ namespace PasswordManager.ViewModel
             set
             {
                 searchText = value;
-                OnPropertyChanged(nameof(SearchText));
+                OnPropertyChanged();
                 OnPropertyChanged(nameof(Profiles));
             }
         }
@@ -65,7 +65,7 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         private async Task ShowNoteInfo(ProfileInfo sender)
         {
-            Dictionary<string, object> routeParams = new Dictionary<string, object>
+            Dictionary<string, object> routeParams = new()
             {
                 {"profile", sender}
             };
