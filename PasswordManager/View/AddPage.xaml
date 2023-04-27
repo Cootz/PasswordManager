@@ -8,19 +8,14 @@
              xmlns:converters="clr-namespace:PasswordManager.Model.Converter"
              x:DataType="viewmodel:AddViewModel"
              x:Name="Addpage"
-             Title="Add new password">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:FirstValidationConverter x:Key="firstValidationConverter"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+             Title="Add new password">  
 
     <VerticalStackLayout>
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Service:" VerticalOptions="Center" FontSize="Medium"/>
             <Picker ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService.Value}" HorizontalOptions="Fill" MinimumWidthRequest="150" Margin="5,0,0,0" FontSize="Medium" ItemDisplayBinding="{Binding Name}"/>
         </HorizontalStackLayout>
-        <Label Text="{Binding SelectedService.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}" HorizontalOptions="Center"/>
+        <Label Text="{Binding SelectedService.Errors, Converter={StaticResource FirstValidationConverter}}" Style="{StaticResource ErrorLabel}" HorizontalOptions="Center"/>
         
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Login:" VerticalOptions="Center" FontSize="Medium"/>
@@ -32,7 +27,7 @@
                 </Entry.Behaviors>
             </Entry>
         </HorizontalStackLayout>
-        <Label Text="{Binding Username.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}" HorizontalOptions="Center"/>
+        <Label Text="{Binding Username.Errors, Converter={StaticResource FirstValidationConverter}}" Style="{StaticResource ErrorLabel}" HorizontalOptions="Center"/>
         
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Password:" VerticalOptions="Center" FontSize="Medium"/>
@@ -44,7 +39,7 @@
                 </Entry.Behaviors>
             </Entry>
         </HorizontalStackLayout>
-        <Label Text="{Binding Password.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}" HorizontalOptions="Center"/>
+        <Label Text="{Binding Password.Errors, Converter={StaticResource FirstValidationConverter}}" Style="{StaticResource ErrorLabel}" HorizontalOptions="Center"/>
         
         <Button Text="Add" VerticalOptions="CenterAndExpand" Command="{Binding AddProfileCommand}"/>
     </VerticalStackLayout>

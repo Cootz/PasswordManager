@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Services;
+using PasswordManager.Validation;
+using PasswordManager.Validation.Rules;
 using PasswordManager.View;
 using SharpHook;
 
@@ -8,20 +10,22 @@ namespace PasswordManager.ViewModel
 {
     public partial class LoginViewModel : ObservableObject
     {
-        private ISecureStorage secureStorage;
-        private INavigationService navigationService;
-        private IGlobalHook hook;
+        private readonly INavigationService navigationService;
+        private readonly IGlobalHook hook;
 
-        [ObservableProperty]
-        private string password;
+        public ValidatableObject<string> Password { get; set; } = new();
 
         public LoginViewModel(ISecureStorage secureStorage, INavigationService navigation, IGlobalHook globalHook)
         {
-            this.secureStorage = secureStorage;
             navigationService = navigation;
             hook = globalHook;
 
             hook.KeyPressed += OnKeyPressed;
+
+            Password.Validations.Add(new LoginPasswordRule(secureStorage)
+            {
+                ValidationMessage = "Incorrect password"
+            });
         }
 
         private void OnKeyPressed(object sender, KeyboardHookEventArgs e)
@@ -33,7 +37,9 @@ namespace PasswordManager.ViewModel
         [RelayCommand]
         async void Login()
         {
-            if (Password == await secureStorage.GetAsync("app-password"))
+            await Task.Run(Password.Validate);
+
+            if (Password.IsValid)
             {
                 await navigationService.NavigateToAsync($"//{nameof(RecentPage)}");
 

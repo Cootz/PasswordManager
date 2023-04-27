@@ -8,12 +8,6 @@
              x:DataType="viewmodel:RegisterViewModel"
              x:Name="Registration"
              Title="Registration">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:FirstValidationConverter x:Key="firstValidationConverter"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-    
     <VerticalStackLayout>
         <Label Text="Enter password"/>
         <Entry BindingContext="{Binding Password}" Style="{StaticResource EntryWithValidation}" IsPassword="True">
@@ -23,7 +17,7 @@
                     EventName="TextChanged"/>
             </Entry.Behaviors>
         </Entry>
-        <Label Text="{Binding Password.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}"/>
+        <Label Text="{Binding Password.Errors, Converter={StaticResource FirstValidationConverter}}" Style="{StaticResource ErrorLabel}"/>
         
         <Label Text="Confirm password"/>
         <Entry BindingContext="{Binding MatchValidation}" Text="{Binding Source={x:Reference Registration}, Path=BindingContext.PasswordConfirmation.Value}" IsPassword="True">
@@ -33,7 +27,7 @@
                     EventName="TextChanged"/>
             </Entry.Behaviors>
         </Entry>
-        <Label Text="{Binding MatchValidation.Errors, Converter={StaticResource firstValidationConverter}}" Style="{StaticResource ErrorLabel}"/>
+        <Label Text="{Binding MatchValidation.Errors, Converter={StaticResource FirstValidationConverter}}" Style="{StaticResource ErrorLabel}"/>
         
         <Button Text="Register" Command="{Binding RegisterCommand}"/>
     </VerticalStackLayout>
