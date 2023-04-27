@@ -9,6 +9,5 @@
         /// Stopping sharphook and running it agait couses errors so this will be used instead
         /// </remarks>
         public static bool IsAppActive { get; set; } = true;
-
     }
 }

@@ -16,10 +16,14 @@ namespace PasswordManager.ViewModel
             get
             {
                 if (!String.IsNullOrEmpty(SearchText) && SearchText.Length > 2)
+                {
                     return profiles.Filter($"{nameof(ProfileInfo.Service)}.{nameof(ServiceInfo.Name)} CONTAINS[c] $0" +
-                    $"|| {nameof(ProfileInfo.Username)} CONTAINS[c] $0", SearchText);
+                                           $"|| {nameof(ProfileInfo.Username)} CONTAINS[c] $0", SearchText);
+                }
                 else
+                {
                     return profiles;
+                }
             }
             set
             {
@@ -28,7 +32,7 @@ namespace PasswordManager.ViewModel
             }
         }
 
-        string searchText = string.Empty;
+        private string searchText = string.Empty;
 
         public string SearchText
         {
@@ -53,23 +57,17 @@ namespace PasswordManager.ViewModel
         }
 
         [RelayCommand]
-        async Task AddNote()
-        {
-            await _navigationService.NavigateToAsync(nameof(AddPage));
-        }
+        private async Task AddNote() => await _navigationService.NavigateToAsync(nameof(AddPage));
 
         [RelayCommand]
-        async Task DeleteNote(ProfileInfo sender)
-        {
-            await db.Remove(sender);
-        }
+        private async Task DeleteNote(ProfileInfo sender) => await db.Remove(sender);
 
         [RelayCommand]
-        async Task ShowNoteInfo(ProfileInfo sender)
+        private async Task ShowNoteInfo(ProfileInfo sender)
         {
-            var routeParams = new Dictionary<string, object>
+            Dictionary<string, object> routeParams = new Dictionary<string, object>
             {
-                { "profile" , sender }
+                {"profile", sender}
             };
 
             await _navigationService.NavigateToAsync(nameof(ProfilePage), routeParams);

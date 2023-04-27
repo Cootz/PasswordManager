@@ -6,17 +6,16 @@ namespace PasswordManager.Tests.Converter
     [TestFixture]
     public class FirstValidationConverterTest
     {
-
         [Test]
         public void ConverterWithValidationObjectHavingErrorMessagesTest()
         {
             ValidatableObject<string> validatableObject = new();
 
-            validatableObject.Errors = new List<string> { "First error message", "Second error message" };
+            validatableObject.Errors = new List<string> {"First error message", "Second error message"};
 
             IValueConverter converter = new FirstValidationConverter();
 
-            string firstMessage = (string)converter.Convert(validatableObject.Errors, typeof(string), null, null);
+            string firstMessage = (string) converter.Convert(validatableObject.Errors, typeof(string), null, null);
 
             Assert.That(firstMessage, Is.EqualTo(validatableObject.Errors.First()));
         }
@@ -28,7 +27,7 @@ namespace PasswordManager.Tests.Converter
 
             IValueConverter converter = new FirstValidationConverter();
 
-            string firstMessage = (string)converter.Convert(validatableObject.Errors, typeof(string), null, null);
+            string firstMessage = (string) converter.Convert(validatableObject.Errors, typeof(string), null, null);
 
             Assert.That(firstMessage, Is.EqualTo(string.Empty));
         }

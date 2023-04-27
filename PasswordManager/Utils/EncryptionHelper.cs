@@ -7,7 +7,7 @@ namespace PasswordManager.Utils
     {
         public static byte[] GenerateKey()
         {
-            List<byte> key = new List<byte>();
+            List<byte> key = new();
 
             using Aes aes_encryption = Aes.Create();
             using Aes aes_HMAC = Aes.Create();
@@ -24,14 +24,8 @@ namespace PasswordManager.Utils
             return key.ToArray();
         }
 
-        public static string ToKeyString(this byte[] key)
-        {
-            return Encoding.Unicode.GetString(key);
-        }
+        public static string ToKeyString(this byte[] key) => Encoding.Unicode.GetString(key);
 
-        public static byte[] ToKey(this string key_string)
-        {
-            return Encoding.Unicode.GetBytes(key_string);
-        }
+        public static byte[] ToKey(this string key_string) => Encoding.Unicode.GetBytes(key_string);
     }
 }

@@ -35,27 +35,23 @@ namespace PasswordManager.Model.DB
             Initialize().Wait();
         }
 
-        public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(() =>
-        {
-            realm.Add(info);
-        });
+        public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(() => { realm.Add(info); });
 
-        public void Dispose()
-        {
-            realm.Dispose();
-        }
+        public void Dispose() => realm.Dispose();
 
         public async Task Initialize()
         {
             //Prevent double initialization
             if (IsInitialized())
+            {
                 return;
+            }
 
             byte[] key = new byte[64];
 
-            string enc_key_string = await secureStorage.GetAsync("realm_key");
+            string encKeyString = await secureStorage.GetAsync("realm_key");
 
-            if (enc_key_string == null || enc_key_string.ToKey().Length != 64)
+            if (encKeyString == null || encKeyString.ToKey().Length != 64)
             {
                 string databasePath = Path.Combine(dataStorage.WorkingDirectory, "data.realm");
 
@@ -69,11 +65,13 @@ namespace PasswordManager.Model.DB
                 await secureStorage.SetAsync("realm_key", key.ToKeyString());
             }
             else
-                key = enc_key_string.ToKey();
+            {
+                key = encKeyString.ToKey();
+            }
 
             Debug.Assert(key.Length == 64);
 
-            var config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "data.realm"))
+            RealmConfiguration config = new RealmConfiguration(Path.Combine(dataStorage.WorkingDirectory, "data.realm"))
             {
                 SchemaVersion = schema_version,
                 MigrationCallback = OnMigration,
@@ -95,21 +93,30 @@ namespace PasswordManager.Model.DB
             }
 
             //Preparing default values
-            var services = realm.All<ServiceInfo>();
-            var servicesToAdd = new List<ServiceInfo>();
+            IQueryable<ServiceInfo> services = realm.All<ServiceInfo>();
+            List<ServiceInfo> servicesToAdd = new List<ServiceInfo>();
 
-            foreach (var service in ServiceInfo.DefaultServices)
+            foreach (ServiceInfo service in ServiceInfo.DefaultServices)
+            {
                 if (realm.Find<ServiceInfo>(service.ID) is null)
+                {
                     servicesToAdd.Add(service);
+                }
+            }
 
             if (servicesToAdd.Count > 0)
+            {
                 realm.Write(() =>
                 {
                     foreach (ServiceInfo service in servicesToAdd)
+                    {
                         realm.Add(service);
+                    }
                 });
+            }
 
-            Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count() == ServiceInfo.DefaultServices.Length);
+            Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count() ==
+                         ServiceInfo.DefaultServices.Length);
 
             isInitialized = true;
         }
@@ -117,7 +124,9 @@ namespace PasswordManager.Model.DB
         private void OnMigration(Migration migration, ulong lastSchemaVersion)
         {
             for (ulong i = 1; i <= schema_version; i++)
+            {
                 applyMigrationsForVestions(migration, i);
+            }
         }
 
         private void applyMigrationsForVestions(Migration migration, ulong targetVersion)
@@ -125,10 +134,12 @@ namespace PasswordManager.Model.DB
             switch (targetVersion)
             {
                 case 2:
-                    var newProfiles = migration.NewRealm.All<ProfileInfo>();
+                    IQueryable<ProfileInfo> newProfiles = migration.NewRealm.All<ProfileInfo>();
 
                     for (int i = 0; i < newProfiles.Count(); i++)
+                    {
                         newProfiles.ElementAt(i).ID = Guid.NewGuid();
+                    }
 
                     break;
             }

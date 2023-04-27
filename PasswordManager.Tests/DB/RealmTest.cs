@@ -27,31 +27,29 @@ namespace PasswordManager.Tests.DB
             realm_verson++;
         }
 
-        public async Task Add<T>(T info) where T : IRealmObject
-        {
-            await realm.WriteAsync(() =>
-            {
-                realm.Add(info);
-            });
-        }
+        public async Task Add<T>(T info) where T : IRealmObject =>
+            await realm.WriteAsync(() => { realm.Add(info); });
 
-        public void Dispose()
-        {
-            realm = null!;
-        }
+        public void Dispose() => realm = null!;
 
         public async Task Initialize()
         {
             //Preparing default values
-            var services = realm.All<ServiceInfo>();
-            var servicesToAdd = new List<ServiceInfo>();
+            IQueryable<ServiceInfo>? services = realm.All<ServiceInfo>();
+            List<ServiceInfo>? servicesToAdd = new List<ServiceInfo>();
 
-            foreach (var service in ServiceInfo.DefaultServices)
+            foreach (ServiceInfo? service in ServiceInfo.DefaultServices)
+            {
                 if (realm.Find<ServiceInfo>(service.ID) is null)
+                {
                     servicesToAdd.Add(service);
+                }
+            }
 
             if (servicesToAdd.Count > 0)
+            {
                 await realm.WriteAsync(() => servicesToAdd.ForEach(s => realm.Add(s)));
+            }
 
             isInitialized = true;
         }

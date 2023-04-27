@@ -6,8 +6,10 @@
 
         private bool disposed = false;
 
-        public SemaphoreQueue(int parallelismLevel) =>
-            semaphore = new(parallelismLevel);
+        public SemaphoreQueue(int parallelismLevel)
+        {
+            semaphore = new SemaphoreSlim(parallelismLevel);
+        }
 
         public async void Enqueue(Func<Task> taskGenerator)
         {

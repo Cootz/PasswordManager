@@ -9,14 +9,11 @@ namespace PasswordManager.Validation
     /// </summary>
     public partial class ValidatableObject<T> : ObservableObject, IValidity
     {
-        [ObservableProperty]
-        private IEnumerable<string> _errors;
+        [ObservableProperty] private IEnumerable<string> _errors;
 
-        [ObservableProperty]
-        private bool _isValid;
+        [ObservableProperty] private bool _isValid;
 
-        [ObservableProperty]
-        private T _value = default;
+        [ObservableProperty] private T _value = default;
 
         public ICommand ValidateCommand { get; }
 
@@ -32,10 +29,10 @@ namespace PasswordManager.Validation
         public bool Validate()
         {
             Errors = Validations
-                ?.Where(v => !v.Check(Value))
-                ?.Select(v => v.ValidationMessage)
-                ?.ToArray()
-                ?? Enumerable.Empty<string>();
+                         ?.Where(v => !v.Check(Value))
+                         ?.Select(v => v.ValidationMessage)
+                         ?.ToArray()
+                     ?? Enumerable.Empty<string>();
 
             IsValid = !Errors.Any();
             return IsValid;

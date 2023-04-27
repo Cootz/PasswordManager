@@ -10,7 +10,7 @@ namespace PasswordManager.Tests.ViewModel
 {
     public class RecentViewModelTest : DatabaseTest
     {
-        INavigationService _navigationService = Substitute.For<INavigationService>();
+        private INavigationService _navigationService = Substitute.For<INavigationService>();
 
         [Test]
         public void TestListWithEmptySearch() => RunTestWithDatabase((databaseService) =>
@@ -45,7 +45,8 @@ namespace PasswordManager.Tests.ViewModel
 
             ServiceInfo service = databaseService.Select<ServiceInfo>().First(s => s.Name == "steam");
 
-            Assert.That(viewModel.Profiles, Is.EquivalentTo(databaseService.Select<ProfileInfo>().Where(x => x.Service == service)));
+            Assert.That(viewModel.Profiles,
+                Is.EquivalentTo(databaseService.Select<ProfileInfo>().Where(x => x.Service == service)));
         });
 
         [Test]
@@ -78,14 +79,20 @@ namespace PasswordManager.Tests.ViewModel
 
         private RecentViewModel setupViewModel(DatabaseService databaseService)
         {
-            foreach (var service in ServiceInfo.DefaultServices)
+            foreach (ServiceInfo? service in ServiceInfo.DefaultServices)
+            {
                 if (!databaseService.Select<ServiceInfo>().Any(s => s.ID == service.ID))
+                {
                     databaseService.Add(service);
+                }
+            }
 
-            var testProfiles = ProfileData.GetTestProfiles();
+            ProfileInfo[]? testProfiles = ProfileData.GetTestProfiles();
 
-            foreach (var profile in testProfiles)
+            foreach (ProfileInfo? profile in testProfiles)
+            {
                 databaseService.Add(profile);
+            }
 
             return new RecentViewModel(databaseService, _navigationService);
         }

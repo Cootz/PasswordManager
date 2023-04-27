@@ -1,12 +1,13 @@
 using PasswordManager.ViewModel;
 
-namespace PasswordManager.View;
-
-public partial class RegisterPage : ContentPage
+namespace PasswordManager.View
 {
-    public RegisterPage(RegisterViewModel vm)
+    public partial class RegisterPage : ContentPage
     {
-        BindingContext = vm;
-        InitializeComponent();
+        public RegisterPage(RegisterViewModel vm)
+        {
+            BindingContext = vm;
+            InitializeComponent();
+        }
     }
 }

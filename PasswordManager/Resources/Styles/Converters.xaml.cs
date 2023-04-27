@@ -1,14 +1,15 @@
 using PasswordManager.Model.Converter;
 
-namespace PasswordManager.Resources.Styles;
-
-public partial class Converters : ResourceDictionary
+namespace PasswordManager.Resources.Styles
 {
-    public Converters()
+    public partial class Converters : ResourceDictionary
     {
-        InitializeComponent();
+        public Converters()
+        {
+            InitializeComponent();
 
-        //If initialized in xaml throws an exception
-        Add("FirstValidationConverter", new FirstValidationConverter());
+            //If initialized in xaml throws an exception
+            Add("FirstValidationConverter", new FirstValidationConverter());
+        }
     }
 }

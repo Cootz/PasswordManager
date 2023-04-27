@@ -11,64 +11,73 @@ namespace PasswordManager.Tests.TestData
             get
             {
                 yield return new TestCaseData(
-                    new object[] {
-                            new IValidationRule<object>[] {
+                        new object[]
+                        {
+                            new IValidationRule<object>[]
+                            {
                                 GetRuleThatReturns(true),
                                 GetRuleThatReturns(true),
                                 GetRuleThatReturns(true),
                                 GetRuleThatReturns(true),
-                                GetRuleThatReturns(true),
+                                GetRuleThatReturns(true)
                             }
-                    })
-                .Returns(true)
-                .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithAllValidChecks");
+                        })
+                    .Returns(true)
+                    .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithAllValidChecks");
 
                 yield return new TestCaseData(
-                    new object[] {
-                            new IValidationRule<object>[] {
+                        new object[]
+                        {
+                            new IValidationRule<object>[]
+                            {
                                 GetRuleThatReturns(false),
                                 GetRuleThatReturns(false),
                                 GetRuleThatReturns(false),
                                 GetRuleThatReturns(false),
-                                GetRuleThatReturns(false),
+                                GetRuleThatReturns(false)
                             }
-                    })
-                .Returns(false)
-                .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithAllInvalidChecks");
+                        })
+                    .Returns(false)
+                    .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithAllInvalidChecks");
 
                 yield return new TestCaseData(
-                    new object[] {
-                            new IValidationRule <object>[] {
+                        new object[]
+                        {
+                            new IValidationRule<object>[]
+                            {
                                 GetRuleThatReturns(true),
                                 GetRuleThatReturns(false),
                                 GetRuleThatReturns(true),
                                 GetRuleThatReturns(true),
-                                GetRuleThatReturns(true),
+                                GetRuleThatReturns(true)
                             }
-                    })
-                .Returns(false)
-                .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithOneInvalidCheck");
+                        })
+                    .Returns(false)
+                    .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithOneInvalidCheck");
 
                 yield return new TestCaseData(
-                    new object[] {
-                            new IValidationRule <object>[] {
+                        new object[]
+                        {
+                            new IValidationRule<object>[]
+                            {
                                 GetRuleThatReturns(true),
                                 GetRuleThatReturns(true),
                                 GetRuleThatReturns(true),
                                 GetRuleThatReturns(true),
-                                GetRuleThatReturns(false),
+                                GetRuleThatReturns(false)
                             }
-                    })
-                .Returns(false)
-                .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithOneInvalidCheckAtTheEnd");
+                        })
+                    .Returns(false)
+                    .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithOneInvalidCheckAtTheEnd");
 
-                yield return new TestCaseData(Enumerable.Empty<IValidationRule<object>>()).Returns(true).SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithNoRules");
+                yield return new TestCaseData(Enumerable.Empty<IValidationRule<object>>()).Returns(true)
+                    .SetName($"{nameof(ValidatableObjectTest.ValidateWithRules)}_WithNoRules");
             }
         }
 
         private static IValidationRule<object> GetRuleThatReturns(bool returnValue)
         {
-            var rule = Substitute.For<IValidationRule<object>>();
+            IValidationRule<object>? rule = Substitute.For<IValidationRule<object>>();
 
             rule.Check(default!).ReturnsForAnyArgs(returnValue);
 

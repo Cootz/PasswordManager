@@ -8,16 +8,16 @@ namespace PasswordManager.Tests.DB.Schema
         [Test]
         public void CompareTwoEqualProfilesTest()
         {
-            var providedService = new ServiceInfo("steam");
+            ServiceInfo? providedService = new ServiceInfo("steam");
 
-            var Profile = new ProfileInfo
+            ProfileInfo? Profile = new ProfileInfo
             {
                 Username = "testUser",
                 Password = "testPassword",
                 Service = providedService
             };
 
-            var otherProfile = new ProfileInfo
+            ProfileInfo? otherProfile = new ProfileInfo
             {
                 Username = "testUser",
                 Password = "testPassword",
@@ -30,16 +30,16 @@ namespace PasswordManager.Tests.DB.Schema
         [Test]
         public void CompareTwoDifferentProfilesTest()
         {
-            var steamService = new ServiceInfo("steam");
+            ServiceInfo? steamService = new ServiceInfo("steam");
 
-            var Profile = new ProfileInfo
+            ProfileInfo? Profile = new ProfileInfo
             {
                 Username = "testUser",
                 Password = "testPassword",
                 Service = steamService
             };
 
-            var otherProfile = new ProfileInfo
+            ProfileInfo? otherProfile = new ProfileInfo
             {
                 Username = "diffTestUser",
                 Password = "diffTestPassword",
@@ -52,9 +52,9 @@ namespace PasswordManager.Tests.DB.Schema
         [Test]
         public void CompareProfileWithNullTest()
         {
-            var steamService = new ServiceInfo("steam");
+            ServiceInfo? steamService = new ServiceInfo("steam");
 
-            var Profile = new ProfileInfo
+            ProfileInfo? Profile = new ProfileInfo
             {
                 Username = "testUser",
                 Password = "testPassword",
@@ -68,12 +68,11 @@ namespace PasswordManager.Tests.DB.Schema
         [Test]
         public void CompareNullWithProfileTest()
         {
-            var steamService = new ServiceInfo("steam");
+            ServiceInfo? steamService = new ServiceInfo("steam");
 
             ProfileInfo? Profile = null;
 
             Assert.That(Profile == new ProfileInfo(), Is.False);
         }
-
     }
 }

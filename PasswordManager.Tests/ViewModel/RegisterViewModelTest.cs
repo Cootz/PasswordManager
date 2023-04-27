@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using CommunityToolkit.Mvvm.Input;
+using NSubstitute;
 using PasswordManager.Services;
 using PasswordManager.ViewModel;
 using SharpHook;
@@ -20,8 +21,10 @@ namespace PasswordManager.Tests.ViewModel
         public void OneTimeSetUp()
         {
             secureStorage.GetAsync("app-password").Returns(Task.FromResult<string>(null!));
-            secureStorage.SetAsync(default!, default!).ReturnsForAnyArgs(Task.CompletedTask).AndDoes((info) => savedPassword = (string)info[1]);
-            navigationService.NavigateToAsync(default).ReturnsForAnyArgs(Task.CompletedTask).AndDoes((task) => pageChanged = true);
+            secureStorage.SetAsync(default!, default!).ReturnsForAnyArgs(Task.CompletedTask)
+                .AndDoes((info) => savedPassword = (string) info[1]);
+            navigationService.NavigateToAsync(default).ReturnsForAnyArgs(Task.CompletedTask)
+                .AndDoes((task) => pageChanged = true);
         }
 
         [Test]
@@ -30,7 +33,7 @@ namespace PasswordManager.Tests.ViewModel
             string enteredPassword = password;
 
             RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
-            var command = viewModel.RegisterCommand;
+            IRelayCommand? command = viewModel.RegisterCommand;
 
             viewModel.Password.Value = enteredPassword;
             viewModel.PasswordConfirmation.Value = enteredPassword;
@@ -53,7 +56,7 @@ namespace PasswordManager.Tests.ViewModel
             string enteredPassword = "tinyPsw";
 
             RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
-            var command = viewModel.RegisterCommand;
+            IRelayCommand? command = viewModel.RegisterCommand;
 
             viewModel.Password.Value = enteredPassword;
             viewModel.PasswordConfirmation.Value = enteredPassword;
@@ -73,7 +76,7 @@ namespace PasswordManager.Tests.ViewModel
             string enteredPassword = password;
 
             RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
-            var command = viewModel.RegisterCommand;
+            IRelayCommand? command = viewModel.RegisterCommand;
 
             viewModel.Password.Value = enteredPassword;
             viewModel.PasswordConfirmation.Value = enteredPassword + "123";

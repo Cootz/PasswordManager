@@ -9,33 +9,34 @@ namespace PasswordManager.Tests.ViewModel
     [TestFixture]
     public class LoginViewModelTest
     {
-        private readonly ISecureStorage secureStorage = Substitute.For<ISecureStorage>();
-        private readonly INavigationService navigationService = Substitute.For<INavigationService>();
-        private readonly IGlobalHook hook = Substitute.For<IGlobalHook>();
-        private const string password = "TestP@ssw0rd";
+        private readonly ISecureStorage _secureStorage = Substitute.For<ISecureStorage>();
+        private readonly INavigationService _navigationService = Substitute.For<INavigationService>();
+        private readonly IGlobalHook _hook = Substitute.For<IGlobalHook>();
+        private const string Password = "TestP@ssw0rd";
 
-        private bool pageChanged = false;
+        private bool _pageChanged = false;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            secureStorage.GetAsync("app-password").Returns(password);
-            navigationService.NavigateToAsync(default).ReturnsForAnyArgs(Task.CompletedTask).AndDoes((task) => pageChanged = true);
+            _secureStorage.GetAsync("app-password").Returns(Password);
+            _navigationService.NavigateToAsync(default).ReturnsForAnyArgs(Task.CompletedTask)
+                .AndDoes((task) => _pageChanged = true);
         }
 
         [Test]
         public async Task TestLoginWithCorrectPassword()
         {
-            string enteredPassword = password;
+            string enteredPassword = Password;
 
-            LoginViewModel viewModel = new(secureStorage, navigationService, hook);
-            AsyncRelayCommand command = (AsyncRelayCommand)viewModel.LoginCommand;
+            LoginViewModel viewModel = new(_secureStorage, _navigationService, _hook);
+            AsyncRelayCommand command = (AsyncRelayCommand) viewModel.LoginCommand;
 
             viewModel.Password.Value = enteredPassword;
 
             await command.ExecuteAsync(null);
 
-            Assert.That(pageChanged, Is.True);
+            Assert.That(_pageChanged, Is.True);
         }
 
         [Test]
@@ -43,17 +44,17 @@ namespace PasswordManager.Tests.ViewModel
         {
             string enteredPassword = "wrongPassword";
 
-            LoginViewModel viewModel = new(secureStorage, navigationService, hook);
-            var command = viewModel.LoginCommand;
+            LoginViewModel viewModel = new(_secureStorage, _navigationService, _hook);
+            IRelayCommand command = viewModel.LoginCommand;
 
             viewModel.Password.Value = enteredPassword;
 
             command.Execute(null);
 
-            Assert.That(pageChanged, Is.False);
+            Assert.That(_pageChanged, Is.False);
         }
 
         [TearDown]
-        public void TearDown() => pageChanged = false;
+        public void TearDown() => _pageChanged = false;
     }
 }

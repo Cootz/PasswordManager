@@ -15,36 +15,30 @@ namespace PasswordManager.Tests.ViewModel
         private const string service_name = "Test service";
 
         [OneTimeSetUp]
-        public void OniTimeSetup()
-        {
-            alertService.ShowPromptAsync("", "").ReturnsForAnyArgs(service_name);
-        }
+        public void OniTimeSetup() => alertService.ShowPromptAsync("", "").ReturnsForAnyArgs(service_name);
 
         [Test]
-        public void AddServiceTest()
-        {
+        public void AddServiceTest() =>
             RunTestWithDatabase((databaseService) =>
             {
-                SettingsViewModel viewModel = new SettingsViewModel(databaseService, alertService);
-                RelayCommand command = (RelayCommand)viewModel.AddServiceCommand;
+                SettingsViewModel viewModel = new(databaseService, alertService);
+                RelayCommand command = (RelayCommand) viewModel.AddServiceCommand;
 
                 Assert.DoesNotThrow(() => command.Execute(null));
 
                 Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name));
             });
-        }
 
         [Test]
-        public void RemoveServiceWithoutProfilesTest()
-        {
+        public void RemoveServiceWithoutProfilesTest() =>
             RunTestWithDatabase((databaseService) =>
             {
-                SettingsViewModel viewModel = new SettingsViewModel(databaseService, alertService);
-                RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
+                SettingsViewModel viewModel = new(databaseService, alertService);
+                RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>) viewModel.RemoveServiceCommand;
 
-                ServiceInfo service = new ServiceInfo()
+                ServiceInfo service = new()
                 {
-                    Name = service_name,
+                    Name = service_name
                 };
 
                 databaseService.Add(service);
@@ -53,19 +47,17 @@ namespace PasswordManager.Tests.ViewModel
 
                 Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
             });
-        }
 
         [Test]
-        public void RemoveServiceWithProfilesTest()
-        {
+        public void RemoveServiceWithProfilesTest() =>
             RunTestWithDatabaseAsync(async (databaseService) =>
             {
-                SettingsViewModel viewModel = new SettingsViewModel(databaseService, alertService);
-                RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
+                SettingsViewModel viewModel = new(databaseService, alertService);
+                RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>) viewModel.RemoveServiceCommand;
 
-                ServiceInfo service = new ServiceInfo()
+                ServiceInfo service = new()
                 {
-                    Name = service_name,
+                    Name = service_name
                 };
 
                 databaseService.Add(service);
@@ -73,7 +65,9 @@ namespace PasswordManager.Tests.ViewModel
                 ProfileInfo[] profileInfos = ProfileData.GetTestProfiles(service);
 
                 foreach (ProfileInfo profile in profileInfos)
+                {
                     databaseService.Add(profile);
+                }
 
                 Assert.DoesNotThrow(() => command.Execute(service));
 
@@ -84,8 +78,9 @@ namespace PasswordManager.Tests.ViewModel
                 Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
 
                 foreach (ProfileInfo profile in profileInfos)
+                {
                     Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profile.ID), Is.False);
+                }
             });
-        }
     }
 }

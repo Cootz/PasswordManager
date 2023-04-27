@@ -7,8 +7,7 @@ namespace PasswordManager.ViewModel
 {
     public partial class SettingsViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private IQueryable<ServiceInfo> serviceInfos;
+        [ObservableProperty] private IQueryable<ServiceInfo> serviceInfos;
 
         private DatabaseService databaseService;
         private IAlertService alertService;
@@ -28,7 +27,7 @@ namespace PasswordManager.ViewModel
 
             if (!string.IsNullOrEmpty(response))
             {
-                ServiceInfo newService = new ServiceInfo();
+                ServiceInfo newService = new();
 
                 newService.Name = response;
 
@@ -37,8 +36,7 @@ namespace PasswordManager.ViewModel
         }
 
         [RelayCommand]
-        private async void RemoveService(ServiceInfo info)
-        {
+        private async void RemoveService(ServiceInfo info) =>
             await databaseService.RealmQuerry(async (realm) =>
             {
                 await realm.WriteAsync(() =>
@@ -47,6 +45,5 @@ namespace PasswordManager.ViewModel
                     realm.Remove(info);
                 });
             });
-        }
     }
 }

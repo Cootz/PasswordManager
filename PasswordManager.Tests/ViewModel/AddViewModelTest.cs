@@ -11,13 +11,12 @@ namespace PasswordManager.Tests.ViewModel
         private INavigationService navigationService = Substitute.For<INavigationService>();
 
         [Test]
-        public void ClickOnAddButtonWithValiableProfileTest()
-        {
+        public void ClickOnAddButtonWithValiableProfileTest() =>
             RunTestWithDatabase((databaseService) =>
             {
                 AddViewModel viewModel = new(databaseService, navigationService);
 
-                AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
+                AsyncRelayCommand command = (AsyncRelayCommand) viewModel.AddProfileCommand;
 
                 viewModel.SelectedService.Value = viewModel.Services.First();
                 viewModel.Username.Value = "Valid username";
@@ -25,16 +24,14 @@ namespace PasswordManager.Tests.ViewModel
 
                 Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
             });
-        }
 
         [Test]
-        public void ClickOnAddButtonWithEmptyLoginTest()
-        {
+        public void ClickOnAddButtonWithEmptyLoginTest() =>
             RunTestWithDatabase((databaseService) =>
             {
-                var alertService = Substitute.For<IAlertService>();
+                IAlertService? alertService = Substitute.For<IAlertService>();
                 AddViewModel viewModel = new(databaseService, navigationService);
-                AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
+                AsyncRelayCommand command = (AsyncRelayCommand) viewModel.AddProfileCommand;
 
                 viewModel.SelectedService.Value = viewModel.Services.First();
                 viewModel.Username.Value = "";
@@ -42,15 +39,13 @@ namespace PasswordManager.Tests.ViewModel
 
                 Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
             });
-        }
 
         [Test]
-        public void ClickOnAddButtonWithEmptyPasswordTest()
-        {
+        public void ClickOnAddButtonWithEmptyPasswordTest() =>
             RunTestWithDatabase((databaseService) =>
             {
                 AddViewModel viewModel = new(databaseService, navigationService);
-                AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
+                AsyncRelayCommand command = (AsyncRelayCommand) viewModel.AddProfileCommand;
 
                 viewModel.SelectedService.Value = viewModel.Services.First();
                 viewModel.Username.Value = "";
@@ -58,6 +53,5 @@ namespace PasswordManager.Tests.ViewModel
 
                 Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
             });
-        }
     }
 }

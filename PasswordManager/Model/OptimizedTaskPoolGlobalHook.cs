@@ -17,15 +17,18 @@ namespace PasswordManager.Model
         /// </remarks>
         public OptimizedTaskPoolGlobalHook()
             : this(TaskPoolGlobalHookOptions.Sequential)
-        { }
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of <see cref="OptimizedTaskPoolGlobalHook" />.
         /// </summary>
         /// <param name="options">The options of the hook which include its parallelism level.</param>
         public OptimizedTaskPoolGlobalHook(TaskPoolGlobalHookOptions options)
-            : base(options.RunAsyncOnBackgroundThread) =>
-            this.taskQueue = new(options.ParallelismLevel);
+            : base(options.RunAsyncOnBackgroundThread)
+        {
+            taskQueue = new SemaphoreQueue(options.ParallelismLevel);
+        }
 
         /// <summary>
         /// Handles the hook event.
@@ -37,12 +40,12 @@ namespace PasswordManager.Model
             {
                 if (e.Type != EventType.HookDisabled)
                 {
-                    var copy = e;
-                    this.taskQueue.Enqueue(() => Task.Run(() => this.DispatchEvent(ref copy)));
+                    UioHookEvent copy = e;
+                    taskQueue.Enqueue(() => Task.Run(() => DispatchEvent(ref copy)));
                 }
                 else
                 {
-                    this.DispatchEvent(ref e);
+                    DispatchEvent(ref e);
                 }
             }
         }
@@ -63,7 +66,7 @@ namespace PasswordManager.Model
         {
             if (disposing)
             {
-                this.taskQueue.Dispose();
+                taskQueue.Dispose();
             }
 
             base.Dispose(disposing);

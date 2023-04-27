@@ -8,42 +8,42 @@ namespace PasswordManager.Tests.TestData
         {
             Service = new ServiceInfo("test service"),
             Username = "test username",
-            Password = "test password",
+            Password = "test password"
         };
 
         public static ProfileInfo[] GetTestProfiles()
         {
-            var steam = ServiceInfo.DefaultServices.Single(s => s.Name == "steam");
-            var origin = ServiceInfo.DefaultServices.Single(s => s.Name == "origin");
-            var gog = ServiceInfo.DefaultServices.Single(s => s.Name == "gog");
+            ServiceInfo? steam = ServiceInfo.DefaultServices.Single(s => s.Name == "steam");
+            ServiceInfo? origin = ServiceInfo.DefaultServices.Single(s => s.Name == "origin");
+            ServiceInfo? gog = ServiceInfo.DefaultServices.Single(s => s.Name == "gog");
 
             return new ProfileInfo[]
             {
-                new ()
+                new()
                 {
                     Service = steam,
                     Username = "coo",
                     Password = "P@ssw0rd"
                 },
-                new ()
+                new()
                 {
                     Service = steam,
                     Username = "Rimo",
                     Password = "Passw0rd"
                 },
-                new ()
+                new()
                 {
                     Service = steam,
                     Username = "Iro",
                     Password = "Password"
                 },
-                new ()
+                new()
                 {
                     Service = origin,
                     Username = "Ica",
                     Password = "P@ssword"
                 },
-                new ()
+                new()
                 {
                     Service = gog,
                     Username = "Tenno",
@@ -52,41 +52,39 @@ namespace PasswordManager.Tests.TestData
             };
         }
 
-        public static ProfileInfo[] GetTestProfiles(ServiceInfo service)
-        {
-            return new ProfileInfo[]
+        public static ProfileInfo[] GetTestProfiles(ServiceInfo service) =>
+            new ProfileInfo[]
             {
-                new ()
+                new()
                 {
                     Service = service,
                     Username = "coo",
                     Password = "P@ssw0rd"
                 },
-                new ()
+                new()
                 {
                     Service = service,
                     Username = "Rimo",
                     Password = "Passw0rd"
                 },
-                new ()
+                new()
                 {
                     Service = service,
                     Username = "Iro",
                     Password = "Password"
                 },
-                new ()
+                new()
                 {
                     Service = service,
                     Username = "Ica",
                     Password = "P@ssword"
                 },
-                new ()
+                new()
                 {
                     Service = service,
                     Username = "Tenno",
                     Password = "p@ssword"
                 }
             };
-        }
     }
 }

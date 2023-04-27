@@ -1,13 +1,14 @@
 using PasswordManager.ViewModel;
 
-namespace PasswordManager.View;
-
-public partial class ProfilePage : ContentPage
+namespace PasswordManager.View
 {
-    public ProfilePage(ProfileViewModel vm)
+    public partial class ProfilePage : ContentPage
     {
-        InitializeComponent();
+        public ProfilePage(ProfileViewModel vm)
+        {
+            InitializeComponent();
 
-        BindingContext = vm;
+            BindingContext = vm;
+        }
     }
 }

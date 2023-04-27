@@ -1,12 +1,13 @@
 using PasswordManager.ViewModel;
 
-namespace PasswordManager.View;
-
-public partial class AddPage : ContentPage
+namespace PasswordManager.View
 {
-    public AddPage(AddViewModel vm)
+    public partial class AddPage : ContentPage
     {
-        InitializeComponent();
-        BindingContext = vm;
+        public AddPage(AddViewModel vm)
+        {
+            InitializeComponent();
+            BindingContext = vm;
+        }
     }
 }

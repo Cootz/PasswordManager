@@ -10,10 +10,10 @@ namespace PasswordManager.Tests.DB
     [NonParallelizable]
     public class DatabaseTest
     {
-        static TempStorage? tempStorage;
-        static ISecureStorage? secureStorage;
-        static RealmController? controller;
-        static DatabaseService? database;
+        private static TempStorage? tempStorage;
+        private static ISecureStorage? secureStorage;
+        private static RealmController? controller;
+        private static DatabaseService? database;
 
         [OneTimeSetUp]
         public static void Setup()
@@ -25,25 +25,18 @@ namespace PasswordManager.Tests.DB
 
                 tempStorage = new TempStorage();
                 controller = new RealmController(tempStorage, secureStorage);
-                database = new(controller);
+                database = new DatabaseService(controller);
 
                 database.Initialize().Wait();
             }
         }
 
-        protected void RunTestWithDatabase(Action<DatabaseService> testRun)
-        {
-            testRun(database!);
-        }
+        protected void RunTestWithDatabase(Action<DatabaseService> testRun) => testRun(database!);
 
-        protected async void RunTestWithDatabaseAsync(Func<DatabaseService, Task> testRun)
-        {
-            await testRun(database!);
-        }
+        protected async void RunTestWithDatabaseAsync(Func<DatabaseService, Task> testRun) => await testRun(database!);
 
         [TearDown]
-        public async Task TearDown()
-        {
+        public async Task TearDown() =>
             await controller!.RealmQuerry(async (realm) =>
             {
                 await realm.WriteAsync(() =>
@@ -53,7 +46,9 @@ namespace PasswordManager.Tests.DB
                     foreach (ServiceInfo service in realm.All<ServiceInfo>())
                     {
                         if (!ServiceInfo.DefaultServices.Contains(service))
+                        {
                             realm.Remove(service);
+                        }
                     }
                 });
 
@@ -64,6 +59,5 @@ namespace PasswordManager.Tests.DB
 
                 realm.Refresh();
             });
-        }
     }
 }

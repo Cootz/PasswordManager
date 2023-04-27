@@ -1,12 +1,13 @@
 using PasswordManager.ViewModel;
 
-namespace PasswordManager.View;
-
-public partial class RecentPage : ContentPage
+namespace PasswordManager.View
 {
-    public RecentPage(RecentViewModel vm)
+    public partial class RecentPage : ContentPage
     {
-        InitializeComponent();
-        BindingContext = vm;
+        public RecentPage(RecentViewModel vm)
+        {
+            InitializeComponent();
+            BindingContext = vm;
+        }
     }
 }

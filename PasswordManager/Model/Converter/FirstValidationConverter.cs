@@ -7,10 +7,10 @@ namespace PasswordManager.Model.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var validation = value as IEnumerable<string>;
-            return validation.Any() ? validation.First() : string.Empty;
+            return value is IEnumerable<string> validation && validation.Any() ? validation.First() : string.Empty;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => ThrowHelper.ThrowNotSupportedException();
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+            ThrowHelper.ThrowNotSupportedException();
     }
 }

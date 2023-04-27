@@ -23,12 +23,16 @@ namespace PasswordManager.Model.IO
                 string archivePath = Path.Combine(externalStorage?.WorkingDirectory ?? file.DirectoryName, fileName);
 
                 using (ZipArchive zip = ZipFile.Open(archivePath, ZipArchiveMode.Create))
+                {
                     zip.CreateEntryFromFile(file.FullName, file.Name, CompressionLevel.Optimal);
+                }
 
                 return new FileInfo(archivePath);
             }
             else
+            {
                 throw new FileNotFoundException($"File {file.Name} does not exist. Backup is failed!");
+            }
         }
     }
 }

@@ -12,8 +12,7 @@ namespace PasswordManager.ViewModel
         private readonly DatabaseService _databaseService;
         private readonly INavigationService _navigationService;
 
-        [ObservableProperty]
-        private IQueryable<ServiceInfo> services;
+        [ObservableProperty] private IQueryable<ServiceInfo> services;
 
         public ValidatableObject<string> Username { get; } = new();
 
@@ -95,7 +94,7 @@ namespace PasswordManager.ViewModel
         }
 
         [RelayCommand]
-        async Task AddProfile()
+        private async Task AddProfile()
         {
             if (Username.Validate() && Password.Validate() && SelectedService.Validate())
             {
@@ -112,9 +111,6 @@ namespace PasswordManager.ViewModel
             }
         }
 
-        async Task GoBack()
-        {
-            await _navigationService.PopAsync();
-        }
+        private async Task GoBack() => await _navigationService.PopAsync();
     }
 }

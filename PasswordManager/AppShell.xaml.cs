@@ -18,9 +18,13 @@ namespace PasswordManager
             ISecureStorage secureStorage = SecureStorage.Default;
 
             if (!String.IsNullOrEmpty(secureStorage.GetAsync("app-password").Result))
+            {
                 GoToAsync($"//{nameof(LoginPage)}");
+            }
             else
+            {
                 GoToAsync($"//{nameof(RegisterPage)}");
+            }
         }
     }
 }

@@ -55,18 +55,22 @@ namespace PasswordManager.ViewModel
             void onPasswordPropertyChanged(object sender, PropertyChangedEventArgs e)
             {
                 if (e.PropertyName == nameof(Password.Value) || e.PropertyName == nameof(PasswordConfirmation.Value))
+                {
                     MatchValidation.Value = (Password.Value, PasswordConfirmation.Value);
+                }
             }
         }
 
         private void OnKeyPressed(object sender, KeyboardHookEventArgs e)
         {
             if (e.Data.KeyCode == SharpHook.Native.KeyCode.VcEnter)
+            {
                 MainThread.BeginInvokeOnMainThread(Register);
+            }
         }
 
         [RelayCommand]
-        async void Register()
+        private async void Register()
         {
             if (Password.Validate() && PasswordConfirmation.Validate() && MatchValidation.Validate())
             {
