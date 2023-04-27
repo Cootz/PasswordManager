@@ -20,7 +20,7 @@ namespace PasswordManager.Model.IO
             if (file.Exists)
             {
                 string fileName = $"{file.Name}-{DateTime.Now.ToString(DateTimeFormat)}.zip";
-                string archivePath = Path.Combine(externalStorage?.WorkingDirectory ?? file.DirectoryName, fileName);
+                string archivePath = Path.Combine(externalStorage?.WorkingDirectory ?? file.DirectoryName!, fileName);
 
                 using (ZipArchive zip = ZipFile.Open(archivePath, ZipArchiveMode.Create))
                 {

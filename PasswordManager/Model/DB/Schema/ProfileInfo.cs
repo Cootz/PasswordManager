@@ -62,12 +62,7 @@ namespace PasswordManager.Model.DB.Schema
                 return true;
             }
 
-            if (obj is null)
-            {
-                return false;
-            }
-
-            return Equals(obj as ProfileInfo);
+            return obj is not null && Equals(obj as ProfileInfo);
         }
 
         public override int GetHashCode() => base.GetHashCode();

@@ -4,7 +4,7 @@
     {
         private readonly SemaphoreSlim semaphore;
 
-        private bool disposed = false;
+        private bool disposed;
 
         public SemaphoreQueue(int parallelismLevel)
         {
@@ -29,11 +29,13 @@
 
         public void Dispose()
         {
-            if (!disposed)
+            if (disposed)
             {
-                semaphore.Dispose();
-                disposed = true;
+                return;
             }
+
+            semaphore.Dispose();
+            disposed = true;
         }
     }
 }

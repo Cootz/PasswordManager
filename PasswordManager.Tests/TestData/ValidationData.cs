@@ -13,7 +13,7 @@ namespace PasswordManager.Tests.TestData
                 yield return new TestCaseData(
                         new object[]
                         {
-                            new IValidationRule<object>[]
+                            new[]
                             {
                                 GetRuleThatReturns(true),
                                 GetRuleThatReturns(true),
@@ -28,7 +28,7 @@ namespace PasswordManager.Tests.TestData
                 yield return new TestCaseData(
                         new object[]
                         {
-                            new IValidationRule<object>[]
+                            new[]
                             {
                                 GetRuleThatReturns(false),
                                 GetRuleThatReturns(false),
@@ -43,7 +43,7 @@ namespace PasswordManager.Tests.TestData
                 yield return new TestCaseData(
                         new object[]
                         {
-                            new IValidationRule<object>[]
+                            new[]
                             {
                                 GetRuleThatReturns(true),
                                 GetRuleThatReturns(false),
@@ -58,7 +58,7 @@ namespace PasswordManager.Tests.TestData
                 yield return new TestCaseData(
                         new object[]
                         {
-                            new IValidationRule<object>[]
+                            new[]
                             {
                                 GetRuleThatReturns(true),
                                 GetRuleThatReturns(true),

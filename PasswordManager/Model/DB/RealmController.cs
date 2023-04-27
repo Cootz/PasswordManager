@@ -4,6 +4,8 @@ using PasswordManager.Utils;
 using Realms;
 using System.Diagnostics;
 
+// ReSharper disable MethodHasAsyncOverload
+
 namespace PasswordManager.Model.DB
 {
     /// <summary>
@@ -80,7 +82,7 @@ namespace PasswordManager.Model.DB
 
             try
             {
-                realm = await Realm.GetInstanceAsync(config);
+                realm = Realm.GetInstance(config);
             }
             catch
             {
@@ -89,24 +91,16 @@ namespace PasswordManager.Model.DB
                 BackupManager.Backup(new FileInfo(databasePath));
                 File.Delete(databasePath);
 
-                realm = await Realm.GetInstanceAsync(config);
+                realm = Realm.GetInstance(config);
             }
 
             //Preparing default values
-            IQueryable<ServiceInfo> services = realm.All<ServiceInfo>();
-            List<ServiceInfo> servicesToAdd = new List<ServiceInfo>();
-
-            foreach (ServiceInfo service in ServiceInfo.DefaultServices)
-            {
-                if (realm.Find<ServiceInfo>(service.ID) is null)
-                {
-                    servicesToAdd.Add(service);
-                }
-            }
+            List<ServiceInfo> servicesToAdd = ServiceInfo.DefaultServices
+                .Where(service => realm.Find<ServiceInfo>(service.ID) is null).ToList();
 
             if (servicesToAdd.Count > 0)
             {
-                await realm.WriteAsync(() =>
+                realm.Write(() =>
                 {
                     foreach (ServiceInfo service in servicesToAdd)
                     {

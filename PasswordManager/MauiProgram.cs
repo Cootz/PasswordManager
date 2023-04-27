@@ -23,8 +23,7 @@ namespace PasswordManager
 
         public static MauiApp CreateMauiApp()
         {
-            OptimizedTaskPoolGlobalHook globalHook =
-                new OptimizedTaskPoolGlobalHook(new TaskPoolGlobalHookOptions(4, true));
+            OptimizedTaskPoolGlobalHook globalHook = new(new TaskPoolGlobalHookOptions(4, true));
 
             MauiAppBuilder builder = MauiApp.CreateBuilder();
             builder
@@ -42,8 +41,8 @@ namespace PasswordManager
                     {
                         windows.OnActivated((window, args) =>
                         {
-                            OptimizationHelper.IsAppActive =
- args.WindowActivationState != Microsoft.UI.Xaml.WindowActivationState.Deactivated;
+                            OptimizationHelper.IsAppActive = args.WindowActivationState !=
+                                                             Microsoft.UI.Xaml.WindowActivationState.Deactivated;
                         });
                     });
 #elif MACCATALYST
@@ -59,7 +58,7 @@ namespace PasswordManager
             string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             //Setup dependencies for injection
-            builder.Services.AddSingleton<Storage>(x => new AppStorage(Path.Combine(appData, AppName)));
+            builder.Services.AddSingleton<Storage>(_ => new AppStorage(Path.Combine(appData, AppName)));
 
             builder.Services.AddSingleton<INavigationService, NavigationService>();
 
@@ -73,7 +72,7 @@ namespace PasswordManager
                 return globalHook;
             });
 
-            builder.Services.AddSingleton(s => SecureStorage.Default);
+            builder.Services.AddSingleton(_ => SecureStorage.Default);
 
             builder.Services.AddSingleton(s =>
                 new DatabaseService(new RealmController(s.GetService<Storage>(), SecureStorage.Default)));

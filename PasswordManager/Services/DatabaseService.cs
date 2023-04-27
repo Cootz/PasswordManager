@@ -12,7 +12,7 @@ namespace PasswordManager.Services
     {
         private IController DB;
 
-        private bool isInitialized = false;
+        private bool isInitialized;
 
         public bool IsInitialized() => isInitialized;
 
@@ -62,7 +62,7 @@ namespace PasswordManager.Services
         /// </summary>
         /// <param name="action"></param>
         /// <returns></returns>
-        public async Task RealmQuerry(Func<Realm, Task> action) => await (DB as RealmController).RealmQuery(action);
+        public async Task RealmQuery(Func<Realm, Task> action) => await ((RealmController) DB).RealmQuery(action);
 
         /// <summary>
         /// Select every instance of given class from database

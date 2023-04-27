@@ -40,7 +40,7 @@ namespace PasswordManager.ViewModel
 
         [RelayCommand]
         private async void RemoveService(ServiceInfo info) =>
-            await databaseService.RealmQuerry(async (realm) =>
+            await databaseService.RealmQuery(async (realm) =>
             {
                 await realm.WriteAsync(() =>
                 {

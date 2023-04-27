@@ -12,7 +12,7 @@
 
         public Storage(string path)
         {
-            DirectoryInfo dir = Directory.CreateDirectory(path);
+            Directory.CreateDirectory(path);
 
             WorkingDirectory = path;
         }
