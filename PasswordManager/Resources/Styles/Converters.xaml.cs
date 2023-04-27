@@ -4,11 +4,11 @@ namespace PasswordManager.Resources.Styles;
 
 public partial class Converters : ResourceDictionary
 {
-	public Converters()
-	{
-		InitializeComponent();
+    public Converters()
+    {
+        InitializeComponent();
 
-		//If initialized in xaml throws an exception
-		Add("FirstValidationConverter", new FirstValidationConverter());
-	}
+        //If initialized in xaml throws an exception
+        Add("FirstValidationConverter", new FirstValidationConverter());
+    }
 }

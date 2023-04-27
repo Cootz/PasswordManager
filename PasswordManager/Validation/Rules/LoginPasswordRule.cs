@@ -1,12 +1,4 @@
-﻿using Microsoft.Maui.Storage;
-using PasswordManager.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PasswordManager.Validation.Rules
+﻿namespace PasswordManager.Validation.Rules
 {
     public class LoginPasswordRule : IValidationRule<string>
     {
@@ -14,7 +6,7 @@ namespace PasswordManager.Validation.Rules
 
         public string ValidationMessage { get; set; }
 
-        public LoginPasswordRule(ISecureStorage secureStorage) 
+        public LoginPasswordRule(ISecureStorage secureStorage)
         {
             this.secureStorage = secureStorage;
         }
