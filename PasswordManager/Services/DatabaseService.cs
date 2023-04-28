@@ -14,15 +14,9 @@ public sealed class DatabaseService : IInitializable, IDisposable
 
     private bool isInitialized;
 
-    public bool IsInitialized()
-    {
-        return isInitialized;
-    }
+    public bool IsInitialized() => isInitialized;
 
-    public DatabaseService(IController DB)
-    {
-        this.DB = DB;
-    }
+    public DatabaseService(IController DB) => this.DB = DB;
 
     public async Task Initialize()
     {
@@ -36,7 +30,7 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// </summary>
     public async void SavePasswords(IEnumerable<ProfileInfo> data)
     {
-        foreach (var prof in data) await DB.Add(prof);
+        foreach (ProfileInfo prof in data) await DB.Add(prof);
     }
 
     /// <summary>
@@ -80,10 +74,7 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// Select every instance of given class from database
     /// </summary>
     /// <typeparam name="T">Type to search</typeparam>
-    public IQueryable<T> Select<T>() where T : IRealmObject
-    {
-        return DB.Select<T>();
-    }
+    public IQueryable<T> Select<T>() where T : IRealmObject => DB.Select<T>();
 
     public void Dispose()
     {

@@ -8,5 +8,8 @@ public partial class ProfileViewModel : ObservableObject
 {
     [ObservableProperty] private ProfileInfo profileInfo;
 
-    public string PageTitle => $"Profile {ProfileInfo?.Username ?? string.Empty}";
+    public string PageTitle
+    {
+        get => $"Profile {ProfileInfo?.Username ?? string.Empty}";
+    }
 }

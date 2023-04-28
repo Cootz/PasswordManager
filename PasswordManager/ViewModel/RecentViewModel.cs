@@ -16,8 +16,9 @@ public partial class RecentViewModel : ObservableObject
         get
         {
             if (!string.IsNullOrEmpty(SearchText) && SearchText.Length > 2)
-                return profiles.Filter($"{nameof(ProfileInfo.Service)}.{nameof(ServiceInfo.Name)} CONTAINS[c] $0" +
-                                       $"|| {nameof(ProfileInfo.Username)} CONTAINS[c] $0", SearchText);
+                return profiles.Filter(
+                    $"{nameof(ProfileInfo.Service)}.{nameof(ServiceInfo.Name)} CONTAINS[c] $0"
+                    + $"|| {nameof(ProfileInfo.Username)} CONTAINS[c] $0", SearchText);
             else
                 return profiles;
         }

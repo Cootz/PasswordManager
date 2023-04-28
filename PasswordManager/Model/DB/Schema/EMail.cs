@@ -26,28 +26,19 @@ public class EMail
         _postfix = postfix;
     }
 
-    public EMail(string fullAdress)
-    {
-        Adress = fullAdress;
-    }
+    public EMail(string fullAdress) => Adress = fullAdress;
 
     private void Parse(string email)
     {
-        var parsed = email.Split(SplitChar);
+        string[] parsed = email.Split(SplitChar);
 
         _adr = parsed[0];
         _postfix = parsed[1];
     }
 
-    public static bool operator !=(EMail left, EMail right)
-    {
-        return left.Adress != right.Adress;
-    }
+    public static bool operator !=(EMail left, EMail right) => left.Adress != right.Adress;
 
-    public static bool operator ==(EMail left, EMail right)
-    {
-        return left.Adress == right.Adress;
-    }
+    public static bool operator ==(EMail left, EMail right) => left.Adress == right.Adress;
 
     public override bool Equals(object obj)
     {
@@ -61,13 +52,7 @@ public class EMail
         }
     }
 
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
+    public override int GetHashCode() => base.GetHashCode();
 
-    public override string ToString()
-    {
-        return Adress;
-    }
+    public override string ToString() => Adress;
 }

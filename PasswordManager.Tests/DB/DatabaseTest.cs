@@ -50,7 +50,7 @@ public class DatabaseTest
             {
                 realm.RemoveAll<ProfileInfo>();
 
-                foreach (var service in realm.All<ServiceInfo>())
+                foreach (ServiceInfo? service in realm.All<ServiceInfo>())
                     if (!ServiceInfo.DefaultServices.Contains(service))
                         realm.Remove(service);
             });

@@ -19,13 +19,11 @@ public static class BackupManager
     {
         if (file.Exists)
         {
-            var fileName = $"{file.Name}-{DateTime.Now.ToString(DateTimeFormat)}.zip";
-            var archivePath = Path.Combine(externalStorage?.WorkingDirectory ?? file.DirectoryName!, fileName);
+            string fileName = $"{file.Name}-{DateTime.Now.ToString(DateTimeFormat)}.zip";
+            string archivePath = Path.Combine(externalStorage?.WorkingDirectory ?? file.DirectoryName!, fileName);
 
-            using (var zip = ZipFile.Open(archivePath, ZipArchiveMode.Create))
-            {
+            using (ZipArchive zip = ZipFile.Open(archivePath, ZipArchiveMode.Create))
                 zip.CreateEntryFromFile(file.FullName, file.Name, CompressionLevel.Optimal);
-            }
 
             return new FileInfo(archivePath);
         }

@@ -34,7 +34,7 @@ public partial class SettingLayout : ContentView
 
     private static void OrientationChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        var layout = (SettingLayout)bindable;
+        SettingLayout? layout = (SettingLayout)bindable;
 
         SetOrientation(layout, (OrientationEnum)newValue);
         layout.InvalidateMeasure();

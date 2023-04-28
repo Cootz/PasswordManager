@@ -25,7 +25,7 @@ public static class MauiProgram
     {
         OptimizedTaskPoolGlobalHook globalHook = new(new TaskPoolGlobalHookOptions(4, true));
 
-        var builder = MauiApp.CreateBuilder();
+        MauiAppBuilder builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
@@ -55,7 +55,7 @@ public static class MauiProgram
 #endif
             });
 
-        var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
         //Setup dependencies for injection
         builder.Services.AddSingleton<Storage>(_ => new AppStorage(Path.Combine(appData, AppName)));

@@ -29,8 +29,8 @@ public class EncryptionHelperTest
     [Test]
     public void ByteKeyToStringTest()
     {
-        var key = expected_byte_key;
-        var key_string = string.Empty;
+        byte[]? key = expected_byte_key;
+        string? key_string = string.Empty;
 
         Assert.DoesNotThrow(() => { key_string = key.ToKeyString(); });
 
@@ -40,7 +40,7 @@ public class EncryptionHelperTest
     [Test]
     public void StringKeyToByteTest()
     {
-        var key_string = expected_string;
+        string? key_string = expected_string;
         byte[] key = null!;
 
         Assert.DoesNotThrow(() => { key = key_string.ToKey(); });

@@ -26,7 +26,7 @@ public class SettingsViewModelTest : DatabaseTest
         RunTestWithDatabase((databaseService) =>
         {
             SettingsViewModel viewModel = new(databaseService, alertService);
-            var command = (RelayCommand)viewModel.AddServiceCommand;
+            RelayCommand? command = (RelayCommand)viewModel.AddServiceCommand;
 
             Assert.DoesNotThrow(() => command.Execute(null));
 
@@ -72,7 +72,7 @@ public class SettingsViewModelTest : DatabaseTest
 
             ProfileInfo[] profileInfos = ProfileData.GetTestProfiles(service);
 
-            foreach (var profile in profileInfos) databaseService.Add(profile);
+            foreach (ProfileInfo? profile in profileInfos) databaseService.Add(profile);
 
             Assert.DoesNotThrow(() => command.Execute(service));
 
@@ -82,7 +82,7 @@ public class SettingsViewModelTest : DatabaseTest
 
             Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
 
-            foreach (var profile in profileInfos)
+            foreach (ProfileInfo? profile in profileInfos)
                 Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profile.ID), Is.False);
         });
     }

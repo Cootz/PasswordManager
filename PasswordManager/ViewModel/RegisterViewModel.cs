@@ -54,7 +54,7 @@ public partial class RegisterViewModel : ObservableObject
 
         void onPasswordPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Password.Value) || e.PropertyName == nameof(PasswordConfirmation.Value))
+            if (e.PropertyName is nameof(Password.Value) or nameof(PasswordConfirmation.Value))
                 MatchValidation.Value = (Password.Value, PasswordConfirmation.Value);
         }
     }

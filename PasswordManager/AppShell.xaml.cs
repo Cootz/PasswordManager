@@ -15,7 +15,7 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
 
-        var secureStorage = SecureStorage.Default;
+        ISecureStorage secureStorage = SecureStorage.Default;
 
         if (!string.IsNullOrEmpty(secureStorage.GetAsync("app-password").Result))
             GoToAsync($"//{nameof(LoginPage)}");

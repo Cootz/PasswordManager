@@ -20,10 +20,7 @@ public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
 
     public string Password { get; set; }
 
-    public ProfileInfo()
-    {
-        ID = Guid.NewGuid();
-    }
+    public ProfileInfo() => ID = Guid.NewGuid();
 
     public ProfileInfo(Guid id, ServiceInfo service, string username, string password)
     {
@@ -51,15 +48,9 @@ public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
         return equals[0] & equals[1] & equals[2];
     }
 
-    public static bool operator !=(ProfileInfo left, ProfileInfo right)
-    {
-        return !left?.Equals(right) ?? false;
-    }
+    public static bool operator !=(ProfileInfo left, ProfileInfo right) => !left?.Equals(right) ?? false;
 
-    public static bool operator ==(ProfileInfo left, ProfileInfo right)
-    {
-        return left?.Equals(right) ?? false;
-    }
+    public static bool operator ==(ProfileInfo left, ProfileInfo right) => left?.Equals(right) ?? false;
 
     public override bool Equals([AllowNull] object obj)
     {
@@ -68,8 +59,5 @@ public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
         return obj is not null && Equals(obj as ProfileInfo);
     }
 
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
+    public override int GetHashCode() => base.GetHashCode();
 }

@@ -15,7 +15,7 @@ public class FirstValidationConverterTest
 
         IValueConverter converter = new FirstValidationConverter();
 
-        var firstMessage = (string)converter.Convert(validatableObject.Errors, typeof(string), null, null);
+        string? firstMessage = (string)converter.Convert(validatableObject.Errors, typeof(string), null, null);
 
         Assert.That(firstMessage, Is.EqualTo(validatableObject.Errors.First()));
     }
@@ -27,7 +27,7 @@ public class FirstValidationConverterTest
 
         IValueConverter converter = new FirstValidationConverter();
 
-        var firstMessage = (string)converter.Convert(validatableObject.Errors, typeof(string), null, null);
+        string? firstMessage = (string)converter.Convert(validatableObject.Errors, typeof(string), null, null);
 
         Assert.That(firstMessage, Is.EqualTo(string.Empty));
     }

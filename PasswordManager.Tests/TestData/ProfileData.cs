@@ -4,21 +4,19 @@ namespace PasswordManager.Tests.TestData;
 
 public static class ProfileData
 {
-    public static ProfileInfo GetTestProfile()
-    {
-        return new ProfileInfo
+    public static ProfileInfo GetTestProfile() =>
+        new()
         {
             Service = new ServiceInfo("test service"),
             Username = "test username",
             Password = "test password"
         };
-    }
 
     public static ProfileInfo[] GetTestProfiles()
     {
-        var steam = ServiceInfo.DefaultServices.Single(s => s.Name == "steam");
-        var origin = ServiceInfo.DefaultServices.Single(s => s.Name == "origin");
-        var gog = ServiceInfo.DefaultServices.Single(s => s.Name == "gog");
+        ServiceInfo? steam = ServiceInfo.DefaultServices.Single(s => s.Name == "steam");
+        ServiceInfo? origin = ServiceInfo.DefaultServices.Single(s => s.Name == "origin");
+        ServiceInfo? gog = ServiceInfo.DefaultServices.Single(s => s.Name == "gog");
 
         return new ProfileInfo[]
         {

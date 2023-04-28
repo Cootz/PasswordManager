@@ -6,10 +6,7 @@ internal sealed class SemaphoreQueue : IDisposable
 
     private bool disposed;
 
-    public SemaphoreQueue(int parallelismLevel)
-    {
-        semaphore = new SemaphoreSlim(parallelismLevel);
-    }
+    public SemaphoreQueue(int parallelismLevel) => semaphore = new SemaphoreSlim(parallelismLevel);
 
     public async void Enqueue(Func<Task> taskGenerator)
     {

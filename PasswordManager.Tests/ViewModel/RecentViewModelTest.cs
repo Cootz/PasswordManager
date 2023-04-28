@@ -17,7 +17,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            var viewModel = setupViewModel(databaseService);
+            RecentViewModel? viewModel = setupViewModel(databaseService);
 
             viewModel.SearchText = string.Empty;
 
@@ -32,7 +32,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            var viewModel = setupViewModel(databaseService);
+            RecentViewModel? viewModel = setupViewModel(databaseService);
 
             viewModel.SearchText = new string('t', length);
 
@@ -47,11 +47,11 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            var viewModel = setupViewModel(databaseService);
+            RecentViewModel? viewModel = setupViewModel(databaseService);
 
             viewModel.SearchText = searchRequest;
 
-            var service = databaseService.Select<ServiceInfo>().First(s => s.Name == "steam");
+            ServiceInfo? service = databaseService.Select<ServiceInfo>().First(s => s.Name == "steam");
 
             Assert.That(viewModel.Profiles,
                 Is.EquivalentTo(databaseService.Select<ProfileInfo>().Where(x => x.Service == service)));
@@ -63,7 +63,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            var viewModel = setupViewModel(databaseService);
+            RecentViewModel? viewModel = setupViewModel(databaseService);
 
             ICommand command = viewModel.ShowNoteInfoCommand;
 
@@ -76,11 +76,11 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabaseAsync(async (databaseService) =>
         {
-            var viewModel = setupViewModel(databaseService);
+            RecentViewModel? viewModel = setupViewModel(databaseService);
 
             ICommand command = viewModel.DeleteNoteCommand;
 
-            var deletedProfile = databaseService.Select<ProfileInfo>().First();
+            ProfileInfo? deletedProfile = databaseService.Select<ProfileInfo>().First();
 
             command.Execute(deletedProfile);
 
@@ -94,13 +94,13 @@ public class RecentViewModelTest : DatabaseTest
 
     private RecentViewModel setupViewModel(DatabaseService databaseService)
     {
-        foreach (var service in ServiceInfo.DefaultServices)
+        foreach (ServiceInfo? service in ServiceInfo.DefaultServices)
             if (!databaseService.Select<ServiceInfo>().Any(s => s.ID == service.ID))
                 databaseService.Add(service);
 
         ProfileInfo[]? testProfiles = ProfileData.GetTestProfiles();
 
-        foreach (var profile in testProfiles) databaseService.Add(profile);
+        foreach (ProfileInfo? profile in testProfiles) databaseService.Add(profile);
 
         return new RecentViewModel(databaseService, _navigationService);
     }

@@ -20,17 +20,18 @@ public class LoginViewModelTest
     public void OneTimeSetUp()
     {
         _secureStorage.GetAsync("app-password").Returns(Password);
-        _navigationService.NavigateToAsync(default).ReturnsForAnyArgs(Task.CompletedTask)
+        _navigationService.NavigateToAsync(default)
+            .ReturnsForAnyArgs(Task.CompletedTask)
             .AndDoes((task) => _pageChanged = true);
     }
 
     [Test]
     public async Task TestLoginWithCorrectPassword()
     {
-        var enteredPassword = Password;
+        string? enteredPassword = Password;
 
         LoginViewModel viewModel = new(_secureStorage, _navigationService, _hook);
-        var command = (AsyncRelayCommand)viewModel.LoginCommand;
+        AsyncRelayCommand? command = (AsyncRelayCommand)viewModel.LoginCommand;
 
         viewModel.Password.Value = enteredPassword;
 
@@ -42,7 +43,7 @@ public class LoginViewModelTest
     [Test]
     public void TestLoginWithIncorrectPassword()
     {
-        var enteredPassword = "wrongPassword";
+        string? enteredPassword = "wrongPassword";
 
         LoginViewModel viewModel = new(_secureStorage, _navigationService, _hook);
         IRelayCommand command = viewModel.LoginCommand;

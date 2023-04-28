@@ -9,8 +9,8 @@ public static class EncryptionHelper
     {
         List<byte> key = new();
 
-        using var aes_encryption = Aes.Create();
-        using var aes_HMAC = Aes.Create();
+        using Aes aes_encryption = Aes.Create();
+        using Aes aes_HMAC = Aes.Create();
 
         aes_encryption.KeySize = 256;
         aes_HMAC.KeySize = 256;
@@ -24,13 +24,7 @@ public static class EncryptionHelper
         return key.ToArray();
     }
 
-    public static string ToKeyString(this byte[] key)
-    {
-        return Encoding.Unicode.GetString(key);
-    }
+    public static string ToKeyString(this byte[] key) => Encoding.Unicode.GetString(key);
 
-    public static byte[] ToKey(this string key_string)
-    {
-        return Encoding.Unicode.GetBytes(key_string);
-    }
+    public static byte[] ToKey(this string key_string) => Encoding.Unicode.GetBytes(key_string);
 }

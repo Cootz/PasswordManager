@@ -43,7 +43,7 @@ public class RealmTest : IController
         IQueryable<ServiceInfo>? services = realm.All<ServiceInfo>();
         List<ServiceInfo>? servicesToAdd = new();
 
-        foreach (var service in ServiceInfo.DefaultServices)
+        foreach (ServiceInfo? service in ServiceInfo.DefaultServices)
             if (realm.Find<ServiceInfo>(service.ID) is null)
                 servicesToAdd.Add(service);
 
@@ -52,23 +52,14 @@ public class RealmTest : IController
         isInitialized = true;
     }
 
-    public bool IsInitialized()
-    {
-        return isInitialized;
-    }
+    public bool IsInitialized() => isInitialized;
 
-    public Task Refresh()
-    {
-        return realm.RefreshAsync();
-    }
+    public Task Refresh() => realm.RefreshAsync();
 
     public Task Remove<T>(T info) where T : IRealmObject
     {
         return realm.WriteAsync(() => realm.Remove(info));
     }
 
-    public IQueryable<T> Select<T>() where T : IRealmObject
-    {
-        return realm.All<T>();
-    }
+    public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
 }

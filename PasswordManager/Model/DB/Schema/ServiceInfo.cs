@@ -30,15 +30,9 @@ public partial class ServiceInfo : RealmObject, IEquatable<ServiceInfo>
     [Backlink(nameof(ProfileInfo.Service))]
     public IQueryable<ProfileInfo> Profiles { get; }
 
-    public ServiceInfo(string name) : base()
-    {
-        Name = name ?? string.Empty;
-    }
+    public ServiceInfo(string name) : base() => Name = name ?? string.Empty;
 
-    public ServiceInfo()
-    {
-        ID = Guid.NewGuid();
-    }
+    public ServiceInfo() => ID = Guid.NewGuid();
 
     public bool Equals([AllowNull] ServiceInfo other)
     {
@@ -51,23 +45,11 @@ public partial class ServiceInfo : RealmObject, IEquatable<ServiceInfo>
         return equals[0] & equals[1];
     }
 
-    public static bool operator !=(ServiceInfo left, ServiceInfo right)
-    {
-        return !left?.Equals(right) ?? false;
-    }
+    public static bool operator !=(ServiceInfo left, ServiceInfo right) => !left?.Equals(right) ?? false;
 
-    public static bool operator ==(ServiceInfo left, ServiceInfo right)
-    {
-        return left?.Equals(right) ?? false;
-    }
+    public static bool operator ==(ServiceInfo left, ServiceInfo right) => left?.Equals(right) ?? false;
 
-    public override int GetHashCode()
-    {
-        return ID.GetHashCode();
-    }
+    public override int GetHashCode() => ID.GetHashCode();
 
-    public override bool Equals(object obj)
-    {
-        return obj is ServiceInfo ? Equals(obj as ServiceInfo) : false;
-    }
+    public override bool Equals(object obj) => obj is ServiceInfo ? Equals(obj as ServiceInfo) : false;
 }

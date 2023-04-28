@@ -12,13 +12,13 @@ public class BackupManagerTest
     public void BackupFileOnseTest()
     {
         TempStorage storage = new();
-        var filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
+        string? filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
 
         File.Create(filePath).Dispose();
 
         FileInfo? fileinfo = new(filePath);
 
-        var backupFileInfo = BackupManager.Backup(fileinfo);
+        FileInfo? backupFileInfo = BackupManager.Backup(fileinfo);
 
         Assert.That(backupFileInfo, Is.Not.Null);
         Assert.That(File.Exists(backupFileInfo.FullName), Is.True);
@@ -29,7 +29,7 @@ public class BackupManagerTest
     public void BackupFileMultipleTimesTest()
     {
         TempStorage storage = new();
-        var filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
+        string? filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
 
         File.Create(filePath).Dispose();
 
@@ -37,9 +37,9 @@ public class BackupManagerTest
 
         List<FileInfo> backupFileInfos = new();
 
-        for (var i = 0; i < 100; i++) backupFileInfos.Add(BackupManager.Backup(fileinfo));
+        for (int i = 0; i < 100; i++) backupFileInfos.Add(BackupManager.Backup(fileinfo));
 
-        foreach (var backupFileInfo in backupFileInfos)
+        foreach (FileInfo? backupFileInfo in backupFileInfos)
         {
             Assert.That(backupFileInfo, Is.Not.Null);
             Assert.That(File.Exists(backupFileInfo.FullName), Is.True);
@@ -51,7 +51,7 @@ public class BackupManagerTest
     public void BackupNonExistingFile()
     {
         TempStorage storage = new();
-        var filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
+        string? filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
 
         FileInfo? fileinfo = new(filePath);
 
@@ -63,15 +63,15 @@ public class BackupManagerTest
     {
         TempStorage storage = new();
 
-        var backupStorage = (TempStorage)storage.GetStorageForDirectory("backup");
+        TempStorage? backupStorage = (TempStorage)storage.GetStorageForDirectory("backup");
 
-        var filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
+        string? filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
 
         File.Create(filePath).Dispose();
 
         FileInfo? fileinfo = new(filePath);
 
-        var backupFileInfo = BackupManager.Backup(fileinfo, backupStorage);
+        FileInfo? backupFileInfo = BackupManager.Backup(fileinfo, backupStorage);
 
         Assert.That(backupFileInfo, Is.Not.Null);
         Assert.That(File.Exists(backupFileInfo.FullName), Is.True);

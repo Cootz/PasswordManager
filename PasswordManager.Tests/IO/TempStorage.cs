@@ -13,8 +13,6 @@ public class TempStorage : Storage
     {
     }
 
-    public override Storage GetStorageForDirectory(string directory)
-    {
-        return new TempStorage(Path.Combine(WorkingDirectory, directory));
-    }
+    public override Storage GetStorageForDirectory(string directory) =>
+        new TempStorage(Path.Combine(WorkingDirectory, directory));
 }

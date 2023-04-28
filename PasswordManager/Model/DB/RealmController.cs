@@ -27,10 +27,7 @@ public sealed class RealmController : IController
 
     private bool isInitialized = false;
 
-    public bool IsInitialized()
-    {
-        return isInitialized;
-    }
+    public bool IsInitialized() => isInitialized;
 
     public RealmController(Storage storage, ISecureStorage secureStorage)
     {
@@ -40,28 +37,22 @@ public sealed class RealmController : IController
         Initialize().Wait();
     }
 
-    public async Task Add<T>(T info) where T : IRealmObject
-    {
-        await realm.WriteAsync(() => { realm.Add(info); });
-    }
+    public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(() => { realm.Add(info); });
 
-    public void Dispose()
-    {
-        realm.Dispose();
-    }
+    public void Dispose() => realm.Dispose();
 
     public async Task Initialize()
     {
         //Prevent double initialization
         if (IsInitialized()) return;
 
-        var key = new byte[64];
+        byte[] key = new byte[64];
 
-        var encKeyString = await secureStorage.GetAsync("realm_key");
+        string encKeyString = await secureStorage.GetAsync("realm_key");
 
         if (encKeyString == null || encKeyString.ToKey().Length != 64)
         {
-            var databasePath = Path.Combine(dataStorage.WorkingDirectory, "data.realm");
+            string databasePath = Path.Combine(dataStorage.WorkingDirectory, "data.realm");
 
             if (File.Exists(databasePath))
             {
@@ -92,7 +83,7 @@ public sealed class RealmController : IController
         }
         catch
         {
-            var databasePath = config.DatabasePath;
+            string databasePath = config.DatabasePath;
 
             BackupManager.Backup(new FileInfo(databasePath));
             File.Delete(databasePath);
@@ -101,13 +92,13 @@ public sealed class RealmController : IController
         }
 
         //Preparing default values
-        var servicesToAdd = ServiceInfo.DefaultServices
+        List<ServiceInfo> servicesToAdd = ServiceInfo.DefaultServices
             .Where(service => realm.Find<ServiceInfo>(service.ID) is null).ToList();
 
         if (servicesToAdd.Count > 0)
             realm.Write(() =>
             {
-                foreach (var service in servicesToAdd) realm.Add(service);
+                foreach (ServiceInfo service in servicesToAdd) realm.Add(service);
             });
 
         Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count() ==
@@ -126,23 +117,17 @@ public sealed class RealmController : IController
         switch (targetVersion)
         {
             case 2:
-                var newProfiles = migration.NewRealm.All<ProfileInfo>();
+                IQueryable<ProfileInfo> newProfiles = migration.NewRealm.All<ProfileInfo>();
 
-                for (var i = 0; i < newProfiles.Count(); i++) newProfiles.ElementAt(i).ID = Guid.NewGuid();
+                for (int i = 0; i < newProfiles.Count(); i++) newProfiles.ElementAt(i).ID = Guid.NewGuid();
 
                 break;
         }
     }
 
-    public IQueryable<T> Select<T>() where T : IRealmObject
-    {
-        return realm.All<T>();
-    }
+    public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
 
-    public Task Refresh()
-    {
-        return realm.RefreshAsync();
-    }
+    public Task Refresh() => realm.RefreshAsync();
 
     public async Task RealmQuery(Func<Realm, Task> action)
     {

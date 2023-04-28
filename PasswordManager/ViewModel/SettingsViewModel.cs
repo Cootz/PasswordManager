@@ -23,7 +23,7 @@ public partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     private async void AddService()
     {
-        var response = await alertService.ShowPromptAsync("Service", "Enter service name");
+        string response = await alertService.ShowPromptAsync("Service", "Enter service name");
 
         if (string.IsNullOrEmpty(response)) return;
 

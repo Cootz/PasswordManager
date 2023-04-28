@@ -10,7 +10,7 @@ public class TestController : DatabaseTest
     {
         RunTestWithDatabase((controller) =>
         {
-            var profile = ProfileData.GetTestProfile();
+            ProfileInfo? profile = ProfileData.GetTestProfile();
 
             controller.Add(profile);
 
@@ -36,7 +36,7 @@ public class TestController : DatabaseTest
     {
         RunTestWithDatabase((controller) =>
         {
-            var profile = ProfileData.GetTestProfile();
+            ProfileInfo? profile = ProfileData.GetTestProfile();
 
             controller.Add(profile);
 
@@ -49,7 +49,7 @@ public class TestController : DatabaseTest
     {
         RunTestWithDatabaseAsync(async (controller) =>
         {
-            var profile = ProfileData.GetTestProfile();
+            ProfileInfo? profile = ProfileData.GetTestProfile();
 
             controller.Add(profile);
 

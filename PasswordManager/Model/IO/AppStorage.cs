@@ -6,8 +6,6 @@ public class AppStorage : Storage
     {
     }
 
-    public override Storage GetStorageForDirectory(string directory)
-    {
-        return new AppStorage(Path.Combine(WorkingDirectory, directory));
-    }
+    public override Storage GetStorageForDirectory(string directory) =>
+        new AppStorage(Path.Combine(WorkingDirectory, directory));
 }
