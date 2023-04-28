@@ -2,21 +2,20 @@
 using PasswordManager.Validation;
 using PasswordManager.Validation.Rules;
 
-namespace PasswordManager.Tests.Validation
+namespace PasswordManager.Tests.Validation;
+
+[TestFixture]
+public class ValidatableObjectTest
 {
-    [TestFixture]
-    public class ValidatableObjectTest
+    [TestCaseSource(typeof(ValidationData), nameof(ValidationData.RulesTestCases))]
+    public bool ValidateWithRules(IEnumerable<IValidationRule<object>> rules)
     {
-        [TestCaseSource(typeof(ValidationData), nameof(ValidationData.RulesTestCases))]
-        public bool ValidateWithRules(IEnumerable<IValidationRule<object>> rules)
-        {
-            ValidatableObject<object> validatableObject = new();
+        ValidatableObject<object> validatableObject = new();
 
-            validatableObject.Validations.AddRange(rules);
+        validatableObject.Validations.AddRange(rules);
 
-            validatableObject.Validate();
+        validatableObject.Validate();
 
-            return validatableObject.IsValid;
-        }
+        return validatableObject.IsValid;
     }
 }

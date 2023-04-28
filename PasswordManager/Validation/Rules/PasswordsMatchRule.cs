@@ -1,9 +1,11 @@
-﻿namespace PasswordManager.Validation.Rules
-{
-    public class PasswordsMatchRule : IValidationRule<(string, string)>
-    {
-        public string ValidationMessage { get; set; } = "Passwords does not match";
+﻿namespace PasswordManager.Validation.Rules;
 
-        public bool Check((string, string) value) => value.Item1 == value.Item2;
+public class PasswordsMatchRule : IValidationRule<(string, string)>
+{
+    public string ValidationMessage { get; set; } = "Passwords does not match";
+
+    public bool Check((string, string) value)
+    {
+        return value.Item1 == value.Item2;
     }
 }

@@ -1,12 +1,14 @@
-﻿namespace PasswordManager.Validation.Rules
+﻿namespace PasswordManager.Validation.Rules;
+
+public class PasswordLengthRule : IValidationRule<string>
 {
-    public class PasswordLengthRule : IValidationRule<string>
+    private const int MIN_PASSWORD_LENGTH = 8;
+
+    public string ValidationMessage { get; set; } =
+        $"Password must be at least {MIN_PASSWORD_LENGTH} characters long";
+
+    public bool Check(string value)
     {
-        private const int MIN_PASSWORD_LENGTH = 8;
-
-        public string ValidationMessage { get; set; } =
-            $"Password must be at least {MIN_PASSWORD_LENGTH} characters long";
-
-        public bool Check(string value) => value.Length >= 8;
+        return value.Length >= 8;
     }
 }

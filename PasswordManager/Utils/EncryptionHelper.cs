@@ -1,31 +1,36 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace PasswordManager.Utils
+namespace PasswordManager.Utils;
+
+public static class EncryptionHelper
 {
-    public static class EncryptionHelper
+    public static byte[] GenerateKey()
     {
-        public static byte[] GenerateKey()
-        {
-            List<byte> key = new();
+        List<byte> key = new();
 
-            using Aes aes_encryption = Aes.Create();
-            using Aes aes_HMAC = Aes.Create();
+        using var aes_encryption = Aes.Create();
+        using var aes_HMAC = Aes.Create();
 
-            aes_encryption.KeySize = 256;
-            aes_HMAC.KeySize = 256;
+        aes_encryption.KeySize = 256;
+        aes_HMAC.KeySize = 256;
 
-            aes_encryption.GenerateKey();
-            aes_HMAC.GenerateKey();
+        aes_encryption.GenerateKey();
+        aes_HMAC.GenerateKey();
 
-            key.AddRange(aes_encryption.Key);
-            key.AddRange(aes_HMAC.Key);
+        key.AddRange(aes_encryption.Key);
+        key.AddRange(aes_HMAC.Key);
 
-            return key.ToArray();
-        }
+        return key.ToArray();
+    }
 
-        public static string ToKeyString(this byte[] key) => Encoding.Unicode.GetString(key);
+    public static string ToKeyString(this byte[] key)
+    {
+        return Encoding.Unicode.GetString(key);
+    }
 
-        public static byte[] ToKey(this string key_string) => Encoding.Unicode.GetBytes(key_string);
+    public static byte[] ToKey(this string key_string)
+    {
+        return Encoding.Unicode.GetBytes(key_string);
     }
 }

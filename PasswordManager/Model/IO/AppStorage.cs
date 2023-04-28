@@ -1,12 +1,13 @@
-﻿namespace PasswordManager.Model.IO
-{
-    public class AppStorage : Storage
-    {
-        public AppStorage(string path) : base(path)
-        {
-        }
+﻿namespace PasswordManager.Model.IO;
 
-        public override Storage GetStorageForDirectory(string directory) =>
-            new AppStorage(Path.Combine(WorkingDirectory, directory));
+public class AppStorage : Storage
+{
+    public AppStorage(string path) : base(path)
+    {
+    }
+
+    public override Storage GetStorageForDirectory(string directory)
+    {
+        return new AppStorage(Path.Combine(WorkingDirectory, directory));
     }
 }

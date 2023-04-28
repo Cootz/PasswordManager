@@ -1,8 +1,7 @@
-﻿namespace PasswordManager.Validation.Rules
+﻿namespace PasswordManager.Validation.Rules;
+
+public interface IValidationRule<in T>
 {
-    public interface IValidationRule<in T>
-    {
-        string ValidationMessage { get; set; }
-        bool Check(T value);
-    }
+    string ValidationMessage { get; set; }
+    bool Check(T value);
 }

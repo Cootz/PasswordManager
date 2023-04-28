@@ -2,69 +2,74 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
-namespace PasswordManager.Model.DB.Schema
+namespace PasswordManager.Model.DB.Schema;
+
+public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
 {
-    public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
+    private const char FieldSplit = ':';
+
+    private const char ProfileSplit = ';';
+
+    private const string NullMessage = "null";
+
+    [PrimaryKey] public Guid ID { get; set; }
+
+    public ServiceInfo Service { get; set; }
+
+    public string Username { get; set; }
+
+    public string Password { get; set; }
+
+    public ProfileInfo()
     {
-        private const char FieldSplit = ':';
+        ID = Guid.NewGuid();
+    }
 
-        private const char ProfileSplit = ';';
+    public ProfileInfo(Guid id, ServiceInfo service, string username, string password)
+    {
+        ID = id;
+        Service = service;
+        Username = username;
+        Password = password;
+    }
 
-        private const string NullMessage = "null";
+    public override string ToString()
+    {
+        StringBuilder ret = new();
 
-        [PrimaryKey] public Guid ID { get; set; }
+        ret.Append(Service.Name).Append(FieldSplit);
+        ret.Append(Username ?? NullMessage).Append(FieldSplit);
+        ret.Append(Password ?? NullMessage).Append(ProfileSplit);
 
-        public ServiceInfo Service { get; set; }
+        return ret.ToString();
+    }
 
-        public string Username { get; set; }
+    public bool Equals([AllowNull] ProfileInfo other)
+    {
+        bool[] equals = { Service == other?.Service, Password == other?.Password, Username == other?.Username };
 
-        public string Password { get; set; }
+        return equals[0] & equals[1] & equals[2];
+    }
 
-        public ProfileInfo()
-        {
-            ID = Guid.NewGuid();
-        }
+    public static bool operator !=(ProfileInfo left, ProfileInfo right)
+    {
+        return !left?.Equals(right) ?? false;
+    }
 
-        public ProfileInfo(Guid id, ServiceInfo service, string username, string password)
-        {
-            ID = id;
-            Service = service;
-            Username = username;
-            Password = password;
-        }
+    public static bool operator ==(ProfileInfo left, ProfileInfo right)
+    {
+        return left?.Equals(right) ?? false;
+    }
 
-        public override string ToString()
-        {
-            StringBuilder ret = new();
+    public override bool Equals([AllowNull] object obj)
+    {
+        if (ReferenceEquals(this, obj)) return true;
 
-            ret.Append(Service.Name).Append(FieldSplit);
-            ret.Append(Username ?? NullMessage).Append(FieldSplit);
-            ret.Append(Password ?? NullMessage).Append(ProfileSplit);
+        return obj is not null && Equals(obj as ProfileInfo);
+    }
 
-            return ret.ToString();
-        }
-
-        public bool Equals([AllowNull] ProfileInfo other)
-        {
-            bool[] equals = {Service == other?.Service, Password == other?.Password, Username == other?.Username};
-
-            return equals[0] & equals[1] & equals[2];
-        }
-
-        public static bool operator !=(ProfileInfo left, ProfileInfo right) => !left?.Equals(right) ?? false;
-
-        public static bool operator ==(ProfileInfo left, ProfileInfo right) => left?.Equals(right) ?? false;
-
-        public override bool Equals([AllowNull] object obj)
-        {
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            return obj is not null && Equals(obj as ProfileInfo);
-        }
-
-        public override int GetHashCode() => base.GetHashCode();
+    public override int GetHashCode()
+    {
+        return base.GetHashCode();
     }
 }
