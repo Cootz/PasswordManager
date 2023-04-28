@@ -21,9 +21,11 @@ public class RegisterViewModelTest
     public void OneTimeSetUp()
     {
         secureStorage.GetAsync("app-password").Returns(Task.FromResult<string>(null!));
-        secureStorage.SetAsync(default!, default!).ReturnsForAnyArgs(Task.CompletedTask)
+        secureStorage.SetAsync(default!, default!)
+            .ReturnsForAnyArgs(Task.CompletedTask)
             .AndDoes((info) => savedPassword = (string)info[1]);
-        navigationService.NavigateToAsync(default).ReturnsForAnyArgs(Task.CompletedTask)
+        navigationService.NavigateToAsync(default)
+            .ReturnsForAnyArgs(Task.CompletedTask)
             .AndDoes((task) => pageChanged = true);
     }
 

@@ -93,7 +93,8 @@ public sealed class RealmController : IController
 
         //Preparing default values
         List<ServiceInfo> servicesToAdd = ServiceInfo.DefaultServices
-            .Where(service => realm.Find<ServiceInfo>(service.ID) is null).ToList();
+            .Where(service => realm.Find<ServiceInfo>(service.ID) is null)
+            .ToList();
 
         if (servicesToAdd.Count > 0)
             realm.Write(() =>
@@ -101,8 +102,8 @@ public sealed class RealmController : IController
                 foreach (ServiceInfo service in servicesToAdd) realm.Add(service);
             });
 
-        Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count() ==
-                     ServiceInfo.DefaultServices.Length);
+        Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count()
+                     == ServiceInfo.DefaultServices.Length);
 
         isInitialized = true;
     }
