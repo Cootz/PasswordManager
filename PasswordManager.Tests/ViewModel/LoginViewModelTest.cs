@@ -9,35 +9,30 @@ namespace PasswordManager.Tests.ViewModel;
 [TestFixture]
 public class LoginViewModelTest
 {
-    private readonly ISecureStorage _secureStorage = Substitute.For<ISecureStorage>();
-    private readonly INavigationService _navigationService = Substitute.For<INavigationService>();
-    private readonly IGlobalHook _hook = Substitute.For<IGlobalHook>();
+    private readonly ISecureStorage secureStorage = Substitute.For<ISecureStorage>();
+    private readonly INavigationService navigationService = Substitute.For<INavigationService>();
+    private readonly IGlobalHook hook = Substitute.For<IGlobalHook>();
     private const string Password = "TestP@ssw0rd";
-
-    private bool _pageChanged = false;
 
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
-        _secureStorage.GetAsync("app-password").Returns(Password);
-        _navigationService.NavigateToAsync(default)
-            .ReturnsForAnyArgs(Task.CompletedTask)
-            .AndDoes((task) => _pageChanged = true);
+        secureStorage.GetAsync("app-password").Returns(Password);
+        navigationService.NavigateToAsync(default)
+            .ReturnsForAnyArgs(Task.CompletedTask);
     }
 
     [Test]
     public async Task TestLoginWithCorrectPassword()
     {
-        string? enteredPassword = Password;
-
-        LoginViewModel viewModel = new(_secureStorage, _navigationService, _hook);
+        LoginViewModel viewModel = new(secureStorage, navigationService, hook);
         AsyncRelayCommand? command = (AsyncRelayCommand)viewModel.LoginCommand;
 
-        viewModel.Password.Value = enteredPassword;
+        viewModel.Password.Value = Password;
 
         await command.ExecuteAsync(null);
 
-        Assert.That(_pageChanged, Is.True);
+        await navigationService.Received().NavigateToAsync(Arg.Any<string>());
     }
 
     [Test]
@@ -45,19 +40,16 @@ public class LoginViewModelTest
     {
         string? enteredPassword = "wrongPassword";
 
-        LoginViewModel viewModel = new(_secureStorage, _navigationService, _hook);
+        LoginViewModel viewModel = new(secureStorage, navigationService, hook);
         IRelayCommand command = viewModel.LoginCommand;
 
         viewModel.Password.Value = enteredPassword;
 
         command.Execute(null);
 
-        Assert.That(_pageChanged, Is.False);
+        navigationService.DidNotReceive().NavigateToAsync(Arg.Any<string>());
     }
 
     [TearDown]
-    public void TearDown()
-    {
-        _pageChanged = false;
-    }
+    public void TearDown() => navigationService.ClearReceivedCalls();
 }

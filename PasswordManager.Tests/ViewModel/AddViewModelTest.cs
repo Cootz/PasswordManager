@@ -8,10 +8,10 @@ namespace PasswordManager.Tests.ViewModel;
 
 public class AddViewModelTest : DatabaseTest
 {
-    private INavigationService navigationService = Substitute.For<INavigationService>();
+    private readonly INavigationService navigationService = Substitute.For<INavigationService>();
 
     [Test]
-    public void ClickOnAddButtonWithValiableProfileTest()
+    public void ClickOnAddButtonWithValuableProfileTest()
     {
         RunTestWithDatabase((databaseService) =>
         {
@@ -24,6 +24,7 @@ public class AddViewModelTest : DatabaseTest
             viewModel.Password.Value = "Valid p@ss0wrd";
 
             Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
+            navigationService.Received().PopAsync();
         });
     }
 
@@ -32,7 +33,6 @@ public class AddViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            IAlertService? alertService = Substitute.For<IAlertService>();
             AddViewModel viewModel = new(databaseService, navigationService);
             AsyncRelayCommand? command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 
@@ -41,6 +41,7 @@ public class AddViewModelTest : DatabaseTest
             viewModel.Password.Value = "Valid p@ss0wrd";
 
             Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
+            navigationService.DidNotReceive().PopAsync();
         });
     }
 
@@ -57,6 +58,10 @@ public class AddViewModelTest : DatabaseTest
             viewModel.Password.Value = "Valid p@ss0wrd";
 
             Assert.DoesNotThrowAsync(async () => await command.ExecuteAsync(null));
+            navigationService.DidNotReceive().PopAsync();
         });
     }
+
+    [TearDown]
+    public void CleanUp() => navigationService.ClearReceivedCalls();
 }

@@ -9,13 +9,12 @@ namespace PasswordManager.Tests.ViewModel;
 [TestFixture]
 public class RegisterViewModelTest
 {
-    private ISecureStorage secureStorage = Substitute.For<ISecureStorage>();
-    private INavigationService navigationService = Substitute.For<INavigationService>();
-    private IGlobalHook hook = Substitute.For<IGlobalHook>();
-    private const string password = "TestP@ssw0rd";
+    private readonly ISecureStorage secureStorage = Substitute.For<ISecureStorage>();
+    private readonly INavigationService navigationService = Substitute.For<INavigationService>();
+    private readonly IGlobalHook hook = Substitute.For<IGlobalHook>();
+    private const string Password = "TestP@ssw0rd";
 
-    private bool pageChanged = false;
-    private string? savedPassword = null;
+    private string? savedPassword;
 
     [OneTimeSetUp]
     public void OneTimeSetUp()
@@ -25,20 +24,17 @@ public class RegisterViewModelTest
             .ReturnsForAnyArgs(Task.CompletedTask)
             .AndDoes((info) => savedPassword = (string)info[1]);
         navigationService.NavigateToAsync(default)
-            .ReturnsForAnyArgs(Task.CompletedTask)
-            .AndDoes((task) => pageChanged = true);
+            .ReturnsForAnyArgs(Task.CompletedTask);
     }
 
     [Test]
     public void RegisterWithValidPassword()
     {
-        string? enteredPassword = password;
-
         RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
         IRelayCommand? command = viewModel.RegisterCommand;
 
-        viewModel.Password.Value = enteredPassword;
-        viewModel.PasswordConfirmation.Value = enteredPassword;
+        viewModel.Password.Value = Password;
+        viewModel.PasswordConfirmation.Value = Password;
 
         command.Execute(null);
 
@@ -47,8 +43,8 @@ public class RegisterViewModelTest
             Assert.That(viewModel.Password.IsValid);
             Assert.That(viewModel.PasswordConfirmation.IsValid);
             Assert.That(viewModel.MatchValidation.IsValid);
-            Assert.That(savedPassword, Is.EqualTo(password));
-            Assert.That(pageChanged, Is.True);
+            Assert.That(savedPassword, Is.EqualTo(Password));
+            navigationService.Received().NavigateToAsync(Arg.Any<string>());
         });
     }
 
@@ -68,14 +64,14 @@ public class RegisterViewModelTest
         Assert.Multiple(() =>
         {
             Assert.That(viewModel.Password.IsValid, Is.False);
-            Assert.That(pageChanged, Is.False);
+            navigationService.DidNotReceive().NavigateToAsync(Arg.Any<string>());
         });
     }
 
     [Test]
     public void RegisterWithInvalidPasswordConfirmation()
     {
-        string? enteredPassword = password;
+        string? enteredPassword = Password;
 
         RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
         IRelayCommand? command = viewModel.RegisterCommand;
@@ -89,7 +85,7 @@ public class RegisterViewModelTest
         {
             Assert.That(viewModel.Password.IsValid, Is.True);
             Assert.That(viewModel.MatchValidation.IsValid, Is.False);
-            Assert.That(pageChanged, Is.False);
+            navigationService.DidNotReceive().NavigateToAsync(Arg.Any<string>());
         });
     }
 
@@ -97,7 +93,7 @@ public class RegisterViewModelTest
     [TearDown]
     public void TearDown()
     {
-        pageChanged = false;
+        navigationService.ClearReceivedCalls();
         savedPassword = null;
     }
 }

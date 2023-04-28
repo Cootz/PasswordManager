@@ -10,15 +10,12 @@ namespace PasswordManager.Tests.ViewModel;
 
 public class SettingsViewModelTest : DatabaseTest
 {
-    private IAlertService alertService = Substitute.For<IAlertService>();
+    private readonly IAlertService alertService = Substitute.For<IAlertService>();
 
-    private const string service_name = "Test service";
+    private const string ServiceName = "Test service";
 
     [OneTimeSetUp]
-    public void OniTimeSetup()
-    {
-        alertService.ShowPromptAsync("", "").ReturnsForAnyArgs(service_name);
-    }
+    public void OneTimeSetup() => alertService.ShowPromptAsync("", "").ReturnsForAnyArgs(ServiceName);
 
     [Test]
     public void AddServiceTest()
@@ -30,7 +27,8 @@ public class SettingsViewModelTest : DatabaseTest
 
             Assert.DoesNotThrow(() => command.Execute(null));
 
-            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name));
+            alertService.Received().ShowPromptAsync(Arg.Any<string>(), Arg.Any<string>());
+            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == ServiceName));
         });
     }
 
@@ -44,14 +42,14 @@ public class SettingsViewModelTest : DatabaseTest
 
             ServiceInfo service = new()
             {
-                Name = service_name
+                Name = ServiceName
             };
 
             databaseService.Add(service);
 
             Assert.DoesNotThrow(() => command.Execute(service));
 
-            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
+            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == ServiceName), Is.False);
         });
     }
 
@@ -65,7 +63,7 @@ public class SettingsViewModelTest : DatabaseTest
 
             ServiceInfo service = new()
             {
-                Name = service_name
+                Name = ServiceName
             };
 
             databaseService.Add(service);
@@ -80,10 +78,13 @@ public class SettingsViewModelTest : DatabaseTest
 
             await Task.Delay(100);
 
-            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
+            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == ServiceName), Is.False);
 
             foreach (ProfileInfo? profile in profileInfos)
                 Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profile.ID), Is.False);
         });
     }
+
+    [TearDown]
+    public void CleanUp() => alertService.ClearReceivedCalls();
 }
