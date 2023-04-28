@@ -1,5 +1,4 @@
 namespace PasswordManager.View.Controls;
-
 #nullable enable
 
 /// <summary>
@@ -8,10 +7,11 @@ namespace PasswordManager.View.Controls;
 public partial class SettingLayout : ContentView
 {
     public static readonly BindableProperty TitleProperty =
-        BindableProperty.Create(nameof(Title), typeof(string), typeof(SettingLayout), defaultValue: string.Empty);
+        BindableProperty.Create(nameof(Title), typeof(string), typeof(SettingLayout), string.Empty);
 
     public static readonly BindableProperty OrientationProperty =
-        BindableProperty.Create(nameof(Orientation), typeof(OrientationEnum), typeof(SettingLayout), defaultValue: OrientationEnum.Horizontal, propertyChanged: OrientationChanged);
+        BindableProperty.Create(nameof(Orientation), typeof(OrientationEnum), typeof(SettingLayout),
+            OrientationEnum.Horizontal, propertyChanged: OrientationChanged);
 
     public string Title
     {
@@ -32,15 +32,15 @@ public partial class SettingLayout : ContentView
         SetOrientation(this, Orientation);
     }
 
-    static void OrientationChanged(BindableObject bindable, object oldValue, object newValue)
+    private static void OrientationChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        var layout = (SettingLayout)bindable;
+        SettingLayout? layout = (SettingLayout)bindable;
 
         SetOrientation(layout, (OrientationEnum)newValue);
         layout.InvalidateMeasure();
     }
 
-    static void SetOrientation(SettingLayout layout, OrientationEnum orientation)
+    private static void SetOrientation(SettingLayout layout, OrientationEnum orientation)
     {
         switch (orientation)
         {

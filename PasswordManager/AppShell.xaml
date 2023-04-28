@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <Shell
     x:Class="PasswordManager.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -10,19 +11,19 @@
         Title="Login"
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="LoginPage"
-        FlyoutItemIsVisible="False"/>
+        FlyoutItemIsVisible="False" />
 
     <ShellContent
         Title="Register"
         ContentTemplate="{DataTemplate local:RegisterPage}"
         Route="RegisterPage"
-        FlyoutItemIsVisible="False"/>
+        FlyoutItemIsVisible="False" />
 
     <FlyoutItem Title="Recent" Route="RecentPage">
-        <ShellContent ContentTemplate="{DataTemplate local:RecentPage}"/>
+        <ShellContent ContentTemplate="{DataTemplate local:RecentPage}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Settings" Route="SettingsPage">
-        <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}"/>
+        <ShellContent ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>
 </Shell>

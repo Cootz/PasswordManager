@@ -12,8 +12,7 @@ public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
 
     private const string NullMessage = "null";
 
-    [PrimaryKey]
-    public Guid ID { get; set; }
+    [PrimaryKey] public Guid ID { get; set; }
 
     public ServiceInfo Service { get; set; }
 
@@ -21,10 +20,7 @@ public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
 
     public string Password { get; set; }
 
-    public ProfileInfo()
-    {
-        ID = Guid.NewGuid();
-    }
+    public ProfileInfo() => ID = Guid.NewGuid();
 
     public ProfileInfo(Guid id, ServiceInfo service, string username, string password)
     {
@@ -36,7 +32,7 @@ public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
 
     public override string ToString()
     {
-        StringBuilder ret = new StringBuilder();
+        StringBuilder ret = new();
 
         ret.Append(Service.Name).Append(FieldSplit);
         ret.Append(Username ?? NullMessage).Append(FieldSplit);
@@ -52,29 +48,15 @@ public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
         return equals[0] & equals[1] & equals[2];
     }
 
-    public static bool operator !=(ProfileInfo left, ProfileInfo right)
-    {
-        return !left?.Equals(right) ?? false;
-    }
+    public static bool operator !=(ProfileInfo left, ProfileInfo right) => !left?.Equals(right) ?? false;
 
-    public static bool operator ==(ProfileInfo left, ProfileInfo right)
-    {
-        return left?.Equals(right) ?? false;
-    }
+    public static bool operator ==(ProfileInfo left, ProfileInfo right) => left?.Equals(right) ?? false;
 
     public override bool Equals([AllowNull] object obj)
     {
-        if (ReferenceEquals(this, obj))
-        {
-            return true;
-        }
+        if (ReferenceEquals(this, obj)) return true;
 
-        if (obj is null)
-        {
-            return false;
-        }
-
-        return Equals(obj as ProfileInfo);
+        return obj is not null && Equals(obj as ProfileInfo);
     }
 
     public override int GetHashCode() => base.GetHashCode();

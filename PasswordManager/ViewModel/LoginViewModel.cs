@@ -6,51 +6,49 @@ using PasswordManager.Validation.Rules;
 using PasswordManager.View;
 using SharpHook;
 
-namespace PasswordManager.ViewModel
+namespace PasswordManager.ViewModel;
+
+public partial class LoginViewModel : ObservableObject
 {
-    public partial class LoginViewModel : ObservableObject
+    private readonly INavigationService navigationService;
+    private readonly IGlobalHook hook;
+
+    public ValidatableObject<string> Password { get; set; } = new();
+
+    public LoginViewModel(ISecureStorage secureStorage, INavigationService navigation, IGlobalHook globalHook)
     {
-        private readonly INavigationService navigationService;
-        private readonly IGlobalHook hook;
+        navigationService = navigation;
+        hook = globalHook;
 
-        public ValidatableObject<string> Password { get; set; } = new();
+        hook.KeyPressed += OnKeyPressed;
 
-        public LoginViewModel(ISecureStorage secureStorage, INavigationService navigation, IGlobalHook globalHook)
+        Password.Validations.Add(new LoginPasswordRule(secureStorage)
         {
-            navigationService = navigation;
-            hook = globalHook;
+            ValidationMessage = "Incorrect password"
+        });
+    }
 
-            hook.KeyPressed += OnKeyPressed;
+    private void OnKeyPressed(object sender, KeyboardHookEventArgs e)
+    {
+        if (e.Data.KeyCode == SharpHook.Native.KeyCode.VcEnter) MainThread.InvokeOnMainThreadAsync(Login);
+    }
 
-            Password.Validations.Add(new LoginPasswordRule(secureStorage)
-            {
-                ValidationMessage = "Incorrect password"
-            });
-        }
+    [RelayCommand]
+    private async Task Login()
+    {
+        await Task.Run(Password.Validate);
 
-        private void OnKeyPressed(object sender, KeyboardHookEventArgs e)
+        if (Password.IsValid)
         {
-            if (e.Data.KeyCode == SharpHook.Native.KeyCode.VcEnter)
-                MainThread.InvokeOnMainThreadAsync(Login);
-        }
-
-        [RelayCommand]
-        async Task Login()
-        {
-            await Task.Run(Password.Validate);
-
-            if (Password.IsValid)
-            {
-                await navigationService.NavigateToAsync($"//{nameof(RecentPage)}");
+            await navigationService.NavigateToAsync($"//{nameof(RecentPage)}");
 
 #if __MOBILE__
-                navigationService.SetFlyoutBehavior(FlyoutBehavior.Flyout);
+            navigationService.SetFlyoutBehavior(FlyoutBehavior.Flyout);
 #else
                 navigationService.SetFlyoutBehavior(FlyoutBehavior.Locked);
 #endif
 
-                hook.KeyPressed -= OnKeyPressed;
-            }
+            hook.KeyPressed -= OnKeyPressed;
         }
     }
 }

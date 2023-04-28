@@ -5,116 +5,70 @@ using PasswordManager.Services;
 using PasswordManager.Validation;
 using PasswordManager.Validation.Rules;
 
-namespace PasswordManager.ViewModel
+namespace PasswordManager.ViewModel;
+
+public partial class AddViewModel : ObservableObject
 {
-    public partial class AddViewModel : ObservableObject
+    private readonly DatabaseService _databaseService;
+    private readonly INavigationService _navigationService;
+
+    [ObservableProperty] private IQueryable<ServiceInfo> services;
+
+    public ValidatableObject<string> Username { get; } = new();
+
+    public ValidatableObject<string> Password { get; } = new();
+
+    public ValidatableObject<ServiceInfo> SelectedService { get; } = new();
+
+    public AddViewModel(DatabaseService databaseService, INavigationService navigationService)
     {
-        private readonly DatabaseService _databaseService;
-        private readonly INavigationService _navigationService;
+        _databaseService = databaseService;
+        _navigationService = navigationService;
 
-        [ObservableProperty]
-        private IQueryable<ServiceInfo> services;
+        Services = databaseService.Select<ServiceInfo>();
+        SelectedService.Value = Services.First() ?? ServiceInfo.DefaultServices.FirstOrDefault();
 
-        public ValidatableObject<string> Username { get; } = new();
+        AddValidation();
+    }
 
-        public ValidatableObject<string> Password { get; } = new();
-
-        public ValidatableObject<ServiceInfo> SelectedService { get; } = new();
-
-        public AddViewModel(DatabaseService databaseService, INavigationService navigationService)
+    private void AddValidation()
+    {
+        Username.Validations.Add(new IsNotNullOrEmptyRule()
         {
-            _databaseService = databaseService;
-            _navigationService = navigationService;
+            ValidationMessage = "A username is required"
+        });
 
-            Services = databaseService.Select<ServiceInfo>();
-            SelectedService.Value = Services.First() ?? ServiceInfo.DefaultServices.FirstOrDefault();
-
-            AddValidation();
-        }
-
-        private void AddValidation()
+        Password.Validations.Add(new IsNotNullOrEmptyRule()
         {
-            Username.Validations.Add(new IsNotNullOrEmptyRule()
-            {
-                ValidationMessage = "A username is required"
+            ValidationMessage = "A password is required"
+        });
 
-                /* Unmerged change from project 'PasswordManager (net7.0-maccatalyst)'
-                Before:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                After:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                */
-
-                /* Unmerged change from project 'PasswordManager (net7.0-ios)'
-                Before:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                After:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                */
-
-                /* Unmerged change from project 'PasswordManager (net7.0)'
-                Before:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                After:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                */
-
-                /* Unmerged change from project 'PasswordManager (net7.0-android)'
-                Before:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                After:
-                            });
-
-                            Password.Validations.Add(new IsNotNullOrEmptyRule()
-                */
-            });
-
-            Password.Validations.Add(new IsNotNullOrEmptyRule()
-            {
-                ValidationMessage = "A password is required"
-            });
-
-            SelectedService.Validations.Add(new IsNotNullRule<ServiceInfo>()
-            {
-                ValidationMessage = "A service is required"
-            });
-        }
-
-        [RelayCommand]
-        async Task AddProfile()
+        SelectedService.Validations.Add(new IsNotNullRule<ServiceInfo>()
         {
-            if (Username.Validate() && Password.Validate() && SelectedService.Validate())
-            {
-                ProfileInfo profile = new()
-                {
-                    Username = Username.Value,
-                    Password = Password.Value,
-                    Service = SelectedService.Value
-                };
+            ValidationMessage = "A service is required"
+        });
+    }
 
-                _databaseService.Add(profile);
-
-                await GoBack();
-            }
-        }
-
-        async Task GoBack()
+    [RelayCommand]
+    private async Task AddProfile()
+    {
+        if (Username.Validate() && Password.Validate() && SelectedService.Validate())
         {
-            await _navigationService.PopAsync();
+            ProfileInfo profile = new()
+            {
+                Username = Username.Value,
+                Password = Password.Value,
+                Service = SelectedService.Value
+            };
+
+            _databaseService.Add(profile);
+
+            await GoBack();
         }
+    }
+
+    private async Task GoBack()
+    {
+        await _navigationService.PopAsync();
     }
 }

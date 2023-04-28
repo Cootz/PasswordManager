@@ -1,37 +1,34 @@
-﻿namespace PasswordManager.Model
+﻿namespace PasswordManager.Model;
+
+internal sealed class SemaphoreQueue : IDisposable
 {
-    internal sealed class SemaphoreQueue : IDisposable
+    private readonly SemaphoreSlim semaphore;
+
+    private bool disposed;
+
+    public SemaphoreQueue(int parallelismLevel) => semaphore = new SemaphoreSlim(parallelismLevel);
+
+    public async void Enqueue(Func<Task> taskGenerator)
     {
-        private readonly SemaphoreSlim semaphore;
+        ObjectDisposedException.ThrowIf(disposed, this);
 
-        private bool disposed = false;
+        await semaphore.WaitAsync();
 
-        public SemaphoreQueue(int parallelismLevel) =>
-            semaphore = new(parallelismLevel);
-
-        public async void Enqueue(Func<Task> taskGenerator)
+        try
         {
-            ObjectDisposedException.ThrowIf(disposed, this);
-
-            await semaphore.WaitAsync();
-
-            try
-            {
-                await taskGenerator();
-            }
-            finally
-            {
-                semaphore.Release();
-            }
+            await taskGenerator();
         }
-
-        public void Dispose()
+        finally
         {
-            if (!disposed)
-            {
-                semaphore.Dispose();
-                disposed = true;
-            }
+            semaphore.Release();
         }
+    }
+
+    public void Dispose()
+    {
+        if (disposed) return;
+
+        semaphore.Dispose();
+        disposed = true;
     }
 }

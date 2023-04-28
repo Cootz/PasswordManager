@@ -2,23 +2,22 @@
 using PasswordManager.View;
 using PasswordManager.ViewModel;
 
-namespace PasswordManager
+namespace PasswordManager;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public static IAlertService AlertService;
+
+    public App(IServiceProvider provider)
     {
-        public static IAlertService AlertService;
+        InitializeComponent();
 
-        public App(IServiceProvider provider)
-        {
-            InitializeComponent();
+        AlertService = provider.GetService<IAlertService>();
 
-            AlertService = provider.GetService<IAlertService>();
+        //Preinitialize page
+        provider.GetRequiredService<RecentPage>();
+        provider.GetRequiredService<RecentViewModel>();
 
-            //Preinitialize page
-            provider.GetRequiredService<RecentPage>();
-            provider.GetRequiredService<RecentViewModel>();
-
-            MainPage = new AppShell();
-        }
+        MainPage = new AppShell();
     }
 }

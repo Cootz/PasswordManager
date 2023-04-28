@@ -6,86 +6,84 @@ using PasswordManager.Tests.DB;
 using PasswordManager.Tests.TestData;
 using PasswordManager.ViewModel;
 
-namespace PasswordManager.Tests.ViewModel
+namespace PasswordManager.Tests.ViewModel;
+
+public class SettingsViewModelTest : DatabaseTest
 {
-    public class SettingsViewModelTest : DatabaseTest
+    private IAlertService alertService = Substitute.For<IAlertService>();
+
+    private const string service_name = "Test service";
+
+    [OneTimeSetUp]
+    public void OniTimeSetup()
     {
-        private IAlertService alertService = Substitute.For<IAlertService>();
+        alertService.ShowPromptAsync("", "").ReturnsForAnyArgs(service_name);
+    }
 
-        private const string service_name = "Test service";
-
-        [OneTimeSetUp]
-        public void OniTimeSetup()
+    [Test]
+    public void AddServiceTest()
+    {
+        RunTestWithDatabase((databaseService) =>
         {
-            alertService.ShowPromptAsync("", "").ReturnsForAnyArgs(service_name);
-        }
+            SettingsViewModel viewModel = new(databaseService, alertService);
+            RelayCommand? command = (RelayCommand)viewModel.AddServiceCommand;
 
-        [Test]
-        public void AddServiceTest()
+            Assert.DoesNotThrow(() => command.Execute(null));
+
+            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name));
+        });
+    }
+
+    [Test]
+    public void RemoveServiceWithoutProfilesTest()
+    {
+        RunTestWithDatabase((databaseService) =>
         {
-            RunTestWithDatabase((databaseService) =>
+            SettingsViewModel viewModel = new(databaseService, alertService);
+            RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
+
+            ServiceInfo service = new()
             {
-                SettingsViewModel viewModel = new SettingsViewModel(databaseService, alertService);
-                RelayCommand command = (RelayCommand)viewModel.AddServiceCommand;
+                Name = service_name
+            };
 
-                Assert.DoesNotThrow(() => command.Execute(null));
+            databaseService.Add(service);
 
-                Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name));
-            });
-        }
+            Assert.DoesNotThrow(() => command.Execute(service));
 
-        [Test]
-        public void RemoveServiceWithoutProfilesTest()
+            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
+        });
+    }
+
+    [Test]
+    public void RemoveServiceWithProfilesTest()
+    {
+        RunTestWithDatabaseAsync(async (databaseService) =>
         {
-            RunTestWithDatabase((databaseService) =>
+            SettingsViewModel viewModel = new(databaseService, alertService);
+            RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
+
+            ServiceInfo service = new()
             {
-                SettingsViewModel viewModel = new SettingsViewModel(databaseService, alertService);
-                RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
+                Name = service_name
+            };
 
-                ServiceInfo service = new ServiceInfo()
-                {
-                    Name = service_name,
-                };
+            databaseService.Add(service);
 
-                databaseService.Add(service);
+            ProfileInfo[] profileInfos = ProfileData.GetTestProfiles(service);
 
-                Assert.DoesNotThrow(() => command.Execute(service));
+            foreach (ProfileInfo? profile in profileInfos) databaseService.Add(profile);
 
-                Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
-            });
-        }
+            Assert.DoesNotThrow(() => command.Execute(service));
 
-        [Test]
-        public void RemoveServiceWithProfilesTest()
-        {
-            RunTestWithDatabaseAsync(async (databaseService) =>
-            {
-                SettingsViewModel viewModel = new SettingsViewModel(databaseService, alertService);
-                RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
+            await databaseService.Refresh();
 
-                ServiceInfo service = new ServiceInfo()
-                {
-                    Name = service_name,
-                };
+            await Task.Delay(100);
 
-                databaseService.Add(service);
+            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
 
-                ProfileInfo[] profileInfos = ProfileData.GetTestProfiles(service);
-
-                foreach (ProfileInfo profile in profileInfos)
-                    databaseService.Add(profile);
-
-                Assert.DoesNotThrow(() => command.Execute(service));
-
-                await databaseService.Refresh();
-
-                await Task.Delay(100);
-
-                Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
-
-                foreach (ProfileInfo profile in profileInfos)
-                    Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profile.ID), Is.False);
-            });
-        }
+            foreach (ProfileInfo? profile in profileInfos)
+                Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profile.ID), Is.False);
+        });
     }
 }

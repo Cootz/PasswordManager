@@ -12,14 +12,11 @@ public sealed class DatabaseService : IInitializable, IDisposable
 {
     private IController DB;
 
-    private bool isInitialized = false;
+    private bool isInitialized;
 
     public bool IsInitialized() => isInitialized;
 
-    public DatabaseService(IController DB)
-    {
-        this.DB = DB;
-    }
+    public DatabaseService(IController DB) => this.DB = DB;
 
     public async Task Initialize()
     {
@@ -33,36 +30,45 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// </summary>
     public async void SavePasswords(IEnumerable<ProfileInfo> data)
     {
-        foreach (ProfileInfo prof in data)
-        {
-            await DB.Add(prof);
-        }
+        foreach (ProfileInfo prof in data) await DB.Add(prof);
     }
 
     /// <summary>
     /// Deletes entry from database
     /// </summary>
     /// <returns></returns>
-    public async Task Remove<T>(T info) where T : IRealmObject => await DB.Remove(info);
+    public async Task Remove<T>(T info) where T : IRealmObject
+    {
+        await DB.Remove(info);
+    }
 
     /// <summary>
     /// Asynchronously wait for the database instance and outstanding objects to get updated to point to the most recent persisted version
     /// </summary>
     /// <returns></returns>
-    public async Task Refresh() => await DB.Refresh();
+    public async Task Refresh()
+    {
+        await DB.Refresh();
+    }
 
     /// <summary>
     /// Adds entry to database
     /// </summary>
     /// <param name="info"></param>
-    public async void Add(IRealmObject info) => await DB.Add(info);
+    public async void Add(IRealmObject info)
+    {
+        await DB.Add(info);
+    }
 
     /// <summary>
     /// Asynchronously provide direct access to realm instance
     /// </summary>
     /// <param name="action"></param>
     /// <returns></returns>
-    public async Task RealmQuerry(Func<Realm, Task> action) => await (DB as RealmController).RealmQuerry(action);
+    public async Task RealmQuery(Func<Realm, Task> action)
+    {
+        await ((RealmController)DB).RealmQuery(action);
+    }
 
     /// <summary>
     /// Select every instance of given class from database
@@ -70,5 +76,8 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// <typeparam name="T">Type to search</typeparam>
     public IQueryable<T> Select<T>() where T : IRealmObject => DB.Select<T>();
 
-    public void Dispose() => DB.Dispose();
+    public void Dispose()
+    {
+        DB.Dispose();
+    }
 }

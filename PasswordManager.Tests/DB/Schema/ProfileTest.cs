@@ -1,79 +1,77 @@
 ﻿using PasswordManager.Model.DB.Schema;
 
-namespace PasswordManager.Tests.DB.Schema
+namespace PasswordManager.Tests.DB.Schema;
+
+[TestFixture]
+public class ProfileTest
 {
-    [TestFixture]
-    public class ProfileTest
+    [Test]
+    public void CompareTwoEqualProfilesTest()
     {
-        [Test]
-        public void CompareTwoEqualProfilesTest()
+        ServiceInfo? providedService = new("steam");
+
+        ProfileInfo? Profile = new()
         {
-            var providedService = new ServiceInfo("steam");
+            Username = "testUser",
+            Password = "testPassword",
+            Service = providedService
+        };
 
-            var Profile = new ProfileInfo
-            {
-                Username = "testUser",
-                Password = "testPassword",
-                Service = providedService
-            };
-
-            var otherProfile = new ProfileInfo
-            {
-                Username = "testUser",
-                Password = "testPassword",
-                Service = providedService
-            };
-
-            Assert.That(Profile.Equals(otherProfile), Is.True);
-        }
-
-        [Test]
-        public void CompareTwoDifferentProfilesTest()
+        ProfileInfo? otherProfile = new()
         {
-            var steamService = new ServiceInfo("steam");
+            Username = "testUser",
+            Password = "testPassword",
+            Service = providedService
+        };
 
-            var Profile = new ProfileInfo
-            {
-                Username = "testUser",
-                Password = "testPassword",
-                Service = steamService
-            };
+        Assert.That(Profile.Equals(otherProfile), Is.True);
+    }
 
-            var otherProfile = new ProfileInfo
-            {
-                Username = "diffTestUser",
-                Password = "diffTestPassword",
-                Service = steamService
-            };
+    [Test]
+    public void CompareTwoDifferentProfilesTest()
+    {
+        ServiceInfo? steamService = new("steam");
 
-            Assert.That(Profile.Equals(otherProfile), Is.False);
-        }
-
-        [Test]
-        public void CompareProfileWithNullTest()
+        ProfileInfo? Profile = new()
         {
-            var steamService = new ServiceInfo("steam");
+            Username = "testUser",
+            Password = "testPassword",
+            Service = steamService
+        };
 
-            var Profile = new ProfileInfo
-            {
-                Username = "testUser",
-                Password = "testPassword",
-                Service = steamService
-            };
-
-            Assert.That(Profile.Equals(null), Is.False);
-        }
-
-
-        [Test]
-        public void CompareNullWithProfileTest()
+        ProfileInfo? otherProfile = new()
         {
-            var steamService = new ServiceInfo("steam");
+            Username = "diffTestUser",
+            Password = "diffTestPassword",
+            Service = steamService
+        };
 
-            ProfileInfo? Profile = null;
+        Assert.That(Profile.Equals(otherProfile), Is.False);
+    }
 
-            Assert.That(Profile == new ProfileInfo(), Is.False);
-        }
+    [Test]
+    public void CompareProfileWithNullTest()
+    {
+        ServiceInfo? steamService = new("steam");
 
+        ProfileInfo? Profile = new()
+        {
+            Username = "testUser",
+            Password = "testPassword",
+            Service = steamService
+        };
+
+        Assert.That(Profile.Equals(null), Is.False);
+    }
+
+
+    [Test]
+    public void CompareNullWithProfileTest()
+    {
+        ServiceInfo? steamService = new("steam");
+
+        ProfileInfo? Profile = null;
+
+        Assert.That(Profile == new ProfileInfo(), Is.False);
     }
 }

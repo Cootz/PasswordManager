@@ -1,82 +1,81 @@
 ﻿using PasswordManager.Model.IO;
 
-namespace PasswordManager.Tests.IO
+namespace PasswordManager.Tests.IO;
+
+[TestFixture]
+public class BackupManagerTest
 {
-    [TestFixture]
-    public class BackupManagerTest
+    private const string FILENAME = "testfile.txt";
+    private const string DIFFERENT_PATH_MESSAGE = "File saved in a different directory";
+
+    [Test]
+    public void BackupFileOnseTest()
     {
-        const string FILENAME = "testfile.txt";
-        const string DIFFERENT_PATH_MESSAGE = "File saved in a different directory";
+        TempStorage storage = new();
+        string? filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
 
-        [Test]
-        public void BackupFileOnseTest()
+        File.Create(filePath).Dispose();
+
+        FileInfo? fileinfo = new(filePath);
+
+        FileInfo? backupFileInfo = BackupManager.Backup(fileinfo);
+
+        Assert.That(backupFileInfo, Is.Not.Null);
+        Assert.That(File.Exists(backupFileInfo.FullName), Is.True);
+        Assert.That(backupFileInfo.DirectoryName, Is.EqualTo(fileinfo.DirectoryName), DIFFERENT_PATH_MESSAGE);
+    }
+
+    [Test]
+    public void BackupFileMultipleTimesTest()
+    {
+        TempStorage storage = new();
+        string? filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
+
+        File.Create(filePath).Dispose();
+
+        FileInfo? fileinfo = new(filePath);
+
+        List<FileInfo> backupFileInfos = new();
+
+        for (int i = 0; i < 100; i++) backupFileInfos.Add(BackupManager.Backup(fileinfo));
+
+        foreach (FileInfo? backupFileInfo in backupFileInfos)
         {
-            TempStorage storage = new TempStorage();
-            string filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
-
-            File.Create(filePath).Dispose();
-
-            var fileinfo = new FileInfo(filePath);
-
-            var backupFileInfo = BackupManager.Backup(fileinfo);
-
             Assert.That(backupFileInfo, Is.Not.Null);
             Assert.That(File.Exists(backupFileInfo.FullName), Is.True);
-            Assert.That(backupFileInfo.DirectoryName, Is.EqualTo(fileinfo.DirectoryName), message: DIFFERENT_PATH_MESSAGE);
+            Assert.That(backupFileInfo.DirectoryName, Is.EqualTo(fileinfo.DirectoryName), DIFFERENT_PATH_MESSAGE);
         }
+    }
 
-        [Test]
-        public void BackupFileMultipleTimesTest()
-        {
-            TempStorage storage = new TempStorage();
-            string filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
+    [Test]
+    public void BackupNonExistingFile()
+    {
+        TempStorage storage = new();
+        string? filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
 
-            File.Create(filePath).Dispose();
+        FileInfo? fileinfo = new(filePath);
 
-            var fileinfo = new FileInfo(filePath);
+        Assert.Throws<FileNotFoundException>(() => BackupManager.Backup(fileinfo));
+    }
 
-            List<FileInfo> backupFileInfos = new();
+    [Test]
+    public void BackupFileInADifferentDirectory()
+    {
+        TempStorage storage = new();
 
-            for (int i = 0; i < 100; i++)
-                backupFileInfos.Add(BackupManager.Backup(fileinfo));
+        TempStorage? backupStorage = (TempStorage)storage.GetStorageForDirectory("backup");
 
-            foreach (var backupFileInfo in backupFileInfos)
-            {
-                Assert.That(backupFileInfo, Is.Not.Null);
-                Assert.That(File.Exists(backupFileInfo.FullName), Is.True);
-                Assert.That(backupFileInfo.DirectoryName, Is.EqualTo(fileinfo.DirectoryName), message: DIFFERENT_PATH_MESSAGE);
-            }
-        }
+        string? filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
 
-        [Test]
-        public void BackupNonExistingFile()
-        {
-            TempStorage storage = new TempStorage();
-            string filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
+        File.Create(filePath).Dispose();
 
-            var fileinfo = new FileInfo(filePath);
+        FileInfo? fileinfo = new(filePath);
 
-            Assert.Throws<FileNotFoundException>(() => BackupManager.Backup(fileinfo));
-        }
+        FileInfo? backupFileInfo = BackupManager.Backup(fileinfo, backupStorage);
 
-        [Test]
-        public void BackupFileInADifferentDirectory()
-        {
-            TempStorage storage = new TempStorage();
-
-            TempStorage backupStorage = (TempStorage)storage.GetStorageForDirectory("backup");
-
-            string filePath = Path.Combine(storage.WorkingDirectory, FILENAME);
-
-            File.Create(filePath).Dispose();
-
-            var fileinfo = new FileInfo(filePath);
-
-            var backupFileInfo = BackupManager.Backup(fileinfo, backupStorage);
-
-            Assert.That(backupFileInfo, Is.Not.Null);
-            Assert.That(File.Exists(backupFileInfo.FullName), Is.True);
-            Assert.That(backupFileInfo.DirectoryName, Is.EqualTo(backupStorage.WorkingDirectory), message: DIFFERENT_PATH_MESSAGE);
-        }
+        Assert.That(backupFileInfo, Is.Not.Null);
+        Assert.That(File.Exists(backupFileInfo.FullName), Is.True);
+        Assert.That(backupFileInfo.DirectoryName, Is.EqualTo(backupStorage.WorkingDirectory),
+            DIFFERENT_PATH_MESSAGE);
     }
 }
