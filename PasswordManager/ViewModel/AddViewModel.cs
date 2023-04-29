@@ -9,8 +9,8 @@ namespace PasswordManager.ViewModel;
 
 public partial class AddViewModel : ObservableObject
 {
-    private readonly DatabaseService _databaseService;
-    private readonly INavigationService _navigationService;
+    private readonly DatabaseService databaseService;
+    private readonly INavigationService navigationService;
 
     [ObservableProperty] private IQueryable<ServiceInfo> services;
 
@@ -22,8 +22,8 @@ public partial class AddViewModel : ObservableObject
 
     public AddViewModel(DatabaseService databaseService, INavigationService navigationService)
     {
-        _databaseService = databaseService;
-        _navigationService = navigationService;
+        this.databaseService = databaseService;
+        this.navigationService = navigationService;
 
         Services = databaseService.Select<ServiceInfo>();
         SelectedService.Value = Services.First() ?? ServiceInfo.DefaultServices.FirstOrDefault();
@@ -61,7 +61,7 @@ public partial class AddViewModel : ObservableObject
                 Service = SelectedService.Value
             };
 
-            _databaseService.Add(profile);
+            databaseService.Add(profile);
 
             await GoBack();
         }
@@ -69,6 +69,6 @@ public partial class AddViewModel : ObservableObject
 
     private async Task GoBack()
     {
-        await _navigationService.PopAsync();
+        await navigationService.PopAsync();
     }
 }

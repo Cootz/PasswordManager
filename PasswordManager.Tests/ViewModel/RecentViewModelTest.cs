@@ -17,7 +17,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            RecentViewModel? viewModel = setupViewModel(databaseService);
+            RecentViewModel viewModel = setupViewModel(databaseService);
 
             viewModel.SearchText = string.Empty;
 
@@ -32,7 +32,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            RecentViewModel? viewModel = setupViewModel(databaseService);
+            RecentViewModel viewModel = setupViewModel(databaseService);
 
             viewModel.SearchText = new string('t', length);
 
@@ -47,7 +47,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            RecentViewModel? viewModel = setupViewModel(databaseService);
+            RecentViewModel viewModel = setupViewModel(databaseService);
 
             viewModel.SearchText = searchRequest;
 
@@ -63,7 +63,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            RecentViewModel? viewModel = setupViewModel(databaseService);
+            RecentViewModel viewModel = setupViewModel(databaseService);
 
             ICommand command = viewModel.ShowNoteInfoCommand;
 
@@ -78,7 +78,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabaseAsync(async (databaseService) =>
         {
-            RecentViewModel? viewModel = setupViewModel(databaseService);
+            RecentViewModel viewModel = setupViewModel(databaseService);
 
             ICommand command = viewModel.DeleteNoteCommand;
 
@@ -99,7 +99,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabaseAsync(async (databaseService) =>
         {
-            RecentViewModel? viewModel = setupViewModel(databaseService);
+            RecentViewModel viewModel = setupViewModel(databaseService);
 
             ICommand command = viewModel.AddNoteCommand;
             
@@ -118,7 +118,7 @@ public class RecentViewModelTest : DatabaseTest
             if (!databaseService.Select<ServiceInfo>().Any(s => s.ID == service.ID))
                 databaseService.Add(service);
 
-        ProfileInfo[]? testProfiles = ProfileData.GetTestProfiles();
+        ProfileInfo[] testProfiles = ProfileData.GetTestProfiles();
 
         foreach (ProfileInfo? profile in testProfiles) databaseService.Add(profile);
 

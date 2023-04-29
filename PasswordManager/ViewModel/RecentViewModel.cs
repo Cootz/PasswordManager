@@ -42,13 +42,13 @@ public partial class RecentViewModel : ObservableObject
         }
     }
 
-    private DatabaseService db;
-    private readonly INavigationService _navigationService;
+    private readonly DatabaseService db;
+    private readonly INavigationService navigationService;
 
     public RecentViewModel(DatabaseService databaseService, INavigationService navigationService)
     {
         db = databaseService;
-        _navigationService = navigationService;
+        this.navigationService = navigationService;
 
         Profiles = db.Select<ProfileInfo>();
     }
@@ -56,7 +56,7 @@ public partial class RecentViewModel : ObservableObject
     [RelayCommand]
     private async Task AddNote()
     {
-        await _navigationService.NavigateToAsync(nameof(AddPage));
+        await navigationService.NavigateToAsync(nameof(AddPage));
     }
 
     [RelayCommand]
@@ -73,6 +73,6 @@ public partial class RecentViewModel : ObservableObject
             { "profile", sender }
         };
 
-        await _navigationService.NavigateToAsync(nameof(ProfilePage), routeParams);
+        await navigationService.NavigateToAsync(nameof(ProfilePage), routeParams);
     }
 }

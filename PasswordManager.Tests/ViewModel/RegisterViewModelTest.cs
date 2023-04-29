@@ -31,7 +31,7 @@ public class RegisterViewModelTest
     public void RegisterWithValidPassword()
     {
         RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
-        IRelayCommand? command = viewModel.RegisterCommand;
+        IRelayCommand command = viewModel.RegisterCommand;
 
         viewModel.Password.Value = Password;
         viewModel.PasswordConfirmation.Value = Password;
@@ -51,10 +51,10 @@ public class RegisterViewModelTest
     [Test]
     public void RegisterWithShortPassword()
     {
-        string? enteredPassword = "tinyPsw";
+        string enteredPassword = "tinyPsw";
 
         RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
-        IRelayCommand? command = viewModel.RegisterCommand;
+        IRelayCommand command = viewModel.RegisterCommand;
 
         viewModel.Password.Value = enteredPassword;
         viewModel.PasswordConfirmation.Value = enteredPassword;
@@ -71,10 +71,10 @@ public class RegisterViewModelTest
     [Test]
     public void RegisterWithInvalidPasswordConfirmation()
     {
-        string? enteredPassword = Password;
+        string enteredPassword = Password;
 
         RegisterViewModel viewModel = new(secureStorage, navigationService, hook);
-        IRelayCommand? command = viewModel.RegisterCommand;
+        IRelayCommand command = viewModel.RegisterCommand;
 
         viewModel.Password.Value = enteredPassword;
         viewModel.PasswordConfirmation.Value = enteredPassword + "123";

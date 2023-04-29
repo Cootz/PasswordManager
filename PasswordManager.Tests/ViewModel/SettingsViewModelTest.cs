@@ -23,7 +23,7 @@ public class SettingsViewModelTest : DatabaseTest
         RunTestWithDatabase((databaseService) =>
         {
             SettingsViewModel viewModel = new(databaseService, alertService);
-            RelayCommand? command = (RelayCommand)viewModel.AddServiceCommand;
+            RelayCommand command = (RelayCommand)viewModel.AddServiceCommand;
 
             Assert.DoesNotThrow(() => command.Execute(null));
 

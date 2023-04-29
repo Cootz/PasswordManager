@@ -9,8 +9,8 @@ public partial class SettingsViewModel : ObservableObject
 {
     [ObservableProperty] private IQueryable<ServiceInfo> serviceInfos;
 
-    private DatabaseService databaseService;
-    private IAlertService alertService;
+    private readonly DatabaseService databaseService;
+    private readonly IAlertService alertService;
 
     public SettingsViewModel(DatabaseService db, IAlertService alertService)
     {
