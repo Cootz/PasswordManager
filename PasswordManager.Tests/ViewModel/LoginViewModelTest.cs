@@ -13,6 +13,7 @@ public class LoginViewModelTest
     private readonly INavigationService navigationService = Substitute.For<INavigationService>();
     private readonly IGlobalHook hook = Substitute.For<IGlobalHook>();
     private const string Password = "TestP@ssw0rd";
+    private const string EnteredPassword = "wrongPassword";
 
     [OneTimeSetUp]
     public void OneTimeSetUp()
@@ -26,7 +27,7 @@ public class LoginViewModelTest
     public async Task TestLoginWithCorrectPassword()
     {
         LoginViewModel viewModel = new(secureStorage, navigationService, hook);
-        AsyncRelayCommand? command = (AsyncRelayCommand)viewModel.LoginCommand;
+        AsyncRelayCommand command = (AsyncRelayCommand)viewModel.LoginCommand;
 
         viewModel.Password.Value = Password;
 
@@ -38,12 +39,10 @@ public class LoginViewModelTest
     [Test]
     public void TestLoginWithIncorrectPassword()
     {
-        string? enteredPassword = "wrongPassword";
-
         LoginViewModel viewModel = new(secureStorage, navigationService, hook);
         IRelayCommand command = viewModel.LoginCommand;
 
-        viewModel.Password.Value = enteredPassword;
+        viewModel.Password.Value = EnteredPassword;
 
         command.Execute(null);
 
