@@ -7,6 +7,7 @@ public class EncryptionHelperTest
 {
     private const string expected_string = "1234567890qwertyuiopasdfghjkl;";
 
+    // ReSharper disable once InconsistentNaming
     private readonly byte[] expected_byte_key =
     {
         0x31, 0x00, 0x32, 0x00, 0x33, 0x00, 0x34, 0x00, 0x35, 0x00, 0x36, 0x00, 0x37, 0x00, 0x38, 0x00, 0x39, 0x00,
@@ -29,21 +30,20 @@ public class EncryptionHelperTest
     [Test]
     public void ByteKeyToStringTest()
     {
-        byte[]? key = expected_byte_key;
-        string? key_string = string.Empty;
+        byte[] key = expected_byte_key;
+        string? keyString = string.Empty;
 
-        Assert.DoesNotThrow(() => { key_string = key.ToKeyString(); });
+        Assert.DoesNotThrow(() => { keyString = key.ToKeyString(); });
 
-        Assert.That(key_string, Is.EquivalentTo(expected_string));
+        Assert.That(keyString, Is.EquivalentTo(expected_string));
     }
 
     [Test]
     public void StringKeyToByteTest()
     {
-        string? key_string = expected_string;
         byte[] key = null!;
 
-        Assert.DoesNotThrow(() => { key = key_string.ToKey(); });
+        Assert.DoesNotThrow(() => { key = expected_string.ToKey(); });
 
         Assert.That(key.Length, Is.EqualTo(60));
         Assert.That(key, Is.EquivalentTo(expected_byte_key));
