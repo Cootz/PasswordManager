@@ -17,7 +17,7 @@ public class AddViewModelTest : DatabaseTest
         {
             AddViewModel viewModel = new(databaseService, navigationService);
 
-            AsyncRelayCommand? command = (AsyncRelayCommand)viewModel.AddProfileCommand;
+            AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 
             viewModel.SelectedService.Value = viewModel.Services.First();
             viewModel.Username.Value = "Valid username";
@@ -34,7 +34,7 @@ public class AddViewModelTest : DatabaseTest
         RunTestWithDatabase((databaseService) =>
         {
             AddViewModel viewModel = new(databaseService, navigationService);
-            AsyncRelayCommand? command = (AsyncRelayCommand)viewModel.AddProfileCommand;
+            AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 
             viewModel.SelectedService.Value = viewModel.Services.First();
             viewModel.Username.Value = "";
@@ -51,7 +51,7 @@ public class AddViewModelTest : DatabaseTest
         RunTestWithDatabase((databaseService) =>
         {
             AddViewModel viewModel = new(databaseService, navigationService);
-            AsyncRelayCommand? command = (AsyncRelayCommand)viewModel.AddProfileCommand;
+            AsyncRelayCommand command = (AsyncRelayCommand)viewModel.AddProfileCommand;
 
             viewModel.SelectedService.Value = viewModel.Services.First();
             viewModel.Username.Value = "";
