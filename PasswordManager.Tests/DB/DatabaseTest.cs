@@ -7,7 +7,7 @@ using PasswordManager.Tests.IO;
 namespace PasswordManager.Tests.DB;
 
 [TestFixture]
-[RequiresThread(ApartmentState.STA)]
+[SingleThreaded]
 [NonParallelizable]
 public class DatabaseTest
 {
