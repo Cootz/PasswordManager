@@ -10,14 +10,14 @@ namespace PasswordManager.Tests.ViewModel;
 
 public class RecentViewModelTest : DatabaseTest
 {
-    private INavigationService _navigationService = Substitute.For<INavigationService>();
+    private readonly INavigationService navigationService = Substitute.For<INavigationService>();
 
     [Test]
     public void TestListWithEmptySearch()
     {
         RunTestWithDatabase((databaseService) =>
         {
-            RecentViewModel? viewModel = setupViewModel(databaseService);
+            RecentViewModel viewModel = setupViewModel(databaseService);
 
             viewModel.SearchText = string.Empty;
 
@@ -32,7 +32,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            RecentViewModel? viewModel = setupViewModel(databaseService);
+            RecentViewModel viewModel = setupViewModel(databaseService);
 
             viewModel.SearchText = new string('t', length);
 
@@ -47,7 +47,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            RecentViewModel? viewModel = setupViewModel(databaseService);
+            RecentViewModel viewModel = setupViewModel(databaseService);
 
             viewModel.SearchText = searchRequest;
 
@@ -63,11 +63,13 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            RecentViewModel? viewModel = setupViewModel(databaseService);
+            RecentViewModel viewModel = setupViewModel(databaseService);
 
             ICommand command = viewModel.ShowNoteInfoCommand;
 
             Assert.DoesNotThrow(() => command.Execute(databaseService.Select<ProfileInfo>().First()));
+
+            navigationService.Received().NavigateToAsync(Arg.Any<string>(), Arg.Any<Dictionary<string, object>>());
         });
     }
 
@@ -76,7 +78,7 @@ public class RecentViewModelTest : DatabaseTest
     {
         RunTestWithDatabaseAsync(async (databaseService) =>
         {
-            RecentViewModel? viewModel = setupViewModel(databaseService);
+            RecentViewModel viewModel = setupViewModel(databaseService);
 
             ICommand command = viewModel.DeleteNoteCommand;
 
@@ -92,16 +94,34 @@ public class RecentViewModelTest : DatabaseTest
         });
     }
 
+    [Test]
+    public void TestProfileAddition()
+    {
+        RunTestWithDatabaseAsync(async (databaseService) =>
+        {
+            RecentViewModel viewModel = setupViewModel(databaseService);
+
+            ICommand command = viewModel.AddNoteCommand;
+            
+            command.Execute(null);
+
+            await navigationService.Received().NavigateToAsync(Arg.Any<string>());
+        });
+    }
+
+    [TearDown]
+    public void CleanUp() => navigationService.ClearReceivedCalls();
+
     private RecentViewModel setupViewModel(DatabaseService databaseService)
     {
         foreach (ServiceInfo? service in ServiceInfo.DefaultServices)
             if (!databaseService.Select<ServiceInfo>().Any(s => s.ID == service.ID))
                 databaseService.Add(service);
 
-        ProfileInfo[]? testProfiles = ProfileData.GetTestProfiles();
+        ProfileInfo[] testProfiles = ProfileData.GetTestProfiles();
 
         foreach (ProfileInfo? profile in testProfiles) databaseService.Add(profile);
 
-        return new RecentViewModel(databaseService, _navigationService);
+        return new RecentViewModel(databaseService, navigationService);
     }
 }

@@ -12,7 +12,7 @@ public static class ProfileData
             Password = "test password"
         };
 
-    public static ProfileInfo[] GetTestProfiles()
+    public static ProfileInfo[] GetTestProfiles(ServiceInfo? service = null)
     {
         ServiceInfo? steam = ServiceInfo.DefaultServices.Single(s => s.Name == "steam");
         ServiceInfo? origin = ServiceInfo.DefaultServices.Single(s => s.Name == "origin");
@@ -22,68 +22,31 @@ public static class ProfileData
         {
             new()
             {
-                Service = steam,
+                Service = service ?? steam,
                 Username = "coo",
                 Password = "P@ssw0rd"
             },
             new()
             {
-                Service = steam,
+                Service = service ?? steam,
                 Username = "Rimo",
                 Password = "Passw0rd"
             },
             new()
             {
-                Service = steam,
+                Service = service ?? steam,
                 Username = "Iro",
                 Password = "Password"
             },
             new()
             {
-                Service = origin,
+                Service = service ?? origin,
                 Username = "Ica",
                 Password = "P@ssword"
             },
             new()
             {
-                Service = gog,
-                Username = "Tenno",
-                Password = "p@ssword"
-            }
-        };
-    }
-
-    public static ProfileInfo[] GetTestProfiles(ServiceInfo service)
-    {
-        return new ProfileInfo[]
-        {
-            new()
-            {
-                Service = service,
-                Username = "coo",
-                Password = "P@ssw0rd"
-            },
-            new()
-            {
-                Service = service,
-                Username = "Rimo",
-                Password = "Passw0rd"
-            },
-            new()
-            {
-                Service = service,
-                Username = "Iro",
-                Password = "Password"
-            },
-            new()
-            {
-                Service = service,
-                Username = "Ica",
-                Password = "P@ssword"
-            },
-            new()
-            {
-                Service = service,
+                Service = service ?? gog,
                 Username = "Tenno",
                 Password = "p@ssword"
             }
