@@ -12,7 +12,7 @@
     <VerticalStackLayout Margin="10" Spacing="6" HorizontalOptions="FillAndExpand">
         <controls:SettingLayout Title="Services" Orientation="Vertical" HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical">
-                <CollectionView MaximumHeightRequest="200" ItemsSource="{Binding ServiceInfos}"
+                <CollectionView MaximumHeightRequest="200" ItemsSource="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=ServiceInfos}"
                                 HorizontalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="{x:Type schema:ServiceInfo}">
@@ -39,7 +39,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
                 <Button Text="Add" FontSize="Medium" HorizontalOptions="FillAndExpand" Margin="0,0,0,10"
-                        Command="{Binding AddServiceCommand}" />
+                        Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=AddServiceCommand}" />
             </StackLayout>
         </controls:SettingLayout>
     </VerticalStackLayout>
