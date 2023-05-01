@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Model.DB.Schema;
 
 namespace PasswordManager.ViewModel;
@@ -12,4 +13,7 @@ public partial class ProfileViewModel : ObservableObject
     {
         get => $"Profile {ProfileInfo?.Username ?? string.Empty}";
     }
+
+    [RelayCommand]
+    void CopyToClipboard(string text) => Clipboard.Default.SetTextAsync(text);
 }

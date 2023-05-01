@@ -17,17 +17,25 @@
             <Setter Property="VerticalOptions" Value="CenterAndExpand" />
             <Setter Property="FontSize" Value="Medium" />
         </Style>
+        <Style x:Key="leftImageButton" TargetType="ImageButton">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="MaximumHeightRequest" Value="10"/>
+        </Style>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="auto, auto, auto" ColumnDefinitions="*,*" RowSpacing="5" ColumnSpacing="20" Margin="10">
+    <Grid RowDefinitions="auto, auto, auto" ColumnDefinitions="*,auto , *" RowSpacing="5" ColumnSpacing="20" Margin="10">
         <Label Text="Service" Style="{StaticResource leftLabel}" Grid.Column="0" Grid.Row="0" />
         <Label Text="{Binding ProfileInfo.Service.Name}" Style="{StaticResource rightLabel}" Grid.Column="1"
                Grid.Row="0" />
 
         <Label Text="Login" Style="{StaticResource leftLabel}" Grid.Column="0" Grid.Row="1" />
         <Label Text="{Binding ProfileInfo.Username}" Style="{StaticResource rightLabel}" Grid.Column="1" Grid.Row="1" />
+        <ImageButton Source="{AppThemeBinding Light=copy_paste_icon.png, Dark=copy_paste_dark_icon.png}" Padding="5" Style="{StaticResource leftImageButton}" Command="{Binding CopyToClipboardCommand}" CommandParameter="{Binding ProfileInfo.Username}" Grid.Column="2" Grid.Row="1"/>
 
         <Label Text="Password" Style="{StaticResource leftLabel}" Grid.Column="0" Grid.Row="2" />
-        <Label Text="{Binding ProfileInfo.Password}" Style="{StaticResource rightLabel}" Grid.Column="1" Grid.Row="2" />
+        <Label Text="{Binding ProfileInfo.Password}" Style="{StaticResource rightLabel}" Grid.Column="1" Grid.Row="2"/>
+        <ImageButton Source="{AppThemeBinding Light=copy_paste_icon.png, Dark=copy_paste_dark_icon.png}" Padding="5" Style="{StaticResource leftImageButton}" Command="{Binding CopyToClipboardCommand}" CommandParameter="{Binding ProfileInfo.Password}" Grid.Column="2" Grid.Row="2"/>
     </Grid>
 </ContentPage>
