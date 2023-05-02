@@ -16,7 +16,8 @@
     <VerticalStackLayout Margin="10" Spacing="6" HorizontalOptions="FillAndExpand">
         <controls:SettingLayout Title="Services" Orientation="Vertical" HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical">
-                <CollectionView MaximumHeightRequest="200" ItemsSource="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=ServiceInfos}"
+                <CollectionView MaximumHeightRequest="200"
+                                ItemsSource="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=ServiceInfos}"
                                 HorizontalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="{x:Type schema:ServiceInfo}">
@@ -48,9 +49,10 @@
         </controls:SettingLayout>
 
         <controls:SettingLayout Title="Theme">
-            <Picker ItemsSource="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=Themes}" 
-                    SelectedItem="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=CurrentTheme}" 
-                    ItemDisplayBinding="{Binding Name }"/>
+            <Picker
+                ItemsSource="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=Themes}"
+                SelectedItem="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=CurrentTheme}"
+                ItemDisplayBinding="{Binding Name }" />
         </controls:SettingLayout>
     </VerticalStackLayout>
 </ContentPage>

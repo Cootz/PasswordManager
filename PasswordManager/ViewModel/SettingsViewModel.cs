@@ -18,8 +18,9 @@ public partial class SettingsViewModel : ObservableObject
 
     public AppThemeInfo CurrentTheme
     {
-        get => Themes.First(t => t.Theme == settingsService.CurrentTheme) ;
-        set => SetProperty(CurrentTheme, value, settingsService, (settings, themeInfo) => settings.CurrentTheme = themeInfo.Theme);
+        get => Themes.First(t => t.Theme == settingsService.CurrentTheme);
+        set => SetProperty(CurrentTheme, value, settingsService,
+            (settings, themeInfo) => settings.CurrentTheme = themeInfo.Theme);
     }
 
     public SettingsViewModel(DatabaseService db, IAlertService alertService, ISettingsService settingsService)
@@ -31,9 +32,9 @@ public partial class SettingsViewModel : ObservableObject
         ServiceInfos = settingsService.ServiceInfos;
         Themes = new()
         {
-            new ("Dark", AppTheme.Dark),
-            new ("Light", AppTheme.Light),
-            new ("System", AppTheme.Unspecified)
+            new("Dark", AppTheme.Dark),
+            new("Light", AppTheme.Light),
+            new("System", AppTheme.Unspecified)
         };
     }
 

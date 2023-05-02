@@ -91,7 +91,8 @@ public class SettingsViewModelTest : DatabaseTest
         });
     }
 
-    private SettingsViewModel setUpViewModel(DatabaseService databaseService) => new(databaseService, alertService, settingsService);
+    private SettingsViewModel setUpViewModel(DatabaseService databaseService) =>
+        new(databaseService, alertService, settingsService);
 
     [Test]
     public void ChangeAppThemeTest()
