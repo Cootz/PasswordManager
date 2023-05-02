@@ -49,7 +49,7 @@
 
         <controls:SettingLayout Title="Theme">
             <Picker ItemsSource="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=Themes}" 
-                    SelectedItem="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=Theme}" 
+                    SelectedItem="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=CurrentTheme}" 
                     ItemDisplayBinding="{Binding Name }"/>
         </controls:SettingLayout>
     </VerticalStackLayout>

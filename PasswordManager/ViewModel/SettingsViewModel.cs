@@ -16,10 +16,10 @@ public partial class SettingsViewModel : ObservableObject
 
     [ObservableProperty] private ObservableCollection<AppThemeInfo> themes;
 
-    public AppThemeInfo Theme
+    public AppThemeInfo CurrentTheme
     {
         get => Themes.First(t => t.Theme == settingsService.CurrentTheme) ;
-        set => SetProperty(Theme, value, settingsService, (settings, themeInfo) => settings.CurrentTheme = themeInfo.Theme);
+        set => SetProperty(CurrentTheme, value, settingsService, (settings, themeInfo) => settings.CurrentTheme = themeInfo.Theme);
     }
 
     public SettingsViewModel(DatabaseService db, IAlertService alertService, ISettingsService settingsService)

@@ -11,18 +11,24 @@ namespace PasswordManager.Tests.ViewModel;
 public class SettingsViewModelTest : DatabaseTest
 {
     private readonly IAlertService alertService = Substitute.For<IAlertService>();
+    private readonly ISettingsService settingsService = Substitute.For<ISettingsService>();
 
     private const string ServiceName = "Test service";
 
     [OneTimeSetUp]
-    public void OneTimeSetup() => alertService.ShowPromptAsync("", "").ReturnsForAnyArgs(ServiceName);
+    public void OneTimeSetup()
+    {
+        alertService.ShowPromptAsync("", "").ReturnsForAnyArgs(ServiceName);
+
+        settingsService.CurrentTheme = AppTheme.Unspecified;
+    }
 
     [Test]
     public void AddServiceTest()
     {
         RunTestWithDatabase((databaseService) =>
         {
-            SettingsViewModel viewModel = new(databaseService, alertService);
+            SettingsViewModel viewModel = setUpViewModel(databaseService);
             RelayCommand command = (RelayCommand)viewModel.AddServiceCommand;
 
             Assert.DoesNotThrow(() => command.Execute(null));
@@ -37,7 +43,7 @@ public class SettingsViewModelTest : DatabaseTest
     {
         RunTestWithDatabase((databaseService) =>
         {
-            SettingsViewModel viewModel = new(databaseService, alertService);
+            SettingsViewModel viewModel = setUpViewModel(databaseService);
             RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
 
             ServiceInfo service = new()
@@ -58,7 +64,7 @@ public class SettingsViewModelTest : DatabaseTest
     {
         RunTestWithDatabaseAsync(async (databaseService) =>
         {
-            SettingsViewModel viewModel = new(databaseService, alertService);
+            SettingsViewModel viewModel = setUpViewModel(databaseService);
             RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
 
             ServiceInfo service = new()
@@ -85,6 +91,33 @@ public class SettingsViewModelTest : DatabaseTest
         });
     }
 
+    private SettingsViewModel setUpViewModel(DatabaseService databaseService) => new(databaseService, alertService, settingsService);
+
+    [Test]
+    public void ChangeAppThemeTest()
+    {
+        RunTestWithDatabase((databaseService) =>
+        {
+            SettingsViewModel viewModel = setUpViewModel(databaseService);
+
+            SettingsViewModel.AppThemeInfo darkThemeInfo = viewModel.Themes.First(t => t.Theme == AppTheme.Dark);
+
+            viewModel.CurrentTheme = darkThemeInfo;
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(settingsService.CurrentTheme == darkThemeInfo.Theme);
+                Assert.That(viewModel.CurrentTheme == darkThemeInfo);
+            });
+        });
+    }
+
     [TearDown]
-    public void CleanUp() => alertService.ClearReceivedCalls();
+    public void CleanUp()
+    {
+        settingsService.CurrentTheme = AppTheme.Unspecified;
+
+        alertService.ClearReceivedCalls();
+        settingsService.ClearReceivedCalls();
+    }
 }
