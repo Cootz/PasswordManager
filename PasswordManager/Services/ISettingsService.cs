@@ -9,7 +9,7 @@ namespace PasswordManager.Services
 {
     public interface ISettingsService
     {
-        IQueryable<ProfileInfo> ProfileInfos { get; }
+        IQueryable<ServiceInfo> ServiceInfos { get; }
         AppTheme CurrentTheme { get; set; }
     }
 }

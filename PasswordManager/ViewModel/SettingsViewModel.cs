@@ -11,13 +11,21 @@ public partial class SettingsViewModel : ObservableObject
 
     private readonly DatabaseService databaseService;
     private readonly IAlertService alertService;
+    private readonly ISettingsService settingsService;
 
-    public SettingsViewModel(DatabaseService db, IAlertService alertService)
+    public AppTheme Theme
+    {
+        get => settingsService.CurrentTheme;
+        set => SetProperty(settingsService.CurrentTheme, value, settingsService, (settings, theme) => settings.CurrentTheme = theme);
+    }
+
+    public SettingsViewModel(DatabaseService db, IAlertService alertService, ISettingsService settingsService)
     {
         databaseService = db;
         this.alertService = alertService;
+        this.settingsService = settingsService;
 
-        ServiceInfos = db.Select<ServiceInfo>();
+        ServiceInfos = settingsService.ServiceInfos;
     }
 
     [RelayCommand]

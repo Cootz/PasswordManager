@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PasswordManager.Model.DB.Schema;
+﻿using PasswordManager.Model.DB.Schema;
 
 namespace PasswordManager.Services
 {
@@ -11,9 +6,9 @@ namespace PasswordManager.Services
     {
         private readonly DatabaseService databaseService;
 
-        public IQueryable<ProfileInfo> ProfileInfos
+        public IQueryable<ServiceInfo> ServiceInfos
         {
-            get => databaseService.Select<ProfileInfo>();
+            get => databaseService.Select<ServiceInfo>();
         }
 
         public AppTheme CurrentTheme
