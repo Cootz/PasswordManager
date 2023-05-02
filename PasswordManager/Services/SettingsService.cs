@@ -1,4 +1,6 @@
-﻿using PasswordManager.Model.DB.Schema;
+﻿using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using PasswordManager.Model.DB.Schema;
 
 namespace PasswordManager.Services
 {
@@ -13,8 +15,12 @@ namespace PasswordManager.Services
 
         public AppTheme CurrentTheme
         {
-            get => Preferences.Default.Get("app_theme", AppTheme.Unspecified); 
-            set => Preferences.Default.Set("app_theme", value);
+            get => (AppTheme)Preferences.Default.Get("app_theme", 0);
+            set
+            {
+                Preferences.Default.Set("app_theme", (int)value);
+                App.Current.UserAppTheme = CurrentTheme;
+            }
         }
 
         public SettingsService(DatabaseService databaseService)
