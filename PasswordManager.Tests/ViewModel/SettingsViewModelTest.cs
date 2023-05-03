@@ -76,18 +76,18 @@ public class SettingsViewModelTest : DatabaseTest
 
             ProfileInfo[] profileInfos = ProfileData.GetTestProfiles(service);
 
+            var profileInfoIds = (from profile in profileInfos select profile.ID).ToArray();
+
             foreach (ProfileInfo? profile in profileInfos) databaseService.Add(profile);
 
             Assert.DoesNotThrow(() => command.Execute(service));
 
             await databaseService.Refresh();
 
-            await Task.Delay(100);
-
             Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == ServiceName), Is.False);
 
-            foreach (ProfileInfo? profile in profileInfos)
-                Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profile.ID), Is.False);
+            foreach (var profileId in profileInfoIds)
+                Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profileId), Is.False);
         });
     }
 

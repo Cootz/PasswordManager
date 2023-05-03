@@ -43,7 +43,11 @@ public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
 
     public bool Equals([AllowNull] ProfileInfo other)
     {
-        bool[] equals = { Service == other?.Service, Password == other?.Password, Username == other?.Username };
+        if (other is null) return false;
+
+        if (!IsValid || !other.IsValid) return false;
+
+        bool[] equals = { Service == other.Service, Password == other.Password, Username == other.Username };
 
         return equals[0] & equals[1] & equals[2];
     }
