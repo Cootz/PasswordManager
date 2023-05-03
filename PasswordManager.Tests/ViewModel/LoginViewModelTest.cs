@@ -39,14 +39,14 @@ public class LoginViewModelTest
     }
 
     [Test]
-    public void TestLoginWithIncorrectPassword()
+    public async Task TestLoginWithIncorrectPassword()
     {
         LoginViewModel viewModel = new(secureStorage, navigationService, hook);
-        IRelayCommand command = viewModel.LoginCommand;
+        AsyncRelayCommand command = (AsyncRelayCommand)viewModel.LoginCommand;
 
         viewModel.Password.Value = incorrect_password;
 
-        command.Execute(null);
+        await command.ExecuteAsync(null);
 
         navigationService.DidNotReceive().NavigateToAsync(Arg.Any<string>());
         Assert.That(viewModel.Password.Errors.First(), Is.EqualTo(warning_message));
