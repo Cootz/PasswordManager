@@ -40,6 +40,8 @@ public partial class ServiceInfo : RealmObject, IEquatable<ServiceInfo>
 
         if (other is null) return false;
 
+        if (!IsValid || !other.IsValid) return false;
+        
         bool[] equals = { ID == other.ID, Name == other.Name };
 
         return equals[0] & equals[1];

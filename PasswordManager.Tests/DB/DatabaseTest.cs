@@ -18,17 +18,17 @@ public class DatabaseTest
     [OneTimeSetUp]
     public static void Setup()
     {
-        if (tempStorage is null)
-        {
-            secureStorage = Substitute.For<ISecureStorage>();
-            secureStorage.GetAsync("realm_key").Returns(Task.FromResult(@"PeShVmYq3t6w9z$C&F)J@McQfTjWnZr4"));
+        if (tempStorage is not null)
+            return;
 
-            tempStorage = new TempStorage();
-            controller = new RealmController(tempStorage, secureStorage);
-            database = new DatabaseService(controller);
+        secureStorage = Substitute.For<ISecureStorage>();
+        secureStorage.GetAsync("realm_key").Returns(Task.FromResult(@"PeShVmYq3t6w9z$C&F)J@McQfTjWnZr4"));
 
-            database.Initialize().Wait();
-        }
+        tempStorage = new TempStorage();
+        controller = new RealmController(tempStorage, secureStorage);
+        database = new DatabaseService(controller);
+
+        database.Initialize().Wait();
     }
 
     protected void RunTestWithDatabase(Action<DatabaseService> testRun)
