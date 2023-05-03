@@ -76,7 +76,7 @@ public partial class RegisterViewModel : ObservableObject
 #if __MOBILE__
             navigationService.SetFlyoutBehavior(FlyoutBehavior.Flyout);
 #else
-                navigationService.SetFlyoutBehavior(FlyoutBehavior.Locked);
+            navigationService.SetFlyoutBehavior(FlyoutBehavior.Locked);
 #endif
 
             hook.KeyPressed -= OnKeyPressed;

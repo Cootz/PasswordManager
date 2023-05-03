@@ -10,9 +10,10 @@ public partial class App : Application
 
     public App(IServiceProvider provider)
     {
-        InitializeComponent();
-
         AlertService = provider.GetService<IAlertService>();
+        UserAppTheme = provider.GetService<ISettingsService>().CurrentTheme;
+
+        InitializeComponent();
 
         //Preinitialize page
         provider.GetRequiredService<RecentPage>();

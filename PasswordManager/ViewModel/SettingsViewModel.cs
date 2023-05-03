@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
+using System.Collections.ObjectModel;
 
 namespace PasswordManager.ViewModel;
 
@@ -11,13 +12,30 @@ public partial class SettingsViewModel : ObservableObject
 
     private readonly DatabaseService databaseService;
     private readonly IAlertService alertService;
+    private readonly ISettingsService settingsService;
 
-    public SettingsViewModel(DatabaseService db, IAlertService alertService)
+    [ObservableProperty] private ObservableCollection<AppThemeInfo> themes;
+
+    public AppThemeInfo CurrentTheme
+    {
+        get => Themes.First(t => t.Theme == settingsService.CurrentTheme);
+        set => SetProperty(CurrentTheme, value, settingsService,
+            (settings, themeInfo) => settings.CurrentTheme = themeInfo.Theme);
+    }
+
+    public SettingsViewModel(DatabaseService db, IAlertService alertService, ISettingsService settingsService)
     {
         databaseService = db;
         this.alertService = alertService;
+        this.settingsService = settingsService;
 
-        ServiceInfos = db.Select<ServiceInfo>();
+        ServiceInfos = settingsService.ServiceInfos;
+        Themes = new()
+        {
+            new("Dark", AppTheme.Dark),
+            new("Light", AppTheme.Light),
+            new("System", AppTheme.Unspecified)
+        };
     }
 
     [RelayCommand]
@@ -46,5 +64,17 @@ public partial class SettingsViewModel : ObservableObject
                 realm.Remove(info);
             });
         });
+    }
+
+    public class AppThemeInfo
+    {
+        public string Name { get; set; }
+        public AppTheme Theme { get; set; }
+
+        public AppThemeInfo(string name, AppTheme theme)
+        {
+            Name = name;
+            Theme = theme;
+        }
     }
 }

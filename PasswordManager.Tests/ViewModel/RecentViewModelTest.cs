@@ -102,7 +102,7 @@ public class RecentViewModelTest : DatabaseTest
             RecentViewModel viewModel = setupViewModel(databaseService);
 
             ICommand command = viewModel.AddNoteCommand;
-            
+
             command.Execute(null);
 
             await navigationService.Received().NavigateToAsync(Arg.Any<string>());

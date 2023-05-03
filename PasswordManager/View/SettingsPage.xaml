@@ -6,13 +6,18 @@
              x:Class="PasswordManager.View.SettingsPage"
              xmlns:controls="clr-namespace:PasswordManager.View.Controls"
              xmlns:viewmodels="clr-namespace:PasswordManager.ViewModel"
+             xmlns:convertors="clr-namespace:PasswordManager.Model.Converter"
+             xmlns:appModel="clr-namespace:Microsoft;assembly=Microsoft.Maui.ApplicationModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:applicationModel="clr-namespace:Microsoft.Maui.ApplicationModel;assembly=Microsoft.Maui.Essentials"
              x:DataType="viewmodels:SettingsViewModel"
              x:Name="Settings"
              Title="Settings">
     <VerticalStackLayout Margin="10" Spacing="6" HorizontalOptions="FillAndExpand">
         <controls:SettingLayout Title="Services" Orientation="Vertical" HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical">
-                <CollectionView MaximumHeightRequest="200" ItemsSource="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=ServiceInfos}"
+                <CollectionView MaximumHeightRequest="200"
+                                ItemsSource="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=ServiceInfos}"
                                 HorizontalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="{x:Type schema:ServiceInfo}">
@@ -41,6 +46,13 @@
                 <Button Text="Add" FontSize="Medium" HorizontalOptions="FillAndExpand" Margin="0,0,0,10"
                         Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=AddServiceCommand}" />
             </StackLayout>
+        </controls:SettingLayout>
+
+        <controls:SettingLayout Title="Theme">
+            <Picker
+                ItemsSource="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=Themes}"
+                SelectedItem="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=CurrentTheme}"
+                ItemDisplayBinding="{Binding Name }" />
         </controls:SettingLayout>
     </VerticalStackLayout>
 </ContentPage>
