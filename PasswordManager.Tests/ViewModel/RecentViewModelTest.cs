@@ -84,13 +84,13 @@ public class RecentViewModelTest : DatabaseTest
 
             ProfileInfo? deletedProfile = databaseService.Select<ProfileInfo>().First();
 
+            Guid deletedProfileId = deletedProfile.ID;
+
             command.Execute(deletedProfile);
 
             await databaseService.Refresh();
 
-            await Task.Delay(50);
-
-            Assert.That(deletedProfile, Is.Not.AnyOf(databaseService.Select<ProfileInfo>()));
+            Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == deletedProfileId), Is.False);
         });
     }
 
