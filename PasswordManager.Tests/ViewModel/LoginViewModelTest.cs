@@ -48,7 +48,7 @@ public class LoginViewModelTest
 
         await command.ExecuteAsync(null);
 
-        navigationService.DidNotReceive().NavigateToAsync(Arg.Any<string>());
+        await navigationService.DidNotReceive().NavigateToAsync(Arg.Any<string>());
         Assert.That(viewModel.Password.Errors.First(), Is.EqualTo(warning_message));
     }
 
