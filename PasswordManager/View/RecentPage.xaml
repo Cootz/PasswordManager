@@ -55,6 +55,12 @@
                 <Frame Margin="10, 5"
                        Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
                        ToolTipProperties.Text="Tap for more info">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=ShowNoteInfoCommand}"
+                            CommandParameter="{Binding .}" />
+                    </Frame.GestureRecognizers>
+
                     <FlyoutBase.ContextFlyout>
                         <MenuFlyout>
                             <!--RelativeSource not working due to the bag. See: https://github.com/dotnet/maui/issues/5382-->
