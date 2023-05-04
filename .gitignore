@@ -35,3 +35,8 @@ bld/
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Encryption
+*.keystore
+*.cert
+*.key
