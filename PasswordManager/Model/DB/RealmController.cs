@@ -1,73 +1,142 @@
 ﻿using PasswordManager.Model.DB.Schema;
 using PasswordManager.Model.IO;
+using PasswordManager.Utils;
 using Realms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
-namespace PasswordManager.Model.DB
+// ReSharper disable MethodHasAsyncOverload
+
+namespace PasswordManager.Model.DB;
+
+/// <summary>
+/// Handles data transferring to/from realm
+/// </summary>
+public sealed class RealmController : IController
 {
-    public class RealmController : IController
+    /// <summary>
+    /// Version     Changes
+    /// 3       -   Update <see cref="ServiceInfo"/> and <see cref="ProfileInfo"/> after migration from Sqlite
+    /// </summary>
+    private const ulong schema_version = 3;
+
+    private Storage dataStorage { get; set; }
+
+    private ISecureStorage secureStorage { get; set; }
+
+    private Realm realm;
+
+    private bool isInitialized = false;
+
+    public bool IsInitialized() => isInitialized;
+
+    public RealmController(Storage storage, ISecureStorage secureStorage)
     {
-        private const ulong schema_version = 2;
+        this.secureStorage = secureStorage;
+        dataStorage = storage.GetStorageForDirectory("data");
 
-        private Realm realm;
+        Initialize().Wait();
+    }
 
-        public RealmController() { }
+    public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(() => { realm.Add(info); });
 
-        public async Task Add(Profile profile)
+    public void Dispose() => realm.Dispose();
+
+    public async Task Initialize()
+    {
+        //Prevent double initialization
+        if (IsInitialized()) return;
+
+        byte[] key = new byte[64];
+
+        string encKeyString = await secureStorage.GetAsync("realm_key");
+
+        if (encKeyString == null || encKeyString.ToKey().Length != 64)
         {
-            await realm.WriteAsync(() =>
+            string databasePath = Path.Combine(dataStorage.WorkingDirectory, "data.realm");
+
+            if (File.Exists(databasePath))
             {
-                realm.Add(profile);
-            });
+                BackupManager.Backup(new FileInfo(databasePath));
+                File.Delete(databasePath);
+            }
+
+            key = EncryptionHelper.GenerateKey();
+            await secureStorage.SetAsync("realm_key", key.ToKeyString());
+        }
+        else
+        {
+            key = encKeyString.ToKey();
         }
 
-        public void Dispose()
-        {
-            realm.Dispose();
-        }
+        Debug.Assert(key.Length == 64);
 
-        public async Task Initialize()
+        RealmConfiguration config = new(Path.Combine(dataStorage.WorkingDirectory, "data.realm"))
         {
-            var config = new RealmConfiguration(Path.Combine(AppDirectoryManager.Data, "Psw.realm"))
-            { 
-                SchemaVersion = schema_version,
-                MigrationCallback = OnMigration
-            };
+            SchemaVersion = schema_version,
+            MigrationCallback = OnMigration,
+            EncryptionKey = key
+        };
+
+        try
+        {
+            realm = Realm.GetInstance(config);
+        }
+        catch
+        {
+            string databasePath = config.DatabasePath;
+
+            BackupManager.Backup(new FileInfo(databasePath));
+            File.Delete(databasePath);
+
             realm = Realm.GetInstance(config);
         }
 
-        private void OnMigration(Migration migration, ulong lastSchemaVersion)
-        {
-            for (ulong i = 1; i <= schema_version; i++)
-                applyMigrationsForVestions(migration, (ulong)i);
-        }
+        //Preparing default values
+        List<ServiceInfo> servicesToAdd = ServiceInfo.DefaultServices
+            .Where(service => realm.Find<ServiceInfo>(service.ID) is null)
+            .ToList();
 
-        private void applyMigrationsForVestions(Migration migration, ulong targetVersion)
-        {
-            switch (targetVersion)
+        if (servicesToAdd.Count > 0)
+            realm.Write(() =>
             {
-                case 2:
-                    var newProfiles = migration.NewRealm.All<Profile>();
+                foreach (ServiceInfo service in servicesToAdd) realm.Add(service);
+            });
 
-                    for (int i = 0; i < newProfiles.Count(); i++)
-                        newProfiles.ElementAt(i).ID = Guid.NewGuid();
-                    break;
-            }
-        }
+        Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count()
+                     == ServiceInfo.DefaultServices.Length);
 
-        public IQueryable<T> Select<T>()
-            where T : class
+        isInitialized = true;
+    }
+
+    private void OnMigration(Migration migration, ulong lastSchemaVersion)
+    {
+        for (ulong i = 1; i <= schema_version; i++) applyMigrationsForVersions(migration, i);
+    }
+
+    private void applyMigrationsForVersions(Migration migration, ulong targetVersion)
+    {
+        switch (targetVersion)
         {
-            var type = typeof(T);
-            return type switch
-            {
-                var value when value == typeof(Profile) => (IQueryable<T>)realm?.All<Profile>(),
-                _ => null
-            };
+            case 2:
+                IQueryable<ProfileInfo> newProfiles = migration.NewRealm.All<ProfileInfo>();
+
+                for (int i = 0; i < newProfiles.Count(); i++) newProfiles.ElementAt(i).ID = Guid.NewGuid();
+
+                break;
         }
+    }
+
+    public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
+
+    public Task Refresh() => realm.RefreshAsync();
+
+    public async Task RealmQuery(Func<Realm, Task> action)
+    {
+        await action(realm);
+    }
+
+    public Task Remove<T>(T info) where T : IRealmObject
+    {
+        return realm?.WriteAsync(() => realm.Remove(info));
     }
 }

@@ -1,22 +1,24 @@
-﻿using PasswordManager.Model.DB;
-using PasswordManager.Model.IO;
+﻿using PasswordManager.Services;
+using PasswordManager.View;
+using PasswordManager.ViewModel;
 
-namespace PasswordManager
+namespace PasswordManager;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public static IAlertService AlertService;
+
+    public App(IServiceProvider provider)
     {
-        public App()
-        {
-            AppDirectoryManager.Initialize().Wait();
+        AlertService = provider.GetService<IAlertService>();
+        UserAppTheme = provider.GetService<ISettingsService>().CurrentTheme;
 
-            Task[] Inits = {
-                PasswordController.Initialize(),
-            };
+        InitializeComponent();
 
-            InitializeComponent();
+        //Preinitialize page
+        provider.GetRequiredService<RecentPage>();
+        provider.GetRequiredService<RecentViewModel>();
 
-            Task.WhenAll(Inits);
-            MainPage = new AppShell();
-        }
+        MainPage = new AppShell();
     }
 }

@@ -13,17 +13,15 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "main" ]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "main" ]
-  schedule:
-    - cron: '17 18 * * 0'
 
 jobs:
   analyze:
     name: Analyze
-    runs-on: ${{ matrix.os.fullname }}
+    runs-on: windows-latest
     permissions:
       actions: read
       contents: read
@@ -33,15 +31,8 @@ jobs:
       fail-fast: false
       matrix:
         language: [ 'csharp' ]
-        os:
-            - { prettyname: Windows, fullname: windows-latest, buildname: net7.0-windows10.0.19041.0 }
-            - { prettyname: macOS, fullname: macos-latest, buildname: net7.0-maccatalyst }
-            - { prettyname: Android, fullname: windows-latest, buildname: net7.0-android }
-            - { prettyname: iOS, fullname: macos-latest, buildname: net7.0-ios }
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
-        # Use only 'java' to analyze code written in Java, Kotlin or both
-        # Use only 'javascript' to analyze code written in JavaScript, TypeScript or both
-        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
+
+    timeout-minutes: 60
 
     steps:
     - name: Checkout repository
@@ -63,14 +54,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '7.0.x'
-    
-    - name: Install .NET workloads
-      run: dotnet workload restore
+      
+    - name: Install MAUI
+      run: dotnet workload install maui
 
-    # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
-    # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Build
-      run: dotnet build -c Debug -f ${{ matrix.os.buildname }} Passwords.sln
+    - name: Build app
+      run: dotnet build -c Debug -warnaserror -f:net7.0-windows10.0.19041.0 ${{github.workspace}}/PasswordManager/PasswordManager.csproj
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
