@@ -23,6 +23,7 @@
         <Label Text="Confirm password" />
         <Entry BindingContext="{Binding MatchValidation}"
                Text="{Binding Source={x:Reference Registration}, Path=BindingContext.PasswordConfirmation.Value}"
+               Style="{StaticResource EntryWithValidation}"
                IsPassword="True">
             <Entry.Behaviors>
                 <toolkit:EventToCommandBehavior
