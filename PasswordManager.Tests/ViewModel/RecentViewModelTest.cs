@@ -5,12 +5,14 @@ using PasswordManager.Tests.DB;
 using PasswordManager.Tests.TestData;
 using PasswordManager.ViewModel;
 using System.Windows.Input;
+using SharpHook;
 
 namespace PasswordManager.Tests.ViewModel;
 
 public class RecentViewModelTest : DatabaseTest
 {
     private readonly INavigationService navigationService = Substitute.For<INavigationService>();
+    private readonly IGlobalHook globalHook = Substitute.For<IGlobalHook>();
 
     [Test]
     public void TestListWithEmptySearch()
@@ -122,6 +124,6 @@ public class RecentViewModelTest : DatabaseTest
 
         foreach (ProfileInfo? profile in testProfiles) databaseService.Add(profile);
 
-        return new RecentViewModel(databaseService, navigationService);
+        return new RecentViewModel(databaseService, navigationService, globalHook);
     }
 }
