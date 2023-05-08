@@ -4,6 +4,8 @@ using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
 using PasswordManager.View;
 using Realms;
+using SharpHook;
+using SharpHook.Native;
 
 namespace PasswordManager.ViewModel;
 
@@ -15,12 +17,11 @@ public partial class RecentViewModel : ObservableObject
     {
         get
         {
-            if (!string.IsNullOrEmpty(SearchText) && SearchText.Length > 2)
-                return profiles.Filter(
+            return !string.IsNullOrEmpty(SearchText) && SearchText.Length > 2
+                ? profiles.Filter(
                     $"{nameof(ProfileInfo.Service)}.{nameof(ServiceInfo.Name)} CONTAINS[c] $0"
-                    + $"|| {nameof(ProfileInfo.Username)} CONTAINS[c] $0", SearchText);
-            else
-                return profiles;
+                    + $"|| {nameof(ProfileInfo.Username)} CONTAINS[c] $0", SearchText)
+                : profiles;
         }
         set
         {
@@ -45,12 +46,20 @@ public partial class RecentViewModel : ObservableObject
     private readonly DatabaseService db;
     private readonly INavigationService navigationService;
 
-    public RecentViewModel(DatabaseService databaseService, INavigationService navigationService)
+    public RecentViewModel(DatabaseService databaseService, INavigationService navigationService, IGlobalHook globalHook)
     {
         db = databaseService;
         this.navigationService = navigationService;
 
+        globalHook.KeyReleased += OnKeyReleased;
+
         Profiles = db.Select<ProfileInfo>();
+    }
+
+    private void OnKeyReleased(object sender, KeyboardHookEventArgs e)
+    {
+        if (e.Data.KeyCode == KeyCode.VcEscape)
+            MainThread.BeginInvokeOnMainThread(() => navigationService.PopAsync());
     }
 
     [RelayCommand]
