@@ -13,6 +13,13 @@ public class RecentViewModelTest : DatabaseTest
 {
     private readonly INavigationService navigationService = Substitute.For<INavigationService>();
     private readonly IGlobalHook globalHook = Substitute.For<IGlobalHook>();
+    private readonly IAlertService alertService = Substitute.For<IAlertService>();
+
+    [SetUp]
+    public void SetUp()
+    {
+        alertService.ShowConfirmationAsync(default, default).ReturnsForAnyArgs(Task.FromResult(true));
+    }
 
     [Test]
     public void TestListWithEmptySearch()
@@ -92,7 +99,32 @@ public class RecentViewModelTest : DatabaseTest
 
             await databaseService.Refresh();
 
+            await alertService.Received(1).ShowConfirmationAsync(Arg.Any<string>(), Arg.Any<string>());
             Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == deletedProfileId), Is.False);
+        });
+    }
+
+    [Test]
+    public void TestProfileDeletionCancellation()
+    {
+        RunTestWithDatabaseAsync(async (databaseService) =>
+        {
+            alertService.ShowConfirmationAsync(default, default).ReturnsForAnyArgs(Task.FromResult(false));
+
+            RecentViewModel viewModel = setupViewModel(databaseService);
+
+            ICommand command = viewModel.DeleteNoteCommand;
+
+            ProfileInfo? profileToDelete = databaseService.Select<ProfileInfo>().First();
+
+            Guid profileId = profileToDelete.ID;
+
+            command.Execute(profileToDelete);
+
+            await databaseService.Refresh();
+
+            await alertService.Received(1).ShowConfirmationAsync(Arg.Any<string>(), Arg.Any<string>());
+            Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profileId), Is.True);
         });
     }
 
@@ -112,7 +144,12 @@ public class RecentViewModelTest : DatabaseTest
     }
 
     [TearDown]
-    public void CleanUp() => navigationService.ClearReceivedCalls();
+    public void CleanUp()
+    {
+        navigationService.ClearReceivedCalls();
+        globalHook.ClearReceivedCalls();
+        alertService.ClearReceivedCalls();
+    }
 
     private RecentViewModel setupViewModel(DatabaseService databaseService)
     {
@@ -124,6 +161,6 @@ public class RecentViewModelTest : DatabaseTest
 
         foreach (ProfileInfo? profile in testProfiles) databaseService.Add(profile);
 
-        return new RecentViewModel(databaseService, navigationService, globalHook);
+        return new RecentViewModel(databaseService, navigationService, globalHook, alertService);
     }
 }

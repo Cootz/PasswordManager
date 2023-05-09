@@ -45,11 +45,13 @@ public partial class RecentViewModel : ObservableObject
 
     private readonly DatabaseService db;
     private readonly INavigationService navigationService;
+    private readonly IAlertService alertService;
 
-    public RecentViewModel(DatabaseService databaseService, INavigationService navigationService, IGlobalHook globalHook)
+    public RecentViewModel(DatabaseService databaseService, INavigationService navigationService, IGlobalHook globalHook, IAlertService alertService)
     {
         db = databaseService;
         this.navigationService = navigationService;
+        this.alertService = alertService;
 
         globalHook.KeyReleased += OnKeyReleased;
 
@@ -71,7 +73,10 @@ public partial class RecentViewModel : ObservableObject
     [RelayCommand]
     private async Task DeleteNote(ProfileInfo sender)
     {
-        await db.Remove(sender);
+        bool confirmed = await alertService.ShowConfirmationAsync("Delete profile", "This profile will be permanently deleted. Continue?");
+
+        if (confirmed)
+            await db.Remove(sender);
     }
 
     [RelayCommand]
