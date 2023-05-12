@@ -1,0 +1,71 @@
+﻿using System.Threading;
+using PasswordManager.View;
+using UITestingPractice.UITests;
+using Xamarin.UITest;
+using Xamarin.UITest.Queries;
+
+#pragma warning disable CS8618
+
+namespace PasswordManager.Tests.UI.Smoke
+{
+    [TestFixture(Platform.Android)]
+    [TestFixture(Platform.iOS)]
+    public class SmokeTest
+    {
+        private IApp app;
+        private readonly Platform platform;
+
+        public SmokeTest(Platform platform)
+        {
+            this.platform = platform;
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            app = AppInitializer.StartApp(platform);
+        }
+
+        [Test]
+        public void TestBaseScreensLoading()
+        {
+            WaitAndAssert("LoginEntry", timeout: TimeSpan.FromSeconds(30));
+
+            app.EnterText("LoginEntry", "P@ssw0rd");
+
+            app.Screenshot($"Enter password at the {nameof(LoginPage)}");
+
+            app.Tap("LoginButton");
+
+            WaitAndAssert("ProfilesCollectionView");
+            app.Screenshot($"{nameof(RecentPage)} loaded");
+
+            app.Tap("Settings");
+
+            WaitAndAssert("ServicesCollectionView");
+            app.Screenshot($"{nameof(SettingsPage)} loaded");
+
+            app.Tap("Recent");
+            
+            WaitAndAssert("ProfilesCollectionView");
+            app.Screenshot($"Navigated from {nameof(SettingsPage)} to {nameof(RecentPage)} via {nameof(AppShell)}");
+
+            app.Tap("AddButton");
+
+            WaitAndAssert("ServicePicker");
+            app.Screenshot($"{nameof(AddPage)} loaded");
+
+            app.Back();
+
+            WaitAndAssert("ProfilesCollectionView");
+            app.Screenshot($"Navigated from {nameof(AddPage)} back to {nameof(RecentPage)}");
+        }
+
+        public void WaitAndAssert(string marked, string timeoutMessage = "Timed out waiting for element...", TimeSpan? timeout = null, TimeSpan? retryFrequency = null, TimeSpan? postTimeout = null)
+        {
+            AppResult[] results = app.WaitForElement(marked, timeoutMessage, timeout, retryFrequency, postTimeout);
+            
+            Assert.That(results.Any());
+        }
+    }
+}

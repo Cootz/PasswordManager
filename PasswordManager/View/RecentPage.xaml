@@ -86,8 +86,8 @@
 
     <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, *" RowSpacing="5">
         <Entry FontSize="24" Margin="5, 10, 5, 0" Text="{Binding SearchText}" Placeholder="Search" />
-        <Button Text="Add" Margin="5" Padding="10" FontSize="Medium" Grid.Row="1" Command="{Binding AddNoteCommand}" />
+        <Button Text="Add" AutomationId="AddButton" Margin="5" Padding="10" FontSize="Medium" Grid.Row="1" Command="{Binding AddNoteCommand}" />
 
-        <CollectionView x:Name="ProfilesCollectionView" ItemsSource="{Binding Profiles}" Grid.Row="2"/>
+        <CollectionView x:Name="ProfilesCollectionView" AutomationId="ProfilesCollectionView" ItemsSource="{Binding Profiles}" Grid.Row="2"/>
     </Grid>
 </ContentPage>
