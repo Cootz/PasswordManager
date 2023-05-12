@@ -15,10 +15,6 @@ public partial class App : Application
 
         InitializeComponent();
 
-        //Preinitialize page
-        provider.GetRequiredService<RecentPage>();
-        provider.GetRequiredService<RecentViewModel>();
-
         MainPage = new AppShell();
     }
 }
