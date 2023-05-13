@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
-using PasswordManager.Model.DB.Schema;
+﻿using PasswordManager.Model.DB.Schema;
 
 namespace PasswordManager.Services
 {

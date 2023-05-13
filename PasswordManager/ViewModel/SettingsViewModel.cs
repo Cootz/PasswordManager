@@ -56,14 +56,17 @@ public partial class SettingsViewModel : ObservableObject
     [RelayCommand]
     private async void RemoveService(ServiceInfo info)
     {
-        await databaseService.RealmQuery(async (realm) =>
-        {
-            await realm.WriteAsync(() =>
+        bool confirmed = await alertService.ShowConfirmationAsync("Warning", "All linked to this service profiles will be permanently removed. Continue?");
+
+        if (confirmed)
+            await databaseService.RealmQuery(async (realm) =>
             {
-                realm.RemoveRange(info.Profiles);
-                realm.Remove(info);
+                await realm.WriteAsync(() =>
+                {
+                    realm.RemoveRange(info.Profiles);
+                    realm.Remove(info);
+                });
             });
-        });
     }
 
     public class AppThemeInfo

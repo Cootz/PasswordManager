@@ -38,5 +38,4 @@ bld/
 
 # Encryption
 *.keystore
-*.cert
 *.key

@@ -19,13 +19,13 @@ public sealed class RealmController : IController
     /// </summary>
     private const ulong schema_version = 3;
 
-    private Storage dataStorage { get; set; }
+    private readonly Storage dataStorage;
 
-    private ISecureStorage secureStorage { get; set; }
+    private readonly ISecureStorage secureStorage;
 
     private Realm realm;
 
-    private bool isInitialized = false;
+    private bool isInitialized;
 
     public bool IsInitialized() => isInitialized;
 
@@ -33,8 +33,6 @@ public sealed class RealmController : IController
     {
         this.secureStorage = secureStorage;
         dataStorage = storage.GetStorageForDirectory("data");
-
-        Initialize().Wait();
     }
 
     public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(() => { realm.Add(info); });

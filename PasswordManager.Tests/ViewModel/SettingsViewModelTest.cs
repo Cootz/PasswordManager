@@ -23,6 +23,12 @@ public class SettingsViewModelTest : DatabaseTest
         settingsService.CurrentTheme = AppTheme.Unspecified;
     }
 
+    [SetUp]
+    public void SetUp()
+    {
+        alertService.ShowConfirmationAsync(default, default).ReturnsForAnyArgs(Task.FromResult(true));
+    }
+
     [Test]
     public void AddServiceTest()
     {
@@ -55,6 +61,7 @@ public class SettingsViewModelTest : DatabaseTest
 
             Assert.DoesNotThrow(() => command.Execute(service));
 
+            alertService.Received(1).ShowConfirmationAsync(Arg.Any<string>(), Arg.Any<string>());
             Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == ServiceName), Is.False);
         });
     }
@@ -84,10 +91,35 @@ public class SettingsViewModelTest : DatabaseTest
 
             await databaseService.Refresh();
 
+            await alertService.Received(1).ShowConfirmationAsync(Arg.Any<string>(), Arg.Any<string>());
             Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == ServiceName), Is.False);
 
             foreach (var profileId in profileInfoIds)
                 Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profileId), Is.False);
+        });
+    }
+
+    [Test]
+    public void RemoveServiceWithCancellationTest()
+    {
+        RunTestWithDatabase((databaseService) =>
+        {
+            alertService.ShowConfirmationAsync(default, default).ReturnsForAnyArgs(Task.FromResult(false));
+
+            SettingsViewModel viewModel = setUpViewModel(databaseService);
+            RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
+
+            ServiceInfo service = new()
+            {
+                Name = ServiceName
+            };
+
+            databaseService.Add(service);
+
+            Assert.DoesNotThrow(() => command.Execute(service));
+
+            alertService.Received(1).ShowConfirmationAsync(Arg.Any<string>(), Arg.Any<string>());
+            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == ServiceName), Is.True);
         });
     }
 
