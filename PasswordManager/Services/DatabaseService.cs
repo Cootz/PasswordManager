@@ -1,5 +1,4 @@
-﻿using PasswordManager.Model;
-using PasswordManager.Model.DB;
+﻿using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using Realms;
 
@@ -8,22 +7,11 @@ namespace PasswordManager.Services;
 /// <summary>
 /// Provides interactions with database
 /// </summary>
-public sealed class DatabaseService : IInitializable, IDisposable
+public sealed class DatabaseService : IDisposable
 {
     private readonly IController db;
-
-    private bool isInitialized;
-
-    public bool IsInitialized() => isInitialized;
-
+    
     public DatabaseService(IController db) => this.db = db;
-
-    public async Task Initialize()
-    {
-        await db.Initialize();
-
-        isInitialized = true;
-    }
 
     /// <summary>
     /// Save a range of <see cref="ProfileInfo"/>

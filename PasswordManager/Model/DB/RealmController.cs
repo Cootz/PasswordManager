@@ -25,24 +25,24 @@ public sealed class RealmController : IController
 
     private Realm realm;
 
-    private bool isInitialized;
-
-    public bool IsInitialized() => isInitialized;
-
     public RealmController(Storage storage, ISecureStorage secureStorage)
     {
         this.secureStorage = secureStorage;
         dataStorage = storage.GetStorageForDirectory("data");
+
+        Initialization = InitializeAsync();
     }
 
     public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(() => { realm.Add(info); });
 
     public void Dispose() => realm.Dispose();
 
-    public async Task Initialize()
+    public Task Initialization { get; private set; }
+
+    public async Task InitializeAsync()
     {
         //Prevent double initialization
-        if (IsInitialized()) return;
+        if (Initialization.IsCompletedSuccessfully) return;
 
         byte[] key = new byte[64];
 
@@ -102,8 +102,6 @@ public sealed class RealmController : IController
 
         Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count()
                      == ServiceInfo.DefaultServices.Length);
-
-        isInitialized = true;
     }
 
     private void OnMigration(Migration migration, ulong lastSchemaVersion)
