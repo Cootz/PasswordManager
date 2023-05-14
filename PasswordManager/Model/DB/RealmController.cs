@@ -122,15 +122,21 @@ public sealed class RealmController : IController
 
     public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
 
-    public Task Refresh() => realm.RefreshAsync();
+    public async Task Refresh()
+    {
+        await Initialization;
+        await realm.RefreshAsync();
+    }
 
     public async Task RealmQuery(Func<Realm, Task> action)
     {
+        await Initialization;
         await action(realm);
     }
 
-    public Task Remove<T>(T info) where T : IRealmObject
+    public async Task Remove<T>(T info) where T : IRealmObject
     {
-        return realm?.WriteAsync(() => realm.Remove(info));
+        await Initialization;
+        await realm.WriteAsync(() => realm.Remove(info));
     }
 }
