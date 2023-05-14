@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using PasswordManager.View;
-using UITestingPractice.UITests;
+﻿using PasswordManager.View;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
 
@@ -29,7 +27,22 @@ namespace PasswordManager.Tests.UI.Smoke
         [Test]
         public void TestBaseScreensLoading()
         {
-            WaitAndAssert("LoginEntry", timeout: TimeSpan.FromSeconds(30));
+            WaitAndAssert(c => c.Marked("PasswordEntry"));
+            app.EnterText("PasswordEntry", "P@ssw0rd");
+            app.EnterText("PasswordConfirmation", "P@ssw0rd");
+
+            app.Screenshot($"Enter and repeated password at the {nameof(RegisterPage)}");
+
+            app.Tap("RegisterButton");
+
+            WaitAndAssert("ProfilesCollectionView");
+            app.Screenshot($"{nameof(RecentPage)} loaded");
+
+            app.Back();
+
+            app = AppInitializer.OpenApp(platform);
+
+            WaitAndAssert("LoginEntry");
 
             app.EnterText("LoginEntry", "P@ssw0rd");
 
@@ -65,6 +78,13 @@ namespace PasswordManager.Tests.UI.Smoke
         {
             AppResult[] results = app.WaitForElement(marked, timeoutMessage, timeout, retryFrequency, postTimeout);
             
+            Assert.That(results.Any());
+        }
+
+        public void WaitAndAssert(Func<AppQuery, AppQuery> query, string timeoutMessage = "Timed out waiting for element...", TimeSpan? timeout = null, TimeSpan? retryFrequency = null, TimeSpan? postTimeout = null)
+        {
+            AppResult[] results = app.WaitForElement(query, timeoutMessage, timeout, retryFrequency, postTimeout);
+
             Assert.That(results.Any());
         }
     }
