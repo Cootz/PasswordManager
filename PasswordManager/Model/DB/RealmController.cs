@@ -4,8 +4,6 @@ using PasswordManager.Utils;
 using Realms;
 using System.Diagnostics;
 
-// ReSharper disable MethodHasAsyncOverload
-
 namespace PasswordManager.Model.DB;
 
 /// <summary>
@@ -42,9 +40,9 @@ public sealed class RealmController : IController
     public async Task InitializeAsync()
     {
         //Prevent double initialization
-        if (Initialization.IsCompletedSuccessfully) return;
+        if (Initialization is not null && Initialization.IsCompletedSuccessfully) return;
 
-        byte[] key = new byte[64];
+        byte[] key;
 
         string encKeyString = await secureStorage.GetAsync("realm_key");
 
@@ -77,7 +75,7 @@ public sealed class RealmController : IController
 
         try
         {
-            realm = Realm.GetInstance(config);
+            realm = await Realm.GetInstanceAsync(config);
         }
         catch
         {
@@ -86,7 +84,7 @@ public sealed class RealmController : IController
             BackupManager.Backup(new FileInfo(databasePath));
             File.Delete(databasePath);
 
-            realm = Realm.GetInstance(config);
+            realm = await Realm.GetInstanceAsync(config);
         }
 
         //Preparing default values
@@ -95,7 +93,7 @@ public sealed class RealmController : IController
             .ToList();
 
         if (servicesToAdd.Count > 0)
-            realm.Write(() =>
+            await realm.WriteAsync(() =>
             {
                 foreach (ServiceInfo service in servicesToAdd) realm.Add(service);
             });
