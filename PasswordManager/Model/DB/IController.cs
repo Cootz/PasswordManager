@@ -5,7 +5,7 @@ namespace PasswordManager.Model.DB;
 /// <summary>
 /// Provides database logic. Makes database migration easier
 /// </summary>
-public interface IController : IInitializable, IDisposable
+public interface IController : IInitialization, IDisposable
 {
     /// <summary>
     /// Select every instance of given class from database
