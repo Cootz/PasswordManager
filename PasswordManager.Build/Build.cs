@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
@@ -9,7 +8,6 @@ using Nuke.Common.Tools.PowerShell;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
-using static Nuke.Common.Tools.NUnit.NUnitTasks;
 
 [GitHubActions("Test runners",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
