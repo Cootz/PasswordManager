@@ -39,3 +39,6 @@ bld/
 # Encryption
 *.keystore
 *.key
+
+#Nuke
+[Tt]emp/
