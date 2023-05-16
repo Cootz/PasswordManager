@@ -3,10 +3,13 @@ using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
+using Nuke.Common.Tools.PowerShell;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
+using static Nuke.Common.Tools.NUnit.NUnitTasks;
 
 [GitHubActions("Test runners",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
@@ -37,11 +40,12 @@ class Build : NukeBuild
     Target Restore => _ => _
         .Executes(() =>
         {
-            DotNetRestore(s => s.SetProjectFile(Solution));
+            PowerShell(p => p
+                .SetCommand("dotnet workload restore"));
         });
 
     /// <remarks>
-    /// Allow compile to restore some components due to the <see href="https://github.com/dotnet/runtime/issues/62219">bug</see>
+    /// Allow compile to restore components due to the <see href="https://github.com/dotnet/runtime/issues/62219">bug</see>
     /// </remarks>>
     Target Compile => _ => _
         .DependsOn(Restore)
