@@ -485,14 +485,5 @@
         <Setter Property="MinimumWidthRequest" Value="150" />
         <Setter Property="Margin" Value="5,0,0,0" />
         <Setter Property="FontSize" Value="Medium" />
-        <Style.Triggers>
-            <DataTrigger
-                TargetType="Entry"
-                Binding="{Binding Source={RelativeSource Self}, Path=BindingContext.IsValid}"
-                Value="False">
-                <Setter Property="BackgroundColor"
-                        Value="{AppThemeBinding Light={StaticResource LightErrorColor}, Dark={StaticResource DarkErrorColor}}" />
-            </DataTrigger>
-        </Style.Triggers>
     </Style>
 </ResourceDictionary>
