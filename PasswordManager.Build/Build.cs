@@ -9,7 +9,7 @@ using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
-[GitHubActions("Test runners",
+[GitHubActions("Test runner",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
     OnPushBranches = new[] { "main" },
     OnPullRequestBranches = new[] { "main" },
