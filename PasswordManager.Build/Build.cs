@@ -40,6 +40,9 @@ class Build : NukeBuild
             DotNetRestore(s => s.SetProjectFile(Solution));
         });
 
+    /// <remarks>
+    /// Allow compile to restore some components due to the <see href="https://github.com/dotnet/runtime/issues/62219">bug</see>
+    /// </remarks>>
     Target Compile => _ => _
         .DependsOn(Restore)
         .Executes(() =>
@@ -50,7 +53,7 @@ class Build : NukeBuild
 #if DEBUG
                 .SetProperty("AndroidSdkDirectory", @"E:\Android\Sdk")
 #endif
-                .EnableNoRestore());
+                );
         });
 
     Target Test => _ => _
