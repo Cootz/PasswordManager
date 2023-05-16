@@ -39,8 +39,7 @@ class Build : NukeBuild
         .Executes(() =>
         {
             PowerShell(p => p
-                .SetCommand("dotnet workload restore")
-                .SetProcessWorkingDirectory(RootDirectory));
+                .SetCommand($"dotnet workload restore {Solution.Directory / Solution.FileName}"));
         });
 
     /// <remarks>
