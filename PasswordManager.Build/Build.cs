@@ -39,7 +39,7 @@ class Build : NukeBuild
         .Executes(() =>
         {
             PowerShell(p => p
-                .SetCommand($"dotnet workload restore {Solution.Directory / Solution.FileName}"));
+                .SetCommand($"dotnet workload install maui"));
         });
 
     /// <remarks>
