@@ -9,12 +9,12 @@
 #
 #     - To trigger manual generation invoke:
 #
-#         nuke --generate-configuration GitHubActions_Test_runners --host GitHubActions
+#         nuke --generate-configuration GitHubActions_Test_runner --host GitHubActions
 #
 # </auto-generated>
 # ------------------------------------------------------------------------------
 
-name: Test_runners
+name: Test_runner
 
 on:
   push:
