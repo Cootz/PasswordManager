@@ -4,8 +4,6 @@ using PasswordManager.Utils;
 using Realms;
 using System.Diagnostics;
 
-// ReSharper disable MethodHasAsyncOverload
-
 namespace PasswordManager.Model.DB;
 
 /// <summary>
@@ -25,26 +23,26 @@ public sealed class RealmController : IController
 
     private Realm realm;
 
-    private bool isInitialized;
-
-    public bool IsInitialized() => isInitialized;
-
     public RealmController(Storage storage, ISecureStorage secureStorage)
     {
         this.secureStorage = secureStorage;
         dataStorage = storage.GetStorageForDirectory("data");
+
+        Initialization = InitializeAsync();
     }
 
     public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(() => { realm.Add(info); });
 
     public void Dispose() => realm.Dispose();
 
-    public async Task Initialize()
+    public Task Initialization { get; private set; }
+
+    public async Task InitializeAsync()
     {
         //Prevent double initialization
-        if (IsInitialized()) return;
+        if (Initialization is not null && Initialization.IsCompletedSuccessfully) return;
 
-        byte[] key = new byte[64];
+        byte[] key;
 
         string encKeyString = await secureStorage.GetAsync("realm_key");
 
@@ -77,7 +75,7 @@ public sealed class RealmController : IController
 
         try
         {
-            realm = Realm.GetInstance(config);
+            realm = await Realm.GetInstanceAsync(config);
         }
         catch
         {
@@ -86,7 +84,7 @@ public sealed class RealmController : IController
             BackupManager.Backup(new FileInfo(databasePath));
             File.Delete(databasePath);
 
-            realm = Realm.GetInstance(config);
+            realm = await Realm.GetInstanceAsync(config);
         }
 
         //Preparing default values
@@ -95,15 +93,13 @@ public sealed class RealmController : IController
             .ToList();
 
         if (servicesToAdd.Count > 0)
-            realm.Write(() =>
+            await realm.WriteAsync(() =>
             {
                 foreach (ServiceInfo service in servicesToAdd) realm.Add(service);
             });
 
         Debug.Assert(realm.All<ServiceInfo>().ToArray().Intersect(ServiceInfo.DefaultServices).Count()
                      == ServiceInfo.DefaultServices.Length);
-
-        isInitialized = true;
     }
 
     private void OnMigration(Migration migration, ulong lastSchemaVersion)
@@ -126,15 +122,21 @@ public sealed class RealmController : IController
 
     public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
 
-    public Task Refresh() => realm.RefreshAsync();
+    public async Task Refresh()
+    {
+        await Initialization;
+        await realm.RefreshAsync();
+    }
 
     public async Task RealmQuery(Func<Realm, Task> action)
     {
+        await Initialization;
         await action(realm);
     }
 
-    public Task Remove<T>(T info) where T : IRealmObject
+    public async Task Remove<T>(T info) where T : IRealmObject
     {
-        return realm?.WriteAsync(() => realm.Remove(info));
+        await Initialization;
+        await realm.WriteAsync(() => realm.Remove(info));
     }
 }

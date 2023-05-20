@@ -16,7 +16,7 @@ public class DatabaseTest
     private static DatabaseService? database;
 
     [OneTimeSetUp]
-    public static async Task Setup()
+    public static void Setup()
     {
         if (tempStorage is not null)
             return;
@@ -27,8 +27,6 @@ public class DatabaseTest
         tempStorage = new TempStorage();
         controller = new RealmController(tempStorage, secureStorage);
         database = new DatabaseService(controller);
-
-        await database.Initialize();
     }
 
     protected void RunTestWithDatabase(Action<DatabaseService> testRun)
