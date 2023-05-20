@@ -30,14 +30,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - name: 'Cache: .nuke/temp, ~/.nuget/packages, ~/.android/avd/*, ~/.android/adb*'
+      - name: 'Cache: .nuke/temp, ~/.nuget/packages'
         uses: actions/cache@v3
         with:
           path: |
             .nuke/temp
             ~/.nuget/packages
-            ~/.android/avd/*
-            ~/.android/adb*
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
       - name: 'Run: UnitTest'
         run: ./build.cmd UnitTest
@@ -46,14 +44,12 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-      - name: 'Cache: .nuke/temp, ~/.nuget/packages, ~/.android/avd/*, ~/.android/adb*'
+      - name: 'Cache: .nuke/temp, ~/.nuget/packages'
         uses: actions/cache@v3
         with:
           path: |
             .nuke/temp
             ~/.nuget/packages
-            ~/.android/avd/*
-            ~/.android/adb*
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
       - name: 'Run: UnitTest'
         run: ./build.cmd UnitTest
