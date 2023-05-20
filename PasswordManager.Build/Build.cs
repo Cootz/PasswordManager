@@ -8,18 +8,28 @@ using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
-[GitHubActions("Test runner",
-    GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOs12,
+[GitHubActions("Desktop test runner",
+    GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
     OnPushBranches = new[] { "main" },
     OnPullRequestBranches = new[] { "main" },
     CacheIncludePatterns = new[]
     {
         ".nuke/temp", 
+        "~/.nuget/packages"
+    },
+    InvokedTargets = new[] { nameof(UnitTest) })]
+[GitHubActions("Mobile test runner",
+    GitHubActionsImage.MacOsLatest,
+    OnPushBranches = new[] { "main" },
+    OnPullRequestBranches = new[] { "main" },
+    CacheIncludePatterns = new[]
+    {
+        ".nuke/temp",
         "~/.nuget/packages",
         "~/.android/avd/*",
         "~/.android/adb*"
     },
-    InvokedTargets = new[] { nameof(Test) },
+    InvokedTargets = new[] { nameof(UITest) },
     AutoGenerate = false)]
 class Build : NukeBuild
 {
@@ -67,15 +77,25 @@ class Build : NukeBuild
                 );
         });
 
-    Target Test => _ => _
+    Target UnitTest => _ => _
         .DependsOn(Compile)
         .Executes(() =>
         {
             DotNetTest(s => s
-                .SetProjectFile(Solution)
+                .SetProjectFile("PasswordManager.Tests")
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
                 .EnableNoBuild());
         });
 
+    Target UITest => _ => _
+        .DependsOn(Compile)
+        .Executes(() =>
+        {
+            DotNetTest(s => s
+                .SetProjectFile("PasswordManager.Tests.UI")
+                .SetConfiguration(Configuration)
+                .EnableNoRestore()
+                .EnableNoBuild());
+        });
 }
