@@ -44,6 +44,9 @@ jobs:
   macos-12:
     name: macos-12 (api-${{ matrix.api-level }})
     runs-on: macos-12
+    strategy:
+      matrix:
+        api-level: [21, 23, 29, 32]
     steps:
       - uses: actions/checkout@v3
       - name: 'Cache: .nuke/temp, ~/.nuget/packages, ~/.android/avd/*, ~/.android/adb*'
