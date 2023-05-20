@@ -28,9 +28,22 @@ jobs:
   windows-latest:
     name: windows-latest
     runs-on: windows-latest
-    strategy:
-      matrix:
-        api-level: [21, 23, 29, 32]
+    steps:
+      - uses: actions/checkout@v3
+      - name: 'Cache: .nuke/temp, ~/.nuget/packages, ~/.android/avd/*, ~/.android/adb*'
+        uses: actions/cache@v3
+        with:
+          path: |
+            .nuke/temp
+            ~/.nuget/packages
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
+      - name: 'Run: Test'
+        run: ./build.cmd Test
+  macos-12:
+    name: macos-12 (api-${{ matrix.api-level }})
+    runs-on: macos-12
     steps:
       - uses: actions/checkout@v3
       - name: 'Cache: .nuke/temp, ~/.nuget/packages, ~/.android/avd/*, ~/.android/adb*'
@@ -50,19 +63,3 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: ./build.cmd Test
-  macos-latest:
-    name: macos-latest
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: 'Cache: .nuke/temp, ~/.nuget/packages, ~/.android/avd/*, ~/.android/adb*'
-        uses: actions/cache@v3
-        with:
-          path: |
-            .nuke/temp
-            ~/.nuget/packages
-            ~/.android/avd/*
-            ~/.android/adb*
-          key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
-      - name: 'Run: Test'
-        run: ./build.cmd Test

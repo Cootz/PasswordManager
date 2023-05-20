@@ -9,7 +9,7 @@ using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 [GitHubActions("Test runner",
-    GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
+    GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOs12,
     OnPushBranches = new[] { "main" },
     OnPullRequestBranches = new[] { "main" },
     CacheIncludePatterns = new[]
@@ -45,8 +45,9 @@ class Build : NukeBuild
     Target Restore => _ => _
         .Executes(() =>
         {
+            //Use 
             PowerShell(p => p
-                .SetCommand($"dotnet workload install maui"));
+                .SetCommand("dotnet workload install maui"));
         });
 
     /// <remarks>
