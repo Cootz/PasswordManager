@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Xamarin.UITest;
+﻿using Xamarin.UITest;
 using Xamarin.UITest.Configuration;
 using Platform = Xamarin.UITest.Platform;
 

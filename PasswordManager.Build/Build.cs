@@ -12,7 +12,8 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
     OnPushBranches = new[] { "main" },
     OnPullRequestBranches = new[] { "main" },
-    InvokedTargets = new[] { nameof(Test) })]
+    InvokedTargets = new[] { nameof(Test) },
+    AutoGenerate = false)]
 class Build : NukeBuild
 {
     public static int Main () => Execute<Build>(x => x.Compile);
