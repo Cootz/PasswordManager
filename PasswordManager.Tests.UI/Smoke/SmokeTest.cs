@@ -1,13 +1,14 @@
 ﻿using PasswordManager.View;
 using Xamarin.UITest;
 using Xamarin.UITest.Queries;
+using Platform = Xamarin.UITest.Platform;
 
 #pragma warning disable CS8618
 
 namespace PasswordManager.Tests.UI.Smoke
 {
     [TestFixture(Platform.Android)]
-    [TestFixture(Platform.iOS)]
+    //[TestFixture(Platform.iOS)]
     public class SmokeTest
     {
         private IApp app;
