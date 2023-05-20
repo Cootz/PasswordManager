@@ -12,6 +12,13 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
     OnPushBranches = new[] { "main" },
     OnPullRequestBranches = new[] { "main" },
+    CacheIncludePatterns = new[]
+    {
+        ".nuke/temp", 
+        "~/.nuget/packages",
+        "~/.android/avd/*",
+        "~/.android/adb*"
+    },
     InvokedTargets = new[] { nameof(Test) },
     AutoGenerate = false)]
 class Build : NukeBuild
