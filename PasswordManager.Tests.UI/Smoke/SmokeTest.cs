@@ -26,13 +26,14 @@ namespace PasswordManager.Tests.UI.Smoke
         }
 
         [Test]
-        public void TestAppLoading() => WaitAndAssert("Register");
+        public void TestAppLoading() => WaitAndAssert("RegisterButton");
 
-        //[Test]
+        [Test]
         public void TestBasePath()
         {
             WaitAndAssert(c => c.Marked("PasswordEntry"));
-            app.EnterText(x => x.TextField(), "P@ssw0rd");
+            app.EnterText("PasswordEntry", "P@ssw0rd");
+            app.EnterText("PasswordConfirmation", "P@ssw0rd");
 
             app.Screenshot($"Enter and repeated password at the {nameof(RegisterPage)}");
 
@@ -56,11 +57,15 @@ namespace PasswordManager.Tests.UI.Smoke
             WaitAndAssert("ProfilesCollectionView");
             app.Screenshot($"{nameof(RecentPage)} loaded");
 
+            app.Print.Tree();
+
+            app.Tap("Open navigation drawer");
             app.Tap("Settings");
 
             WaitAndAssert("ServicesCollectionView");
             app.Screenshot($"{nameof(SettingsPage)} loaded");
 
+            app.Tap("Open navigation drawer");
             app.Tap("Recent");
             
             WaitAndAssert("ProfilesCollectionView");

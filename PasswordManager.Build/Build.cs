@@ -53,6 +53,7 @@ class Build : NukeBuild
                 .SetConfiguration(Configuration)
 #if DEBUG
                 .SetProperty("AndroidSdkDirectory", @"E:\Android\Sdk")
+                .SetProperty("EmbedAssembliesIntoApk", "true")
 #endif
                 );
         });
