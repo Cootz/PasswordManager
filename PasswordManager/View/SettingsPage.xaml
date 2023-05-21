@@ -18,7 +18,8 @@
             <StackLayout Orientation="Vertical">
                 <CollectionView MaximumHeightRequest="200"
                                 ItemsSource="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=ServiceInfos}"
-                                HorizontalOptions="FillAndExpand">
+                                HorizontalOptions="FillAndExpand"
+                                AutomationId="ServicesCollectionView">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="{x:Type schema:ServiceInfo}">
                             <SwipeView>

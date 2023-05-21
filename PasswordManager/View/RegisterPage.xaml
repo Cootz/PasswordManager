@@ -10,7 +10,8 @@
              Title="Registration">
     <VerticalStackLayout>
         <Label Text="Enter password" />
-        <Entry BindingContext="{Binding Password}" Style="{StaticResource EntryWithValidation}" IsPassword="True">
+        <Entry BindingContext="{Binding Password}" Style="{StaticResource EntryWithValidation}"
+               AutomationId="PasswordEntry" IsPassword="True">
             <Entry.Behaviors>
                 <toolkit:EventToCommandBehavior
                     Command="{Binding Source={x:Reference Registration}, Path=BindingContext.Password.ValidateCommand}"
@@ -22,6 +23,7 @@
 
         <Label Text="Confirm password" />
         <Entry BindingContext="{Binding MatchValidation}"
+               AutomationId="PasswordConfirmation"
                Text="{Binding Source={x:Reference Registration}, Path=BindingContext.PasswordConfirmation.Value}"
                Style="{StaticResource EntryWithValidation}"
                IsPassword="True">
@@ -34,6 +36,6 @@
         <Label Text="{Binding MatchValidation.Errors, Converter={StaticResource FirstValidationConverter}}"
                Style="{StaticResource ErrorLabel}" />
 
-        <Button Text="Register" Command="{Binding RegisterCommand}" />
+        <Button Text="Register" AutomationId="RegisterButton" Command="{Binding RegisterCommand}" />
     </VerticalStackLayout>
 </ContentPage>

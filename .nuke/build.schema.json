@@ -75,7 +75,8 @@
               "Clean",
               "Compile",
               "Restore",
-              "Test"
+              "UITest",
+              "UnitTest"
             ]
           }
         },
@@ -92,7 +93,8 @@
               "Clean",
               "Compile",
               "Restore",
-              "Test"
+              "UITest",
+              "UnitTest"
             ]
           }
         },

@@ -1,18 +1,39 @@
+using System.IO;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.PowerShell;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
-[GitHubActions("Test runner",
+[GitHubActions("Desktop test runner",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
     OnPushBranches = new[] { "main" },
     OnPullRequestBranches = new[] { "main" },
-    InvokedTargets = new[] { nameof(Test) })]
+    CacheIncludePatterns = new[]
+    {
+        ".nuke/temp", 
+        "~/.nuget/packages"
+    },
+    InvokedTargets = new[] { nameof(UnitTest) },
+    AutoGenerate = false)]
+[GitHubActions("Mobile test runner",
+    GitHubActionsImage.MacOsLatest,
+    OnPushBranches = new[] { "main" },
+    OnPullRequestBranches = new[] { "main" },
+    CacheIncludePatterns = new[]
+    {
+        ".nuke/temp",
+        "~/.nuget/packages",
+        "~/.android/avd/*",
+        "~/.android/adb*"
+    },
+    InvokedTargets = new[] { nameof(UITest) },
+    AutoGenerate = false)]
 class Build : NukeBuild
 {
     public static int Main () => Execute<Build>(x => x.Compile);
@@ -37,8 +58,16 @@ class Build : NukeBuild
     Target Restore => _ => _
         .Executes(() =>
         {
-            PowerShell(p => p
-                .SetCommand($"dotnet workload install maui"));
+            foreach (var project in Solution.AllProjects)
+            {
+                PowerShell(p => p
+                    .SetCommand($"dotnet workload restore { Path.GetFileName(project.Path) }")
+                    .SetProcessWorkingDirectory(project.Directory));
+            }
+
+            DotNetRestore(s => s
+                .SetProjectFile(Solution)
+            );
         });
 
     /// <remarks>
@@ -53,19 +82,30 @@ class Build : NukeBuild
                 .SetConfiguration(Configuration)
 #if DEBUG
                 .SetProperty("AndroidSdkDirectory", @"E:\Android\Sdk")
+                .SetProperty("EmbedAssembliesIntoApk", "true")
 #endif
                 );
         });
 
-    Target Test => _ => _
+    Target UnitTest => _ => _
         .DependsOn(Compile)
         .Executes(() =>
         {
             DotNetTest(s => s
-                .SetProjectFile(Solution)
+                .SetProjectFile("PasswordManager.Tests")
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
                 .EnableNoBuild());
         });
 
+    Target UITest => _ => _
+        .DependsOn(Compile)
+        .Executes(() =>
+        {
+            DotNetTest(s => s
+                .SetProjectFile("PasswordManager.Tests.UI")
+                .SetConfiguration(Configuration)
+                .EnableNoRestore()
+                .EnableNoBuild());
+        });
 }
