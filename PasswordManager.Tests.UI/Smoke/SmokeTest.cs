@@ -35,6 +35,8 @@ namespace PasswordManager.Tests.UI.Smoke
             app.EnterText("PasswordEntry", "P@ssw0rd");
             app.EnterText("PasswordConfirmation", "P@ssw0rd");
 
+            app.DismissKeyboard();
+
             app.Screenshot($"Enter and repeated password at the {nameof(RegisterPage)}");
 
             app.Tap("RegisterButton");
@@ -49,6 +51,7 @@ namespace PasswordManager.Tests.UI.Smoke
             WaitAndAssert("LoginEntry");
 
             app.EnterText("LoginEntry", "P@ssw0rd");
+            app.DismissKeyboard();
 
             app.Screenshot($"Enter password at the {nameof(LoginPage)}");
 
@@ -56,8 +59,6 @@ namespace PasswordManager.Tests.UI.Smoke
 
             WaitAndAssert("ProfilesCollectionView");
             app.Screenshot($"{nameof(RecentPage)} loaded");
-
-            app.Print.Tree();
 
             app.Tap("Open navigation drawer");
             app.Tap("Settings");
