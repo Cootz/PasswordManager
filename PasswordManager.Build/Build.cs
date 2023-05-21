@@ -57,9 +57,13 @@ class Build : NukeBuild
     Target Restore => _ => _
         .Executes(() =>
         {
-            PowerShell(p => p
-                .SetCommand($"dotnet workload restore {Solution.FileName}")
-                .SetProcessWorkingDirectory(RootDirectory));
+            foreach (var project in Solution.AllProjects)
+            {
+                PowerShell(p => p
+                    .SetCommand($"dotnet workload restore {project.Name}")
+                    .SetProcessWorkingDirectory(project.Directory));
+            }
+
             DotNetRestore(s => s
                 .SetProjectFile(Solution)
             );
