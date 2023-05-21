@@ -1,3 +1,4 @@
+using System.IO;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
@@ -60,7 +61,7 @@ class Build : NukeBuild
             foreach (var project in Solution.AllProjects)
             {
                 PowerShell(p => p
-                    .SetCommand($"dotnet workload restore {project.Name}")
+                    .SetCommand($"dotnet workload restore { Path.GetFileName(project.Path) }")
                     .SetProcessWorkingDirectory(project.Directory));
             }
 
