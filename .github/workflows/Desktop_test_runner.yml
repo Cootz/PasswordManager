@@ -51,5 +51,14 @@ jobs:
             .nuke/temp
             ~/.nuget/packages
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
+
+      # see https://github.com/actions/runner-images/issues/6771#issuecomment-1354713617
+      # remove once all workflow VMs use Xcode 14.3
+      - name: Set Xcode Version
+        shell: bash
+        run: |
+          sudo xcode-select -s "/Applications/Xcode_14.3.app"
+          echo "MD_APPLE_SDK_ROOT=/Applications/Xcode_14.3.app" >> $GITHUB_ENV
+
       - name: 'Run: UnitTest'
         run: ./build.cmd UnitTest

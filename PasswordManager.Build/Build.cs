@@ -2,6 +2,7 @@ using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.PowerShell;
 using Nuke.Common.Utilities.Collections;
@@ -17,7 +18,8 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
         ".nuke/temp", 
         "~/.nuget/packages"
     },
-    InvokedTargets = new[] { nameof(UnitTest) })]
+    InvokedTargets = new[] { nameof(UnitTest) },
+    AutoGenerate = false)]
 [GitHubActions("Mobile test runner",
     GitHubActionsImage.MacOsLatest,
     OnPushBranches = new[] { "main" },
@@ -55,9 +57,12 @@ class Build : NukeBuild
     Target Restore => _ => _
         .Executes(() =>
         {
-            //Use 
             PowerShell(p => p
-                .SetCommand("dotnet workload install maui"));
+                .SetCommand($"dotnet workload restore {Solution.FileName}")
+                .SetProcessWorkingDirectory(RootDirectory));
+            DotNetRestore(s => s
+                .SetProjectFile(Solution)
+            );
         });
 
     /// <remarks>
