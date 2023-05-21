@@ -26,7 +26,7 @@ on:
 
 jobs:
   macos-latest:
-    name: macos-13
+    name: macos-13 (api-${{ matrix.api-level }})
     runs-on: macos-13
     strategy:
       matrix:
