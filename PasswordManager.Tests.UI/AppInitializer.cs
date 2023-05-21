@@ -7,7 +7,7 @@ namespace PasswordManager.Tests.UI
     public class AppInitializer
     {
         private const string apk_file_path =
-            @"..\..\..\..\PasswordManager\bin\Debug\net7.0-android\com.companyname.passwordmanager-Signed.apk";
+            @"../../../../PasswordManager/bin/Debug/net7.0-android/com.companyname.passwordmanager-Signed.apk";
 
         public static IApp OpenApp(Platform platform)
         {
