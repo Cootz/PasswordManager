@@ -22,11 +22,12 @@
 
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Login:" VerticalOptions="Center" FontSize="Medium" />
-            <Entry BindingContext="{Binding Username}" Style="{StaticResource EntryWithValidation}">
+            <Entry BindingContext="{Binding Username}" Style="{StaticResource EntryWithValidation}"
+                   AutomationId="LoginEntry">
                 <Entry.Behaviors>
                     <toolkit:EventToCommandBehavior
                         Command="{Binding Source={x:Reference Addpage}, Path=BindingContext.Username.ValidateCommand}"
-                        EventName="TextChanged" />
+                        EventName="TextChanged"/>
                 </Entry.Behaviors>
             </Entry>
         </HorizontalStackLayout>
@@ -35,7 +36,8 @@
 
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <Label Text="Password:" VerticalOptions="Center" FontSize="Medium" />
-            <Entry BindingContext="{Binding Password}" Style="{StaticResource EntryWithValidation}" IsPassword="True">
+            <Entry BindingContext="{Binding Password}" Style="{StaticResource EntryWithValidation}" IsPassword="True"
+                   AutomationId="PasswordEntry">
                 <Entry.Behaviors>
                     <toolkit:EventToCommandBehavior
                         Command="{Binding Source={x:Reference Addpage}, Path=BindingContext.Password.ValidateCommand}"
@@ -46,6 +48,7 @@
         <Label Text="{Binding Password.Errors, Converter={StaticResource FirstValidationConverter}}"
                Style="{StaticResource ErrorLabel}" HorizontalOptions="Center" />
 
-        <Button Text="Add" VerticalOptions="CenterAndExpand" Command="{Binding AddProfileCommand}" />
+        <Button Text="Add" VerticalOptions="CenterAndExpand" Command="{Binding AddProfileCommand}"
+                AutomationId="AddButton"/>
     </VerticalStackLayout>
 </ContentPage>
