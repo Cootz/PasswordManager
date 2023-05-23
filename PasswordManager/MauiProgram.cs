@@ -63,8 +63,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<INavigationService, NavigationService>();
 
         builder.Services.AddSingleton<IAlertService, AlertService>();
+        builder.Services.AddSingleton<IToastService, ToastService>();
 
-        builder.Services.AddSingleton<IGlobalHook, OptimizedTaskPoolGlobalHook>(s =>
+        builder.Services.AddSingleton<IGlobalHook, OptimizedTaskPoolGlobalHook>(_ =>
         {
 #if WINDOWS || MACCATALYST
             globalHook.RunAsync();
@@ -73,6 +74,7 @@ public static class MauiProgram
         });
 
         builder.Services.AddSingleton(_ => SecureStorage.Default);
+        builder.Services.AddSingleton(_ => Clipboard.Default);
 
         builder.Services.AddSingleton(s => new DatabaseService(new RealmController(s.GetService<Storage>(), SecureStorage.Default)));
 
