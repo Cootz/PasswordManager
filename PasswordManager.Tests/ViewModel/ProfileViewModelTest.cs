@@ -1,9 +1,5 @@
 ﻿using System.Windows.Input;
-using AutoFixture.AutoNSubstitute;
-using AutoFixture.NUnit3;
-using Microsoft.Maui.Controls.Internals;
 using NSubstitute;
-using NSubstitute.ReceivedExtensions;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
 using PasswordManager.Tests.TestAttributes;
