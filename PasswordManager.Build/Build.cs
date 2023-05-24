@@ -1,7 +1,6 @@
 using System.IO;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
-using Nuke.Common.CI.GitHubActions.Configuration;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
@@ -42,17 +41,20 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     public readonly Configuration Configuration = Configuration.Debug;
 
+    [Parameter] public readonly string ActionName;
+
     [Solution]
     public readonly Solution Solution;
 
     public GitHubActions GitHubActions => GitHubActions.Instance;
-
-    public string YamlLogFilename => "TestResults-${{github.action}}-${{github.job}}";
-    public string ExecutionLogFilename => $"TestResults-{GitHubActions.Action}-{GitHubActions.Job}";
+    
+    public string ExecutionLogFilename => $"TestResults-{ActionName ?? "${{env.ACTION_NAME}}"}";
 
     public AbsolutePath SourceDirectory => RootDirectory / "PasswordManager";
     public AbsolutePath UnitTestsDirectory => RootDirectory / "PasswordManager.Tests";
+    public AbsolutePath UnitTestResultsDirectory => UnitTestsDirectory / "TestResults";
     public AbsolutePath UITestsDirectory => RootDirectory / "PasswordManager.Tests.UI";
+    public AbsolutePath UITestsResultsDirectory => UITestsDirectory / "TestResults";
 
     public Target Clean => _ => _
         .Before(Restore)
@@ -60,6 +62,7 @@ class Build : NukeBuild
         {
             SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
             UnitTestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
+            UITestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
         });
 
     public Target Restore => _ => _
@@ -96,7 +99,7 @@ class Build : NukeBuild
 
     public Target UnitTest => _ => _
         .DependsOn(Compile)
-        .Produces(UnitTestsDirectory / YamlLogFilename)
+        .Produces(UnitTestResultsDirectory / ExecutionLogFilename)
         .Executes(() =>
         {
             DotNetTest(s => s
@@ -109,7 +112,7 @@ class Build : NukeBuild
 
     public Target UITest => _ => _
         .DependsOn(Compile)
-        .Produces(UITestsDirectory / YamlLogFilename)
+        .Produces(UITestsResultsDirectory / ExecutionLogFilename)
         .Executes(() =>
         {
             DotNetTest(s => s

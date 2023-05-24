@@ -28,6 +28,8 @@ jobs:
   windows-latest:
     name: windows-latest
     runs-on: windows-latest
+    env:
+      ACTION_NAME: windows-latest
     steps:
       - uses: actions/checkout@v3
       - name: 'Cache: .nuke/temp, ~/.nuget/packages'
@@ -39,15 +41,17 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
       - name: 'Run: UnitTest'
         run: ./build.cmd UnitTest
-      - name: 'Publish: TestResults-${{github.action}}-${{github.job}}'
+      - name: 'Publish: TestResults-local'
         uses: actions/upload-artifact@v3
         if: ${{ always() }}
         with:
-          name: TestResults-${{github.action}}-${{github.job}}
-          path: PasswordManager.Tests/TestResults-${{github.action}}-${{github.job}}
+          name: TestResults-local
+          path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}
   macos-latest:
     name: macos-13
     runs-on: macos-13
+    env:
+      ACTION_NAME: macos-13
     steps:
       - uses: actions/checkout@v3
       - name: 'Cache: .nuke/temp, ~/.nuget/packages'
@@ -68,9 +72,9 @@ jobs:
 
       - name: 'Run: UnitTest'
         run: ./build.cmd UnitTest
-      - name: 'Publish: TestResults-${{github.action}}-${{github.job}}'
+      - name: 'Publish: TestResults-local'
         uses: actions/upload-artifact@v3
         if: ${{ always() }}
         with:
-          name: TestResults-${{github.action}}-${{github.job}}
-          path: PasswordManager.Tests/TestResults-${{github.action}}-${{github.job}}
+          name: TestResults-local
+          path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}
