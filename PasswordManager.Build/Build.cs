@@ -47,7 +47,7 @@ class Build : NukeBuild
 
     public GitHubActions GitHubActions => GitHubActions.Instance;
 
-    public string YamlLogFilename => "TestResults-${{github.action.name}}-${{job.name}}";
+    public string YamlLogFilename => "TestResults-${{github.action}}-${{github.job}}";
     public string ExecutionLogFilename => $"TestResults-{GitHubActions.Action}-{GitHubActions.Job}";
 
     public AbsolutePath SourceDirectory => RootDirectory / "PasswordManager";

@@ -39,12 +39,12 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
       - name: 'Run: UnitTest'
         run: ./build.cmd UnitTest
-      - name: 'Publish: TestResults-${{github.action.name}}-${{job.name}}'
+      - name: 'Publish: TestResults-${{github.action}}-${{github.job}}'
         uses: actions/upload-artifact@v3
         if: ${{ always() }}
         with:
-          name: TestResults-${{github.action.name}}-${{job.name}}
-          path: PasswordManager.Tests/TestResults-${{github.action.name}}-${{job.name}}
+          name: TestResults-${{github.action}}-${{github.job}}
+          path: PasswordManager.Tests/TestResults-${{github.action}}-${{github.job}}
   macos-latest:
     name: macos-13
     runs-on: macos-13
@@ -68,9 +68,9 @@ jobs:
 
       - name: 'Run: UnitTest'
         run: ./build.cmd UnitTest
-      - name: 'Publish: TestResults-${{github.action.name}}-${{job.name}}'
+      - name: 'Publish: TestResults-${{github.action}}-${{github.job}}'
         uses: actions/upload-artifact@v3
         if: ${{ always() }}
         with:
-          name: TestResults-${{github.action.name}}-${{job.name}}
-          path: PasswordManager.Tests/TestResults-${{github.action.name}}-${{job.name}}
+          name: TestResults-${{github.action}}-${{github.job}}
+          path: PasswordManager.Tests/TestResults-${{github.action}}-${{github.job}}
