@@ -41,6 +41,7 @@ jobs:
         run: ./build.cmd UnitTest
       - name: 'Publish: TestResults-${{github.action.name}}-${{job.name}}'
         uses: actions/upload-artifact@v3
+        if: ${{ always() }}
         with:
           name: TestResults-${{github.action.name}}-${{job.name}}
           path: PasswordManager.Tests/TestResults-${{github.action.name}}-${{job.name}}
@@ -69,6 +70,7 @@ jobs:
         run: ./build.cmd UnitTest
       - name: 'Publish: TestResults-${{github.action.name}}-${{job.name}}'
         uses: actions/upload-artifact@v3
+        if: ${{ always() }}
         with:
           name: TestResults-${{github.action.name}}-${{job.name}}
           path: PasswordManager.Tests/TestResults-${{github.action.name}}-${{job.name}}
