@@ -1,6 +1,7 @@
 using System.IO;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
+using Nuke.Common.CI.GitHubActions.Configuration;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
@@ -46,17 +47,19 @@ class Build : NukeBuild
 
     public GitHubActions GitHubActions => GitHubActions.Instance;
 
-    public string LogFilename => $"TestResults-{GitHubActions.Action}-{GitHubActions.Job}";
+    public string YamlLogFilename => "TestResults-${{github.action.name}}-${{job.name}}";
+    public string ExecutionLogFilename => $"TestResults-{GitHubActions.Action}-{GitHubActions.Job}";
 
     public AbsolutePath SourceDirectory => RootDirectory / "PasswordManager";
-    public AbsolutePath TestsDirectory => RootDirectory / "PasswordManager.Tests";
+    public AbsolutePath UnitTestsDirectory => RootDirectory / "PasswordManager.Tests";
+    public AbsolutePath UITestsDirectory => RootDirectory / "PasswordManager.Tests.UI";
 
     public Target Clean => _ => _
         .Before(Restore)
         .Executes(() =>
         {
             SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
-            TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
+            UnitTestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
         });
 
     public Target Restore => _ => _
@@ -93,7 +96,7 @@ class Build : NukeBuild
 
     public Target UnitTest => _ => _
         .DependsOn(Compile)
-        .Produces(LogFilename)
+        .Produces(UnitTestsDirectory / YamlLogFilename)
         .Executes(() =>
         {
             DotNetTest(s => s
@@ -101,12 +104,12 @@ class Build : NukeBuild
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
                 .EnableNoBuild()
-                .SetLoggers($"trx;LogFileName={LogFilename}"));
+                .SetLoggers($"trx;LogFileName={ExecutionLogFilename}"));
         });
 
     public Target UITest => _ => _
         .DependsOn(Compile)
-        .Produces(LogFilename)
+        .Produces(UITestsDirectory / YamlLogFilename)
         .Executes(() =>
         {
             DotNetTest(s => s
@@ -114,6 +117,6 @@ class Build : NukeBuild
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
                 .EnableNoBuild()
-                .SetLoggers($"trx;LogFileName={LogFilename}"));
+                .SetLoggers($"trx;LogFileName={ExecutionLogFilename}"));
         });
 }
