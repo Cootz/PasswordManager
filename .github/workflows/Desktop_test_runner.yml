@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: ${{ always() }}
         with:
-          name: TestResults-local
+          name: TestResults-${{env.ACTION_NAME}}
           path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}
   macos-latest:
     name: macos-13
@@ -76,5 +76,5 @@ jobs:
         uses: actions/upload-artifact@v3
         if: ${{ always() }}
         with:
-          name: TestResults-local
+          name: TestResults-${{env.ACTION_NAME}}
           path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}
