@@ -46,7 +46,7 @@ jobs:
         if: ${{ always() }}
         with:
           name: TestResults-${{env.ACTION_NAME}}
-          path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}
+          path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}.trx
   macos-latest:
     name: macos-13
     runs-on: macos-13
@@ -77,4 +77,4 @@ jobs:
         if: ${{ always() }}
         with:
           name: TestResults-${{env.ACTION_NAME}}
-          path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}
+          path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}.trx
