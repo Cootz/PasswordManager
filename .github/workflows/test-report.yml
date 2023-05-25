@@ -10,13 +10,12 @@ jobs:
     permissions:
       checks: write
       
-    name: Annotate CI run with test results
+    name: Test Reporter Desktop
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion != 'cancelled' }}   
     strategy:
       fail-fast: false
       matrix:
-        api-level: [21, 23, 29]
         os:
           - { name: windows-latest, prettyname: Windows }
           - { name: macos-13, prettyname: macOS }
@@ -31,6 +30,16 @@ jobs:
           name: Test results (${{ matrix.os.prettyname }})
           path: "*.trx"
           reporter: dotnet-trx
+
+    name: Test Reporter Mobile
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion != 'cancelled' }}   
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level: [21, 23, 29]
+    timeout-minutes: 5
+    steps:
       - name: Test Reporter Mobile
         uses: dorny/test-reporter@v1.6.0
         with:

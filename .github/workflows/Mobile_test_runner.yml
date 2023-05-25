@@ -31,6 +31,8 @@ jobs:
     strategy:
       matrix:
         api-level: [21, 23, 29]
+    env:
+        ACTION_NAME: android-${{ matrix.api-level }}
     steps:
       - uses: actions/checkout@v3
       - name: 'Cache: .nuke/temp, ~/.nuget/packages, ~/.android/avd/*, ~/.android/adb*'
@@ -59,3 +61,10 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: ./build.cmd UITest
+       
+      - name: 'Publish: TestResults-local'
+        uses: actions/upload-artifact@v3
+        if: ${{ always() }}
+        with:
+          name: TestResults-${{env.ACTION_NAME}}
+          path: PasswordManager.Tests.UI/TestResults/TestResults-${{env.ACTION_NAME}}.trx

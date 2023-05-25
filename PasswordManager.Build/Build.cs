@@ -107,7 +107,7 @@ class Build : NukeBuild
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
                 .EnableNoBuild()
-                .SetLoggers($"trx;LogFileName={ExecutionLogFilename}"));
+                .SetLoggers($"trx;LogFileName={ExecutionLogFilename}.trx"));
         });
 
     public Target UITest => _ => _
@@ -120,6 +120,6 @@ class Build : NukeBuild
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
                 .EnableNoBuild()
-                .SetLoggers($"trx;LogFileName={ExecutionLogFilename}"));
+                .SetLoggers($"trx;LogFileName={ExecutionLogFilename}.trx"));
         });
 }
