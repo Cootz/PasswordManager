@@ -42,3 +42,6 @@ bld/
 
 #Nuke
 [Tt]emp/
+
+#NUnit
+[Tt]estResults/
