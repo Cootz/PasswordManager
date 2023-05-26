@@ -1,0 +1,32 @@
+name: Annotate CI run with test results
+on:
+  workflow_run:
+    workflows: ["Desktop_test_runner"]
+    types:
+      - completed
+permissions: {}
+jobs:
+  annotate: 
+    permissions:
+      checks: write
+      
+    name: Test Reporter Desktop
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion != 'cancelled' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - { name: windows-latest, prettyname: Windows }
+          - { name: macos-13, prettyname: macOS }
+    timeout-minutes: 5
+    steps:
+      - name: Test Reporter Desktop
+        uses: dorny/test-reporter@v1.6.0
+        with:
+          # Name or regex of artifact containing test results
+          artifact: TestResults-${{ matrix.os.name }}
+          # Name of the check run
+          name: Test results (${{ matrix.os.prettyname }})
+          path: "*.trx"
+          reporter: dotnet-trx

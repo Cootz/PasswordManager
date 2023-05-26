@@ -39,23 +39,33 @@ class Build : NukeBuild
     public static int Main () => Execute<Build>(x => x.Compile);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly Configuration Configuration = Configuration.Debug;
+    public readonly Configuration Configuration = Configuration.Debug;
+
+    [Parameter] public readonly string ActionName;
 
     [Solution]
-    readonly Solution Solution;
+    public readonly Solution Solution;
 
-    AbsolutePath SourceDirectory => RootDirectory / "PasswordManager";
-    AbsolutePath TestsDirectory => RootDirectory / "PasswordManager.Tests";
+    public GitHubActions GitHubActions => GitHubActions.Instance;
+    
+    public string ExecutionLogFilename => $"TestResults-{ActionName ?? "${{env.ACTION_NAME}}"}";
 
-    Target Clean => _ => _
+    public AbsolutePath SourceDirectory => RootDirectory / "PasswordManager";
+    public AbsolutePath UnitTestsDirectory => RootDirectory / "PasswordManager.Tests";
+    public AbsolutePath UnitTestResultsDirectory => UnitTestsDirectory / "TestResults";
+    public AbsolutePath UITestsDirectory => RootDirectory / "PasswordManager.Tests.UI";
+    public AbsolutePath UITestsResultsDirectory => UITestsDirectory / "TestResults";
+
+    public Target Clean => _ => _
         .Before(Restore)
         .Executes(() =>
         {
             SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
-            TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
+            UnitTestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
+            UITestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
         });
 
-    Target Restore => _ => _
+    public Target Restore => _ => _
         .Executes(() =>
         {
             foreach (var project in Solution.AllProjects)
@@ -73,7 +83,7 @@ class Build : NukeBuild
     /// <remarks>
     /// Allow compile to restore components due to the <see href="https://github.com/dotnet/runtime/issues/62219">bug</see>
     /// </remarks>>
-    Target Compile => _ => _
+    public Target Compile => _ => _
         .DependsOn(Restore)
         .Executes(() =>
         {
@@ -87,25 +97,29 @@ class Build : NukeBuild
                 );
         });
 
-    Target UnitTest => _ => _
+    public Target UnitTest => _ => _
         .DependsOn(Compile)
+        .Produces(UnitTestResultsDirectory / ExecutionLogFilename)
         .Executes(() =>
         {
             DotNetTest(s => s
                 .SetProjectFile("PasswordManager.Tests")
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
-                .EnableNoBuild());
+                .EnableNoBuild()
+                .SetLoggers($"trx;LogFileName={ExecutionLogFilename}.trx"));
         });
 
-    Target UITest => _ => _
+    public Target UITest => _ => _
         .DependsOn(Compile)
+        .Produces(UITestsResultsDirectory / ExecutionLogFilename)
         .Executes(() =>
         {
             DotNetTest(s => s
                 .SetProjectFile("PasswordManager.Tests.UI")
                 .SetConfiguration(Configuration)
                 .EnableNoRestore()
-                .EnableNoBuild());
+                .EnableNoBuild()
+                .SetLoggers($"trx;LogFileName={ExecutionLogFilename}.trx"));
         });
 }
