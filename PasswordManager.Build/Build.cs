@@ -125,8 +125,11 @@ class Build : NukeBuild
 
     public Target Publish => _ => _
         .DependsOn(UnitTest, UITest)
+        .Produces(RootDirectory / "")
         .Executes(() =>
         {
-
+            DotNetPublish(s => s
+                .SetProject(Solution.GetProject("PasswordManager"))
+            );
         });
 }
