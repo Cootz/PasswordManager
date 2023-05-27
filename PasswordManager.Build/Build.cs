@@ -122,4 +122,11 @@ class Build : NukeBuild
                 .EnableNoBuild()
                 .SetLoggers($"trx;LogFileName={ExecutionLogFilename}.trx"));
         });
+
+    public Target Publish => _ => _
+        .DependsOn(UnitTest, UITest)
+        .Executes(() =>
+        {
+
+        });
 }
