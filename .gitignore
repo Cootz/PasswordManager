@@ -45,3 +45,6 @@ bld/
 
 #NUnit
 [Tt]estResults/
+
+#Publishing
+[Pp]ublish/

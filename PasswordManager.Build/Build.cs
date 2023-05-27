@@ -1,4 +1,6 @@
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
@@ -56,6 +58,8 @@ class Build : NukeBuild
     public AbsolutePath UITestsDirectory => RootDirectory / "PasswordManager.Tests.UI";
     public AbsolutePath UITestsResultsDirectory => UITestsDirectory / "TestResults";
 
+    public AbsolutePath PublishDirectory = RootDirectory / "Publish";
+
     public Target Clean => _ => _
         .Before(Restore)
         .Executes(() =>
@@ -94,7 +98,7 @@ class Build : NukeBuild
                 .SetProperty("AndroidSdkDirectory", @"E:\Android\Sdk")
                 .SetProperty("EmbedAssembliesIntoApk", "true")
 #endif
-                );
+            );
         });
 
     public Target UnitTest => _ => _
@@ -125,11 +129,39 @@ class Build : NukeBuild
 
     public Target Publish => _ => _
         .DependsOn(UnitTest, UITest)
-        .Produces(RootDirectory / "")
+        .Produces(PublishDirectory / "*")
         .Executes(() =>
         {
-            DotNetPublish(s => s
-                .SetProject(Solution.GetProject("PasswordManager"))
-            );
+            Project publishProject = Solution.GetProject("PasswordManager");
+
+            var publishFrameworks = publishProject.GetTargetFrameworks()!.Where(f => f != "net7.0");
+
+            foreach (var framework in publishFrameworks)
+            {
+                DotNetPublish(s => s
+                    .SetProject(publishProject)
+                    .SetConfiguration(Configuration)
+                    .SetFramework(framework)
+                    .EnableNoRestore()
+                );
+            }
+
+            Directory.CreateDirectory(PublishDirectory);
+
+            AbsolutePath winPublishDirectory = SourceDirectory / @"bin\Release\net7.0-windows10.0.19041.0\win10-x64\publish";
+            AbsolutePath macArmPublishDirectory = SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-arm64\PasswordManager.app";
+            AbsolutePath macIntelPublishDirectory = SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-x64\PasswordManager.app";
+            AbsolutePath androidPublishDirectory = SourceDirectory / @"bin\Release\net7.0-android\publish\com.companyname.passwordmanager-Signed.apk";
+
+            zipToPublish(winPublishDirectory, "win.zip");
+            zipToPublish(macArmPublishDirectory, "masOS-arm.zip");
+            zipToPublish(macIntelPublishDirectory, "masOS-x64.zip");
+            
+            File.Copy(androidPublishDirectory, PublishDirectory / "PasswordManager.apk");
         });
+
+    private void zipToPublish(AbsolutePath path, string zipFileName) => path.ZipTo(
+        PublishDirectory / zipFileName,
+        compressionLevel: CompressionLevel.SmallestSize,
+        fileMode: FileMode.CreateNew);
 }
