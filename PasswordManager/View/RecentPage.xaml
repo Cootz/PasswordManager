@@ -8,86 +8,49 @@
              x:DataType="viewmodel:RecentViewModel"
              x:Name="RecentProfiles"
              Title="Your profiles">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <DataTemplate x:Key="General" x:DataType="{x:Type schema:ProfileInfo}">
-                <SwipeView>
-                    <SwipeView.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=ShowNoteInfoCommand}"
-                            CommandParameter="{Binding .}" />
-                    </SwipeView.GestureRecognizers>
 
-                    <SwipeView.RightItems>
-                        <SwipeItems>
-                            <SwipeItem Text="Delete" BackgroundColor="{StaticResource Primary}"
-                                       Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=DeleteNoteCommand}"
-                                       CommandParameter="{Binding .}" />
-                        </SwipeItems>
-                    </SwipeView.RightItems>
+    <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, *" RowSpacing="5">
+        <Entry FontSize="24" Margin="5, 10, 5, 0" Text="{Binding SearchText}" Placeholder="Search"
+               AutomationId="SearchBar" />
+        <Button Text="Add" AutomationId="AddButton" Margin="5" Padding="10" FontSize="Medium" Grid.Row="1"
+                Command="{Binding AddNoteCommand}" />
 
-                    <FlyoutBase.ContextFlyout>
-                        <MenuFlyout>
-                            <!--RelativeSource not working due to the bag. See: https://github.com/dotnet/maui/issues/5382-->
-                            <MenuFlyoutItem Text="Delete"
-                                            Command="{Binding Source={x:Reference Name=RecentProfiles}, Path=BindingContext.DeleteNoteCommand}"
-                                            CommandParameter="{Binding .}" />
-                        </MenuFlyout>
-                    </FlyoutBase.ContextFlyout>
-
+        <CollectionView x:Name="ProfilesCollectionView" AutomationId="ProfilesCollectionView"
+                        ItemsSource="{Binding Profiles}" Grid.Row="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type schema:ProfileInfo}">
                     <Frame Margin="10, 5"
                            Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
                            ToolTipProperties.Text="Tap for more info">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=ShowNoteInfoCommand}"
+                                CommandParameter="{Binding .}" />
+                            <SwipeGestureRecognizer Direction="Left"
+                                                    Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=DeleteNoteCommand}"
+                                                    CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+
+                        <FlyoutBase.ContextFlyout>
+                            <MenuFlyout>
+                                <!--RelativeSource not working due to the bag. See: https://github.com/dotnet/maui/issues/5382-->
+                                <MenuFlyoutItem Text="Delete"
+                                                Command="{Binding Source={x:Reference Name=RecentProfiles}, Path=BindingContext.DeleteNoteCommand}"
+                                                CommandParameter="{Binding .}" />
+                            </MenuFlyout>
+                        </FlyoutBase.ContextFlyout>
+
                         <Grid ColumnDefinitions="*,*" HorizontalOptions="FillAndExpand"
                               VerticalOptions="CenterAndExpand">
                             <Label Grid.Column="0" Text="{Binding Service.Name}"
                                    HorizontalTextAlignment="Center"
                                    FontSize="Medium" />
-                            <Label Grid.Column="1" Text="{Binding Username}"
-                                   HorizontalTextAlignment="Center"
+                            <Label Grid.Column="1" Text="{Binding Username}" HorizontalTextAlignment="Center"
                                    FontSize="Medium" />
                         </Grid>
                     </Frame>
-                </SwipeView>
-            </DataTemplate>
-
-            <DataTemplate x:Key="WindowsSpecific" x:DataType="{x:Type schema:ProfileInfo}">
-                <Frame Margin="10, 5"
-                       Background="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
-                       ToolTipProperties.Text="Tap for more info">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding Source={RelativeSource Mode=FindAncestorBindingContext, AncestorType={x:Type viewmodel:RecentViewModel}}, Path=ShowNoteInfoCommand}"
-                            CommandParameter="{Binding .}" />
-                    </Frame.GestureRecognizers>
-
-                    <FlyoutBase.ContextFlyout>
-                        <MenuFlyout>
-                            <!--RelativeSource not working due to the bag. See: https://github.com/dotnet/maui/issues/5382-->
-                            <MenuFlyoutItem Text="Delete"
-                                            Command="{Binding Source={x:Reference Name=RecentProfiles}, Path=BindingContext.DeleteNoteCommand}"
-                                            CommandParameter="{Binding .}" />
-                        </MenuFlyout>
-                    </FlyoutBase.ContextFlyout>
-
-                    <Grid ColumnDefinitions="*,*" HorizontalOptions="FillAndExpand"
-                          VerticalOptions="CenterAndExpand">
-                        <Label Grid.Column="0" Text="{Binding Service.Name}"
-                               HorizontalTextAlignment="Center"
-                               FontSize="Medium" />
-                        <Label Grid.Column="1" Text="{Binding Username}" HorizontalTextAlignment="Center"
-                               FontSize="Medium" />
-                    </Grid>
-                </Frame>
-            </DataTemplate>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
-
-    <Grid HorizontalOptions="FillAndExpand" RowDefinitions="Auto, Auto, *" RowSpacing="5">
-        <Entry FontSize="24" Margin="5, 10, 5, 0" Text="{Binding SearchText}" Placeholder="Search" />
-        <Button Text="Add" AutomationId="AddButton" Margin="5" Padding="10" FontSize="Medium" Grid.Row="1" Command="{Binding AddNoteCommand}" />
-
-        <CollectionView x:Name="ProfilesCollectionView" AutomationId="ProfilesCollectionView" ItemsSource="{Binding Profiles}" Grid.Row="2"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>
