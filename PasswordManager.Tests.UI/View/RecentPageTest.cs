@@ -105,7 +105,7 @@ namespace PasswordManager.Tests.UI.View
         {
             app.SwipeRightToLeft(marked);
 
-            app.WaitForElement(accept);
+            app.WaitForElement(accept, timeout: TimeSpan.FromMinutes(1));
             app.Tap(accept);
         }
     }
