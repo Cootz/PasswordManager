@@ -6,8 +6,8 @@ namespace PasswordManager.Tests.UI.View
 {
     public class RecentPageTest : AppTestBase
     {
-        private const string login = "TestLogin";
-        private const string password = "TestP@ssw0rd";
+        private const string test_login = "TestLogin";
+        private const string test_password = "TestP@ssw0rd";
         private const string default_service = "steam";
 
         public RecentPageTest(Platform platform) : base(platform)
@@ -20,10 +20,10 @@ namespace PasswordManager.Tests.UI.View
         {
             navigateToRecentPage();
 
-            addProfile(login, password, service);
+            addProfile(test_login, test_password, service);
 
             waitAndAssert(service ?? default_service);
-            waitAndAssert(login);
+            waitAndAssert(test_login);
         }
 
         [Test]
@@ -31,11 +31,11 @@ namespace PasswordManager.Tests.UI.View
         {
             navigateToRecentPage();
 
-            addProfile(login, password);
+            addProfile(test_login, test_password);
             
-            removeProfile(login, "Yes");
+            removeProfile(test_login, "Yes");
 
-            Assert.DoesNotThrow( () => app.WaitForNoElement(login));
+            Assert.DoesNotThrow( () => app.WaitForNoElement(test_login));
         }
 
         [Test]
@@ -43,9 +43,9 @@ namespace PasswordManager.Tests.UI.View
         {
             navigateToRecentPage();
 
-            foreach (var service in ServiceInfo.DefaultServices) addProfile(login, password, service.Name);
+            foreach (var service in ServiceInfo.DefaultServices) addProfile(test_login, test_password, service.Name);
 
-            var profileCards = app.WaitForElement(login);
+            var profileCards = app.WaitForElement(test_login);
 
             Assert.That(profileCards.Length, Is.EqualTo(ServiceInfo.DefaultServices.Length));
 
@@ -104,6 +104,11 @@ namespace PasswordManager.Tests.UI.View
         private void removeProfile(string marked, string accept)
         {
             app.SwipeRightToLeft(marked);
+
+            Thread.Sleep(1000);
+            app.Print.Tree();
+            app.Print.Visible();
+            app.Print.Query();
 
             app.WaitForElement(accept, timeout: TimeSpan.FromMinutes(1));
             app.Tap(accept);
