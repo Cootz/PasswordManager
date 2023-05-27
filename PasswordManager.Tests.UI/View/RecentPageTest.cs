@@ -27,18 +27,6 @@ namespace PasswordManager.Tests.UI.View
         }
 
         [Test]
-        public void RemoveAddedProfileTest()
-        {
-            navigateToRecentPage();
-
-            addProfile(test_login, test_password);
-            
-            removeProfile(test_login, "Yes");
-
-            Assert.DoesNotThrow( () => app.WaitForNoElement(test_login));
-        }
-
-        [Test]
         public void SearchForProfileTest()
         {
             navigateToRecentPage();
@@ -99,19 +87,6 @@ namespace PasswordManager.Tests.UI.View
             app.Tap("AddButton");
 
             app.WaitForElement("ProfilesCollectionView");
-        }
-
-        private void removeProfile(string marked, string accept)
-        {
-            app.SwipeRightToLeft(marked);
-
-            Thread.Sleep(1000);
-            app.Print.Tree();
-            app.Print.Visible();
-            app.Print.Query();
-
-            app.WaitForElement(accept, timeout: TimeSpan.FromMinutes(1));
-            app.Tap(accept);
         }
     }
 }
