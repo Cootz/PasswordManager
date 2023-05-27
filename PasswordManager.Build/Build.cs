@@ -64,6 +64,9 @@ class Build : NukeBuild
         .Before(Restore)
         .Executes(() =>
         {
+            // ReSharper disable once StringLiteralTypo
+            RootDirectory.GlobDirectories("[Pp]ublish").ForEach(d => d.DeleteDirectory());
+
             SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
             UnitTestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
             UITestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(d => d.DeleteDirectory());
@@ -160,7 +163,7 @@ class Build : NukeBuild
             File.Copy(androidPublishDirectory, PublishDirectory / "PasswordManager.apk");
         });
 
-    private void zipToPublish(AbsolutePath path, string zipFileName) => path.ZipTo(
+    void zipToPublish(AbsolutePath path, string zipFileName) => path.ZipTo(
         PublishDirectory / zipFileName,
         compressionLevel: CompressionLevel.SmallestSize,
         fileMode: FileMode.CreateNew);
