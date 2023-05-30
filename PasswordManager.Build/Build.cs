@@ -9,10 +9,12 @@ using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
+using Nuke.Common.Tools.GitReleaseManager;
 using Nuke.Common.Tools.PowerShell;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
+using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
 
 [GitHubActions("Desktop test runner",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
@@ -38,6 +40,10 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
     },
     InvokedTargets = new[] { nameof(UITest) },
     AutoGenerate = false)]
+[GitHubActions("Automatic release",
+    GitHubActionsImage.MacOsLatest,
+    OnPushBranches = new[] { "Release" },
+    InvokedTargets = new[] { nameof(Publish) })]
 class Build : NukeBuild
 {
     public static int Main () => Execute<Build>(x => x.Compile);
@@ -50,11 +56,19 @@ class Build : NukeBuild
     [Solution]
     public readonly Solution Solution;
 
-    public GitHubActions GitHubActions => GitHubActions.Instance;
+    [LatestGitHubRelease(repository_identifier)] public readonly string LatestGitHubRelease = repository_identifier;
     
+    const string repository_identifier = @"Cootz/PasswordManager";
+
+    const string win_release_file_name = "win_x64.zip";
+    const string macos_arm_release_file_name = "macOS-arm.zip";
+    const string macos_intel_release_file_name = "macOS-x64.zip";
+    const string android_release_file_name = "PasswordManager.apk";
+    const string passwordmanager_project_name = "PasswordManager";
+
     public string ExecutionLogFilename => $"TestResults-{ActionName ?? "${{env.ACTION_NAME}}"}";
 
-    public AbsolutePath SourceDirectory => RootDirectory / "PasswordManager";
+    public AbsolutePath SourceDirectory => RootDirectory / passwordmanager_project_name;
     public AbsolutePath UnitTestsDirectory => RootDirectory / "PasswordManager.Tests";
     public AbsolutePath UnitTestResultsDirectory => UnitTestsDirectory / "TestResults";
     public AbsolutePath UITestsDirectory => RootDirectory / "PasswordManager.Tests.UI";
@@ -132,21 +146,11 @@ class Build : NukeBuild
                 .SetLoggers($"trx;LogFileName={ExecutionLogFilename}.trx"));
         });
 
-    const string win_release_file_name = "win.zip";
-    const string masos_arm_release_file_name = "masOS-arm.zip";
-    const string masos_intel_release_file_name = "masOS-x64.zip";
-    const string android_release_file_name = "PasswordManager.apk";
-
     public Target Publish => _ => _
         .DependsOn(UnitTest, UITest)
-        .Produces(
-            PublishDirectory / win_release_file_name,
-            PublishDirectory / masos_arm_release_file_name,
-            PublishDirectory / masos_intel_release_file_name,
-            PublishDirectory / android_release_file_name)
         .Executes(() =>
         {
-            Project publishProject = Solution.GetProject("PasswordManager");
+            Project publishProject = Solution.GetProject(passwordmanager_project_name);
 
             var publishFrameworks = publishProject.GetTargetFrameworks()!.Where(f => f != "net7.0");
 
@@ -168,14 +172,33 @@ class Build : NukeBuild
             AbsolutePath androidPublishDirectory = SourceDirectory / @"bin\Release\net7.0-android\publish\com.companyname.passwordmanager-Signed.apk";
 
             zipToPublish(winPublishDirectory, win_release_file_name);
-            zipToPublish(macArmPublishDirectory, masos_arm_release_file_name);
-            zipToPublish(macIntelPublishDirectory, masos_intel_release_file_name);
+            zipToPublish(macArmPublishDirectory, macos_arm_release_file_name);
+            zipToPublish(macIntelPublishDirectory, macos_intel_release_file_name);
             
             File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
+
+            GitReleaseManagerPublish(c => c
+                .SetTagName(generateVersion(LatestGitHubRelease)));
         });
 
     void zipToPublish(AbsolutePath path, string zipFileName) => path.ZipTo(
         PublishDirectory / zipFileName,
         compressionLevel: CompressionLevel.SmallestSize,
         fileMode: FileMode.CreateNew);
+
+    string generateVersion([CanBeNull] string previousVersion)
+    {
+        var now = DateTime.Now;
+
+        string currentVersion = now.ToString("yyyy.Md");
+
+        string fullCurrentVersion = $"v{currentVersion}.0";
+
+        if (previousVersion is null || previousVersion != fullCurrentVersion)
+            return fullCurrentVersion;
+        
+        int subVersion = int.Parse(previousVersion.Split('.').Last());
+
+        return $"v{currentVersion}.{subVersion + 1}";
+    }
 }
