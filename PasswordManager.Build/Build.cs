@@ -43,7 +43,12 @@ using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
 [GitHubActions("Automatic release",
     GitHubActionsImage.MacOsLatest,
     OnPushBranches = new[] { "Release" },
-    InvokedTargets = new[] { nameof(Publish) })]
+    InvokedTargets = new[] { nameof(Publish) },
+    WritePermissions = new[] { 
+        GitHubActionsPermissions.Contents, GitHubActionsPermissions.Deployments, 
+        GitHubActionsPermissions.RepositoryProjects, GitHubActionsPermissions.Statuses, 
+        GitHubActionsPermissions.Packages, GitHubActionsPermissions.Checks},
+    EnableGitHubToken = true)]
 class Build : NukeBuild
 {
     public static int Main () => Execute<Build>(x => x.Compile);
@@ -148,6 +153,12 @@ class Build : NukeBuild
 
     public Target Publish => _ => _
         .DependsOn(UnitTest, UITest)
+        .Produces(
+            PublishDirectory / win_release_file_name,
+            PublishDirectory / macos_arm_release_file_name,
+            PublishDirectory / macos_intel_release_file_name,
+            PublishDirectory / android_release_file_name
+        )
         .Executes(() =>
         {
             Project publishProject = Solution.GetProject(passwordmanager_project_name);
@@ -176,9 +187,6 @@ class Build : NukeBuild
             zipToPublish(macIntelPublishDirectory, macos_intel_release_file_name);
             
             File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
-
-            GitReleaseManagerPublish(c => c
-                .SetTagName(generateVersion(LatestGitHubRelease)));
         });
 
     void zipToPublish(AbsolutePath path, string zipFileName) => path.ZipTo(

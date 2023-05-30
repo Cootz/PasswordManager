@@ -21,6 +21,14 @@ on:
     branches:
       - Release
 
+permissions:
+  contents: write
+  deployments: write
+  repository-projects: write
+  statuses: write
+  packages: write
+  checks: write
+
 jobs:
   macos-latest:
     name: macos-latest
@@ -36,6 +44,8 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
       - name: 'Run: Publish'
         run: ./build.cmd Publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Publish: TestResults-${{env.ACTION_NAME}}'
         uses: actions/upload-artifact@v3
         with:
@@ -46,3 +56,23 @@ jobs:
         with:
           name: TestResults-${{env.ACTION_NAME}}
           path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}
+      - name: 'Publish: win_x64.zip'
+        uses: actions/upload-artifact@v3
+        with:
+          name: win_x64.zip
+          path: Publish/win_x64.zip
+      - name: 'Publish: macOS-arm.zip'
+        uses: actions/upload-artifact@v3
+        with:
+          name: macOS-arm.zip
+          path: Publish/macOS-arm.zip
+      - name: 'Publish: macOS-x64.zip'
+        uses: actions/upload-artifact@v3
+        with:
+          name: macOS-x64.zip
+          path: Publish/macOS-x64.zip
+      - name: 'Publish: PasswordManager.apk'
+        uses: actions/upload-artifact@v3
+        with:
+          name: PasswordManager.apk
+          path: Publish/PasswordManager.apk
