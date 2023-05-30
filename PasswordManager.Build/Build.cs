@@ -31,13 +31,6 @@ using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
     GitHubActionsImage.MacOsLatest,
     OnPushBranches = new[] { "main" },
     OnPullRequestBranches = new[] { "main" },
-    CacheIncludePatterns = new[]
-    {
-        ".nuke/temp",
-        "~/.nuget/packages",
-        "~/.android/avd/*",
-        "~/.android/adb*"
-    },
     InvokedTargets = new[] { nameof(UITest) },
     AutoGenerate = false)]
 [GitHubActions("Automatic release",
