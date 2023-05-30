@@ -1,6 +1,8 @@
+using System;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using JetBrains.Annotations;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
@@ -130,9 +132,18 @@ class Build : NukeBuild
                 .SetLoggers($"trx;LogFileName={ExecutionLogFilename}.trx"));
         });
 
+    const string win_release_file_name = "win.zip";
+    const string masos_arm_release_file_name = "masOS-arm.zip";
+    const string masos_intel_release_file_name = "masOS-x64.zip";
+    const string android_release_file_name = "PasswordManager.apk";
+
     public Target Publish => _ => _
         .DependsOn(UnitTest, UITest)
-        .Produces(PublishDirectory / "*")
+        .Produces(
+            PublishDirectory / win_release_file_name,
+            PublishDirectory / masos_arm_release_file_name,
+            PublishDirectory / masos_intel_release_file_name,
+            PublishDirectory / android_release_file_name)
         .Executes(() =>
         {
             Project publishProject = Solution.GetProject("PasswordManager");
@@ -156,11 +167,11 @@ class Build : NukeBuild
             AbsolutePath macIntelPublishDirectory = SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-x64\PasswordManager.app";
             AbsolutePath androidPublishDirectory = SourceDirectory / @"bin\Release\net7.0-android\publish\com.companyname.passwordmanager-Signed.apk";
 
-            zipToPublish(winPublishDirectory, "win.zip");
-            zipToPublish(macArmPublishDirectory, "masOS-arm.zip");
-            zipToPublish(macIntelPublishDirectory, "masOS-x64.zip");
+            zipToPublish(winPublishDirectory, win_release_file_name);
+            zipToPublish(macArmPublishDirectory, masos_arm_release_file_name);
+            zipToPublish(macIntelPublishDirectory, masos_intel_release_file_name);
             
-            File.Copy(androidPublishDirectory, PublishDirectory / "PasswordManager.apk");
+            File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
         });
 
     void zipToPublish(AbsolutePath path, string zipFileName) => path.ZipTo(
