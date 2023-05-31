@@ -41,7 +41,8 @@ using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
         GitHubActionsPermissions.Contents, GitHubActionsPermissions.Deployments, 
         GitHubActionsPermissions.RepositoryProjects, GitHubActionsPermissions.Statuses, 
         GitHubActionsPermissions.Packages, GitHubActionsPermissions.Checks},
-    EnableGitHubToken = true)]
+    EnableGitHubToken = true,
+    AutoGenerate = false)]
 class Build : NukeBuild
 {
     public static int Main () => Execute<Build>(x => x.Compile);
