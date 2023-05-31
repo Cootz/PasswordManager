@@ -14,9 +14,7 @@ using Nuke.Common.Tools.PowerShell;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
-using static Nuke.Common.Tools.GitHub.GitHubTasks;
 using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
-using static Nuke.Common.Tools.Git.GitTasks;
 
 [GitHubActions("Desktop test runner",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
@@ -146,8 +144,11 @@ class Build : NukeBuild
                 .SetLoggers($"trx;LogFileName={ExecutionLogFilename}.trx"));
         });
 
+    /// <remarks>
+    /// We do not depend on <see cref="UnitTest"/> and <see cref="UITest"/> as they are already executed in a PR to Release branch
+    /// </remarks>
     public Target Publish => _ => _
-        .DependsOn(UnitTest, UITest)
+        .DependsOn(Compile)
         .Produces(PublishDirectory)
         .Executes(() =>
         {

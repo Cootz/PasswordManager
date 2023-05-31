@@ -46,16 +46,6 @@ jobs:
         run: ./build.cmd Publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: 'Publish: TestResults-${{env.ACTION_NAME}}'
-        uses: actions/upload-artifact@v3
-        with:
-          name: TestResults-${{env.ACTION_NAME}}
-          path: PasswordManager.Tests.UI/TestResults/TestResults-${{env.ACTION_NAME}}
-      - name: 'Publish: TestResults-${{env.ACTION_NAME}}'
-        uses: actions/upload-artifact@v3
-        with:
-          name: TestResults-${{env.ACTION_NAME}}
-          path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}
       - name: 'Publish: Publish'
         uses: actions/upload-artifact@v3
         with:
