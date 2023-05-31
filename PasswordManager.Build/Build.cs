@@ -14,9 +14,7 @@ using Nuke.Common.Tools.PowerShell;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
-using static Nuke.Common.Tools.GitHub.GitHubTasks;
 using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
-using static Nuke.Common.Tools.Git.GitTasks;
 
 [GitHubActions("Desktop test runner",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
@@ -43,7 +41,8 @@ using static Nuke.Common.Tools.Git.GitTasks;
         GitHubActionsPermissions.Contents, GitHubActionsPermissions.Deployments, 
         GitHubActionsPermissions.RepositoryProjects, GitHubActionsPermissions.Statuses, 
         GitHubActionsPermissions.Packages, GitHubActionsPermissions.Checks},
-    EnableGitHubToken = true)]
+    EnableGitHubToken = true,
+    AutoGenerate = false)]
 class Build : NukeBuild
 {
     public static int Main () => Execute<Build>(x => x.Compile);
