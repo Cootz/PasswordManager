@@ -38,5 +38,13 @@ bld/
 
 # Encryption
 *.keystore
-*.cert
 *.key
+
+#Nuke
+[Tt]emp/
+
+#NUnit
+[Tt]estResults/
+
+#Publishing
+[Pp]ublish/

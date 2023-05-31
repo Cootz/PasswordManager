@@ -1,5 +1,4 @@
-﻿using PasswordManager.Model;
-using PasswordManager.Model.DB;
+﻿using PasswordManager.Model.DB;
 using PasswordManager.Model.DB.Schema;
 using Realms;
 
@@ -8,29 +7,18 @@ namespace PasswordManager.Services;
 /// <summary>
 /// Provides interactions with database
 /// </summary>
-public sealed class DatabaseService : IInitializable, IDisposable
+public sealed class DatabaseService : IDisposable
 {
-    private IController DB;
-
-    private bool isInitialized;
-
-    public bool IsInitialized() => isInitialized;
-
-    public DatabaseService(IController DB) => this.DB = DB;
-
-    public async Task Initialize()
-    {
-        await DB.Initialize();
-
-        isInitialized = true;
-    }
+    private readonly IController db;
+    
+    public DatabaseService(IController db) => this.db = db;
 
     /// <summary>
     /// Save a range of <see cref="ProfileInfo"/>
     /// </summary>
     public async void SavePasswords(IEnumerable<ProfileInfo> data)
     {
-        foreach (ProfileInfo prof in data) await DB.Add(prof);
+        foreach (ProfileInfo prof in data) await db.Add(prof);
     }
 
     /// <summary>
@@ -39,7 +27,7 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// <returns></returns>
     public async Task Remove<T>(T info) where T : IRealmObject
     {
-        await DB.Remove(info);
+        await db.Remove(info);
     }
 
     /// <summary>
@@ -48,7 +36,7 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// <returns></returns>
     public async Task Refresh()
     {
-        await DB.Refresh();
+        await db.Refresh();
     }
 
     /// <summary>
@@ -57,7 +45,7 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// <param name="info"></param>
     public async void Add(IRealmObject info)
     {
-        await DB.Add(info);
+        await db.Add(info);
     }
 
     /// <summary>
@@ -67,17 +55,17 @@ public sealed class DatabaseService : IInitializable, IDisposable
     /// <returns></returns>
     public async Task RealmQuery(Func<Realm, Task> action)
     {
-        await ((RealmController)DB).RealmQuery(action);
+        await ((RealmController)db).RealmQuery(action);
     }
 
     /// <summary>
     /// Select every instance of given class from database
     /// </summary>
     /// <typeparam name="T">Type to search</typeparam>
-    public IQueryable<T> Select<T>() where T : IRealmObject => DB.Select<T>();
+    public IQueryable<T> Select<T>() where T : IRealmObject => db.Select<T>();
 
     public void Dispose()
     {
-        DB.Dispose();
+        db.Dispose();
     }
 }

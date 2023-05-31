@@ -13,14 +13,20 @@ public class SettingsViewModelTest : DatabaseTest
     private readonly IAlertService alertService = Substitute.For<IAlertService>();
     private readonly ISettingsService settingsService = Substitute.For<ISettingsService>();
 
-    private const string ServiceName = "Test service";
+    private const string service_name = "Test service";
 
     [OneTimeSetUp]
     public void OneTimeSetup()
     {
-        alertService.ShowPromptAsync("", "").ReturnsForAnyArgs(ServiceName);
+        alertService.ShowPromptAsync("", "").ReturnsForAnyArgs(service_name);
 
         settingsService.CurrentTheme = AppTheme.Unspecified;
+    }
+
+    [SetUp]
+    public void SetUp()
+    {
+        alertService.ShowConfirmationAsync(default, default).ReturnsForAnyArgs(Task.FromResult(true));
     }
 
     [Test]
@@ -34,7 +40,7 @@ public class SettingsViewModelTest : DatabaseTest
             Assert.DoesNotThrow(() => command.Execute(null));
 
             alertService.Received().ShowPromptAsync(Arg.Any<string>(), Arg.Any<string>());
-            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == ServiceName));
+            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name));
         });
     }
 
@@ -48,14 +54,15 @@ public class SettingsViewModelTest : DatabaseTest
 
             ServiceInfo service = new()
             {
-                Name = ServiceName
+                Name = service_name
             };
 
             databaseService.Add(service);
 
             Assert.DoesNotThrow(() => command.Execute(service));
 
-            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == ServiceName), Is.False);
+            alertService.Received(1).ShowConfirmationAsync(Arg.Any<string>(), Arg.Any<string>());
+            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
         });
     }
 
@@ -69,7 +76,7 @@ public class SettingsViewModelTest : DatabaseTest
 
             ServiceInfo service = new()
             {
-                Name = ServiceName
+                Name = service_name
             };
 
             databaseService.Add(service);
@@ -84,10 +91,35 @@ public class SettingsViewModelTest : DatabaseTest
 
             await databaseService.Refresh();
 
-            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == ServiceName), Is.False);
+            await alertService.Received(1).ShowConfirmationAsync(Arg.Any<string>(), Arg.Any<string>());
+            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.False);
 
             foreach (var profileId in profileInfoIds)
                 Assert.That(databaseService.Select<ProfileInfo>().Any(p => p.ID == profileId), Is.False);
+        });
+    }
+
+    [Test]
+    public void RemoveServiceWithCancellationTest()
+    {
+        RunTestWithDatabase((databaseService) =>
+        {
+            alertService.ShowConfirmationAsync(default, default).ReturnsForAnyArgs(Task.FromResult(false));
+
+            SettingsViewModel viewModel = setUpViewModel(databaseService);
+            RelayCommand<ServiceInfo> command = (RelayCommand<ServiceInfo>)viewModel.RemoveServiceCommand;
+
+            ServiceInfo service = new()
+            {
+                Name = service_name
+            };
+
+            databaseService.Add(service);
+
+            Assert.DoesNotThrow(() => command.Execute(service));
+
+            alertService.Received(1).ShowConfirmationAsync(Arg.Any<string>(), Arg.Any<string>());
+            Assert.That(databaseService.Select<ServiceInfo>().Any(s => s.Name == service_name), Is.True);
         });
     }
 

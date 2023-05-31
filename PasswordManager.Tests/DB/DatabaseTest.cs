@@ -27,8 +27,6 @@ public class DatabaseTest
         tempStorage = new TempStorage();
         controller = new RealmController(tempStorage, secureStorage);
         database = new DatabaseService(controller);
-
-        database.Initialize().Wait();
     }
 
     protected void RunTestWithDatabase(Action<DatabaseService> testRun)

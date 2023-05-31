@@ -74,8 +74,7 @@ public static class MauiProgram
 
         builder.Services.AddSingleton(_ => SecureStorage.Default);
 
-        builder.Services.AddSingleton(s =>
-            new DatabaseService(new RealmController(s.GetService<Storage>(), SecureStorage.Default)));
+        builder.Services.AddSingleton(s => new DatabaseService(new RealmController(s.GetService<Storage>(), SecureStorage.Default)));
 
         builder.Services.AddSingleton<ISettingsService, SettingsService>();
 

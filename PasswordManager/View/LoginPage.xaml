@@ -8,9 +8,9 @@
              x:Name="Loginpage"
              Title="Login">
     <VerticalStackLayout>
-        <Entry BindingContext="{Binding Password}" IsPassword="True" Style="{StaticResource EntryWithValidation}" />
+        <Entry AutomationId="LoginEntry" BindingContext="{Binding Password}" IsPassword="True" Style="{StaticResource EntryWithValidation}" />
         <Label Text="{Binding Password.Errors, Converter={StaticResource FirstValidationConverter}}"
                Style="{StaticResource ErrorLabel}" />
-        <Button Text="Login" Command="{Binding LoginCommand}" />
+        <Button Text="Login" AutomationId="LoginButton" Command="{Binding LoginCommand}" />
     </VerticalStackLayout>
 </ContentPage>

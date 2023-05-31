@@ -1,0 +1,29 @@
+name: Annotate CI run with test results
+on:
+  workflow_run:
+    workflows: ["Mobile_test_runner"]
+    types:
+      - completed
+permissions: {}
+jobs:
+  annotate: 
+    permissions:
+      checks: write
+
+    name: Test Reporter Mobile
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level: [21, 23, 29]
+    timeout-minutes: 5
+    steps:
+      - name: Test Reporter Mobile
+        uses: dorny/test-reporter@v1.6.0
+        with:
+          # Name or regex of artifact containing test results
+          artifact: TestResults-android-${{ matrix.api-level }}
+          # Name of the check run
+          name: Test results (Android-${{ matrix.api-level  }})
+          path: "*.trx"
+          reporter: dotnet-trx
