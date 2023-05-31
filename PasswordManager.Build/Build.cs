@@ -41,8 +41,7 @@ using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
         GitHubActionsPermissions.Contents, GitHubActionsPermissions.Deployments, 
         GitHubActionsPermissions.RepositoryProjects, GitHubActionsPermissions.Statuses, 
         GitHubActionsPermissions.Packages, GitHubActionsPermissions.Checks},
-    EnableGitHubToken = true,
-    AutoGenerate = false)]
+    EnableGitHubToken = true)]
 class Build : NukeBuild
 {
     public static int Main () => Execute<Build>(x => x.Compile);
@@ -145,8 +144,11 @@ class Build : NukeBuild
                 .SetLoggers($"trx;LogFileName={ExecutionLogFilename}.trx"));
         });
 
+    /// <remarks>
+    /// We do not depend on <see cref="UnitTest"/> and <see cref="UITest"/> as they are already executed in a PR to Release branch
+    /// </remarks>
     public Target Publish => _ => _
-        .DependsOn(UnitTest, UITest)
+        .DependsOn(Compile)
         .Produces(PublishDirectory)
         .Executes(() =>
         {
