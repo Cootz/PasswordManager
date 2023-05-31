@@ -35,6 +35,7 @@ jobs:
     runs-on: macos-13
     env:
       ACTION_NAME: macos-13
+      CONFIGURATION: Release
     steps:
       - uses: actions/checkout@v3
       - name: 'Cache: .nuke/temp, ~/.nuget/packages'
