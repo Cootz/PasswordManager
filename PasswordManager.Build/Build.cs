@@ -9,10 +9,14 @@ using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
+using Nuke.Common.Tools.GitReleaseManager;
 using Nuke.Common.Tools.PowerShell;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
+using static Nuke.Common.Tools.GitHub.GitHubTasks;
+using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
+using static Nuke.Common.Tools.Git.GitTasks;
 
 [GitHubActions("Desktop test runner",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
@@ -144,12 +148,7 @@ class Build : NukeBuild
 
     public Target Publish => _ => _
         .DependsOn(UnitTest, UITest)
-        .Produces(
-            PublishDirectory / win_release_file_name,
-            PublishDirectory / macos_arm_release_file_name,
-            PublishDirectory / macos_intel_release_file_name,
-            PublishDirectory / android_release_file_name
-        )
+        .Produces(PublishDirectory)
         .Executes(() =>
         {
             Project publishProject = Solution.GetProject(passwordmanager_project_name);
@@ -178,6 +177,14 @@ class Build : NukeBuild
             zipToPublish(macIntelPublishDirectory, macos_intel_release_file_name);
             
             File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
+
+            GitReleaseManagerPublish(c => c
+                .SetToken(GitHubActions.Instance.Token)
+                .SetTagName(generateVersion(LatestGitHubRelease))
+                .SetProcessArgumentConfigurator(_ => _
+                    .Add("-d")
+                    .Add("--generate-notes")
+                    .Add("--latest")));
         });
 
     void zipToPublish(AbsolutePath path, string zipFileName) => path.ZipTo(
