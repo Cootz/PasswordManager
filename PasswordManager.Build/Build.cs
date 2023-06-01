@@ -6,12 +6,10 @@ using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
-using Nuke.Common.Tools.GitReleaseManager;
 using Nuke.Common.Tools.PowerShell;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
-using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
 
 [GitHubActions("Desktop test runner",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
@@ -30,15 +28,11 @@ using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
     OnPullRequestBranches = new[] { "main" },
     InvokedTargets = new[] { nameof(UITest) },
     AutoGenerate = false)]
-[GitHubActions("Automatic release",
+[GitHubActions("Automatic release generation",
     GitHubActionsImage.MacOsLatest,
+    GitHubActionsImage.WindowsLatest,
     OnPushBranches = new[] { "Release" },
-    InvokedTargets = new[] { nameof(Publish) },
-    WritePermissions = new[] { 
-        GitHubActionsPermissions.Contents, GitHubActionsPermissions.Deployments, 
-        GitHubActionsPermissions.RepositoryProjects, GitHubActionsPermissions.Statuses, 
-        GitHubActionsPermissions.Packages, GitHubActionsPermissions.Checks},
-    EnableGitHubToken = true,
+    InvokedTargets = new[] { nameof(Pack) },
     AutoGenerate = false)]
 class Build : NukeBuild
 {
@@ -175,29 +169,20 @@ class Build : NukeBuild
 
             Directory.CreateDirectory(PublishDirectory);
 
-            AbsolutePath winPublishDirectory = SourceDirectory / @"bin\Release\net7.0-windows10.0.19041.0\win10-x64\publish";
-            AbsolutePath macArmPublishDirectory = SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-arm64\PasswordManager.app";
-            AbsolutePath macIntelPublishDirectory = SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-x64\PasswordManager.app";
-            AbsolutePath androidPublishDirectory = SourceDirectory / @"bin\Release\net7.0-android\publish\com.companyname.passwordmanager-Signed.apk";
+            AbsolutePath winPublishDirectory =
+                SourceDirectory / @"bin\Release\net7.0-windows10.0.19041.0\win10-x64\publish";
+            AbsolutePath macArmPublishDirectory =
+                SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-arm64\PasswordManager.app";
+            AbsolutePath macIntelPublishDirectory =
+                SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-x64\PasswordManager.app";
+            AbsolutePath androidPublishDirectory = 
+                SourceDirectory / @"bin\Release\net7.0-android\publish\com.companyname.passwordmanager-Signed.apk";
 
             zipHelper.ZipToPublish(winPublishDirectory, win_release_file_name);
             zipHelper.ZipToPublish(macArmPublishDirectory, macos_arm_release_file_name);
             zipHelper.ZipToPublish(macIntelPublishDirectory, macos_intel_release_file_name);
-            
-            if(androidPublishDirectory.Exists())
-                File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
-        });
 
-    public Target Publish => _ => _
-        .DependsOn(Pack)
-        .Executes(() =>
-        {
-            GitReleaseManagerPublish(c => c
-                .SetToken(GitHubActions.Instance.Token)
-                .SetTagName(versionHelper.GenerateVersion(LatestGitHubRelease))
-                .SetProcessArgumentConfigurator(_ => _
-                    .Add("-d")
-                    .Add("--generate-notes")
-                    .Add("--latest")));
+            if (androidPublishDirectory.Exists())
+                File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
         });
 }
