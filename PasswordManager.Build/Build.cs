@@ -184,7 +184,8 @@ class Build : NukeBuild
             zipHelper.ZipToPublish(macArmPublishDirectory, macos_arm_release_file_name);
             zipHelper.ZipToPublish(macIntelPublishDirectory, macos_intel_release_file_name);
             
-            File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
+            if(androidPublishDirectory.Exists())
+                File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
         });
 
     public Target Publish => _ => _
