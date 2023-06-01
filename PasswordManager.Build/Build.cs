@@ -1,8 +1,5 @@
-using System;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using JetBrains.Annotations;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
