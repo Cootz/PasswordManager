@@ -1,8 +1,5 @@
-using System;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using JetBrains.Annotations;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
@@ -55,7 +52,7 @@ class Build : NukeBuild
     [Solution]
     public readonly Solution Solution;
 
-    [LatestGitHubRelease(repository_identifier)] public readonly string LatestGitHubRelease = repository_identifier;
+    [LatestGitHubRelease(Build.repository_identifier)] public readonly string LatestGitHubRelease = repository_identifier;
     
     const string repository_identifier = @"Cootz/PasswordManager";
 
@@ -64,6 +61,7 @@ class Build : NukeBuild
     const string macos_intel_release_file_name = "macOS-x64.zip";
     const string android_release_file_name = "PasswordManager.apk";
     const string passwordmanager_project_name = "PasswordManager";
+    public const string DIRECTORY_INDICATOR = "dir";
 
     public string ExecutionLogFilename => $"TestResults-{ActionName ?? "${{env.ACTION_NAME}}"}";
 
@@ -74,6 +72,14 @@ class Build : NukeBuild
     public AbsolutePath UITestsResultsDirectory => UITestsDirectory / "TestResults";
 
     public AbsolutePath PublishDirectory = RootDirectory / "Publish";
+    private readonly ZipHelper zipHelper;
+    private readonly VersionHelper versionHelper;
+
+    public Build()
+    {
+        zipHelper = new ZipHelper(this);
+        versionHelper = new VersionHelper();
+    }
 
     public Target Clean => _ => _
         .Before(Restore)
@@ -146,10 +152,10 @@ class Build : NukeBuild
         });
 
     /// <remarks>
-    /// We do not depend on <see cref="UnitTest"/> and <see cref="UITest"/> as they are already executed in a PR to Release branch
+    /// We do not depend on <see cref="UITest"/> as it's already executed in a PR to Release branch
     /// </remarks>
-    public Target Publish => _ => _
-        .DependsOn(Compile)
+    public Target Pack => _ => _
+        .DependsOn(Compile, UnitTest)
         .Produces(PublishDirectory)
         .Executes(() =>
         {
@@ -174,39 +180,24 @@ class Build : NukeBuild
             AbsolutePath macIntelPublishDirectory = SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-x64\PasswordManager.app";
             AbsolutePath androidPublishDirectory = SourceDirectory / @"bin\Release\net7.0-android\publish\com.companyname.passwordmanager-Signed.apk";
 
-            zipToPublish(winPublishDirectory, win_release_file_name);
-            zipToPublish(macArmPublishDirectory, macos_arm_release_file_name);
-            zipToPublish(macIntelPublishDirectory, macos_intel_release_file_name);
+            zipHelper.ZipToPublish(winPublishDirectory, win_release_file_name);
+            zipHelper.ZipToPublish(macArmPublishDirectory, macos_arm_release_file_name);
+            zipHelper.ZipToPublish(macIntelPublishDirectory, macos_intel_release_file_name);
             
-            File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
+            if(androidPublishDirectory.Exists())
+                File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
+        });
 
+    public Target Publish => _ => _
+        .DependsOn(Pack)
+        .Executes(() =>
+        {
             GitReleaseManagerPublish(c => c
                 .SetToken(GitHubActions.Instance.Token)
-                .SetTagName(generateVersion(LatestGitHubRelease))
+                .SetTagName(versionHelper.GenerateVersion(LatestGitHubRelease))
                 .SetProcessArgumentConfigurator(_ => _
                     .Add("-d")
                     .Add("--generate-notes")
                     .Add("--latest")));
         });
-
-    void zipToPublish(AbsolutePath path, string zipFileName) => path.ZipTo(
-        PublishDirectory / zipFileName,
-        compressionLevel: CompressionLevel.SmallestSize,
-        fileMode: FileMode.CreateNew);
-
-    string generateVersion([CanBeNull] string previousVersion)
-    {
-        var now = DateTime.Now;
-
-        string currentVersion = now.ToString("yyyy.Md");
-
-        string fullCurrentVersion = $"v{currentVersion}.0";
-
-        if (previousVersion is null || previousVersion != fullCurrentVersion)
-            return fullCurrentVersion;
-        
-        int subVersion = int.Parse(previousVersion.Split('.').Last());
-
-        return $"v{currentVersion}.{subVersion + 1}";
-    }
 }
