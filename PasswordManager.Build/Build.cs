@@ -36,7 +36,7 @@ using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
 [GitHubActions("Automatic release",
     GitHubActionsImage.MacOsLatest,
     OnPushBranches = new[] { "Release" },
-    InvokedTargets = new[] { nameof(Pack) },
+    InvokedTargets = new[] { nameof(Publish) },
     WritePermissions = new[] { 
         GitHubActionsPermissions.Contents, GitHubActionsPermissions.Deployments, 
         GitHubActionsPermissions.RepositoryProjects, GitHubActionsPermissions.Statuses, 
@@ -76,10 +76,12 @@ class Build : NukeBuild
 
     public AbsolutePath PublishDirectory = RootDirectory / "Publish";
     private readonly ZipHelper zipHelper;
+    private readonly VersionHelper versionHelper;
 
     public Build()
     {
         zipHelper = new ZipHelper(this);
+        versionHelper = new VersionHelper();
     }
 
     public Target Clean => _ => _
@@ -188,19 +190,16 @@ class Build : NukeBuild
             File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
         });
 
-    string generateVersion([CanBeNull] string previousVersion)
-    {
-        var now = DateTime.Now;
-
-        string currentVersion = now.ToString("yyyy.Md");
-
-        string fullCurrentVersion = $"v{currentVersion}.0";
-
-        if (previousVersion is null || previousVersion != fullCurrentVersion)
-            return fullCurrentVersion;
-        
-        int subVersion = int.Parse(previousVersion.Split('.').Last());
-
-        return $"v{currentVersion}.{subVersion + 1}";
-    }
+    public Target Publish => _ => _
+        .DependsOn(Pack)
+        .Executes(() =>
+        {
+            GitReleaseManagerPublish(c => c
+                .SetToken(GitHubActions.Instance.Token)
+                .SetTagName(versionHelper.GenerateVersion(LatestGitHubRelease))
+                .SetProcessArgumentConfigurator(_ => _
+                    .Add("-d")
+                    .Add("--generate-notes")
+                    .Add("--latest")));
+        });
 }
