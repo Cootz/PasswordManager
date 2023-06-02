@@ -1,20 +1,15 @@
-using System;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using JetBrains.Annotations;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
-using Nuke.Common.Tools.GitReleaseManager;
 using Nuke.Common.Tools.PowerShell;
 using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
-using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
 
 [GitHubActions("Desktop test runner",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
@@ -33,15 +28,12 @@ using static Nuke.Common.Tools.GitReleaseManager.GitReleaseManagerTasks;
     OnPullRequestBranches = new[] { "main" },
     InvokedTargets = new[] { nameof(UITest) },
     AutoGenerate = false)]
-[GitHubActions("Automatic release",
+[GitHubActions("Automatic release generation",
     GitHubActionsImage.MacOsLatest,
+    GitHubActionsImage.WindowsLatest,
     OnPushBranches = new[] { "Release" },
-    InvokedTargets = new[] { nameof(Publish) },
-    WritePermissions = new[] { 
-        GitHubActionsPermissions.Contents, GitHubActionsPermissions.Deployments, 
-        GitHubActionsPermissions.RepositoryProjects, GitHubActionsPermissions.Statuses, 
-        GitHubActionsPermissions.Packages, GitHubActionsPermissions.Checks},
-    EnableGitHubToken = true)]
+    InvokedTargets = new[] { nameof(Pack) },
+    AutoGenerate = false)]
 class Build : NukeBuild
 {
     public static int Main () => Execute<Build>(x => x.Compile);
@@ -54,7 +46,7 @@ class Build : NukeBuild
     [Solution]
     public readonly Solution Solution;
 
-    [LatestGitHubRelease(repository_identifier)] public readonly string LatestGitHubRelease = repository_identifier;
+    [LatestGitHubRelease(Build.repository_identifier)] public readonly string LatestGitHubRelease = repository_identifier;
     
     const string repository_identifier = @"Cootz/PasswordManager";
 
@@ -63,6 +55,7 @@ class Build : NukeBuild
     const string macos_intel_release_file_name = "macOS-x64.zip";
     const string android_release_file_name = "PasswordManager.apk";
     const string passwordmanager_project_name = "PasswordManager";
+    public const string DIRECTORY_INDICATOR = "dir";
 
     public string ExecutionLogFilename => $"TestResults-{ActionName ?? "${{env.ACTION_NAME}}"}";
 
@@ -73,6 +66,14 @@ class Build : NukeBuild
     public AbsolutePath UITestsResultsDirectory => UITestsDirectory / "TestResults";
 
     public AbsolutePath PublishDirectory = RootDirectory / "Publish";
+    private readonly ZipHelper zipHelper;
+    private readonly VersionHelper versionHelper;
+
+    public Build()
+    {
+        zipHelper = new ZipHelper(this);
+        versionHelper = new VersionHelper();
+    }
 
     public Target Clean => _ => _
         .Before(Restore)
@@ -145,10 +146,10 @@ class Build : NukeBuild
         });
 
     /// <remarks>
-    /// We do not depend on <see cref="UnitTest"/> and <see cref="UITest"/> as they are already executed in a PR to Release branch
+    /// We do not depend on <see cref="UITest"/> as it's already executed in a PR to Release branch
     /// </remarks>
-    public Target Publish => _ => _
-        .DependsOn(Compile)
+    public Target Pack => _ => _
+        .DependsOn(Compile, UnitTest)
         .Produces(PublishDirectory)
         .Executes(() =>
         {
@@ -168,44 +169,20 @@ class Build : NukeBuild
 
             Directory.CreateDirectory(PublishDirectory);
 
-            AbsolutePath winPublishDirectory = SourceDirectory / @"bin\Release\net7.0-windows10.0.19041.0\win10-x64\publish";
-            AbsolutePath macArmPublishDirectory = SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-arm64\PasswordManager.app";
-            AbsolutePath macIntelPublishDirectory = SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-x64\PasswordManager.app";
-            AbsolutePath androidPublishDirectory = SourceDirectory / @"bin\Release\net7.0-android\publish\com.companyname.passwordmanager-Signed.apk";
+            AbsolutePath winPublishDirectory =
+                SourceDirectory / @"bin\Release\net7.0-windows10.0.19041.0\win10-x64\publish";
+            AbsolutePath macArmPublishDirectory =
+                SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-arm64";
+            AbsolutePath macIntelPublishDirectory =
+                SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-x64";
+            AbsolutePath androidPublishDirectory = 
+                SourceDirectory / @"bin\Release\net7.0-android\publish\com.companyname.passwordmanager-Signed.apk";
 
-            zipToPublish(winPublishDirectory, win_release_file_name);
-            zipToPublish(macArmPublishDirectory, macos_arm_release_file_name);
-            zipToPublish(macIntelPublishDirectory, macos_intel_release_file_name);
-            
-            File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
+            zipHelper.ZipToPublish(winPublishDirectory, win_release_file_name);
+            zipHelper.ZipToPublish(macArmPublishDirectory, macos_arm_release_file_name);
+            zipHelper.ZipToPublish(macIntelPublishDirectory, macos_intel_release_file_name);
 
-            GitReleaseManagerPublish(c => c
-                .SetToken(GitHubActions.Instance.Token)
-                .SetTagName(generateVersion(LatestGitHubRelease))
-                .SetProcessArgumentConfigurator(_ => _
-                    .Add("-d")
-                    .Add("--generate-notes")
-                    .Add("--latest")));
+            if (androidPublishDirectory.Exists("file"))
+                File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
         });
-
-    void zipToPublish(AbsolutePath path, string zipFileName) => path.ZipTo(
-        PublishDirectory / zipFileName,
-        compressionLevel: CompressionLevel.SmallestSize,
-        fileMode: FileMode.CreateNew);
-
-    string generateVersion([CanBeNull] string previousVersion)
-    {
-        var now = DateTime.Now;
-
-        string currentVersion = now.ToString("yyyy.Md");
-
-        string fullCurrentVersion = $"v{currentVersion}.0";
-
-        if (previousVersion is null || previousVersion != fullCurrentVersion)
-            return fullCurrentVersion;
-        
-        int subVersion = int.Parse(previousVersion.Split('.').Last());
-
-        return $"v{currentVersion}.{subVersion + 1}";
-    }
 }

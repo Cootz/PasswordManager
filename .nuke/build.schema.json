@@ -77,7 +77,7 @@
             "enum": [
               "Clean",
               "Compile",
-              "Publish",
+              "Pack",
               "Restore",
               "UITest",
               "UnitTest"
@@ -96,7 +96,7 @@
             "enum": [
               "Clean",
               "Compile",
-              "Publish",
+              "Pack",
               "Restore",
               "UITest",
               "UnitTest"
