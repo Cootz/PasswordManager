@@ -172,9 +172,9 @@ class Build : NukeBuild
             AbsolutePath winPublishDirectory =
                 SourceDirectory / @"bin\Release\net7.0-windows10.0.19041.0\win10-x64\publish";
             AbsolutePath macArmPublishDirectory =
-                SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-arm64\PasswordManager.app";
+                SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-arm64";
             AbsolutePath macIntelPublishDirectory =
-                SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-x64\PasswordManager.app";
+                SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-x64";
             AbsolutePath androidPublishDirectory = 
                 SourceDirectory / @"bin\Release\net7.0-android\publish\com.companyname.passwordmanager-Signed.apk";
 
@@ -182,7 +182,7 @@ class Build : NukeBuild
             zipHelper.ZipToPublish(macArmPublishDirectory, macos_arm_release_file_name);
             zipHelper.ZipToPublish(macIntelPublishDirectory, macos_intel_release_file_name);
 
-            if (androidPublishDirectory.Exists())
+            if (androidPublishDirectory.Exists("file"))
                 File.Copy(androidPublishDirectory, PublishDirectory / android_release_file_name);
         });
 }
