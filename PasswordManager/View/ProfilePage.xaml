@@ -38,7 +38,12 @@
                      CommandParameter="{Binding ProfileInfo.Username}" Grid.Column="2" Grid.Row="1" />
 
         <Label Text="Password" Style="{StaticResource LeftLabel}" Grid.Column="0" Grid.Row="2" />
-        <Label Text="{Binding ProfileInfo.Password}" Style="{StaticResource RightLabel}" Grid.Column="1" Grid.Row="2" />
+        <Label Text="{Binding VisiblePassword}"  Style="{StaticResource RightLabel}" Grid.Column="1" Grid.Row="2">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding ChangePasswordVisibilityCommand}"/>
+            </Label.GestureRecognizers>
+        </Label>
         <ImageButton Source="{AppThemeBinding Light=copy_paste_icon.png, Dark=copy_paste_dark_icon.png}" Padding="5"
                      Style="{StaticResource LeftImageButton}" Command="{Binding CopyToClipboardCommand}"
                      CommandParameter="{Binding ProfileInfo.Password}" Grid.Column="2" Grid.Row="2" />
