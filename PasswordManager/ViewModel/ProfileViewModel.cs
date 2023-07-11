@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PasswordManager.Model.DB.Schema;
 
@@ -15,5 +16,10 @@ public partial class ProfileViewModel : ObservableObject
     }
 
     [RelayCommand]
-    void CopyToClipboard(string text) => Clipboard.Default.SetTextAsync(text);
+    async Task CopyToClipboard(string text)
+    {
+        await Clipboard.Default.SetTextAsync(text);
+        var toast = CommunityToolkit.Maui.Alerts.Toast.Make("Password copied");
+        await toast.Show();
+    }
 }

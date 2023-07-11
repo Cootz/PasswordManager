@@ -1,8 +1,5 @@
 {
   "profiles": {
-    "Project Name (Package)": {
-      "commandName": "MsixPackage"
-    },
     "Project Name (Unpackaged)": {
       "commandName": "Project"
     }
