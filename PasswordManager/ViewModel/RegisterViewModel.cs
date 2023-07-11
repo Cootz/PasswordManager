@@ -61,11 +61,12 @@ public partial class RegisterViewModel : ObservableObject
 
     private void OnKeyPressed(object sender, KeyboardHookEventArgs e)
     {
-        if (e.Data.KeyCode == SharpHook.Native.KeyCode.VcEnter) MainThread.BeginInvokeOnMainThread(Register);
+        if (e.Data.KeyCode == SharpHook.Native.KeyCode.VcEnter)
+            MainThread.BeginInvokeOnMainThread(async () => await Register());
     }
 
     [RelayCommand]
-    private async void Register()
+    private async Task Register()
     {
         if (Password.Validate() && PasswordConfirmation.Validate() && MatchValidation.Validate())
         {

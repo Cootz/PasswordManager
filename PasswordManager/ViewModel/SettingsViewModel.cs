@@ -39,7 +39,7 @@ public partial class SettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async void AddService()
+    private async Task AddService()
     {
         string response = await alertService.ShowPromptAsync("Service", "Enter service name");
 
@@ -54,7 +54,7 @@ public partial class SettingsViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async void RemoveService(ServiceInfo info)
+    private async Task RemoveService(ServiceInfo info)
     {
         bool confirmed = await alertService.ShowConfirmationAsync("Warning", "All linked to this service profiles will be permanently removed. Continue?");
 
