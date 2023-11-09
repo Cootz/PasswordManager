@@ -42,7 +42,7 @@ public class DatabaseTest
     [TearDown]
     public async Task TearDown()
     {
-        await controller!.RealmQuery(async (realm) =>
+        await controller!.RealmQueryAsync(async (realm) =>
         {
             await realm.WriteAsync(() =>
             {

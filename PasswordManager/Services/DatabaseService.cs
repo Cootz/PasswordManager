@@ -18,7 +18,7 @@ public sealed class DatabaseService : IDisposable
     /// </summary>
     public async void SavePasswords(IEnumerable<ProfileInfo> data)
     {
-        foreach (ProfileInfo prof in data) await db.Add(prof);
+        foreach (ProfileInfo prof in data) await db.AddAsync(prof);
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ public sealed class DatabaseService : IDisposable
     /// <returns></returns>
     public async Task Remove<T>(T info) where T : IRealmObject
     {
-        await db.Remove(info);
+        await db.RemoveAsync(info);
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public sealed class DatabaseService : IDisposable
     /// <returns></returns>
     public async Task Refresh()
     {
-        await db.Refresh();
+        await db.RefreshAsync();
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public sealed class DatabaseService : IDisposable
     /// <param name="info"></param>
     public async void Add(IRealmObject info)
     {
-        await db.Add(info);
+        await db.AddAsync(info);
     }
 
     /// <summary>
@@ -55,7 +55,7 @@ public sealed class DatabaseService : IDisposable
     /// <returns></returns>
     public async Task RealmQuery(Func<Realm, Task> action)
     {
-        await ((RealmController)db).RealmQuery(action);
+        await ((RealmController)db).RealmQueryAsync(action);
     }
 
     /// <summary>

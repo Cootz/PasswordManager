@@ -31,7 +31,7 @@ public sealed class RealmController : IController
         Initialization = InitializeAsync();
     }
 
-    public async Task Add<T>(T info) where T : IRealmObject => await realm.WriteAsync(() => { realm.Add(info); });
+    public async Task AddAsync<T>(T info) where T : IRealmObject => await realm.WriteAsync(() => { realm.Add(info); });
 
     public void Dispose() => realm.Dispose();
 
@@ -122,19 +122,19 @@ public sealed class RealmController : IController
 
     public IQueryable<T> Select<T>() where T : IRealmObject => realm.All<T>();
 
-    public async Task Refresh()
+    public async Task RefreshAsync()
     {
         await Initialization;
         await realm.RefreshAsync();
     }
 
-    public async Task RealmQuery(Func<Realm, Task> action)
+    public async Task RealmQueryAsync(Func<Realm, Task> action)
     {
         await Initialization;
         await action(realm);
     }
 
-    public async Task Remove<T>(T info) where T : IRealmObject
+    public async Task RemoveAsync<T>(T info) where T : IRealmObject
     {
         await Initialization;
         await realm.WriteAsync(() => realm.Remove(info));
