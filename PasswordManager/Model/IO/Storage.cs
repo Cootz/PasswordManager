@@ -8,7 +8,7 @@ public abstract class Storage
     /// <summary>
     /// Current working directory of the storage
     /// </summary>
-    public string WorkingDirectory { get; private set; }
+    public string WorkingDirectory { get; private init; }
 
     public Storage(string path)
     {
