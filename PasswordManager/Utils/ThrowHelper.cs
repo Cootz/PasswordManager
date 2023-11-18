@@ -1,5 +1,8 @@
 ﻿namespace PasswordManager.Utils;
 
+/// <summary>
+/// Helps throwing exceptions
+/// </summary>
 internal static class ThrowHelper
 {
     internal static T ThrowNotSupportedException<T>() => (T)ThrowNotSupportedException(typeof(T));

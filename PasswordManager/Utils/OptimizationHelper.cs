@@ -1,5 +1,8 @@
 ﻿namespace PasswordManager.Utils;
 
+/// <summary>
+/// Contains optimization utils
+/// </summary>
 public static class OptimizationHelper
 {
     /// <summary>
