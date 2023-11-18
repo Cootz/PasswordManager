@@ -15,8 +15,14 @@ public partial class ValidatableObject<T> : ObservableObject, IValidity
 
     [ObservableProperty] private T _value = default;
 
+    /// <summary>
+    /// Command provider for <see cref="Validate"/> method
+    /// </summary>
     public ICommand ValidateCommand { get; }
 
+    /// <summary>
+    /// Validations to be applied on the object
+    /// </summary>
     public List<IValidationRule<T>> Validations { get; } = new();
 
     public ValidatableObject()
@@ -26,6 +32,10 @@ public partial class ValidatableObject<T> : ObservableObject, IValidity
         ValidateCommand = new Command(() => Validate());
     }
 
+    /// <summary>
+    /// Validates the object to match all the <see cref="Validations"/>
+    /// </summary>
+    /// <returns></returns>
     public bool Validate()
     {
         Errors = Validations

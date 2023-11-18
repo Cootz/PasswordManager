@@ -14,11 +14,11 @@ public partial class ProfileInfo : RealmObject, IEquatable<ProfileInfo>
 
     [PrimaryKey] public Guid ID { get; set; }
 
-    public ServiceInfo Service { get; set; }
+    public ServiceInfo Service { get; init; }
 
-    public string Username { get; set; }
+    public string Username { get; init; }
 
-    public string Password { get; set; }
+    public string Password { get; init; }
 
     public ProfileInfo() => ID = Guid.NewGuid();
 

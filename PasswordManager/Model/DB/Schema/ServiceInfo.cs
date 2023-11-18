@@ -16,13 +16,13 @@ public partial class ServiceInfo : RealmObject, IEquatable<ServiceInfo>
         new() { ID = Guid.Parse("00000000-0000-0000-0000-000000000004"), Name = "origin" }
     };
 
-    [PrimaryKey] public Guid ID { get; set; }
+    [PrimaryKey] public Guid ID { get; init; }
 
     /// <summary>
     /// Service name
     /// </summary>
     [Indexed]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; init; } = string.Empty;
 
     /// <summary>
     /// List of <see cref="ProfileInfo"/>s linked to this <see cref="ServiceInfo"/>
