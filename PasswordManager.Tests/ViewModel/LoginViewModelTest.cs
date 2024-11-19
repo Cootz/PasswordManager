@@ -54,4 +54,7 @@ public class LoginViewModelTest
 
     [TearDown]
     public void TearDown() => navigationService.ClearReceivedCalls();
+
+    [OneTimeTearDown]
+    public void OneTimeTearDown() => hook.Dispose();
 }
