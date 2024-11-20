@@ -4,8 +4,8 @@ using PasswordManager.Services;
 using PasswordManager.Tests.DB;
 using PasswordManager.Tests.TestData;
 using PasswordManager.ViewModel;
-using System.Windows.Input;
 using SharpHook;
+using System.Windows.Input;
 
 namespace PasswordManager.Tests.ViewModel;
 

@@ -10,7 +10,7 @@ namespace PasswordManager.Services;
 public sealed class DatabaseService : IDisposable
 {
     private readonly IController db;
-    
+
     public DatabaseService(IController db) => this.db = db;
 
     /// <summary>

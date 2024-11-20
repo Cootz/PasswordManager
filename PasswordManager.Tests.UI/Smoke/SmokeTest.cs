@@ -1,6 +1,4 @@
 ﻿using PasswordManager.View;
-using Xamarin.UITest;
-using Xamarin.UITest.Queries;
 using Platform = Xamarin.UITest.Platform;
 
 namespace PasswordManager.Tests.UI.Smoke
@@ -54,7 +52,7 @@ namespace PasswordManager.Tests.UI.Smoke
 
             app.Tap("Open navigation drawer");
             app.Tap("Recent");
-            
+
             waitAndAssert("ProfilesCollectionView");
             app.Screenshot($"Navigated from {nameof(SettingsPage)} to {nameof(RecentPage)} via {nameof(AppShell)}");
 

@@ -55,7 +55,7 @@ namespace PasswordManager.Tests.UI.View
             app.EnterText("PasswordConfirmation", "P@ssw0rd");
 
             app.DismissKeyboard();
-            
+
             app.Tap("RegisterButton");
 
             app.WaitForElement("ProfilesCollectionView");

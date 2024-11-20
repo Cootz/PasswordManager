@@ -37,14 +37,14 @@ public static class MauiProgram
             .ConfigureLifecycleEvents(events =>
             {
 #if WINDOWS
-                    events.AddWindows(windows =>
+                events.AddWindows(windows =>
+                {
+                    windows.OnActivated((window, args) =>
                     {
-                        windows.OnActivated((window, args) =>
-                        {
-                            OptimizationHelper.IsAppActive = args.WindowActivationState !=
-                                                             Microsoft.UI.Xaml.WindowActivationState.Deactivated;
-                        });
+                        OptimizationHelper.IsAppActive = args.WindowActivationState !=
+                                                         Microsoft.UI.Xaml.WindowActivationState.Deactivated;
                     });
+                });
 #elif MACCATALYST
                 events.AddiOS(ios =>
                 {

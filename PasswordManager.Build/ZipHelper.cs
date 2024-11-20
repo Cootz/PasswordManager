@@ -1,6 +1,6 @@
+using Nuke.Common.IO;
 using System.IO;
 using System.IO.Compression;
-using Nuke.Common.IO;
 
 class ZipHelper
 {
