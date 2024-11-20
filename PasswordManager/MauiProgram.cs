@@ -23,7 +23,7 @@ public static class MauiProgram
 
     public static MauiApp CreateMauiApp()
     {
-        OptimizedTaskPoolGlobalHook globalHook = new(new TaskPoolGlobalHookOptions(4, true));
+        OptimizedTaskPoolGlobalHook globalHook = new(4, true);
 
         MauiAppBuilder builder = MauiApp.CreateBuilder();
         builder
