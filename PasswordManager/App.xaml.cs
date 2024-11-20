@@ -1,6 +1,4 @@
 ﻿using PasswordManager.Services;
-using PasswordManager.View;
-using PasswordManager.ViewModel;
 
 namespace PasswordManager;
 
@@ -14,7 +12,7 @@ public partial class App : Application
         UserAppTheme = provider.GetService<ISettingsService>().CurrentTheme;
 
         InitializeComponent();
-
-        Windows[0].Page = new AppShell();
     }
+
+    protected override Window CreateWindow(IActivationState activationState) => new(new AppShell());
 }
