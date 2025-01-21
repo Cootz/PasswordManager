@@ -27,7 +27,7 @@ on:
 jobs:
   macos-latest:
     name: Android (api-${{ matrix.api-level }})
-    runs-on: macos-13
+    runs-on: macos-15
     strategy:
       matrix:
         api-level: [21, 23, 29]

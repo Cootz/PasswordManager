@@ -48,10 +48,10 @@ jobs:
           name: TestResults-${{env.ACTION_NAME}}
           path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}.trx
   macos-latest:
-    name: macos-13
-    runs-on: macos-13
+    name: macos-15
+    runs-on: macos-15
     env:
-      ACTION_NAME: macos-13
+      ACTION_NAME: macos-15
     steps:
       - uses: actions/checkout@v3
       - name: 'Cache: .nuke/temp, ~/.nuget/packages'
