@@ -13,26 +13,26 @@ using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 
 [GitHubActions("Desktop test runner",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
-    OnPushBranches = new[] { "main" },
-    OnPullRequestBranches = new[] { "main" },
-    CacheIncludePatterns = new[]
-    {
+    OnPushBranches = ["main"],
+    OnPullRequestBranches = ["main"],
+    CacheIncludePatterns =
+    [
         ".nuke/temp",
         "~/.nuget/packages"
-    },
-    InvokedTargets = new[] { nameof(UnitTest) },
+    ],
+    InvokedTargets = [nameof(UnitTest)],
     AutoGenerate = false)]
 [GitHubActions("Mobile test runner",
     GitHubActionsImage.MacOsLatest,
-    OnPushBranches = new[] { "main" },
-    OnPullRequestBranches = new[] { "main" },
-    InvokedTargets = new[] { nameof(UITest) },
+    OnPushBranches = ["main"],
+    OnPullRequestBranches = ["main"],
+    InvokedTargets = [nameof(UITest)],
     AutoGenerate = false)]
 [GitHubActions("Automatic release generation",
     GitHubActionsImage.MacOsLatest,
     GitHubActionsImage.WindowsLatest,
-    OnPushBranches = new[] { "Release" },
-    InvokedTargets = new[] { nameof(Pack) },
+    OnPushBranches = ["Release"],
+    InvokedTargets = [nameof(Pack)],
     AutoGenerate = false)]
 class Build : NukeBuild
 {
