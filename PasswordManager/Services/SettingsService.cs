@@ -6,10 +6,7 @@ namespace PasswordManager.Services
     {
         private readonly DatabaseService databaseService;
 
-        public IQueryable<ServiceInfo> ServiceInfos
-        {
-            get => databaseService.Select<ServiceInfo>();
-        }
+        public IQueryable<ServiceInfo> ServiceInfos => databaseService.Select<ServiceInfo>();
 
         public AppTheme CurrentTheme
         {

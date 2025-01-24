@@ -1,6 +1,6 @@
+using JetBrains.Annotations;
 using System;
 using System.Linq;
-using JetBrains.Annotations;
 
 class VersionHelper
 {
@@ -18,7 +18,7 @@ class VersionHelper
 
         if (previousVersion is null || previousVersion != fullCurrentVersion)
             return fullCurrentVersion;
-        
+
         int subVersion = int.Parse(previousVersion.Split('.').Last());
 
         return $"v{currentVersion}.{subVersion + 1}";

@@ -23,7 +23,7 @@ public static class MauiProgram
 
     public static MauiApp CreateMauiApp()
     {
-        OptimizedTaskPoolGlobalHook globalHook = new(new TaskPoolGlobalHookOptions(4, true));
+        OptimizedTaskPoolGlobalHook globalHook = new(4, true);
 
         MauiAppBuilder builder = MauiApp.CreateBuilder();
         builder
@@ -37,14 +37,14 @@ public static class MauiProgram
             .ConfigureLifecycleEvents(events =>
             {
 #if WINDOWS
-                    events.AddWindows(windows =>
+                events.AddWindows(windows =>
+                {
+                    windows.OnActivated((window, args) =>
                     {
-                        windows.OnActivated((window, args) =>
-                        {
-                            OptimizationHelper.IsAppActive = args.WindowActivationState !=
-                                                             Microsoft.UI.Xaml.WindowActivationState.Deactivated;
-                        });
+                        OptimizationHelper.IsAppActive = args.WindowActivationState !=
+                                                         Microsoft.UI.Xaml.WindowActivationState.Deactivated;
                     });
+                });
 #elif MACCATALYST
                 events.AddiOS(ios =>
                 {

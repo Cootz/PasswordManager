@@ -1,11 +1,12 @@
-﻿using NSubstitute;
+﻿using Newtonsoft.Json.Converters;
+using NSubstitute;
 using PasswordManager.Model.DB.Schema;
 using PasswordManager.Services;
 using PasswordManager.Tests.DB;
 using PasswordManager.Tests.TestData;
 using PasswordManager.ViewModel;
-using System.Windows.Input;
 using SharpHook;
+using System.Windows.Input;
 
 namespace PasswordManager.Tests.ViewModel;
 
@@ -149,6 +150,12 @@ public class RecentViewModelTest : DatabaseTest
         navigationService.ClearReceivedCalls();
         globalHook.ClearReceivedCalls();
         alertService.ClearReceivedCalls();
+    }
+
+    [OneTimeTearDown]
+    public void Dispose()
+    { 
+        globalHook.Dispose();
     }
 
     private RecentViewModel setupViewModel(DatabaseService databaseService)

@@ -48,10 +48,10 @@ jobs:
           name: TestResults-${{env.ACTION_NAME}}
           path: PasswordManager.Tests/TestResults/TestResults-${{env.ACTION_NAME}}.trx
   macos-latest:
-    name: macos-13
-    runs-on: macos-13
+    name: macos-15
+    runs-on: macos-15
     env:
-      ACTION_NAME: macos-13
+      ACTION_NAME: macos-15
     steps:
       - uses: actions/checkout@v3
       - name: 'Cache: .nuke/temp, ~/.nuget/packages'
@@ -61,14 +61,6 @@ jobs:
             .nuke/temp
             ~/.nuget/packages
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
-
-      # see https://github.com/actions/runner-images/issues/6771#issuecomment-1354713617
-      # remove once all workflow VMs use Xcode 14.3
-      - name: Set Xcode Version
-        shell: bash
-        run: |
-          sudo xcode-select -s "/Applications/Xcode_14.3.app"
-          echo "MD_APPLE_SDK_ROOT=/Applications/Xcode_14.3.app" >> $GITHUB_ENV
 
       - name: 'Run: UnitTest'
         run: ./build.cmd UnitTest

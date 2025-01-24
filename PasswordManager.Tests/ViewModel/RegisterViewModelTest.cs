@@ -96,4 +96,10 @@ public class RegisterViewModelTest
         navigationService.ClearReceivedCalls();
         savedPassword = null;
     }
+
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    { 
+        hook.Dispose();
+    }
 }

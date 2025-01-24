@@ -12,8 +12,13 @@ public class DatabaseTest
 {
     private static TempStorage? tempStorage;
     private static ISecureStorage? secureStorage;
+
+    // This property cannot be disposed because Realm can only have one instance per application.
+    // Once this instance disposed Realm will throw an exception if you try to create a new instance of Realm.
+#pragma warning disable NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
     private static RealmController? controller;
     private static DatabaseService? database;
+#pragma warning restore NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
 
     [OneTimeSetUp]
     public static void Setup()

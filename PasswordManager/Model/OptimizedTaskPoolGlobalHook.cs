@@ -11,22 +11,17 @@ public sealed class OptimizedTaskPoolGlobalHook : GlobalHookBase
     /// <summary>
     /// Initializes a new instance of <see cref="OptimizedTaskPoolGlobalHook" />.
     /// </summary>
-    /// <remarks>
-    /// Calling this constructor is the same as passing <see cref="TaskPoolGlobalHookOptions.Sequential" /> to the
-    /// other constructor.
-    /// </remarks>
     public OptimizedTaskPoolGlobalHook()
-        : this(TaskPoolGlobalHookOptions.Sequential)
+        : this(1, true)
     {
     }
 
     /// <summary>
     /// Initializes a new instance of <see cref="OptimizedTaskPoolGlobalHook" />.
     /// </summary>
-    /// <param name="options">The options of the hook which include its parallelism level.</param>
-    public OptimizedTaskPoolGlobalHook(TaskPoolGlobalHookOptions options)
-        : base(options.RunAsyncOnBackgroundThread) =>
-        taskQueue = new SemaphoreQueue(options.ParallelismLevel);
+    public OptimizedTaskPoolGlobalHook(int levelOfParallelism, bool runAsyncOnBackgroundThread)
+        : base(runAsyncOnBackgroundThread) =>
+        taskQueue = new SemaphoreQueue(levelOfParallelism);
 
     /// <summary>
     /// Handles the hook event.

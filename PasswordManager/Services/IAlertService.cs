@@ -19,7 +19,7 @@ public interface IAlertService
     /// </summary>
     /// <returns>User's response</returns>
     Task<bool> ShowConfirmationAsync(string title, string message, string accept, string cancel);
-    
+
     /// <summary>
     /// Show confirmation alert
     /// </summary>

@@ -1,5 +1,3 @@
-using System.IO;
-using System.Linq;
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.IO;
@@ -8,35 +6,37 @@ using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.PowerShell;
 using Nuke.Common.Utilities.Collections;
-using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
+using System.IO;
+using System.Linq;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
+using static Nuke.Common.Tools.PowerShell.PowerShellTasks;
 
 [GitHubActions("Desktop test runner",
     GitHubActionsImage.WindowsLatest, GitHubActionsImage.MacOsLatest,
-    OnPushBranches = new[] { "main" },
-    OnPullRequestBranches = new[] { "main" },
-    CacheIncludePatterns = new[]
-    {
-        ".nuke/temp", 
+    OnPushBranches = ["main"],
+    OnPullRequestBranches = ["main"],
+    CacheIncludePatterns =
+    [
+        ".nuke/temp",
         "~/.nuget/packages"
-    },
-    InvokedTargets = new[] { nameof(UnitTest) },
+    ],
+    InvokedTargets = [nameof(UnitTest)],
     AutoGenerate = false)]
 [GitHubActions("Mobile test runner",
     GitHubActionsImage.MacOsLatest,
-    OnPushBranches = new[] { "main" },
-    OnPullRequestBranches = new[] { "main" },
-    InvokedTargets = new[] { nameof(UITest) },
+    OnPushBranches = ["main"],
+    OnPullRequestBranches = ["main"],
+    InvokedTargets = [nameof(UITest)],
     AutoGenerate = false)]
 [GitHubActions("Automatic release generation",
     GitHubActionsImage.MacOsLatest,
     GitHubActionsImage.WindowsLatest,
-    OnPushBranches = new[] { "Release" },
-    InvokedTargets = new[] { nameof(Pack) },
+    OnPushBranches = ["Release"],
+    InvokedTargets = [nameof(Pack)],
     AutoGenerate = false)]
 class Build : NukeBuild
 {
-    public static int Main () => Execute<Build>(x => x.Compile);
+    public static int Main() => Execute<Build>(x => x.Compile);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     public readonly Configuration Configuration = Configuration.Debug;
@@ -47,7 +47,7 @@ class Build : NukeBuild
     public readonly Solution Solution;
 
     [LatestGitHubRelease(Build.repository_identifier)] public readonly string LatestGitHubRelease = repository_identifier;
-    
+
     const string repository_identifier = @"Cootz/PasswordManager";
 
     const string win_release_file_name = "win_x64.zip";
@@ -93,7 +93,7 @@ class Build : NukeBuild
             foreach (var project in Solution.AllProjects)
             {
                 PowerShell(p => p
-                    .SetCommand($"dotnet workload restore { Path.GetFileName(project.Path) }")
+                    .SetCommand($"dotnet workload restore {Path.GetFileName(project.Path)}")
                     .SetProcessWorkingDirectory(project.Directory));
             }
 
@@ -175,7 +175,7 @@ class Build : NukeBuild
                 SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-arm64";
             AbsolutePath macIntelPublishDirectory =
                 SourceDirectory / @"bin\Release\net7.0-maccatalyst\maccatalyst-x64";
-            AbsolutePath androidPublishDirectory = 
+            AbsolutePath androidPublishDirectory =
                 SourceDirectory / @"bin\Release\net7.0-android\publish\com.companyname.passwordmanager-Signed.apk";
 
             zipHelper.ZipToPublish(winPublishDirectory, win_release_file_name);
